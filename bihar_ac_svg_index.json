@@ -1,0 +1,1946 @@
+﻿[
+    {
+        "key":  "002",
+        "ac_no":  2,
+        "ac_name":  "Ramnagar (SC)",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1.000000,
+        "pc_name":  "VALMIKI NAGAR"
+    },
+    {
+        "key":  "001",
+        "ac_no":  1,
+        "ac_name":  "Valmiki Nagar",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1.000000,
+        "pc_name":  "VALMIKI NAGAR"
+    },
+    {
+        "key":  "009",
+        "ac_no":  9,
+        "ac_name":  "Sikta",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1.000000,
+        "pc_name":  "VALMIKI NAGAR"
+    },
+    {
+        "key":  "004",
+        "ac_no":  4,
+        "ac_name":  "Bagaha",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1.000000,
+        "pc_name":  "VALMIKI NAGAR"
+    },
+    {
+        "key":  "003",
+        "ac_no":  3,
+        "ac_name":  "Narkatiaganj",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1.000000,
+        "pc_name":  "VALMIKI NAGAR"
+    },
+    {
+        "key":  "005",
+        "ac_no":  5,
+        "ac_name":  "Lauriya",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1.000000,
+        "pc_name":  "VALMIKI NAGAR"
+    },
+    {
+        "key":  "010",
+        "ac_no":  10,
+        "ac_name":  "Raxaul",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  2.000000,
+        "pc_name":  "PASCHIM CHAMPARAN"
+    },
+    {
+        "key":  "007",
+        "ac_no":  7,
+        "ac_name":  "Chanpatia",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  2.000000,
+        "pc_name":  "PASCHIM CHAMPARAN"
+    },
+    {
+        "key":  "011",
+        "ac_no":  11,
+        "ac_name":  "Sugauli",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  2.000000,
+        "pc_name":  "PASCHIM CHAMPARAN"
+    },
+    {
+        "key":  "012",
+        "ac_no":  12,
+        "ac_name":  "Narkatia",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  2.000000,
+        "pc_name":  "PASCHIM CHAMPARAN"
+    },
+    {
+        "key":  "025",
+        "ac_no":  25,
+        "ac_name":  "Parihar",
+        "district":  "SITAMARHI",
+        "pc_no":  5.000000,
+        "pc_name":  "SITAMARHI"
+    },
+    {
+        "key":  "021",
+        "ac_no":  21,
+        "ac_name":  "Dhaka",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  4.000000,
+        "pc_name":  "SHEOHAR"
+    },
+    {
+        "key":  "006",
+        "ac_no":  6,
+        "ac_name":  "Nautan",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  2.000000,
+        "pc_name":  "PASCHIM CHAMPARAN"
+    },
+    {
+        "key":  "008",
+        "ac_no":  8,
+        "ac_name":  "Bettiah",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  2.000000,
+        "pc_name":  "PASCHIM CHAMPARAN"
+    },
+    {
+        "key":  "024",
+        "ac_no":  24,
+        "ac_name":  "Bathnaha (SC)",
+        "district":  "SITAMARHI",
+        "pc_no":  5.000000,
+        "pc_name":  "SITAMARHI"
+    },
+    {
+        "key":  "019",
+        "ac_no":  19,
+        "ac_name":  "Motihari",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3.000000,
+        "pc_name":  "PURVI CHAMPARAN"
+    },
+    {
+        "key":  "020",
+        "ac_no":  20,
+        "ac_name":  "Chiraia",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  4.000000,
+        "pc_name":  "SHEOHAR"
+    },
+    {
+        "key":  "023",
+        "ac_no":  23,
+        "ac_name":  "Riga",
+        "district":  "SITAMARHI",
+        "pc_no":  4.000000,
+        "pc_name":  "SHEOHAR"
+    },
+    {
+        "key":  "013",
+        "ac_no":  13,
+        "ac_name":  "Harsidhi (SC)",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3.000000,
+        "pc_name":  "PURVI CHAMPARAN"
+    },
+    {
+        "key":  "014",
+        "ac_no":  14,
+        "ac_name":  "Govindganj",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3.000000,
+        "pc_name":  "PURVI CHAMPARAN"
+    },
+    {
+        "key":  "033",
+        "ac_no":  33,
+        "ac_name":  "Khajauli",
+        "district":  "MADHUBANI",
+        "pc_no":  7.000000,
+        "pc_name":  "JHANJHARPUR"
+    },
+    {
+        "key":  "031",
+        "ac_no":  31,
+        "ac_name":  "Harlakhi",
+        "district":  "MADHUBANI",
+        "pc_no":  6.000000,
+        "pc_name":  "MADHUBANI"
+    },
+    {
+        "key":  "026",
+        "ac_no":  26,
+        "ac_name":  "Sursand",
+        "district":  "SITAMARHI",
+        "pc_no":  5.000000,
+        "pc_name":  "SITAMARHI"
+    },
+    {
+        "key":  "022",
+        "ac_no":  22,
+        "ac_name":  "Sheohar",
+        "district":  "SHEOHAR *",
+        "pc_no":  4.000000,
+        "pc_name":  "SHEOHAR"
+    },
+    {
+        "key":  "028",
+        "ac_no":  28,
+        "ac_name":  "Sitamarhi",
+        "district":  "SITAMARHI",
+        "pc_no":  5.000000,
+        "pc_name":  "SITAMARHI"
+    },
+    {
+        "key":  "053",
+        "ac_no":  53,
+        "ac_name":  "Thakurganj",
+        "district":  "KISHANGANJ",
+        "pc_no":  10.000000,
+        "pc_name":  "KISHANGANJ"
+    },
+    {
+        "key":  "034",
+        "ac_no":  34,
+        "ac_name":  "Babubarhi",
+        "district":  "MADHUBANI",
+        "pc_no":  7.000000,
+        "pc_name":  "JHANJHARPUR"
+    },
+    {
+        "key":  "046",
+        "ac_no":  46,
+        "ac_name":  "Narpatganj",
+        "district":  "ARARIA",
+        "pc_no":  9.000000,
+        "pc_name":  "ARARIA"
+    },
+    {
+        "key":  "027",
+        "ac_no":  27,
+        "ac_name":  "Bajpatti",
+        "district":  "SITAMARHI",
+        "pc_no":  5.000000,
+        "pc_name":  "SITAMARHI"
+    },
+    {
+        "key":  "018",
+        "ac_no":  18,
+        "ac_name":  "Madhuban",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  4.000000,
+        "pc_name":  "SHEOHAR"
+    },
+    {
+        "key":  "102",
+        "ac_no":  102,
+        "ac_name":  "Kuchaikote",
+        "district":  "GOPALGANJ",
+        "pc_no":  17.000000,
+        "pc_name":  "GOPALGANJ (SC)"
+    },
+    {
+        "key":  "103",
+        "ac_no":  103,
+        "ac_name":  "Bhorey (SC)",
+        "district":  "GOPALGANJ",
+        "pc_no":  17.000000,
+        "pc_name":  "GOPALGANJ (SC)"
+    },
+    {
+        "key":  "101",
+        "ac_no":  101,
+        "ac_name":  "Gopalganj",
+        "district":  "GOPALGANJ",
+        "pc_no":  17.000000,
+        "pc_name":  "GOPALGANJ (SC)"
+    },
+    {
+        "key":  "040",
+        "ac_no":  40,
+        "ac_name":  "Laukaha",
+        "district":  "MADHUBANI",
+        "pc_no":  7.000000,
+        "pc_name":  "JHANJHARPUR"
+    },
+    {
+        "key":  "045",
+        "ac_no":  45,
+        "ac_name":  "Chhatapur",
+        "district":  "SUPAUL *",
+        "pc_no":  8.000000,
+        "pc_name":  "SUPAUL"
+    },
+    {
+        "key":  "016",
+        "ac_no":  16,
+        "ac_name":  "Kalyanpur",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3.000000,
+        "pc_name":  "PURVI CHAMPARAN"
+    },
+    {
+        "key":  "030",
+        "ac_no":  30,
+        "ac_name":  "Belsand",
+        "district":  "SITAMARHI",
+        "pc_no":  4.000000,
+        "pc_name":  "SHEOHAR"
+    },
+    {
+        "key":  "032",
+        "ac_no":  32,
+        "ac_name":  "Benipatti",
+        "district":  "MADHUBANI",
+        "pc_no":  6.000000,
+        "pc_name":  "MADHUBANI"
+    },
+    {
+        "key":  "017",
+        "ac_no":  17,
+        "ac_name":  "Pipra",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3.000000,
+        "pc_name":  "PURVI CHAMPARAN"
+    },
+    {
+        "key":  "054",
+        "ac_no":  54,
+        "ac_name":  "Kishanganj",
+        "district":  "KISHANGANJ",
+        "pc_no":  10.000000,
+        "pc_name":  "KISHANGANJ"
+    },
+    {
+        "key":  "015",
+        "ac_no":  15,
+        "ac_name":  "Kesaria",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3.000000,
+        "pc_name":  "PURVI CHAMPARAN"
+    },
+    {
+        "key":  "029",
+        "ac_no":  29,
+        "ac_name":  "Runnisaidpur",
+        "district":  "SITAMARHI",
+        "pc_no":  5.000000,
+        "pc_name":  "SITAMARHI"
+    },
+    {
+        "key":  "052",
+        "ac_no":  52,
+        "ac_name":  "Bahadurganj",
+        "district":  "KISHANGANJ",
+        "pc_no":  10.000000,
+        "pc_name":  "KISHANGANJ"
+    },
+    {
+        "key":  "051",
+        "ac_no":  51,
+        "ac_name":  "Sikti",
+        "district":  "ARARIA",
+        "pc_no":  9.000000,
+        "pc_name":  "ARARIA"
+    },
+    {
+        "key":  "041",
+        "ac_no":  41,
+        "ac_name":  "Nirmali",
+        "district":  "SUPAUL *",
+        "pc_no":  8.000000,
+        "pc_name":  "SUPAUL"
+    },
+    {
+        "key":  "104",
+        "ac_no":  104,
+        "ac_name":  "Hathua",
+        "district":  "GOPALGANJ",
+        "pc_no":  17.000000,
+        "pc_name":  "GOPALGANJ (SC)"
+    },
+    {
+        "key":  "100",
+        "ac_no":  100,
+        "ac_name":  "Barauli",
+        "district":  "GOPALGANJ",
+        "pc_no":  17.000000,
+        "pc_name":  "GOPALGANJ (SC)"
+    },
+    {
+        "key":  "037",
+        "ac_no":  37,
+        "ac_name":  "Rajnagar (SC)",
+        "district":  "MADHUBANI",
+        "pc_no":  7.000000,
+        "pc_name":  "JHANJHARPUR"
+    },
+    {
+        "key":  "048",
+        "ac_no":  48,
+        "ac_name":  "Forbesganj",
+        "district":  "ARARIA",
+        "pc_no":  9.000000,
+        "pc_name":  "ARARIA"
+    },
+    {
+        "key":  "087",
+        "ac_no":  87,
+        "ac_name":  "Jale",
+        "district":  "DARBHANGA",
+        "pc_no":  6.000000,
+        "pc_name":  "MADHUBANI"
+    },
+    {
+        "key":  "099",
+        "ac_no":  99,
+        "ac_name":  "Baikunthpur",
+        "district":  "GOPALGANJ",
+        "pc_no":  17.000000,
+        "pc_name":  "GOPALGANJ (SC)"
+    },
+    {
+        "key":  "039",
+        "ac_no":  39,
+        "ac_name":  "Phulparas",
+        "district":  "MADHUBANI",
+        "pc_no":  7.000000,
+        "pc_name":  "JHANJHARPUR"
+    },
+    {
+        "key":  "035",
+        "ac_no":  35,
+        "ac_name":  "Bisfi",
+        "district":  "MADHUBANI",
+        "pc_no":  6.000000,
+        "pc_name":  "MADHUBANI"
+    },
+    {
+        "key":  "044",
+        "ac_no":  44,
+        "ac_name":  "Triveniganj (SC)",
+        "district":  "SUPAUL *",
+        "pc_no":  8.000000,
+        "pc_name":  "SUPAUL"
+    },
+    {
+        "key":  "089",
+        "ac_no":  89,
+        "ac_name":  "Aurai",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15.000000,
+        "pc_name":  "MUZAFFARPUR"
+    },
+    {
+        "key":  "049",
+        "ac_no":  49,
+        "ac_name":  "Araria",
+        "district":  "ARARIA",
+        "pc_no":  9.000000,
+        "pc_name":  "ARARIA"
+    },
+    {
+        "key":  "036",
+        "ac_no":  36,
+        "ac_name":  "Madhubani",
+        "district":  "MADHUBANI",
+        "pc_no":  6.000000,
+        "pc_name":  "MADHUBANI"
+    },
+    {
+        "key":  "038",
+        "ac_no":  38,
+        "ac_name":  "Jhanjharpur",
+        "district":  "MADHUBANI",
+        "pc_no":  7.000000,
+        "pc_name":  "JHANJHARPUR"
+    },
+    {
+        "key":  "090",
+        "ac_no":  90,
+        "ac_name":  "Minapur",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  16.000000,
+        "pc_name":  "VAISHALI"
+    },
+    {
+        "key":  "042",
+        "ac_no":  42,
+        "ac_name":  "Pipra",
+        "district":  "SUPAUL *",
+        "pc_no":  8.000000,
+        "pc_name":  "SUPAUL"
+    },
+    {
+        "key":  "105",
+        "ac_no":  105,
+        "ac_name":  "Siwan",
+        "district":  "SIWAN",
+        "pc_no":  18.000000,
+        "pc_name":  "SIWAN"
+    },
+    {
+        "key":  "110",
+        "ac_no":  110,
+        "ac_name":  "Barharia",
+        "district":  "SIWAN",
+        "pc_no":  18.000000,
+        "pc_name":  "SIWAN"
+    },
+    {
+        "key":  "106",
+        "ac_no":  106,
+        "ac_name":  "Ziradei",
+        "district":  "SIWAN",
+        "pc_no":  18.000000,
+        "pc_name":  "SIWAN"
+    },
+    {
+        "key":  "043",
+        "ac_no":  43,
+        "ac_name":  "Supaul",
+        "district":  "SUPAUL *",
+        "pc_no":  8.000000,
+        "pc_name":  "SUPAUL"
+    },
+    {
+        "key":  "086",
+        "ac_no":  86,
+        "ac_name":  "Keoti",
+        "district":  "DARBHANGA",
+        "pc_no":  6.000000,
+        "pc_name":  "MADHUBANI"
+    },
+    {
+        "key":  "096",
+        "ac_no":  96,
+        "ac_name":  "Baruraj",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  16.000000,
+        "pc_name":  "VAISHALI"
+    },
+    {
+        "key":  "098",
+        "ac_no":  98,
+        "ac_name":  "Sahebganj",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  16.000000,
+        "pc_name":  "VAISHALI"
+    },
+    {
+        "key":  "050",
+        "ac_no":  50,
+        "ac_name":  "Jokihat",
+        "district":  "ARARIA",
+        "pc_no":  9.000000,
+        "pc_name":  "ARARIA"
+    },
+    {
+        "key":  "111",
+        "ac_no":  111,
+        "ac_name":  "Goriakothi",
+        "district":  "SIWAN",
+        "pc_no":  19.000000,
+        "pc_name":  "MAHARAJGANJ"
+    },
+    {
+        "key":  "091",
+        "ac_no":  91,
+        "ac_name":  "Bochaha (SC)",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15.000000,
+        "pc_name":  "MUZAFFARPUR"
+    },
+    {
+        "key":  "082",
+        "ac_no":  82,
+        "ac_name":  "Darbhanga Rural",
+        "district":  "DARBHANGA",
+        "pc_no":  14.000000,
+        "pc_name":  "DARBHANGA"
+    },
+    {
+        "key":  "088",
+        "ac_no":  88,
+        "ac_name":  "Gaighat",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15.000000,
+        "pc_name":  "MUZAFFARPUR"
+    },
+    {
+        "key":  "095",
+        "ac_no":  95,
+        "ac_name":  "Kanti",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  16.000000,
+        "pc_name":  "VAISHALI"
+    },
+    {
+        "key":  "083",
+        "ac_no":  83,
+        "ac_name":  "Darbhanga",
+        "district":  "DARBHANGA",
+        "pc_no":  14.000000,
+        "pc_name":  "DARBHANGA"
+    },
+    {
+        "key":  "081",
+        "ac_no":  81,
+        "ac_name":  "Alinagar",
+        "district":  "DARBHANGA",
+        "pc_no":  14.000000,
+        "pc_name":  "DARBHANGA"
+    },
+    {
+        "key":  "047",
+        "ac_no":  47,
+        "ac_name":  "Raniganj (SC)",
+        "district":  "ARARIA",
+        "pc_no":  9.000000,
+        "pc_name":  "ARARIA"
+    },
+    {
+        "key":  "107",
+        "ac_no":  107,
+        "ac_name":  "Darauli (SC)",
+        "district":  "SIWAN",
+        "pc_no":  18.000000,
+        "pc_name":  "SIWAN"
+    },
+    {
+        "key":  "116",
+        "ac_no":  116,
+        "ac_name":  "Taraiya",
+        "district":  "SARAN",
+        "pc_no":  19.000000,
+        "pc_name":  "MAHARAJGANJ"
+    },
+    {
+        "key":  "108",
+        "ac_no":  108,
+        "ac_name":  "Raghunathpur",
+        "district":  "SIWAN",
+        "pc_no":  18.000000,
+        "pc_name":  "SIWAN"
+    },
+    {
+        "key":  "115",
+        "ac_no":  115,
+        "ac_name":  "Baniapur",
+        "district":  "SARAN",
+        "pc_no":  19.000000,
+        "pc_name":  "MAHARAJGANJ"
+    },
+    {
+        "key":  "056",
+        "ac_no":  56,
+        "ac_name":  "Amour",
+        "district":  "PURNIA",
+        "pc_no":  10.000000,
+        "pc_name":  "KISHANGANJ"
+    },
+    {
+        "key":  "085",
+        "ac_no":  85,
+        "ac_name":  "Bahadurpur",
+        "district":  "DARBHANGA",
+        "pc_no":  14.000000,
+        "pc_name":  "DARBHANGA"
+    },
+    {
+        "key":  "080",
+        "ac_no":  80,
+        "ac_name":  "Benipur",
+        "district":  "DARBHANGA",
+        "pc_no":  14.000000,
+        "pc_name":  "DARBHANGA"
+    },
+    {
+        "key":  "112",
+        "ac_no":  112,
+        "ac_name":  "Maharajganj",
+        "district":  "SIWAN",
+        "pc_no":  19.000000,
+        "pc_name":  "MAHARAJGANJ"
+    },
+    {
+        "key":  "097",
+        "ac_no":  97,
+        "ac_name":  "Paroo",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  16.000000,
+        "pc_name":  "VAISHALI"
+    },
+    {
+        "key":  "073",
+        "ac_no":  73,
+        "ac_name":  "Madhepura",
+        "district":  "MADHEPURA",
+        "pc_no":  13.000000,
+        "pc_name":  "MADHEPURA"
+    },
+    {
+        "key":  "094",
+        "ac_no":  94,
+        "ac_name":  "Muzaffarpur",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15.000000,
+        "pc_name":  "MUZAFFARPUR"
+    },
+    {
+        "key":  "072",
+        "ac_no":  72,
+        "ac_name":  "Singheshwar (SC)",
+        "district":  "MADHEPURA",
+        "pc_no":  8.000000,
+        "pc_name":  "SUPAUL"
+    },
+    {
+        "key":  "109",
+        "ac_no":  109,
+        "ac_name":  "Daraundha",
+        "district":  "SIWAN",
+        "pc_no":  18.000000,
+        "pc_name":  "SIWAN"
+    },
+    {
+        "key":  "084",
+        "ac_no":  84,
+        "ac_name":  "Hayaghat",
+        "district":  "DARBHANGA",
+        "pc_no":  23.000000,
+        "pc_name":  "SAMASTIPUR (SC)"
+    },
+    {
+        "key":  "093",
+        "ac_no":  93,
+        "ac_name":  "Kurhani",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15.000000,
+        "pc_name":  "MUZAFFARPUR"
+    },
+    {
+        "key":  "077",
+        "ac_no":  77,
+        "ac_name":  "Mahishi",
+        "district":  "SAHARSA",
+        "pc_no":  13.000000,
+        "pc_name":  "MADHEPURA"
+    },
+    {
+        "key":  "131",
+        "ac_no":  131,
+        "ac_name":  "Kalyanpur (SC)",
+        "district":  "SAMASTIPUR",
+        "pc_no":  23.000000,
+        "pc_name":  "SAMASTIPUR (SC)"
+    },
+    {
+        "key":  "079",
+        "ac_no":  79,
+        "ac_name":  "Gaura Bauram",
+        "district":  "DARBHANGA",
+        "pc_no":  14.000000,
+        "pc_name":  "DARBHANGA"
+    },
+    {
+        "key":  "092",
+        "ac_no":  92,
+        "ac_name":  "Sakra (SC)",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15.000000,
+        "pc_name":  "MUZAFFARPUR"
+    },
+    {
+        "key":  "113",
+        "ac_no":  113,
+        "ac_name":  "Ekma",
+        "district":  "SARAN",
+        "pc_no":  19.000000,
+        "pc_name":  "MAHARAJGANJ"
+    },
+    {
+        "key":  "058",
+        "ac_no":  58,
+        "ac_name":  "Kasba",
+        "district":  "PURNIA",
+        "pc_no":  12.000000,
+        "pc_name":  "PURNIA"
+    },
+    {
+        "key":  "059",
+        "ac_no":  59,
+        "ac_name":  "Banmankhi (SC)",
+        "district":  "PURNIA",
+        "pc_no":  12.000000,
+        "pc_name":  "PURNIA"
+    },
+    {
+        "key":  "125",
+        "ac_no":  125,
+        "ac_name":  "Vaishali",
+        "district":  "VAISHALI",
+        "pc_no":  16.000000,
+        "pc_name":  "VAISHALI"
+    },
+    {
+        "key":  "120",
+        "ac_no":  120,
+        "ac_name":  "Amnour",
+        "district":  "SARAN",
+        "pc_no":  20.000000,
+        "pc_name":  "SARAN"
+    },
+    {
+        "key":  "057",
+        "ac_no":  57,
+        "ac_name":  "Baisi",
+        "district":  "PURNIA",
+        "pc_no":  10.000000,
+        "pc_name":  "KISHANGANJ"
+    },
+    {
+        "key":  "114",
+        "ac_no":  114,
+        "ac_name":  "Manjhi",
+        "district":  "SARAN",
+        "pc_no":  19.000000,
+        "pc_name":  "MAHARAJGANJ"
+    },
+    {
+        "key":  "132",
+        "ac_no":  132,
+        "ac_name":  "Warisnagar",
+        "district":  "SAMASTIPUR",
+        "pc_no":  23.000000,
+        "pc_name":  "SAMASTIPUR (SC)"
+    },
+    {
+        "key":  "117",
+        "ac_no":  117,
+        "ac_name":  "Marhaura",
+        "district":  "SARAN",
+        "pc_no":  20.000000,
+        "pc_name":  "SARAN"
+    },
+    {
+        "key":  "133",
+        "ac_no":  133,
+        "ac_name":  "Samastipur",
+        "district":  "SAMASTIPUR",
+        "pc_no":  23.000000,
+        "pc_name":  "SAMASTIPUR (SC)"
+    },
+    {
+        "key":  "071",
+        "ac_no":  71,
+        "ac_name":  "Bihariganj",
+        "district":  "MADHEPURA",
+        "pc_no":  13.000000,
+        "pc_name":  "MADHEPURA"
+    },
+    {
+        "key":  "061",
+        "ac_no":  61,
+        "ac_name":  "Dhamdaha",
+        "district":  "PURNIA",
+        "pc_no":  12.000000,
+        "pc_name":  "PURNIA"
+    },
+    {
+        "key":  "075",
+        "ac_no":  75,
+        "ac_name":  "Saharsa",
+        "district":  "SAHARSA",
+        "pc_no":  13.000000,
+        "pc_name":  "MADHEPURA"
+    },
+    {
+        "key":  "065",
+        "ac_no":  65,
+        "ac_name":  "Balrampur",
+        "district":  "KATIHAR",
+        "pc_no":  11.000000,
+        "pc_name":  "KATIHAR"
+    },
+    {
+        "key":  "126",
+        "ac_no":  126,
+        "ac_name":  "Mahua",
+        "district":  "VAISHALI",
+        "pc_no":  21.000000,
+        "pc_name":  "HAJIPUR (SC)"
+    },
+    {
+        "key":  "139",
+        "ac_no":  139,
+        "ac_name":  "Rosera (SC)",
+        "district":  "SAMASTIPUR",
+        "pc_no":  23.000000,
+        "pc_name":  "SAMASTIPUR (SC)"
+    },
+    {
+        "key":  "124",
+        "ac_no":  124,
+        "ac_name":  "Lalganj",
+        "district":  "VAISHALI",
+        "pc_no":  21.000000,
+        "pc_name":  "HAJIPUR (SC)"
+    },
+    {
+        "key":  "130",
+        "ac_no":  130,
+        "ac_name":  "Patepur (SC)",
+        "district":  "VAISHALI",
+        "pc_no":  22.000000,
+        "pc_name":  "UJIARPUR"
+    },
+    {
+        "key":  "078",
+        "ac_no":  78,
+        "ac_name":  "Kusheshwar Asthan (SC)",
+        "district":  "DARBHANGA",
+        "pc_no":  23.000000,
+        "pc_name":  "SAMASTIPUR (SC)"
+    },
+    {
+        "key":  "121",
+        "ac_no":  121,
+        "ac_name":  "Parsa",
+        "district":  "SARAN",
+        "pc_no":  20.000000,
+        "pc_name":  "SARAN"
+    },
+    {
+        "key":  "135",
+        "ac_no":  135,
+        "ac_name":  "Morwa",
+        "district":  "SAMASTIPUR",
+        "pc_no":  22.000000,
+        "pc_name":  "UJIARPUR"
+    },
+    {
+        "key":  "076",
+        "ac_no":  76,
+        "ac_name":  "Simri Bakhtiarpur",
+        "district":  "SAHARSA",
+        "pc_no":  25.000000,
+        "pc_name":  "KHAGARIA"
+    },
+    {
+        "key":  "074",
+        "ac_no":  74,
+        "ac_name":  "Sonbarsha (SC)",
+        "district":  "SAHARSA",
+        "pc_no":  13.000000,
+        "pc_name":  "MADHEPURA"
+    },
+    {
+        "key":  "062",
+        "ac_no":  62,
+        "ac_name":  "Purnia",
+        "district":  "PURNIA",
+        "pc_no":  12.000000,
+        "pc_name":  "PURNIA"
+    },
+    {
+        "key":  "119",
+        "ac_no":  119,
+        "ac_name":  "Garkha (SC)",
+        "district":  "SARAN",
+        "pc_no":  20.000000,
+        "pc_name":  "SARAN"
+    },
+    {
+        "key":  "140",
+        "ac_no":  140,
+        "ac_name":  "Hasanpur",
+        "district":  "SAMASTIPUR",
+        "pc_no":  25.000000,
+        "pc_name":  "KHAGARIA"
+    },
+    {
+        "key":  "134",
+        "ac_no":  134,
+        "ac_name":  "Ujiarpur",
+        "district":  "SAMASTIPUR",
+        "pc_no":  22.000000,
+        "pc_name":  "UJIARPUR"
+    },
+    {
+        "key":  "118",
+        "ac_no":  118,
+        "ac_name":  "Chapra",
+        "district":  "SARAN",
+        "pc_no":  20.000000,
+        "pc_name":  "SARAN"
+    },
+    {
+        "key":  "060",
+        "ac_no":  60,
+        "ac_name":  "Rupauli",
+        "district":  "PURNIA",
+        "pc_no":  12.000000,
+        "pc_name":  "PURNIA"
+    },
+    {
+        "key":  "136",
+        "ac_no":  136,
+        "ac_name":  "Sarairanjan",
+        "district":  "SAMASTIPUR",
+        "pc_no":  22.000000,
+        "pc_name":  "UJIARPUR"
+    },
+    {
+        "key":  "064",
+        "ac_no":  64,
+        "ac_name":  "Kadwa",
+        "district":  "KATIHAR",
+        "pc_no":  11.000000,
+        "pc_name":  "KATIHAR"
+    },
+    {
+        "key":  "138",
+        "ac_no":  138,
+        "ac_name":  "Bibhutipur",
+        "district":  "SAMASTIPUR",
+        "pc_no":  22.000000,
+        "pc_name":  "UJIARPUR"
+    },
+    {
+        "key":  "127",
+        "ac_no":  127,
+        "ac_name":  "Raja Pakar (SC)",
+        "district":  "VAISHALI",
+        "pc_no":  21.000000,
+        "pc_name":  "HAJIPUR (SC)"
+    },
+    {
+        "key":  "141",
+        "ac_no":  141,
+        "ac_name":  "Cheria Bariarpur",
+        "district":  "BEGUSARAI",
+        "pc_no":  24.000000,
+        "pc_name":  "BEGUSARAI"
+    },
+    {
+        "key":  "123",
+        "ac_no":  123,
+        "ac_name":  "Hajipur",
+        "district":  "VAISHALI",
+        "pc_no":  21.000000,
+        "pc_name":  "HAJIPUR (SC)"
+    },
+    {
+        "key":  "122",
+        "ac_no":  122,
+        "ac_name":  "Sonepur",
+        "district":  "VAISHALI",
+        "pc_no":  20.000000,
+        "pc_name":  "SARAN"
+    },
+    {
+        "key":  "129",
+        "ac_no":  129,
+        "ac_name":  "Mahnar",
+        "district":  "VAISHALI",
+        "pc_no":  21.000000,
+        "pc_name":  "HAJIPUR (SC)"
+    },
+    {
+        "key":  "069",
+        "ac_no":  69,
+        "ac_name":  "Korha (SC)",
+        "district":  "KATIHAR",
+        "pc_no":  12.000000,
+        "pc_name":  "PURNIA"
+    },
+    {
+        "key":  "063",
+        "ac_no":  63,
+        "ac_name":  "Katihar",
+        "district":  "KATIHAR",
+        "pc_no":  11.000000,
+        "pc_name":  "KATIHAR"
+    },
+    {
+        "key":  "148",
+        "ac_no":  148,
+        "ac_name":  "Alauli (SC)",
+        "district":  "KHAGARIA",
+        "pc_no":  25.000000,
+        "pc_name":  "KHAGARIA"
+    },
+    {
+        "key":  "147",
+        "ac_no":  147,
+        "ac_name":  "Bakhri (SC)",
+        "district":  "BEGUSARAI",
+        "pc_no":  24.000000,
+        "pc_name":  "BEGUSARAI"
+    },
+    {
+        "key":  "199",
+        "ac_no":  199,
+        "ac_name":  "Brahampur",
+        "district":  "BUXAR *",
+        "pc_no":  33.000000,
+        "pc_name":  "BUXAR"
+    },
+    {
+        "key":  "066",
+        "ac_no":  66,
+        "ac_name":  "Pranpur",
+        "district":  "KATIHAR",
+        "pc_no":  11.000000,
+        "pc_name":  "KATIHAR"
+    },
+    {
+        "key":  "186",
+        "ac_no":  186,
+        "ac_name":  "Danapur",
+        "district":  "PATNA",
+        "pc_no":  31.000000,
+        "pc_name":  "PATALIPUTRA"
+    },
+    {
+        "key":  "193",
+        "ac_no":  193,
+        "ac_name":  "Barhara",
+        "district":  "BHOJPUR",
+        "pc_no":  32.000000,
+        "pc_name":  "ARRAH"
+    },
+    {
+        "key":  "070",
+        "ac_no":  70,
+        "ac_name":  "Alamnagar",
+        "district":  "MADHEPURA",
+        "pc_no":  13.000000,
+        "pc_name":  "MADHEPURA"
+    },
+    {
+        "key":  "187",
+        "ac_no":  187,
+        "ac_name":  "Maner",
+        "district":  "PATNA",
+        "pc_no":  31.000000,
+        "pc_name":  "PATALIPUTRA"
+    },
+    {
+        "key":  "128",
+        "ac_no":  128,
+        "ac_name":  "Raghopur",
+        "district":  "VAISHALI",
+        "pc_no":  21.000000,
+        "pc_name":  "HAJIPUR (SC)"
+    },
+    {
+        "key":  "198",
+        "ac_no":  198,
+        "ac_name":  "Shahpur",
+        "district":  "BHOJPUR",
+        "pc_no":  32.000000,
+        "pc_name":  "ARRAH"
+    },
+    {
+        "key":  "200",
+        "ac_no":  200,
+        "ac_name":  "Buxar",
+        "district":  "BUXAR *",
+        "pc_no":  33.000000,
+        "pc_name":  "BUXAR"
+    },
+    {
+        "key":  "150",
+        "ac_no":  150,
+        "ac_name":  "Beldaur",
+        "district":  "KHAGARIA",
+        "pc_no":  25.000000,
+        "pc_name":  "KHAGARIA"
+    },
+    {
+        "key":  "142",
+        "ac_no":  142,
+        "ac_name":  "Bachhwara",
+        "district":  "BEGUSARAI",
+        "pc_no":  24.000000,
+        "pc_name":  "BEGUSARAI"
+    },
+    {
+        "key":  "137",
+        "ac_no":  137,
+        "ac_name":  "Mohiuddinnagar",
+        "district":  "SAMASTIPUR",
+        "pc_no":  22.000000,
+        "pc_name":  "UJIARPUR"
+    },
+    {
+        "key":  "181",
+        "ac_no":  181,
+        "ac_name":  "Digha",
+        "district":  "PATNA",
+        "pc_no":  30.000000,
+        "pc_name":  "PATNA SAHIB"
+    },
+    {
+        "key":  "149",
+        "ac_no":  149,
+        "ac_name":  "Khagaria",
+        "district":  "KHAGARIA",
+        "pc_no":  25.000000,
+        "pc_name":  "KHAGARIA"
+    },
+    {
+        "key":  "068",
+        "ac_no":  68,
+        "ac_name":  "Barari",
+        "district":  "KATIHAR",
+        "pc_no":  11.000000,
+        "pc_name":  "KATIHAR"
+    },
+    {
+        "key":  "194",
+        "ac_no":  194,
+        "ac_name":  "Arrah",
+        "district":  "BHOJPUR",
+        "pc_no":  32.000000,
+        "pc_name":  "ARRAH"
+    },
+    {
+        "key":  "182",
+        "ac_no":  182,
+        "ac_name":  "Bankipur",
+        "district":  "PATNA",
+        "pc_no":  30.000000,
+        "pc_name":  "PATNA SAHIB"
+    },
+    {
+        "key":  "184",
+        "ac_no":  184,
+        "ac_name":  "Patna Sahib",
+        "district":  "PATNA",
+        "pc_no":  30.000000,
+        "pc_name":  "PATNA SAHIB"
+    },
+    {
+        "key":  "183",
+        "ac_no":  183,
+        "ac_name":  "Kumhrar",
+        "district":  "PATNA",
+        "pc_no":  30.000000,
+        "pc_name":  "PATNA SAHIB"
+    },
+    {
+        "key":  "192",
+        "ac_no":  192,
+        "ac_name":  "Sandesh",
+        "district":  "BHOJPUR",
+        "pc_no":  32.000000,
+        "pc_name":  "ARRAH"
+    },
+    {
+        "key":  "185",
+        "ac_no":  185,
+        "ac_name":  "Fatuha",
+        "district":  "PATNA",
+        "pc_no":  30.000000,
+        "pc_name":  "PATNA SAHIB"
+    },
+    {
+        "key":  "146",
+        "ac_no":  146,
+        "ac_name":  "Begusarai",
+        "district":  "BEGUSARAI",
+        "pc_no":  24.000000,
+        "pc_name":  "BEGUSARAI"
+    },
+    {
+        "key":  "188",
+        "ac_no":  188,
+        "ac_name":  "Phulwari (SC)",
+        "district":  "PATNA",
+        "pc_no":  31.000000,
+        "pc_name":  "PATALIPUTRA"
+    },
+    {
+        "key":  "201",
+        "ac_no":  201,
+        "ac_name":  "Dumraon",
+        "district":  "BUXAR *",
+        "pc_no":  33.000000,
+        "pc_name":  "BUXAR"
+    },
+    {
+        "key":  "067",
+        "ac_no":  67,
+        "ac_name":  "Manihari (ST)",
+        "district":  "KATIHAR",
+        "pc_no":  11.000000,
+        "pc_name":  "KATIHAR"
+    },
+    {
+        "key":  "153",
+        "ac_no":  153,
+        "ac_name":  "Gopalpur",
+        "district":  "BHAGALPUR",
+        "pc_no":  26.000000,
+        "pc_name":  "BHAGALPUR"
+    },
+    {
+        "key":  "191",
+        "ac_no":  191,
+        "ac_name":  "Bikram",
+        "district":  "PATNA",
+        "pc_no":  31.000000,
+        "pc_name":  "PATALIPUTRA"
+    },
+    {
+        "key":  "202",
+        "ac_no":  202,
+        "ac_name":  "Rajpur (SC)",
+        "district":  "BUXAR *",
+        "pc_no":  33.000000,
+        "pc_name":  "BUXAR"
+    },
+    {
+        "key":  "143",
+        "ac_no":  143,
+        "ac_name":  "Teghra",
+        "district":  "BEGUSARAI",
+        "pc_no":  24.000000,
+        "pc_name":  "BEGUSARAI"
+    },
+    {
+        "key":  "178",
+        "ac_no":  178,
+        "ac_name":  "Mokama",
+        "district":  "PATNA",
+        "pc_no":  28.000000,
+        "pc_name":  "MUNGER"
+    },
+    {
+        "key":  "197",
+        "ac_no":  197,
+        "ac_name":  "Jagdishpur",
+        "district":  "BHOJPUR",
+        "pc_no":  32.000000,
+        "pc_name":  "ARRAH"
+    },
+    {
+        "key":  "179",
+        "ac_no":  179,
+        "ac_name":  "Barh",
+        "district":  "PATNA",
+        "pc_no":  28.000000,
+        "pc_name":  "MUNGER"
+    },
+    {
+        "key":  "152",
+        "ac_no":  152,
+        "ac_name":  "Bihpur",
+        "district":  "BHAGALPUR",
+        "pc_no":  26.000000,
+        "pc_name":  "BHAGALPUR"
+    },
+    {
+        "key":  "145",
+        "ac_no":  145,
+        "ac_name":  "Sahebpur Kamal",
+        "district":  "BEGUSARAI",
+        "pc_no":  24.000000,
+        "pc_name":  "BEGUSARAI"
+    },
+    {
+        "key":  "165",
+        "ac_no":  165,
+        "ac_name":  "Munger",
+        "district":  "MUNGER",
+        "pc_no":  28.000000,
+        "pc_name":  "MUNGER"
+    },
+    {
+        "key":  "180",
+        "ac_no":  180,
+        "ac_name":  "Bakhtiarpur",
+        "district":  "PATNA",
+        "pc_no":  30.000000,
+        "pc_name":  "PATNA SAHIB"
+    },
+    {
+        "key":  "151",
+        "ac_no":  151,
+        "ac_name":  "Parbatta",
+        "district":  "KHAGARIA",
+        "pc_no":  25.000000,
+        "pc_name":  "KHAGARIA"
+    },
+    {
+        "key":  "144",
+        "ac_no":  144,
+        "ac_name":  "Matihani",
+        "district":  "BEGUSARAI",
+        "pc_no":  24.000000,
+        "pc_name":  "BEGUSARAI"
+    },
+    {
+        "key":  "154",
+        "ac_no":  154,
+        "ac_name":  "Pirpainti (SC)",
+        "district":  "BHAGALPUR",
+        "pc_no":  26.000000,
+        "pc_name":  "BHAGALPUR"
+    },
+    {
+        "key":  "195",
+        "ac_no":  195,
+        "ac_name":  "Agiaon (SC)",
+        "district":  "BHOJPUR",
+        "pc_no":  32.000000,
+        "pc_name":  "ARRAH"
+    },
+    {
+        "key":  "177",
+        "ac_no":  177,
+        "ac_name":  "Harnaut",
+        "district":  "NALANDA",
+        "pc_no":  29.000000,
+        "pc_name":  "NALANDA"
+    },
+    {
+        "key":  "189",
+        "ac_no":  189,
+        "ac_name":  "Masaurhi (SC)",
+        "district":  "PATNA",
+        "pc_no":  31.000000,
+        "pc_name":  "PATALIPUTRA"
+    },
+    {
+        "key":  "175",
+        "ac_no":  175,
+        "ac_name":  "Hilsa",
+        "district":  "NALANDA",
+        "pc_no":  29.000000,
+        "pc_name":  "NALANDA"
+    },
+    {
+        "key":  "190",
+        "ac_no":  190,
+        "ac_name":  "Paliganj",
+        "district":  "PATNA",
+        "pc_no":  31.000000,
+        "pc_name":  "PATALIPUTRA"
+    },
+    {
+        "key":  "166",
+        "ac_no":  166,
+        "ac_name":  "Jamalpur",
+        "district":  "MUNGER",
+        "pc_no":  28.000000,
+        "pc_name":  "MUNGER"
+    },
+    {
+        "key":  "203",
+        "ac_no":  203,
+        "ac_name":  "Ramgarh",
+        "district":  "KAIMUR (BHABUA) *",
+        "pc_no":  33.000000,
+        "pc_name":  "BUXAR"
+    },
+    {
+        "key":  "171",
+        "ac_no":  171,
+        "ac_name":  "Asthawan",
+        "district":  "NALANDA",
+        "pc_no":  29.000000,
+        "pc_name":  "NALANDA"
+    },
+    {
+        "key":  "168",
+        "ac_no":  168,
+        "ac_name":  "Lakhisarai",
+        "district":  "LAKHISARAI *",
+        "pc_no":  28.000000,
+        "pc_name":  "MUNGER"
+    },
+    {
+        "key":  "210",
+        "ac_no":  210,
+        "ac_name":  "Dinara",
+        "district":  "ROHTAS",
+        "pc_no":  33.000000,
+        "pc_name":  "BUXAR"
+    },
+    {
+        "key":  "158",
+        "ac_no":  158,
+        "ac_name":  "Nathnagar",
+        "district":  "BHAGALPUR",
+        "pc_no":  26.000000,
+        "pc_name":  "BHAGALPUR"
+    },
+    {
+        "key":  "172",
+        "ac_no":  172,
+        "ac_name":  "Biharsharif",
+        "district":  "NALANDA",
+        "pc_no":  29.000000,
+        "pc_name":  "NALANDA"
+    },
+    {
+        "key":  "155",
+        "ac_no":  155,
+        "ac_name":  "Kahalgaon",
+        "district":  "BHAGALPUR",
+        "pc_no":  26.000000,
+        "pc_name":  "BHAGALPUR"
+    },
+    {
+        "key":  "157",
+        "ac_no":  157,
+        "ac_name":  "Sultanganj",
+        "district":  "BHAGALPUR",
+        "pc_no":  27.000000,
+        "pc_name":  "BANKA"
+    },
+    {
+        "key":  "167",
+        "ac_no":  167,
+        "ac_name":  "Suryagarha",
+        "district":  "LAKHISARAI *",
+        "pc_no":  28.000000,
+        "pc_name":  "MUNGER"
+    },
+    {
+        "key":  "156",
+        "ac_no":  156,
+        "ac_name":  "Bhagalpur",
+        "district":  "BHAGALPUR",
+        "pc_no":  26.000000,
+        "pc_name":  "BHAGALPUR"
+    },
+    {
+        "key":  "196",
+        "ac_no":  196,
+        "ac_name":  "Tarari",
+        "district":  "BHOJPUR",
+        "pc_no":  32.000000,
+        "pc_name":  "ARRAH"
+    },
+    {
+        "key":  "176",
+        "ac_no":  176,
+        "ac_name":  "Nalanda",
+        "district":  "NALANDA",
+        "pc_no":  29.000000,
+        "pc_name":  "NALANDA"
+    },
+    {
+        "key":  "216",
+        "ac_no":  216,
+        "ac_name":  "Jehanabad",
+        "district":  "JEHANABAD",
+        "pc_no":  36.000000,
+        "pc_name":  "JAHANABAD"
+    },
+    {
+        "key":  "217",
+        "ac_no":  217,
+        "ac_name":  "Ghosi",
+        "district":  "JEHANABAD",
+        "pc_no":  36.000000,
+        "pc_name":  "JAHANABAD"
+    },
+    {
+        "key":  "214",
+        "ac_no":  214,
+        "ac_name":  "Arwal",
+        "district":  "JEHANABAD",
+        "pc_no":  36.000000,
+        "pc_name":  "JAHANABAD"
+    },
+    {
+        "key":  "174",
+        "ac_no":  174,
+        "ac_name":  "Islampur",
+        "district":  "NALANDA",
+        "pc_no":  29.000000,
+        "pc_name":  "NALANDA"
+    },
+    {
+        "key":  "170",
+        "ac_no":  170,
+        "ac_name":  "Barbigha",
+        "district":  "SHEIKHPURA *",
+        "pc_no":  39.000000,
+        "pc_name":  "NAWADA"
+    },
+    {
+        "key":  "209",
+        "ac_no":  209,
+        "ac_name":  "Kargahar",
+        "district":  "ROHTAS",
+        "pc_no":  34.000000,
+        "pc_name":  "SASARAM (SC)"
+    },
+    {
+        "key":  "213",
+        "ac_no":  213,
+        "ac_name":  "Karakat",
+        "district":  "ROHTAS",
+        "pc_no":  35.000000,
+        "pc_name":  "KARAKAT"
+    },
+    {
+        "key":  "204",
+        "ac_no":  204,
+        "ac_name":  "Mohania (SC)",
+        "district":  "KAIMUR (BHABUA) *",
+        "pc_no":  34.000000,
+        "pc_name":  "SASARAM (SC)"
+    },
+    {
+        "key":  "215",
+        "ac_no":  215,
+        "ac_name":  "Kurtha",
+        "district":  "JEHANABAD",
+        "pc_no":  36.000000,
+        "pc_name":  "JAHANABAD"
+    },
+    {
+        "key":  "169",
+        "ac_no":  169,
+        "ac_name":  "Sheikhpura",
+        "district":  "SHEIKHPURA *",
+        "pc_no":  40.000000,
+        "pc_name":  "JAMUI (SC)"
+    },
+    {
+        "key":  "164",
+        "ac_no":  164,
+        "ac_name":  "Tarapur",
+        "district":  "MUNGER",
+        "pc_no":  40.000000,
+        "pc_name":  "JAMUI (SC)"
+    },
+    {
+        "key":  "173",
+        "ac_no":  173,
+        "ac_name":  "Rajgir (SC)",
+        "district":  "NALANDA",
+        "pc_no":  29.000000,
+        "pc_name":  "NALANDA"
+    },
+    {
+        "key":  "218",
+        "ac_no":  218,
+        "ac_name":  "Makhdumpur (SC)",
+        "district":  "JEHANABAD",
+        "pc_no":  36.000000,
+        "pc_name":  "JAHANABAD"
+    },
+    {
+        "key":  "206",
+        "ac_no":  206,
+        "ac_name":  "Chainpur",
+        "district":  "ROHTAS",
+        "pc_no":  34.000000,
+        "pc_name":  "SASARAM (SC)"
+    },
+    {
+        "key":  "241",
+        "ac_no":  241,
+        "ac_name":  "Jamui",
+        "district":  "JAMUI *",
+        "pc_no":  40.000000,
+        "pc_name":  "JAMUI (SC)"
+    },
+    {
+        "key":  "159",
+        "ac_no":  159,
+        "ac_name":  "Amarpur",
+        "district":  "BANKA *",
+        "pc_no":  27.000000,
+        "pc_name":  "BANKA"
+    },
+    {
+        "key":  "160",
+        "ac_no":  160,
+        "ac_name":  "Dhauraiya (SC)",
+        "district":  "BANKA *",
+        "pc_no":  27.000000,
+        "pc_name":  "BANKA"
+    },
+    {
+        "key":  "205",
+        "ac_no":  205,
+        "ac_name":  "Bhabua",
+        "district":  "KAIMUR (BHABUA) *",
+        "pc_no":  34.000000,
+        "pc_name":  "SASARAM (SC)"
+    },
+    {
+        "key":  "211",
+        "ac_no":  211,
+        "ac_name":  "Nokha",
+        "district":  "ROHTAS",
+        "pc_no":  35.000000,
+        "pc_name":  "KARAKAT"
+    },
+    {
+        "key":  "239",
+        "ac_no":  239,
+        "ac_name":  "Warsaliganj",
+        "district":  "JAMUI *",
+        "pc_no":  39.000000,
+        "pc_name":  "NAWADA"
+    },
+    {
+        "key":  "220",
+        "ac_no":  220,
+        "ac_name":  "Obra",
+        "district":  "AURANGABAD",
+        "pc_no":  35.000000,
+        "pc_name":  "KARAKAT"
+    },
+    {
+        "key":  "219",
+        "ac_no":  219,
+        "ac_name":  "Goh",
+        "district":  "AURANGABAD",
+        "pc_no":  35.000000,
+        "pc_name":  "KARAKAT"
+    },
+    {
+        "key":  "163",
+        "ac_no":  163,
+        "ac_name":  "Belhar",
+        "district":  "BANKA *",
+        "pc_no":  27.000000,
+        "pc_name":  "BANKA"
+    },
+    {
+        "key":  "242",
+        "ac_no":  242,
+        "ac_name":  "Jhajha",
+        "district":  "JAMUI *",
+        "pc_no":  40.000000,
+        "pc_name":  "JAMUI (SC)"
+    },
+    {
+        "key":  "233",
+        "ac_no":  233,
+        "ac_name":  "Atri",
+        "district":  "GAYA",
+        "pc_no":  36.000000,
+        "pc_name":  "JAHANABAD"
+    },
+    {
+        "key":  "231",
+        "ac_no":  231,
+        "ac_name":  "Tikari",
+        "district":  "GAYA",
+        "pc_no":  37.000000,
+        "pc_name":  "AURANGABAD"
+    },
+    {
+        "key":  "232",
+        "ac_no":  232,
+        "ac_name":  "Belaganj",
+        "district":  "GAYA",
+        "pc_no":  38.000000,
+        "pc_name":  "GAYA (SC)"
+    },
+    {
+        "key":  "212",
+        "ac_no":  212,
+        "ac_name":  "Dehri",
+        "district":  "ROHTAS",
+        "pc_no":  35.000000,
+        "pc_name":  "KARAKAT"
+    },
+    {
+        "key":  "240",
+        "ac_no":  240,
+        "ac_name":  "Sikandra (SC)",
+        "district":  "JAMUI *",
+        "pc_no":  40.000000,
+        "pc_name":  "JAMUI (SC)"
+    },
+    {
+        "key":  "237",
+        "ac_no":  237,
+        "ac_name":  "Nawada",
+        "district":  "NAWADA",
+        "pc_no":  39.000000,
+        "pc_name":  "NAWADA"
+    },
+    {
+        "key":  "161",
+        "ac_no":  161,
+        "ac_name":  "Banka",
+        "district":  "BANKA *",
+        "pc_no":  27.000000,
+        "pc_name":  "BANKA"
+    },
+    {
+        "key":  "207",
+        "ac_no":  207,
+        "ac_name":  "Chenari (SC)",
+        "district":  "ROHTAS",
+        "pc_no":  34.000000,
+        "pc_name":  "SASARAM (SC)"
+    },
+    {
+        "key":  "208",
+        "ac_no":  208,
+        "ac_name":  "Sasaram",
+        "district":  "ROHTAS",
+        "pc_no":  34.000000,
+        "pc_name":  "SASARAM (SC)"
+    },
+    {
+        "key":  "221",
+        "ac_no":  221,
+        "ac_name":  "Nabinagar",
+        "district":  "AURANGABAD",
+        "pc_no":  35.000000,
+        "pc_name":  "KARAKAT"
+    },
+    {
+        "key":  "238",
+        "ac_no":  238,
+        "ac_name":  "Gobindpur",
+        "district":  "NAWADA",
+        "pc_no":  39.000000,
+        "pc_name":  "NAWADA"
+    },
+    {
+        "key":  "162",
+        "ac_no":  162,
+        "ac_name":  "Katoria (ST)",
+        "district":  "BANKA *",
+        "pc_no":  27.000000,
+        "pc_name":  "BANKA"
+    },
+    {
+        "key":  "236",
+        "ac_no":  236,
+        "ac_name":  "Hisua",
+        "district":  "NAWADA",
+        "pc_no":  39.000000,
+        "pc_name":  "NAWADA"
+    },
+    {
+        "key":  "234",
+        "ac_no":  234,
+        "ac_name":  "Wazirganj",
+        "district":  "GAYA",
+        "pc_no":  38.000000,
+        "pc_name":  "GAYA (SC)"
+    },
+    {
+        "key":  "224",
+        "ac_no":  224,
+        "ac_name":  "Rafiganj",
+        "district":  "AURANGABAD",
+        "pc_no":  37.000000,
+        "pc_name":  "AURANGABAD"
+    },
+    {
+        "key":  "223",
+        "ac_no":  223,
+        "ac_name":  "Aurangabad",
+        "district":  "AURANGABAD",
+        "pc_no":  37.000000,
+        "pc_name":  "AURANGABAD"
+    },
+    {
+        "key":  "225",
+        "ac_no":  225,
+        "ac_name":  "Gurua",
+        "district":  "GAYA",
+        "pc_no":  37.000000,
+        "pc_name":  "AURANGABAD"
+    },
+    {
+        "key":  "235",
+        "ac_no":  235,
+        "ac_name":  "Rajauli (SC)",
+        "district":  "NAWADA",
+        "pc_no":  39.000000,
+        "pc_name":  "NAWADA"
+    },
+    {
+        "key":  "230",
+        "ac_no":  230,
+        "ac_name":  "Gaya Town",
+        "district":  "GAYA",
+        "pc_no":  38.000000,
+        "pc_name":  "GAYA (SC)"
+    },
+    {
+        "key":  "243",
+        "ac_no":  243,
+        "ac_name":  "Chakai",
+        "district":  "JAMUI *",
+        "pc_no":  40.000000,
+        "pc_name":  "JAMUI (SC)"
+    },
+    {
+        "key":  "229",
+        "ac_no":  229,
+        "ac_name":  "Bodh Gaya (SC)",
+        "district":  "GAYA",
+        "pc_no":  38.000000,
+        "pc_name":  "GAYA (SC)"
+    },
+    {
+        "key":  "228",
+        "ac_no":  228,
+        "ac_name":  "Barachatti (SC)",
+        "district":  "GAYA",
+        "pc_no":  38.000000,
+        "pc_name":  "GAYA (SC)"
+    },
+    {
+        "key":  "222",
+        "ac_no":  222,
+        "ac_name":  "Kutumba (SC)",
+        "district":  "AURANGABAD",
+        "pc_no":  37.000000,
+        "pc_name":  "AURANGABAD"
+    },
+    {
+        "key":  "226",
+        "ac_no":  226,
+        "ac_name":  "Sherghati",
+        "district":  "GAYA",
+        "pc_no":  38.000000,
+        "pc_name":  "GAYA (SC)"
+    },
+    {
+        "key":  "227",
+        "ac_no":  227,
+        "ac_name":  "Imamganj (SC)",
+        "district":  "GAYA",
+        "pc_no":  37.000000,
+        "pc_name":  "AURANGABAD"
+    },
+    {
+        "key":  "055",
+        "ac_no":  55,
+        "ac_name":  "Kochadhaman",
+        "district":  "KISHANGANJ",
+        "pc_no":  10.000000,
+        "pc_name":  "KISHANGANJ"
+    }
+]

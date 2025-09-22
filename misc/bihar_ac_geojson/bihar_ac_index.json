@@ -1,0 +1,2189 @@
+﻿[
+    {
+        "ac_no":  2,
+        "ac_name":  "Ramnagar (SC)",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1,
+        "pc_name":  "VALMIKI NAGAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_002_ramnagar_sc.geojson"
+    },
+    {
+        "ac_no":  1,
+        "ac_name":  "Valmiki Nagar",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1,
+        "pc_name":  "VALMIKI NAGAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_001_valmiki_nagar.geojson"
+    },
+    {
+        "ac_no":  9,
+        "ac_name":  "Sikta",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1,
+        "pc_name":  "VALMIKI NAGAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_009_sikta.geojson"
+    },
+    {
+        "ac_no":  4,
+        "ac_name":  "Bagaha",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1,
+        "pc_name":  "VALMIKI NAGAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_004_bagaha.geojson"
+    },
+    {
+        "ac_no":  3,
+        "ac_name":  "Narkatiaganj",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1,
+        "pc_name":  "VALMIKI NAGAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_003_narkatiaganj.geojson"
+    },
+    {
+        "ac_no":  5,
+        "ac_name":  "Lauriya",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  1,
+        "pc_name":  "VALMIKI NAGAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_005_lauriya.geojson"
+    },
+    {
+        "ac_no":  10,
+        "ac_name":  "Raxaul",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  2,
+        "pc_name":  "PASCHIM CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_010_raxaul.geojson"
+    },
+    {
+        "ac_no":  7,
+        "ac_name":  "Chanpatia",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  2,
+        "pc_name":  "PASCHIM CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_007_chanpatia.geojson"
+    },
+    {
+        "ac_no":  11,
+        "ac_name":  "Sugauli",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  2,
+        "pc_name":  "PASCHIM CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_011_sugauli.geojson"
+    },
+    {
+        "ac_no":  12,
+        "ac_name":  "Narkatia",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  2,
+        "pc_name":  "PASCHIM CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_012_narkatia.geojson"
+    },
+    {
+        "ac_no":  25,
+        "ac_name":  "Parihar",
+        "district":  "SITAMARHI",
+        "pc_no":  5,
+        "pc_name":  "SITAMARHI",
+        "st_code":  "10",
+        "file":  "bihar_ac_025_parihar.geojson"
+    },
+    {
+        "ac_no":  21,
+        "ac_name":  "Dhaka",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  4,
+        "pc_name":  "SHEOHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_021_dhaka.geojson"
+    },
+    {
+        "ac_no":  6,
+        "ac_name":  "Nautan",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  2,
+        "pc_name":  "PASCHIM CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_006_nautan.geojson"
+    },
+    {
+        "ac_no":  8,
+        "ac_name":  "Bettiah",
+        "district":  "PASHCHIM CHAMPARAN",
+        "pc_no":  2,
+        "pc_name":  "PASCHIM CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_008_bettiah.geojson"
+    },
+    {
+        "ac_no":  24,
+        "ac_name":  "Bathnaha (SC)",
+        "district":  "SITAMARHI",
+        "pc_no":  5,
+        "pc_name":  "SITAMARHI",
+        "st_code":  "10",
+        "file":  "bihar_ac_024_bathnaha_sc.geojson"
+    },
+    {
+        "ac_no":  19,
+        "ac_name":  "Motihari",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3,
+        "pc_name":  "PURVI CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_019_motihari.geojson"
+    },
+    {
+        "ac_no":  20,
+        "ac_name":  "Chiraia",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  4,
+        "pc_name":  "SHEOHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_020_chiraia.geojson"
+    },
+    {
+        "ac_no":  23,
+        "ac_name":  "Riga",
+        "district":  "SITAMARHI",
+        "pc_no":  4,
+        "pc_name":  "SHEOHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_023_riga.geojson"
+    },
+    {
+        "ac_no":  13,
+        "ac_name":  "Harsidhi (SC)",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3,
+        "pc_name":  "PURVI CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_013_harsidhi_sc.geojson"
+    },
+    {
+        "ac_no":  14,
+        "ac_name":  "Govindganj",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3,
+        "pc_name":  "PURVI CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_014_govindganj.geojson"
+    },
+    {
+        "ac_no":  33,
+        "ac_name":  "Khajauli",
+        "district":  "MADHUBANI",
+        "pc_no":  7,
+        "pc_name":  "JHANJHARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_033_khajauli.geojson"
+    },
+    {
+        "ac_no":  31,
+        "ac_name":  "Harlakhi",
+        "district":  "MADHUBANI",
+        "pc_no":  6,
+        "pc_name":  "MADHUBANI",
+        "st_code":  "10",
+        "file":  "bihar_ac_031_harlakhi.geojson"
+    },
+    {
+        "ac_no":  26,
+        "ac_name":  "Sursand",
+        "district":  "SITAMARHI",
+        "pc_no":  5,
+        "pc_name":  "SITAMARHI",
+        "st_code":  "10",
+        "file":  "bihar_ac_026_sursand.geojson"
+    },
+    {
+        "ac_no":  22,
+        "ac_name":  "Sheohar",
+        "district":  "SHEOHAR *",
+        "pc_no":  4,
+        "pc_name":  "SHEOHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_022_sheohar.geojson"
+    },
+    {
+        "ac_no":  28,
+        "ac_name":  "Sitamarhi",
+        "district":  "SITAMARHI",
+        "pc_no":  5,
+        "pc_name":  "SITAMARHI",
+        "st_code":  "10",
+        "file":  "bihar_ac_028_sitamarhi.geojson"
+    },
+    {
+        "ac_no":  53,
+        "ac_name":  "Thakurganj",
+        "district":  "KISHANGANJ",
+        "pc_no":  10,
+        "pc_name":  "KISHANGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_053_thakurganj.geojson"
+    },
+    {
+        "ac_no":  34,
+        "ac_name":  "Babubarhi",
+        "district":  "MADHUBANI",
+        "pc_no":  7,
+        "pc_name":  "JHANJHARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_034_babubarhi.geojson"
+    },
+    {
+        "ac_no":  46,
+        "ac_name":  "Narpatganj",
+        "district":  "ARARIA",
+        "pc_no":  9,
+        "pc_name":  "ARARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_046_narpatganj.geojson"
+    },
+    {
+        "ac_no":  27,
+        "ac_name":  "Bajpatti",
+        "district":  "SITAMARHI",
+        "pc_no":  5,
+        "pc_name":  "SITAMARHI",
+        "st_code":  "10",
+        "file":  "bihar_ac_027_bajpatti.geojson"
+    },
+    {
+        "ac_no":  18,
+        "ac_name":  "Madhuban",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  4,
+        "pc_name":  "SHEOHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_018_madhuban.geojson"
+    },
+    {
+        "ac_no":  102,
+        "ac_name":  "Kuchaikote",
+        "district":  "GOPALGANJ",
+        "pc_no":  17,
+        "pc_name":  "GOPALGANJ (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_102_kuchaikote.geojson"
+    },
+    {
+        "ac_no":  103,
+        "ac_name":  "Bhorey (SC)",
+        "district":  "GOPALGANJ",
+        "pc_no":  17,
+        "pc_name":  "GOPALGANJ (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_103_bhorey_sc.geojson"
+    },
+    {
+        "ac_no":  101,
+        "ac_name":  "Gopalganj",
+        "district":  "GOPALGANJ",
+        "pc_no":  17,
+        "pc_name":  "GOPALGANJ (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_101_gopalganj.geojson"
+    },
+    {
+        "ac_no":  40,
+        "ac_name":  "Laukaha",
+        "district":  "MADHUBANI",
+        "pc_no":  7,
+        "pc_name":  "JHANJHARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_040_laukaha.geojson"
+    },
+    {
+        "ac_no":  45,
+        "ac_name":  "Chhatapur",
+        "district":  "SUPAUL *",
+        "pc_no":  8,
+        "pc_name":  "SUPAUL",
+        "st_code":  "10",
+        "file":  "bihar_ac_045_chhatapur.geojson"
+    },
+    {
+        "ac_no":  16,
+        "ac_name":  "Kalyanpur",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3,
+        "pc_name":  "PURVI CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_016_kalyanpur.geojson"
+    },
+    {
+        "ac_no":  30,
+        "ac_name":  "Belsand",
+        "district":  "SITAMARHI",
+        "pc_no":  4,
+        "pc_name":  "SHEOHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_030_belsand.geojson"
+    },
+    {
+        "ac_no":  32,
+        "ac_name":  "Benipatti",
+        "district":  "MADHUBANI",
+        "pc_no":  6,
+        "pc_name":  "MADHUBANI",
+        "st_code":  "10",
+        "file":  "bihar_ac_032_benipatti.geojson"
+    },
+    {
+        "ac_no":  17,
+        "ac_name":  "Pipra",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3,
+        "pc_name":  "PURVI CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_017_pipra.geojson"
+    },
+    {
+        "ac_no":  54,
+        "ac_name":  "Kishanganj",
+        "district":  "KISHANGANJ",
+        "pc_no":  10,
+        "pc_name":  "KISHANGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_054_kishanganj.geojson"
+    },
+    {
+        "ac_no":  15,
+        "ac_name":  "Kesaria",
+        "district":  "PURBA CHAMPARAN",
+        "pc_no":  3,
+        "pc_name":  "PURVI CHAMPARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_015_kesaria.geojson"
+    },
+    {
+        "ac_no":  29,
+        "ac_name":  "Runnisaidpur",
+        "district":  "SITAMARHI",
+        "pc_no":  5,
+        "pc_name":  "SITAMARHI",
+        "st_code":  "10",
+        "file":  "bihar_ac_029_runnisaidpur.geojson"
+    },
+    {
+        "ac_no":  52,
+        "ac_name":  "Bahadurganj",
+        "district":  "KISHANGANJ",
+        "pc_no":  10,
+        "pc_name":  "KISHANGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_052_bahadurganj.geojson"
+    },
+    {
+        "ac_no":  51,
+        "ac_name":  "Sikti",
+        "district":  "ARARIA",
+        "pc_no":  9,
+        "pc_name":  "ARARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_051_sikti.geojson"
+    },
+    {
+        "ac_no":  41,
+        "ac_name":  "Nirmali",
+        "district":  "SUPAUL *",
+        "pc_no":  8,
+        "pc_name":  "SUPAUL",
+        "st_code":  "10",
+        "file":  "bihar_ac_041_nirmali.geojson"
+    },
+    {
+        "ac_no":  104,
+        "ac_name":  "Hathua",
+        "district":  "GOPALGANJ",
+        "pc_no":  17,
+        "pc_name":  "GOPALGANJ (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_104_hathua.geojson"
+    },
+    {
+        "ac_no":  100,
+        "ac_name":  "Barauli",
+        "district":  "GOPALGANJ",
+        "pc_no":  17,
+        "pc_name":  "GOPALGANJ (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_100_barauli.geojson"
+    },
+    {
+        "ac_no":  37,
+        "ac_name":  "Rajnagar (SC)",
+        "district":  "MADHUBANI",
+        "pc_no":  7,
+        "pc_name":  "JHANJHARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_037_rajnagar_sc.geojson"
+    },
+    {
+        "ac_no":  48,
+        "ac_name":  "Forbesganj",
+        "district":  "ARARIA",
+        "pc_no":  9,
+        "pc_name":  "ARARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_048_forbesganj.geojson"
+    },
+    {
+        "ac_no":  87,
+        "ac_name":  "Jale",
+        "district":  "DARBHANGA",
+        "pc_no":  6,
+        "pc_name":  "MADHUBANI",
+        "st_code":  "10",
+        "file":  "bihar_ac_087_jale.geojson"
+    },
+    {
+        "ac_no":  99,
+        "ac_name":  "Baikunthpur",
+        "district":  "GOPALGANJ",
+        "pc_no":  17,
+        "pc_name":  "GOPALGANJ (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_099_baikunthpur.geojson"
+    },
+    {
+        "ac_no":  39,
+        "ac_name":  "Phulparas",
+        "district":  "MADHUBANI",
+        "pc_no":  7,
+        "pc_name":  "JHANJHARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_039_phulparas.geojson"
+    },
+    {
+        "ac_no":  35,
+        "ac_name":  "Bisfi",
+        "district":  "MADHUBANI",
+        "pc_no":  6,
+        "pc_name":  "MADHUBANI",
+        "st_code":  "10",
+        "file":  "bihar_ac_035_bisfi.geojson"
+    },
+    {
+        "ac_no":  44,
+        "ac_name":  "Triveniganj (SC)",
+        "district":  "SUPAUL *",
+        "pc_no":  8,
+        "pc_name":  "SUPAUL",
+        "st_code":  "10",
+        "file":  "bihar_ac_044_triveniganj_sc.geojson"
+    },
+    {
+        "ac_no":  89,
+        "ac_name":  "Aurai",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15,
+        "pc_name":  "MUZAFFARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_089_aurai.geojson"
+    },
+    {
+        "ac_no":  49,
+        "ac_name":  "Araria",
+        "district":  "ARARIA",
+        "pc_no":  9,
+        "pc_name":  "ARARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_049_araria.geojson"
+    },
+    {
+        "ac_no":  36,
+        "ac_name":  "Madhubani",
+        "district":  "MADHUBANI",
+        "pc_no":  6,
+        "pc_name":  "MADHUBANI",
+        "st_code":  "10",
+        "file":  "bihar_ac_036_madhubani.geojson"
+    },
+    {
+        "ac_no":  38,
+        "ac_name":  "Jhanjharpur",
+        "district":  "MADHUBANI",
+        "pc_no":  7,
+        "pc_name":  "JHANJHARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_038_jhanjharpur.geojson"
+    },
+    {
+        "ac_no":  90,
+        "ac_name":  "Minapur",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  16,
+        "pc_name":  "VAISHALI",
+        "st_code":  "10",
+        "file":  "bihar_ac_090_minapur.geojson"
+    },
+    {
+        "ac_no":  42,
+        "ac_name":  "Pipra",
+        "district":  "SUPAUL *",
+        "pc_no":  8,
+        "pc_name":  "SUPAUL",
+        "st_code":  "10",
+        "file":  "bihar_ac_042_pipra.geojson"
+    },
+    {
+        "ac_no":  105,
+        "ac_name":  "Siwan",
+        "district":  "SIWAN",
+        "pc_no":  18,
+        "pc_name":  "SIWAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_105_siwan.geojson"
+    },
+    {
+        "ac_no":  110,
+        "ac_name":  "Barharia",
+        "district":  "SIWAN",
+        "pc_no":  18,
+        "pc_name":  "SIWAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_110_barharia.geojson"
+    },
+    {
+        "ac_no":  106,
+        "ac_name":  "Ziradei",
+        "district":  "SIWAN",
+        "pc_no":  18,
+        "pc_name":  "SIWAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_106_ziradei.geojson"
+    },
+    {
+        "ac_no":  43,
+        "ac_name":  "Supaul",
+        "district":  "SUPAUL *",
+        "pc_no":  8,
+        "pc_name":  "SUPAUL",
+        "st_code":  "10",
+        "file":  "bihar_ac_043_supaul.geojson"
+    },
+    {
+        "ac_no":  86,
+        "ac_name":  "Keoti",
+        "district":  "DARBHANGA",
+        "pc_no":  6,
+        "pc_name":  "MADHUBANI",
+        "st_code":  "10",
+        "file":  "bihar_ac_086_keoti.geojson"
+    },
+    {
+        "ac_no":  96,
+        "ac_name":  "Baruraj",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  16,
+        "pc_name":  "VAISHALI",
+        "st_code":  "10",
+        "file":  "bihar_ac_096_baruraj.geojson"
+    },
+    {
+        "ac_no":  98,
+        "ac_name":  "Sahebganj",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  16,
+        "pc_name":  "VAISHALI",
+        "st_code":  "10",
+        "file":  "bihar_ac_098_sahebganj.geojson"
+    },
+    {
+        "ac_no":  50,
+        "ac_name":  "Jokihat",
+        "district":  "ARARIA",
+        "pc_no":  9,
+        "pc_name":  "ARARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_050_jokihat.geojson"
+    },
+    {
+        "ac_no":  111,
+        "ac_name":  "Goriakothi",
+        "district":  "SIWAN",
+        "pc_no":  19,
+        "pc_name":  "MAHARAJGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_111_goriakothi.geojson"
+    },
+    {
+        "ac_no":  91,
+        "ac_name":  "Bochaha (SC)",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15,
+        "pc_name":  "MUZAFFARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_091_bochaha_sc.geojson"
+    },
+    {
+        "ac_no":  82,
+        "ac_name":  "Darbhanga Rural",
+        "district":  "DARBHANGA",
+        "pc_no":  14,
+        "pc_name":  "DARBHANGA",
+        "st_code":  "10",
+        "file":  "bihar_ac_082_darbhanga_rural.geojson"
+    },
+    {
+        "ac_no":  88,
+        "ac_name":  "Gaighat",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15,
+        "pc_name":  "MUZAFFARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_088_gaighat.geojson"
+    },
+    {
+        "ac_no":  95,
+        "ac_name":  "Kanti",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  16,
+        "pc_name":  "VAISHALI",
+        "st_code":  "10",
+        "file":  "bihar_ac_095_kanti.geojson"
+    },
+    {
+        "ac_no":  83,
+        "ac_name":  "Darbhanga",
+        "district":  "DARBHANGA",
+        "pc_no":  14,
+        "pc_name":  "DARBHANGA",
+        "st_code":  "10",
+        "file":  "bihar_ac_083_darbhanga.geojson"
+    },
+    {
+        "ac_no":  81,
+        "ac_name":  "Alinagar",
+        "district":  "DARBHANGA",
+        "pc_no":  14,
+        "pc_name":  "DARBHANGA",
+        "st_code":  "10",
+        "file":  "bihar_ac_081_alinagar.geojson"
+    },
+    {
+        "ac_no":  47,
+        "ac_name":  "Raniganj (SC)",
+        "district":  "ARARIA",
+        "pc_no":  9,
+        "pc_name":  "ARARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_047_raniganj_sc.geojson"
+    },
+    {
+        "ac_no":  107,
+        "ac_name":  "Darauli (SC)",
+        "district":  "SIWAN",
+        "pc_no":  18,
+        "pc_name":  "SIWAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_107_darauli_sc.geojson"
+    },
+    {
+        "ac_no":  116,
+        "ac_name":  "Taraiya",
+        "district":  "SARAN",
+        "pc_no":  19,
+        "pc_name":  "MAHARAJGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_116_taraiya.geojson"
+    },
+    {
+        "ac_no":  108,
+        "ac_name":  "Raghunathpur",
+        "district":  "SIWAN",
+        "pc_no":  18,
+        "pc_name":  "SIWAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_108_raghunathpur.geojson"
+    },
+    {
+        "ac_no":  115,
+        "ac_name":  "Baniapur",
+        "district":  "SARAN",
+        "pc_no":  19,
+        "pc_name":  "MAHARAJGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_115_baniapur.geojson"
+    },
+    {
+        "ac_no":  56,
+        "ac_name":  "Amour",
+        "district":  "PURNIA",
+        "pc_no":  10,
+        "pc_name":  "KISHANGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_056_amour.geojson"
+    },
+    {
+        "ac_no":  85,
+        "ac_name":  "Bahadurpur",
+        "district":  "DARBHANGA",
+        "pc_no":  14,
+        "pc_name":  "DARBHANGA",
+        "st_code":  "10",
+        "file":  "bihar_ac_085_bahadurpur.geojson"
+    },
+    {
+        "ac_no":  80,
+        "ac_name":  "Benipur",
+        "district":  "DARBHANGA",
+        "pc_no":  14,
+        "pc_name":  "DARBHANGA",
+        "st_code":  "10",
+        "file":  "bihar_ac_080_benipur.geojson"
+    },
+    {
+        "ac_no":  112,
+        "ac_name":  "Maharajganj",
+        "district":  "SIWAN",
+        "pc_no":  19,
+        "pc_name":  "MAHARAJGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_112_maharajganj.geojson"
+    },
+    {
+        "ac_no":  97,
+        "ac_name":  "Paroo",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  16,
+        "pc_name":  "VAISHALI",
+        "st_code":  "10",
+        "file":  "bihar_ac_097_paroo.geojson"
+    },
+    {
+        "ac_no":  73,
+        "ac_name":  "Madhepura",
+        "district":  "MADHEPURA",
+        "pc_no":  13,
+        "pc_name":  "MADHEPURA",
+        "st_code":  "10",
+        "file":  "bihar_ac_073_madhepura.geojson"
+    },
+    {
+        "ac_no":  94,
+        "ac_name":  "Muzaffarpur",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15,
+        "pc_name":  "MUZAFFARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_094_muzaffarpur.geojson"
+    },
+    {
+        "ac_no":  72,
+        "ac_name":  "Singheshwar (SC)",
+        "district":  "MADHEPURA",
+        "pc_no":  8,
+        "pc_name":  "SUPAUL",
+        "st_code":  "10",
+        "file":  "bihar_ac_072_singheshwar_sc.geojson"
+    },
+    {
+        "ac_no":  109,
+        "ac_name":  "Daraundha",
+        "district":  "SIWAN",
+        "pc_no":  18,
+        "pc_name":  "SIWAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_109_daraundha.geojson"
+    },
+    {
+        "ac_no":  84,
+        "ac_name":  "Hayaghat",
+        "district":  "DARBHANGA",
+        "pc_no":  23,
+        "pc_name":  "SAMASTIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_084_hayaghat.geojson"
+    },
+    {
+        "ac_no":  93,
+        "ac_name":  "Kurhani",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15,
+        "pc_name":  "MUZAFFARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_093_kurhani.geojson"
+    },
+    {
+        "ac_no":  77,
+        "ac_name":  "Mahishi",
+        "district":  "SAHARSA",
+        "pc_no":  13,
+        "pc_name":  "MADHEPURA",
+        "st_code":  "10",
+        "file":  "bihar_ac_077_mahishi.geojson"
+    },
+    {
+        "ac_no":  131,
+        "ac_name":  "Kalyanpur (SC)",
+        "district":  "SAMASTIPUR",
+        "pc_no":  23,
+        "pc_name":  "SAMASTIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_131_kalyanpur_sc.geojson"
+    },
+    {
+        "ac_no":  79,
+        "ac_name":  "Gaura Bauram",
+        "district":  "DARBHANGA",
+        "pc_no":  14,
+        "pc_name":  "DARBHANGA",
+        "st_code":  "10",
+        "file":  "bihar_ac_079_gaura_bauram.geojson"
+    },
+    {
+        "ac_no":  92,
+        "ac_name":  "Sakra (SC)",
+        "district":  "MUZAFFARPUR",
+        "pc_no":  15,
+        "pc_name":  "MUZAFFARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_092_sakra_sc.geojson"
+    },
+    {
+        "ac_no":  113,
+        "ac_name":  "Ekma",
+        "district":  "SARAN",
+        "pc_no":  19,
+        "pc_name":  "MAHARAJGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_113_ekma.geojson"
+    },
+    {
+        "ac_no":  58,
+        "ac_name":  "Kasba",
+        "district":  "PURNIA",
+        "pc_no":  12,
+        "pc_name":  "PURNIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_058_kasba.geojson"
+    },
+    {
+        "ac_no":  59,
+        "ac_name":  "Banmankhi (SC)",
+        "district":  "PURNIA",
+        "pc_no":  12,
+        "pc_name":  "PURNIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_059_banmankhi_sc.geojson"
+    },
+    {
+        "ac_no":  125,
+        "ac_name":  "Vaishali",
+        "district":  "VAISHALI",
+        "pc_no":  16,
+        "pc_name":  "VAISHALI",
+        "st_code":  "10",
+        "file":  "bihar_ac_125_vaishali.geojson"
+    },
+    {
+        "ac_no":  120,
+        "ac_name":  "Amnour",
+        "district":  "SARAN",
+        "pc_no":  20,
+        "pc_name":  "SARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_120_amnour.geojson"
+    },
+    {
+        "ac_no":  57,
+        "ac_name":  "Baisi",
+        "district":  "PURNIA",
+        "pc_no":  10,
+        "pc_name":  "KISHANGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_057_baisi.geojson"
+    },
+    {
+        "ac_no":  114,
+        "ac_name":  "Manjhi",
+        "district":  "SARAN",
+        "pc_no":  19,
+        "pc_name":  "MAHARAJGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_114_manjhi.geojson"
+    },
+    {
+        "ac_no":  132,
+        "ac_name":  "Warisnagar",
+        "district":  "SAMASTIPUR",
+        "pc_no":  23,
+        "pc_name":  "SAMASTIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_132_warisnagar.geojson"
+    },
+    {
+        "ac_no":  117,
+        "ac_name":  "Marhaura",
+        "district":  "SARAN",
+        "pc_no":  20,
+        "pc_name":  "SARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_117_marhaura.geojson"
+    },
+    {
+        "ac_no":  133,
+        "ac_name":  "Samastipur",
+        "district":  "SAMASTIPUR",
+        "pc_no":  23,
+        "pc_name":  "SAMASTIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_133_samastipur.geojson"
+    },
+    {
+        "ac_no":  71,
+        "ac_name":  "Bihariganj",
+        "district":  "MADHEPURA",
+        "pc_no":  13,
+        "pc_name":  "MADHEPURA",
+        "st_code":  "10",
+        "file":  "bihar_ac_071_bihariganj.geojson"
+    },
+    {
+        "ac_no":  61,
+        "ac_name":  "Dhamdaha",
+        "district":  "PURNIA",
+        "pc_no":  12,
+        "pc_name":  "PURNIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_061_dhamdaha.geojson"
+    },
+    {
+        "ac_no":  75,
+        "ac_name":  "Saharsa",
+        "district":  "SAHARSA",
+        "pc_no":  13,
+        "pc_name":  "MADHEPURA",
+        "st_code":  "10",
+        "file":  "bihar_ac_075_saharsa.geojson"
+    },
+    {
+        "ac_no":  65,
+        "ac_name":  "Balrampur",
+        "district":  "KATIHAR",
+        "pc_no":  11,
+        "pc_name":  "KATIHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_065_balrampur.geojson"
+    },
+    {
+        "ac_no":  126,
+        "ac_name":  "Mahua",
+        "district":  "VAISHALI",
+        "pc_no":  21,
+        "pc_name":  "HAJIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_126_mahua.geojson"
+    },
+    {
+        "ac_no":  139,
+        "ac_name":  "Rosera (SC)",
+        "district":  "SAMASTIPUR",
+        "pc_no":  23,
+        "pc_name":  "SAMASTIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_139_rosera_sc.geojson"
+    },
+    {
+        "ac_no":  124,
+        "ac_name":  "Lalganj",
+        "district":  "VAISHALI",
+        "pc_no":  21,
+        "pc_name":  "HAJIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_124_lalganj.geojson"
+    },
+    {
+        "ac_no":  130,
+        "ac_name":  "Patepur (SC)",
+        "district":  "VAISHALI",
+        "pc_no":  22,
+        "pc_name":  "UJIARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_130_patepur_sc.geojson"
+    },
+    {
+        "ac_no":  78,
+        "ac_name":  "Kusheshwar Asthan (SC)",
+        "district":  "DARBHANGA",
+        "pc_no":  23,
+        "pc_name":  "SAMASTIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_078_kusheshwar_asthan_sc.geojson"
+    },
+    {
+        "ac_no":  121,
+        "ac_name":  "Parsa",
+        "district":  "SARAN",
+        "pc_no":  20,
+        "pc_name":  "SARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_121_parsa.geojson"
+    },
+    {
+        "ac_no":  135,
+        "ac_name":  "Morwa",
+        "district":  "SAMASTIPUR",
+        "pc_no":  22,
+        "pc_name":  "UJIARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_135_morwa.geojson"
+    },
+    {
+        "ac_no":  76,
+        "ac_name":  "Simri Bakhtiarpur",
+        "district":  "SAHARSA",
+        "pc_no":  25,
+        "pc_name":  "KHAGARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_076_simri_bakhtiarpur.geojson"
+    },
+    {
+        "ac_no":  74,
+        "ac_name":  "Sonbarsha (SC)",
+        "district":  "SAHARSA",
+        "pc_no":  13,
+        "pc_name":  "MADHEPURA",
+        "st_code":  "10",
+        "file":  "bihar_ac_074_sonbarsha_sc.geojson"
+    },
+    {
+        "ac_no":  62,
+        "ac_name":  "Purnia",
+        "district":  "PURNIA",
+        "pc_no":  12,
+        "pc_name":  "PURNIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_062_purnia.geojson"
+    },
+    {
+        "ac_no":  119,
+        "ac_name":  "Garkha (SC)",
+        "district":  "SARAN",
+        "pc_no":  20,
+        "pc_name":  "SARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_119_garkha_sc.geojson"
+    },
+    {
+        "ac_no":  140,
+        "ac_name":  "Hasanpur",
+        "district":  "SAMASTIPUR",
+        "pc_no":  25,
+        "pc_name":  "KHAGARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_140_hasanpur.geojson"
+    },
+    {
+        "ac_no":  134,
+        "ac_name":  "Ujiarpur",
+        "district":  "SAMASTIPUR",
+        "pc_no":  22,
+        "pc_name":  "UJIARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_134_ujiarpur.geojson"
+    },
+    {
+        "ac_no":  118,
+        "ac_name":  "Chapra",
+        "district":  "SARAN",
+        "pc_no":  20,
+        "pc_name":  "SARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_118_chapra.geojson"
+    },
+    {
+        "ac_no":  60,
+        "ac_name":  "Rupauli",
+        "district":  "PURNIA",
+        "pc_no":  12,
+        "pc_name":  "PURNIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_060_rupauli.geojson"
+    },
+    {
+        "ac_no":  136,
+        "ac_name":  "Sarairanjan",
+        "district":  "SAMASTIPUR",
+        "pc_no":  22,
+        "pc_name":  "UJIARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_136_sarairanjan.geojson"
+    },
+    {
+        "ac_no":  64,
+        "ac_name":  "Kadwa",
+        "district":  "KATIHAR",
+        "pc_no":  11,
+        "pc_name":  "KATIHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_064_kadwa.geojson"
+    },
+    {
+        "ac_no":  138,
+        "ac_name":  "Bibhutipur",
+        "district":  "SAMASTIPUR",
+        "pc_no":  22,
+        "pc_name":  "UJIARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_138_bibhutipur.geojson"
+    },
+    {
+        "ac_no":  127,
+        "ac_name":  "Raja Pakar (SC)",
+        "district":  "VAISHALI",
+        "pc_no":  21,
+        "pc_name":  "HAJIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_127_raja_pakar_sc.geojson"
+    },
+    {
+        "ac_no":  141,
+        "ac_name":  "Cheria Bariarpur",
+        "district":  "BEGUSARAI",
+        "pc_no":  24,
+        "pc_name":  "BEGUSARAI",
+        "st_code":  "10",
+        "file":  "bihar_ac_141_cheria_bariarpur.geojson"
+    },
+    {
+        "ac_no":  123,
+        "ac_name":  "Hajipur",
+        "district":  "VAISHALI",
+        "pc_no":  21,
+        "pc_name":  "HAJIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_123_hajipur.geojson"
+    },
+    {
+        "ac_no":  122,
+        "ac_name":  "Sonepur",
+        "district":  "VAISHALI",
+        "pc_no":  20,
+        "pc_name":  "SARAN",
+        "st_code":  "10",
+        "file":  "bihar_ac_122_sonepur.geojson"
+    },
+    {
+        "ac_no":  129,
+        "ac_name":  "Mahnar",
+        "district":  "VAISHALI",
+        "pc_no":  21,
+        "pc_name":  "HAJIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_129_mahnar.geojson"
+    },
+    {
+        "ac_no":  69,
+        "ac_name":  "Korha (SC)",
+        "district":  "KATIHAR",
+        "pc_no":  12,
+        "pc_name":  "PURNIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_069_korha_sc.geojson"
+    },
+    {
+        "ac_no":  63,
+        "ac_name":  "Katihar",
+        "district":  "KATIHAR",
+        "pc_no":  11,
+        "pc_name":  "KATIHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_063_katihar.geojson"
+    },
+    {
+        "ac_no":  148,
+        "ac_name":  "Alauli (SC)",
+        "district":  "KHAGARIA",
+        "pc_no":  25,
+        "pc_name":  "KHAGARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_148_alauli_sc.geojson"
+    },
+    {
+        "ac_no":  147,
+        "ac_name":  "Bakhri (SC)",
+        "district":  "BEGUSARAI",
+        "pc_no":  24,
+        "pc_name":  "BEGUSARAI",
+        "st_code":  "10",
+        "file":  "bihar_ac_147_bakhri_sc.geojson"
+    },
+    {
+        "ac_no":  199,
+        "ac_name":  "Brahampur",
+        "district":  "BUXAR *",
+        "pc_no":  33,
+        "pc_name":  "BUXAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_199_brahampur.geojson"
+    },
+    {
+        "ac_no":  66,
+        "ac_name":  "Pranpur",
+        "district":  "KATIHAR",
+        "pc_no":  11,
+        "pc_name":  "KATIHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_066_pranpur.geojson"
+    },
+    {
+        "ac_no":  186,
+        "ac_name":  "Danapur",
+        "district":  "PATNA",
+        "pc_no":  31,
+        "pc_name":  "PATALIPUTRA",
+        "st_code":  "10",
+        "file":  "bihar_ac_186_danapur.geojson"
+    },
+    {
+        "ac_no":  193,
+        "ac_name":  "Barhara",
+        "district":  "BHOJPUR",
+        "pc_no":  32,
+        "pc_name":  "ARRAH",
+        "st_code":  "10",
+        "file":  "bihar_ac_193_barhara.geojson"
+    },
+    {
+        "ac_no":  70,
+        "ac_name":  "Alamnagar",
+        "district":  "MADHEPURA",
+        "pc_no":  13,
+        "pc_name":  "MADHEPURA",
+        "st_code":  "10",
+        "file":  "bihar_ac_070_alamnagar.geojson"
+    },
+    {
+        "ac_no":  187,
+        "ac_name":  "Maner",
+        "district":  "PATNA",
+        "pc_no":  31,
+        "pc_name":  "PATALIPUTRA",
+        "st_code":  "10",
+        "file":  "bihar_ac_187_maner.geojson"
+    },
+    {
+        "ac_no":  128,
+        "ac_name":  "Raghopur",
+        "district":  "VAISHALI",
+        "pc_no":  21,
+        "pc_name":  "HAJIPUR (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_128_raghopur.geojson"
+    },
+    {
+        "ac_no":  198,
+        "ac_name":  "Shahpur",
+        "district":  "BHOJPUR",
+        "pc_no":  32,
+        "pc_name":  "ARRAH",
+        "st_code":  "10",
+        "file":  "bihar_ac_198_shahpur.geojson"
+    },
+    {
+        "ac_no":  200,
+        "ac_name":  "Buxar",
+        "district":  "BUXAR *",
+        "pc_no":  33,
+        "pc_name":  "BUXAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_200_buxar.geojson"
+    },
+    {
+        "ac_no":  150,
+        "ac_name":  "Beldaur",
+        "district":  "KHAGARIA",
+        "pc_no":  25,
+        "pc_name":  "KHAGARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_150_beldaur.geojson"
+    },
+    {
+        "ac_no":  142,
+        "ac_name":  "Bachhwara",
+        "district":  "BEGUSARAI",
+        "pc_no":  24,
+        "pc_name":  "BEGUSARAI",
+        "st_code":  "10",
+        "file":  "bihar_ac_142_bachhwara.geojson"
+    },
+    {
+        "ac_no":  137,
+        "ac_name":  "Mohiuddinnagar",
+        "district":  "SAMASTIPUR",
+        "pc_no":  22,
+        "pc_name":  "UJIARPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_137_mohiuddinnagar.geojson"
+    },
+    {
+        "ac_no":  181,
+        "ac_name":  "Digha",
+        "district":  "PATNA",
+        "pc_no":  30,
+        "pc_name":  "PATNA SAHIB",
+        "st_code":  "10",
+        "file":  "bihar_ac_181_digha.geojson"
+    },
+    {
+        "ac_no":  149,
+        "ac_name":  "Khagaria",
+        "district":  "KHAGARIA",
+        "pc_no":  25,
+        "pc_name":  "KHAGARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_149_khagaria.geojson"
+    },
+    {
+        "ac_no":  68,
+        "ac_name":  "Barari",
+        "district":  "KATIHAR",
+        "pc_no":  11,
+        "pc_name":  "KATIHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_068_barari.geojson"
+    },
+    {
+        "ac_no":  194,
+        "ac_name":  "Arrah",
+        "district":  "BHOJPUR",
+        "pc_no":  32,
+        "pc_name":  "ARRAH",
+        "st_code":  "10",
+        "file":  "bihar_ac_194_arrah.geojson"
+    },
+    {
+        "ac_no":  182,
+        "ac_name":  "Bankipur",
+        "district":  "PATNA",
+        "pc_no":  30,
+        "pc_name":  "PATNA SAHIB",
+        "st_code":  "10",
+        "file":  "bihar_ac_182_bankipur.geojson"
+    },
+    {
+        "ac_no":  184,
+        "ac_name":  "Patna Sahib",
+        "district":  "PATNA",
+        "pc_no":  30,
+        "pc_name":  "PATNA SAHIB",
+        "st_code":  "10",
+        "file":  "bihar_ac_184_patna_sahib.geojson"
+    },
+    {
+        "ac_no":  183,
+        "ac_name":  "Kumhrar",
+        "district":  "PATNA",
+        "pc_no":  30,
+        "pc_name":  "PATNA SAHIB",
+        "st_code":  "10",
+        "file":  "bihar_ac_183_kumhrar.geojson"
+    },
+    {
+        "ac_no":  192,
+        "ac_name":  "Sandesh",
+        "district":  "BHOJPUR",
+        "pc_no":  32,
+        "pc_name":  "ARRAH",
+        "st_code":  "10",
+        "file":  "bihar_ac_192_sandesh.geojson"
+    },
+    {
+        "ac_no":  185,
+        "ac_name":  "Fatuha",
+        "district":  "PATNA",
+        "pc_no":  30,
+        "pc_name":  "PATNA SAHIB",
+        "st_code":  "10",
+        "file":  "bihar_ac_185_fatuha.geojson"
+    },
+    {
+        "ac_no":  146,
+        "ac_name":  "Begusarai",
+        "district":  "BEGUSARAI",
+        "pc_no":  24,
+        "pc_name":  "BEGUSARAI",
+        "st_code":  "10",
+        "file":  "bihar_ac_146_begusarai.geojson"
+    },
+    {
+        "ac_no":  188,
+        "ac_name":  "Phulwari (SC)",
+        "district":  "PATNA",
+        "pc_no":  31,
+        "pc_name":  "PATALIPUTRA",
+        "st_code":  "10",
+        "file":  "bihar_ac_188_phulwari_sc.geojson"
+    },
+    {
+        "ac_no":  201,
+        "ac_name":  "Dumraon",
+        "district":  "BUXAR *",
+        "pc_no":  33,
+        "pc_name":  "BUXAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_201_dumraon.geojson"
+    },
+    {
+        "ac_no":  67,
+        "ac_name":  "Manihari (ST)",
+        "district":  "KATIHAR",
+        "pc_no":  11,
+        "pc_name":  "KATIHAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_067_manihari_st.geojson"
+    },
+    {
+        "ac_no":  153,
+        "ac_name":  "Gopalpur",
+        "district":  "BHAGALPUR",
+        "pc_no":  26,
+        "pc_name":  "BHAGALPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_153_gopalpur.geojson"
+    },
+    {
+        "ac_no":  191,
+        "ac_name":  "Bikram",
+        "district":  "PATNA",
+        "pc_no":  31,
+        "pc_name":  "PATALIPUTRA",
+        "st_code":  "10",
+        "file":  "bihar_ac_191_bikram.geojson"
+    },
+    {
+        "ac_no":  202,
+        "ac_name":  "Rajpur (SC)",
+        "district":  "BUXAR *",
+        "pc_no":  33,
+        "pc_name":  "BUXAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_202_rajpur_sc.geojson"
+    },
+    {
+        "ac_no":  143,
+        "ac_name":  "Teghra",
+        "district":  "BEGUSARAI",
+        "pc_no":  24,
+        "pc_name":  "BEGUSARAI",
+        "st_code":  "10",
+        "file":  "bihar_ac_143_teghra.geojson"
+    },
+    {
+        "ac_no":  178,
+        "ac_name":  "Mokama",
+        "district":  "PATNA",
+        "pc_no":  28,
+        "pc_name":  "MUNGER",
+        "st_code":  "10",
+        "file":  "bihar_ac_178_mokama.geojson"
+    },
+    {
+        "ac_no":  197,
+        "ac_name":  "Jagdishpur",
+        "district":  "BHOJPUR",
+        "pc_no":  32,
+        "pc_name":  "ARRAH",
+        "st_code":  "10",
+        "file":  "bihar_ac_197_jagdishpur.geojson"
+    },
+    {
+        "ac_no":  179,
+        "ac_name":  "Barh",
+        "district":  "PATNA",
+        "pc_no":  28,
+        "pc_name":  "MUNGER",
+        "st_code":  "10",
+        "file":  "bihar_ac_179_barh.geojson"
+    },
+    {
+        "ac_no":  152,
+        "ac_name":  "Bihpur",
+        "district":  "BHAGALPUR",
+        "pc_no":  26,
+        "pc_name":  "BHAGALPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_152_bihpur.geojson"
+    },
+    {
+        "ac_no":  145,
+        "ac_name":  "Sahebpur Kamal",
+        "district":  "BEGUSARAI",
+        "pc_no":  24,
+        "pc_name":  "BEGUSARAI",
+        "st_code":  "10",
+        "file":  "bihar_ac_145_sahebpur_kamal.geojson"
+    },
+    {
+        "ac_no":  165,
+        "ac_name":  "Munger",
+        "district":  "MUNGER",
+        "pc_no":  28,
+        "pc_name":  "MUNGER",
+        "st_code":  "10",
+        "file":  "bihar_ac_165_munger.geojson"
+    },
+    {
+        "ac_no":  180,
+        "ac_name":  "Bakhtiarpur",
+        "district":  "PATNA",
+        "pc_no":  30,
+        "pc_name":  "PATNA SAHIB",
+        "st_code":  "10",
+        "file":  "bihar_ac_180_bakhtiarpur.geojson"
+    },
+    {
+        "ac_no":  151,
+        "ac_name":  "Parbatta",
+        "district":  "KHAGARIA",
+        "pc_no":  25,
+        "pc_name":  "KHAGARIA",
+        "st_code":  "10",
+        "file":  "bihar_ac_151_parbatta.geojson"
+    },
+    {
+        "ac_no":  144,
+        "ac_name":  "Matihani",
+        "district":  "BEGUSARAI",
+        "pc_no":  24,
+        "pc_name":  "BEGUSARAI",
+        "st_code":  "10",
+        "file":  "bihar_ac_144_matihani.geojson"
+    },
+    {
+        "ac_no":  154,
+        "ac_name":  "Pirpainti (SC)",
+        "district":  "BHAGALPUR",
+        "pc_no":  26,
+        "pc_name":  "BHAGALPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_154_pirpainti_sc.geojson"
+    },
+    {
+        "ac_no":  195,
+        "ac_name":  "Agiaon (SC)",
+        "district":  "BHOJPUR",
+        "pc_no":  32,
+        "pc_name":  "ARRAH",
+        "st_code":  "10",
+        "file":  "bihar_ac_195_agiaon_sc.geojson"
+    },
+    {
+        "ac_no":  177,
+        "ac_name":  "Harnaut",
+        "district":  "NALANDA",
+        "pc_no":  29,
+        "pc_name":  "NALANDA",
+        "st_code":  "10",
+        "file":  "bihar_ac_177_harnaut.geojson"
+    },
+    {
+        "ac_no":  189,
+        "ac_name":  "Masaurhi (SC)",
+        "district":  "PATNA",
+        "pc_no":  31,
+        "pc_name":  "PATALIPUTRA",
+        "st_code":  "10",
+        "file":  "bihar_ac_189_masaurhi_sc.geojson"
+    },
+    {
+        "ac_no":  175,
+        "ac_name":  "Hilsa",
+        "district":  "NALANDA",
+        "pc_no":  29,
+        "pc_name":  "NALANDA",
+        "st_code":  "10",
+        "file":  "bihar_ac_175_hilsa.geojson"
+    },
+    {
+        "ac_no":  190,
+        "ac_name":  "Paliganj",
+        "district":  "PATNA",
+        "pc_no":  31,
+        "pc_name":  "PATALIPUTRA",
+        "st_code":  "10",
+        "file":  "bihar_ac_190_paliganj.geojson"
+    },
+    {
+        "ac_no":  166,
+        "ac_name":  "Jamalpur",
+        "district":  "MUNGER",
+        "pc_no":  28,
+        "pc_name":  "MUNGER",
+        "st_code":  "10",
+        "file":  "bihar_ac_166_jamalpur.geojson"
+    },
+    {
+        "ac_no":  203,
+        "ac_name":  "Ramgarh",
+        "district":  "KAIMUR (BHABUA) *",
+        "pc_no":  33,
+        "pc_name":  "BUXAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_203_ramgarh.geojson"
+    },
+    {
+        "ac_no":  171,
+        "ac_name":  "Asthawan",
+        "district":  "NALANDA",
+        "pc_no":  29,
+        "pc_name":  "NALANDA",
+        "st_code":  "10",
+        "file":  "bihar_ac_171_asthawan.geojson"
+    },
+    {
+        "ac_no":  168,
+        "ac_name":  "Lakhisarai",
+        "district":  "LAKHISARAI *",
+        "pc_no":  28,
+        "pc_name":  "MUNGER",
+        "st_code":  "10",
+        "file":  "bihar_ac_168_lakhisarai.geojson"
+    },
+    {
+        "ac_no":  210,
+        "ac_name":  "Dinara",
+        "district":  "ROHTAS",
+        "pc_no":  33,
+        "pc_name":  "BUXAR",
+        "st_code":  "10",
+        "file":  "bihar_ac_210_dinara.geojson"
+    },
+    {
+        "ac_no":  158,
+        "ac_name":  "Nathnagar",
+        "district":  "BHAGALPUR",
+        "pc_no":  26,
+        "pc_name":  "BHAGALPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_158_nathnagar.geojson"
+    },
+    {
+        "ac_no":  172,
+        "ac_name":  "Biharsharif",
+        "district":  "NALANDA",
+        "pc_no":  29,
+        "pc_name":  "NALANDA",
+        "st_code":  "10",
+        "file":  "bihar_ac_172_biharsharif.geojson"
+    },
+    {
+        "ac_no":  155,
+        "ac_name":  "Kahalgaon",
+        "district":  "BHAGALPUR",
+        "pc_no":  26,
+        "pc_name":  "BHAGALPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_155_kahalgaon.geojson"
+    },
+    {
+        "ac_no":  157,
+        "ac_name":  "Sultanganj",
+        "district":  "BHAGALPUR",
+        "pc_no":  27,
+        "pc_name":  "BANKA",
+        "st_code":  "10",
+        "file":  "bihar_ac_157_sultanganj.geojson"
+    },
+    {
+        "ac_no":  167,
+        "ac_name":  "Suryagarha",
+        "district":  "LAKHISARAI *",
+        "pc_no":  28,
+        "pc_name":  "MUNGER",
+        "st_code":  "10",
+        "file":  "bihar_ac_167_suryagarha.geojson"
+    },
+    {
+        "ac_no":  156,
+        "ac_name":  "Bhagalpur",
+        "district":  "BHAGALPUR",
+        "pc_no":  26,
+        "pc_name":  "BHAGALPUR",
+        "st_code":  "10",
+        "file":  "bihar_ac_156_bhagalpur.geojson"
+    },
+    {
+        "ac_no":  196,
+        "ac_name":  "Tarari",
+        "district":  "BHOJPUR",
+        "pc_no":  32,
+        "pc_name":  "ARRAH",
+        "st_code":  "10",
+        "file":  "bihar_ac_196_tarari.geojson"
+    },
+    {
+        "ac_no":  176,
+        "ac_name":  "Nalanda",
+        "district":  "NALANDA",
+        "pc_no":  29,
+        "pc_name":  "NALANDA",
+        "st_code":  "10",
+        "file":  "bihar_ac_176_nalanda.geojson"
+    },
+    {
+        "ac_no":  216,
+        "ac_name":  "Jehanabad",
+        "district":  "JEHANABAD",
+        "pc_no":  36,
+        "pc_name":  "JAHANABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_216_jehanabad.geojson"
+    },
+    {
+        "ac_no":  217,
+        "ac_name":  "Ghosi",
+        "district":  "JEHANABAD",
+        "pc_no":  36,
+        "pc_name":  "JAHANABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_217_ghosi.geojson"
+    },
+    {
+        "ac_no":  214,
+        "ac_name":  "Arwal",
+        "district":  "JEHANABAD",
+        "pc_no":  36,
+        "pc_name":  "JAHANABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_214_arwal.geojson"
+    },
+    {
+        "ac_no":  174,
+        "ac_name":  "Islampur",
+        "district":  "NALANDA",
+        "pc_no":  29,
+        "pc_name":  "NALANDA",
+        "st_code":  "10",
+        "file":  "bihar_ac_174_islampur.geojson"
+    },
+    {
+        "ac_no":  170,
+        "ac_name":  "Barbigha",
+        "district":  "SHEIKHPURA *",
+        "pc_no":  39,
+        "pc_name":  "NAWADA",
+        "st_code":  "10",
+        "file":  "bihar_ac_170_barbigha.geojson"
+    },
+    {
+        "ac_no":  209,
+        "ac_name":  "Kargahar",
+        "district":  "ROHTAS",
+        "pc_no":  34,
+        "pc_name":  "SASARAM (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_209_kargahar.geojson"
+    },
+    {
+        "ac_no":  213,
+        "ac_name":  "Karakat",
+        "district":  "ROHTAS",
+        "pc_no":  35,
+        "pc_name":  "KARAKAT",
+        "st_code":  "10",
+        "file":  "bihar_ac_213_karakat.geojson"
+    },
+    {
+        "ac_no":  204,
+        "ac_name":  "Mohania (SC)",
+        "district":  "KAIMUR (BHABUA) *",
+        "pc_no":  34,
+        "pc_name":  "SASARAM (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_204_mohania_sc.geojson"
+    },
+    {
+        "ac_no":  215,
+        "ac_name":  "Kurtha",
+        "district":  "JEHANABAD",
+        "pc_no":  36,
+        "pc_name":  "JAHANABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_215_kurtha.geojson"
+    },
+    {
+        "ac_no":  169,
+        "ac_name":  "Sheikhpura",
+        "district":  "SHEIKHPURA *",
+        "pc_no":  40,
+        "pc_name":  "JAMUI (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_169_sheikhpura.geojson"
+    },
+    {
+        "ac_no":  164,
+        "ac_name":  "Tarapur",
+        "district":  "MUNGER",
+        "pc_no":  40,
+        "pc_name":  "JAMUI (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_164_tarapur.geojson"
+    },
+    {
+        "ac_no":  173,
+        "ac_name":  "Rajgir (SC)",
+        "district":  "NALANDA",
+        "pc_no":  29,
+        "pc_name":  "NALANDA",
+        "st_code":  "10",
+        "file":  "bihar_ac_173_rajgir_sc.geojson"
+    },
+    {
+        "ac_no":  218,
+        "ac_name":  "Makhdumpur (SC)",
+        "district":  "JEHANABAD",
+        "pc_no":  36,
+        "pc_name":  "JAHANABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_218_makhdumpur_sc.geojson"
+    },
+    {
+        "ac_no":  206,
+        "ac_name":  "Chainpur",
+        "district":  "ROHTAS",
+        "pc_no":  34,
+        "pc_name":  "SASARAM (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_206_chainpur.geojson"
+    },
+    {
+        "ac_no":  241,
+        "ac_name":  "Jamui",
+        "district":  "JAMUI *",
+        "pc_no":  40,
+        "pc_name":  "JAMUI (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_241_jamui.geojson"
+    },
+    {
+        "ac_no":  159,
+        "ac_name":  "Amarpur",
+        "district":  "BANKA *",
+        "pc_no":  27,
+        "pc_name":  "BANKA",
+        "st_code":  "10",
+        "file":  "bihar_ac_159_amarpur.geojson"
+    },
+    {
+        "ac_no":  160,
+        "ac_name":  "Dhauraiya (SC)",
+        "district":  "BANKA *",
+        "pc_no":  27,
+        "pc_name":  "BANKA",
+        "st_code":  "10",
+        "file":  "bihar_ac_160_dhauraiya_sc.geojson"
+    },
+    {
+        "ac_no":  205,
+        "ac_name":  "Bhabua",
+        "district":  "KAIMUR (BHABUA) *",
+        "pc_no":  34,
+        "pc_name":  "SASARAM (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_205_bhabua.geojson"
+    },
+    {
+        "ac_no":  211,
+        "ac_name":  "Nokha",
+        "district":  "ROHTAS",
+        "pc_no":  35,
+        "pc_name":  "KARAKAT",
+        "st_code":  "10",
+        "file":  "bihar_ac_211_nokha.geojson"
+    },
+    {
+        "ac_no":  239,
+        "ac_name":  "Warsaliganj",
+        "district":  "JAMUI *",
+        "pc_no":  39,
+        "pc_name":  "NAWADA",
+        "st_code":  "10",
+        "file":  "bihar_ac_239_warsaliganj.geojson"
+    },
+    {
+        "ac_no":  220,
+        "ac_name":  "Obra",
+        "district":  "AURANGABAD",
+        "pc_no":  35,
+        "pc_name":  "KARAKAT",
+        "st_code":  "10",
+        "file":  "bihar_ac_220_obra.geojson"
+    },
+    {
+        "ac_no":  219,
+        "ac_name":  "Goh",
+        "district":  "AURANGABAD",
+        "pc_no":  35,
+        "pc_name":  "KARAKAT",
+        "st_code":  "10",
+        "file":  "bihar_ac_219_goh.geojson"
+    },
+    {
+        "ac_no":  163,
+        "ac_name":  "Belhar",
+        "district":  "BANKA *",
+        "pc_no":  27,
+        "pc_name":  "BANKA",
+        "st_code":  "10",
+        "file":  "bihar_ac_163_belhar.geojson"
+    },
+    {
+        "ac_no":  242,
+        "ac_name":  "Jhajha",
+        "district":  "JAMUI *",
+        "pc_no":  40,
+        "pc_name":  "JAMUI (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_242_jhajha.geojson"
+    },
+    {
+        "ac_no":  233,
+        "ac_name":  "Atri",
+        "district":  "GAYA",
+        "pc_no":  36,
+        "pc_name":  "JAHANABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_233_atri.geojson"
+    },
+    {
+        "ac_no":  231,
+        "ac_name":  "Tikari",
+        "district":  "GAYA",
+        "pc_no":  37,
+        "pc_name":  "AURANGABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_231_tikari.geojson"
+    },
+    {
+        "ac_no":  232,
+        "ac_name":  "Belaganj",
+        "district":  "GAYA",
+        "pc_no":  38,
+        "pc_name":  "GAYA (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_232_belaganj.geojson"
+    },
+    {
+        "ac_no":  212,
+        "ac_name":  "Dehri",
+        "district":  "ROHTAS",
+        "pc_no":  35,
+        "pc_name":  "KARAKAT",
+        "st_code":  "10",
+        "file":  "bihar_ac_212_dehri.geojson"
+    },
+    {
+        "ac_no":  240,
+        "ac_name":  "Sikandra (SC)",
+        "district":  "JAMUI *",
+        "pc_no":  40,
+        "pc_name":  "JAMUI (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_240_sikandra_sc.geojson"
+    },
+    {
+        "ac_no":  237,
+        "ac_name":  "Nawada",
+        "district":  "NAWADA",
+        "pc_no":  39,
+        "pc_name":  "NAWADA",
+        "st_code":  "10",
+        "file":  "bihar_ac_237_nawada.geojson"
+    },
+    {
+        "ac_no":  161,
+        "ac_name":  "Banka",
+        "district":  "BANKA *",
+        "pc_no":  27,
+        "pc_name":  "BANKA",
+        "st_code":  "10",
+        "file":  "bihar_ac_161_banka.geojson"
+    },
+    {
+        "ac_no":  207,
+        "ac_name":  "Chenari (SC)",
+        "district":  "ROHTAS",
+        "pc_no":  34,
+        "pc_name":  "SASARAM (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_207_chenari_sc.geojson"
+    },
+    {
+        "ac_no":  208,
+        "ac_name":  "Sasaram",
+        "district":  "ROHTAS",
+        "pc_no":  34,
+        "pc_name":  "SASARAM (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_208_sasaram.geojson"
+    },
+    {
+        "ac_no":  221,
+        "ac_name":  "Nabinagar",
+        "district":  "AURANGABAD",
+        "pc_no":  35,
+        "pc_name":  "KARAKAT",
+        "st_code":  "10",
+        "file":  "bihar_ac_221_nabinagar.geojson"
+    },
+    {
+        "ac_no":  238,
+        "ac_name":  "Gobindpur",
+        "district":  "NAWADA",
+        "pc_no":  39,
+        "pc_name":  "NAWADA",
+        "st_code":  "10",
+        "file":  "bihar_ac_238_gobindpur.geojson"
+    },
+    {
+        "ac_no":  162,
+        "ac_name":  "Katoria (ST)",
+        "district":  "BANKA *",
+        "pc_no":  27,
+        "pc_name":  "BANKA",
+        "st_code":  "10",
+        "file":  "bihar_ac_162_katoria_st.geojson"
+    },
+    {
+        "ac_no":  236,
+        "ac_name":  "Hisua",
+        "district":  "NAWADA",
+        "pc_no":  39,
+        "pc_name":  "NAWADA",
+        "st_code":  "10",
+        "file":  "bihar_ac_236_hisua.geojson"
+    },
+    {
+        "ac_no":  234,
+        "ac_name":  "Wazirganj",
+        "district":  "GAYA",
+        "pc_no":  38,
+        "pc_name":  "GAYA (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_234_wazirganj.geojson"
+    },
+    {
+        "ac_no":  224,
+        "ac_name":  "Rafiganj",
+        "district":  "AURANGABAD",
+        "pc_no":  37,
+        "pc_name":  "AURANGABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_224_rafiganj.geojson"
+    },
+    {
+        "ac_no":  223,
+        "ac_name":  "Aurangabad",
+        "district":  "AURANGABAD",
+        "pc_no":  37,
+        "pc_name":  "AURANGABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_223_aurangabad.geojson"
+    },
+    {
+        "ac_no":  225,
+        "ac_name":  "Gurua",
+        "district":  "GAYA",
+        "pc_no":  37,
+        "pc_name":  "AURANGABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_225_gurua.geojson"
+    },
+    {
+        "ac_no":  235,
+        "ac_name":  "Rajauli (SC)",
+        "district":  "NAWADA",
+        "pc_no":  39,
+        "pc_name":  "NAWADA",
+        "st_code":  "10",
+        "file":  "bihar_ac_235_rajauli_sc.geojson"
+    },
+    {
+        "ac_no":  230,
+        "ac_name":  "Gaya Town",
+        "district":  "GAYA",
+        "pc_no":  38,
+        "pc_name":  "GAYA (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_230_gaya_town.geojson"
+    },
+    {
+        "ac_no":  243,
+        "ac_name":  "Chakai",
+        "district":  "JAMUI *",
+        "pc_no":  40,
+        "pc_name":  "JAMUI (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_243_chakai.geojson"
+    },
+    {
+        "ac_no":  229,
+        "ac_name":  "Bodh Gaya (SC)",
+        "district":  "GAYA",
+        "pc_no":  38,
+        "pc_name":  "GAYA (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_229_bodh_gaya_sc.geojson"
+    },
+    {
+        "ac_no":  228,
+        "ac_name":  "Barachatti (SC)",
+        "district":  "GAYA",
+        "pc_no":  38,
+        "pc_name":  "GAYA (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_228_barachatti_sc.geojson"
+    },
+    {
+        "ac_no":  222,
+        "ac_name":  "Kutumba (SC)",
+        "district":  "AURANGABAD",
+        "pc_no":  37,
+        "pc_name":  "AURANGABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_222_kutumba_sc.geojson"
+    },
+    {
+        "ac_no":  226,
+        "ac_name":  "Sherghati",
+        "district":  "GAYA",
+        "pc_no":  38,
+        "pc_name":  "GAYA (SC)",
+        "st_code":  "10",
+        "file":  "bihar_ac_226_sherghati.geojson"
+    },
+    {
+        "ac_no":  227,
+        "ac_name":  "Imamganj (SC)",
+        "district":  "GAYA",
+        "pc_no":  37,
+        "pc_name":  "AURANGABAD",
+        "st_code":  "10",
+        "file":  "bihar_ac_227_imamganj_sc.geojson"
+    },
+    {
+        "ac_no":  55,
+        "ac_name":  "Kochadhaman",
+        "district":  "KISHANGANJ",
+        "pc_no":  10,
+        "pc_name":  "KISHANGANJ",
+        "st_code":  "10",
+        "file":  "bihar_ac_055_kochadhaman.geojson"
+    }
+]
