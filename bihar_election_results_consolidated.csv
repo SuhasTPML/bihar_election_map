@@ -1,0 +1,253 @@
+no,constituency_name,slug,district,reserved,lok_sabha_no,lok_sabha,y2010_winner_name,y2010_winner_party,y2010_winner_votes,y2010_margin,y2015_winner_name,y2015_winner_party,y2015_winner_votes,y2015_margin,y2020_winner_name,y2020_winner_party,y2020_winner_votes,y2020_margin,current_mla_name,current_mla_party,current_mla_alliance,current_remarks,diff_party_vs_2020,diff_name_vs_2020
+1,Valmiki Nagar,valmiki-nagar,Paschim Champaran,,1,Valmiki Nagar,Rajesh Singh,JD(U),42289,14671,Dhirendra Pratap Singh,IND,"66,860","33,580",Dhirendra Pratap Singh,JD(U),"74,906","21,585",Dhirendra Pratap Singh,JD(U),NDA,,False,False
+2,Ramnagar,ramnagar-sc,Paschim Champaran,SC,1,Valmiki Nagar,Bhagirathi Devi,BJP,51993,29782,Bhagirathi Devi,BJP,"82,166","17,988",Bhagirathi Devi,BJP,"75,423","15,796",Bhagirathi Devi,BJP,NDA,,False,False
+3,Narkatiaganj,narkatiaganj,Paschim Champaran,,1,Valmiki Nagar,Satish Chandra Dubey,BJP,45022,20228,Vinay Verma,INC,"57,212","16,061",Rashmi Verma,BJP,"75,484","21,134",Rashmi Varma,BJP,NDA,,False,True
+4,Bagaha,bagaha,Paschim Champaran,,1,Valmiki Nagar,Prabhat Ranjan Singh,JD(U),67510,49055,Raghaw Sharan Pandey,BJP,"74,476","8,183",Ram Singh,BJP,"90,013","30,020",Ram Singh,BJP,NDA,,False,False
+5,Lauriya,lauriya,Paschim Champaran,,1,Valmiki Nagar,Vinay Bihari,IND,38381,10881,Vinay Bihari,BJP,"57,351","17,573",Vinay Bihari,BJP,"77,927","29,004",Vinay Bihari,BJP,NDA,,False,False
+6,Nautan,nautan,Paschim Champaran,,2,Paschim Champaran,Manorma Prasad,JD(U),40894,22764,Narayan Prasad,BJP,"66,697","14,335",Narayan Prasad,BJP,"78,657","25,896",Narayan Prasad,BJP,NDA,,False,False
+7,Chanpatia,chanpatia,Paschim Champaran,,2,Paschim Champaran,Chandra Mohan Rai,BJP,44835,23412,Prakash Rai,BJP,"61,304",464,Umakant Singh,BJP,"83,828","13,469",Umakant Singh,BJP,NDA,,False,False
+8,Bettiah,bettiah,Paschim Champaran,,2,Paschim Champaran,Renu Devi,BJP,42010,28789,Madan Mohan Tiwari,INC,"66,786","2,320",Renu Devi,BJP,"84,496","18,079",Renu Devi,BJP,NDA,,False,False
+9,Sikta,sikta,Paschim Champaran,,1,Valmiki Nagar,Dilip Varma,IND,49229,8779,Khurshid (Feroz Ahmad),JD(U),"69,870","2,835",Birendra Prasad Gupta,CPI(ML)L,"49,075","2,302",Birendra Prasad Gupta,CPI(ML)L,MGB,,False,False
+10,Raxaul,raxaul,Purvi Champaran,,2,Paschim Champaran,Ajay Kumar Singh,BJP,48686,10117,Ajay Kumar Singh,BJP,"64,731","3,169",Pramod Kumar Sinha,BJP,"80,979","36,923",Pramod Kumar Sinha,BJP,NDA,,False,False
+11,Sugauli,sugauli,Purvi Champaran,,2,Paschim Champaran,Ramchandra Sahani,BJP,39021,12379,Ramchandra Sahani,BJP,"62,384","7,756",Shashi Bhushan Singh,RJD,"65,267","3,447",Shashi Bhushan Singh,RJD,MGB,,False,False
+12,Narkatiya,narkatiya,Purvi Champaran,,2,Paschim Champaran,Shyam Bihari Prasad,JD(U),31549,7688,Shamim Ahmad,RJD,"75,118","19,982",Shamim Ahmad,RJD,"85,562","27,791",Shamim Ahmad,RJD,MGB,,False,False
+13,Harsidhi,harsidhi-sc,Purvi Champaran,SC,3,Purvi Champaran,Krishnanandan Paswan,BJP,48130,18064,Rajendra Kumar,RJD,"75,203","10,267",Krishnanandan Paswan,BJP,"84,615","15,685",Krishnanandan Paswan,BJP,NDA,,False,False
+14,Govindganj,govindganj,Purvi Champaran,,3,Purvi Champaran,Meena Dwivedi,JD(U),33859,8405,Raju Tiwari,LJP,"74,685","27,920",Sunil Mani Tiwari,BJP,"65,544","27,924",Sunil Mani Tiwari,BJP,NDA,,False,False
+15,Kesaria,kesaria,Purvi Champaran,,3,Purvi Champaran,Sachindra Prasad Singh,BJP,34649,11683,Rajesh Kumar,RJD,"62,902","15,947",Shalini Mishra,JD(U),"40,219","9,227",Shalini Mishra,JD(U),NDA,,False,False
+16,Kalyanpur,kalyanpur,Purvi Champaran,,3,Purvi Champaran,Razia Khatoon,JD(U),41163,15402,Sachindra Prasad Singh,BJP,"50,060","11,488",Manoj Kumar Yadav,RJD,"72,819","1,193",Manoj Kumar Yadav,RJD,MGB,,False,False
+17,Pipra,pipra,Purvi Champaran,,3,Purvi Champaran,Awadhesh Prasad Kushwaha,JD(U),40099,11887,Shyambabu Prasad Yadav,BJP,"65,552","3,930",Shyambabu Prasad Yadav,BJP,"88,587","8,177",Shyambabu Prasad Yadav,BJP,NDA,,False,False
+18,Madhuban,madhuban,Purvi Champaran,,4,Sheohar,Shivajee Rai,JD(U),40478,10122,Rana Randhir Singh,BJP,"61,054","16,222",Rana Randhir Singh,BJP,"73,179","5,878",Rana Randhir Singh,BJP,NDA,,False,False
+19,Motihari,motihari,Purvi Champaran,,3,Purvi Champaran,Pramod Kumar,BJP,51888,24530,Pramod Kumar,BJP,"79,947","18,517",Pramod Kumar,BJP,"92,733","14,645",Pramod Kumar,BJP,NDA,,False,False
+20,Chiraia,chiraia,Purvi Champaran,,4,Sheohar,Avaneesh Kumar Singh,BJP,39459,14828,Lal Babu Prasad Gupta,BJP,"62,831","4,374",Lal Babu Prasad Gupta,BJP,"62,904","16,874",Lal Babu Prasad Gupta,BJP,NDA,,False,False
+21,Dhaka,dhaka,Purvi Champaran,,4,Sheohar,Pawan Kumar Jaiswal,IND,48100,1649,Faisal Rahman,RJD,"87,458","19,197",Pawan Jaiswal,BJP,"99,792","10,114",Pawan Jaiswal,BJP,NDA,,False,False
+22,Sheohar,sheohar,Sheohar,,4,Sheohar,Sharfuddin,JD(U),40447,1631,Sharfuddin,JD(U),"44,576",461,Chetan Anand Singh,RJD,"73,143",36686,Chetan Anand,JD(U),NDA,Switched from RJD to JDU,True,True
+23,Riga,riga,Sitamarhi,,4,Sheohar,Moti Lal Prasad,BJP,48633,22327,Amit Kumar Tuna,INC,"79,217","22,856",Moti Lal Prasad,BJP,"95,226","32,495",Moti Lal Prasad,BJP,NDA,,False,False
+24,Bathnaha,bathnaha-sc,Sitamarhi,SC,5,Sitamarhi,Dinkar Ram,BJP,49181,13292,Dinkar Ram,BJP,"74,763","20,166",Anil Kumar,BJP,"92,648","46,818",Anil Kumar,BJP,NDA,,False,False
+25,Parihar,parihar,Sitamarhi,,5,Sitamarhi,Ram Naresh Prasad Yadav,BJP,32987,4218,Gayatri Devi,BJP,"66,388","4,017",Gayatri Devi,BJP,"73,420","1,569",Gayatri Devi Yadav,BJP,NDA,,False,True
+26,Sursand,sursand,Sitamarhi,,5,Sitamarhi,Shahid Ali Khan,JD(U),38542,1186,Syed Abu Dojana,RJD,"52,857","23,234",Dilip Kumar Ray,JD(U),"67,193","8,876",Dilip Kumar Ray,JD(U),NDA,,False,False
+27,Bajpatti,bajpatti,Sitamarhi,,5,Sitamarhi,Ranju Geeta,JD(U),44726,3420,Ranju Geeta,JD(U),"67,194","16,946",Mukesh Kumar Yadav,RJD,"71,483","2,704",Mukesh Kumar Yadav,RJD,MGB,,False,False
+28,Sitamarhi,sitamarhi,Sitamarhi,,5,Sitamarhi,Sunil Kumar Pintu,BJP,51664,5221,Sunil Kumar,RJD,"81,557","14,722",Mithilesh Kumar,BJP,"90,236","11,475",Mithilesh Kumar,BJP,NDA,,False,False
+29,Runnisaidpur,runnisaidpur,Sitamarhi,,5,Sitamarhi,Guddi Devi,JD(U),36125,10759,Mangita Devi,RJD,"55,699","14,110",Pankaj Kumar Mishra,JD(U),"73,205","24,629",Pankaj Kumar Mishra,JD(U),NDA,,False,False
+30,Belsand,belsand,Sitamarhi,,4,Sheohar,Sunita Singh Chauhan,JD(U),38139,19580,Sunita Singh Chauhan,JD(U),"33,785","5,575",Sanjay Kumar Gupta,RJD,"49,682","13,685",Sanjay Kumar Gupta,RJD,MGB,,False,False
+31,Harlakhi,harlakhi,Madhubani,,6,Madhubani,Shaligram Yadav,JD(U),30281,6659,Basant Kumar,RLSP,"40,468","3,892",Sudhanshu Shekhar,JD(U),"60,393","17,593",Sudhanshu Shekhar,JD(U),NDA,,False,False
+32,Benipatti,benipatti,Madhubani,,6,Madhubani,Vinod Narayan Jha,BJP,31198,12642,Bhawana Jha,INC,"55,978","4,734",Vinod Narayan Jha,BJP,"78,862","32,652",Vinod Narayan Jha,BJP,NDA,,False,False
+33,Khajauli,khajauli,Madhubani,,7,Jhanjharpur,Arun Shankar Prasad,BJP,44959,10713,Sitaram Yadav,RJD,"71,534","10,703",Arun Shankar Prasad,BJP,"83,161","22,689",Arun Shankar Prasad,BJP,NDA,,False,False
+34,Babubarhi,babubarhi,Madhubani,,7,Jhanjharpur,Uma Kant Yadav,RJD,51772,4913,Kapil Deo Kamat,JD(U),"61,486","20,267",Mina Kumari,JD(U),"77,367","11,488",Mina Kumari,JD(U),NDA,,False,False
+35,Bisfi,bisfi,Madhubani,,6,Madhubani,Faiyaz Ahmad,RJD,47169,9501,Faiyaz Ahmad,RJD,"70,975","35,325",Haribhushan Thakur,BJP,"86,574","10,241",Haribhushan Thakur,BJP,NDA,,False,False
+36,Madhubani,madhubani,Madhubani,,6,Madhubani,Ramdeo Mahto,BJP,44817,588,Samir Kumar Mahaseth,RJD,"76,823","7,307",Samir Kumar Mahaseth,RJD,"71,332","6,814",Samir Kumar Mahaseth,RJD,MGB,,False,False
+37,Rajnagar,rajnagar-sc,Madhubani,SC,7,Jhanjharpur,Ram Lakhan Ram Raman,RJD,40584,2459,Ram Prit Paswan,BJP,"71,614","6,242",Ramprit Paswan,BJP,"89,459","19,121",Ram Prit Paswan,BJP,NDA,,False,True
+38,Jhanjharpur,jhanjharpur,Madhubani,,7,Jhanjharpur,Nitish Mishra,JD(U),57652,20681,Gulab Yadav,RJD,"64,320",834,Nitish Mishra,BJP,"94,854","41,788",Nitish Mishra,BJP,NDA,,False,False
+39,Phulparas,phulparas,Madhubani,,7,Jhanjharpur,Guljar Devi Yadav,JD(U),36113,12344,Guljar Devi Yadav,JD(U),"64,368","13,415",Sheela Kumari,JD(U),"75,116","10,966",Sheela Kumari Mandal,JD(U),NDA,,False,True
+40,Laukaha,laukaha,Madhubani,,7,Jhanjharpur,Hari Prasad Sah,JD(U),47849,17566,Lakshmeshwar Roy,JD(U),"79,971","23,833",Bharat Bhushan Mandal,RJD,"78,523","10,077",Bharat Bhushan Mandal,RJD,MGB,,False,False
+41,Nirmali,nirmali,Supaul,,8,Supaul,Aniruddha Prasad Yadav,JD(U),70150,46010,Aniruddha Prasad Yadav,JD(U),"79,600","23,951",Aniruddha Prasad Yadav,JD(U),"92,439","43,922",Aniruddha Prasad Yadav,JD(U),NDA,,False,False
+42,Pipra,pipra,Supaul,,8,Supaul,Sujata Devi,JD(U),44883,14686,Yaduvansh Kumar Yadav,RJD,"85,944","36,369",Rambilash Kamat,JD(U),"82,388","19,245",Ramvilas Kamat,JD(U),NDA,,False,True
+43,Supaul,supaul,Supaul,,8,Supaul,Bijendra Prasad Yadav,JD(U),55179,15400,Bijendra Prasad Yadav,JD(U),"82,295","37,397",Bijendra Prasad Yadav,JD(U),"86,174","28,099",Bijendra Prasad Yadav,JD(U),NDA,,False,False
+44,Triveniganj,triveniganj-sc,Supaul,SC,8,Supaul,Amla Devi,JD(U),63729,19023,Veena Bharti,JD(U),"89,869","52,400",Veena Bharti,JD(U),"79,458","3,031",Veena Bharti,JD(U),NDA,,False,False
+45,Chhatapur,chhatapur,Supaul,,8,Supaul,Neeraj Kumar Singh,JD(U),66895,23730,Neeraj Kumar Singh,BJP,"75,697","9,292",Neeraj Kumar Singh,BJP,"93,755","20,635",Neeraj Kumar Singh,BJP,NDA,,False,False
+46,Narpatganj,narpatganj,Araria,,9,Araria,Devanti Yadav,BJP,61106,6937,Anil Kumar Yadav,RJD,"90,250","25,951",Jai Prakash Yadav,BJP,"98,397","28,610",Jai Prakash Yadav,BJP,NDA,,False,False
+47,Raniganj,raniganj-sc,Araria,SC,9,Araria,Parmanand Rishideo,BJP,65111,23653,Achmit Rishidev,JD(U),"77,717","14,930",Achmit Rishidev,JD(U),"81,901","2,304",Achmit Rishidev,JD(U),NDA,,False,False
+48,Forbesganj,forbesganj,Araria,,9,Araria,Padam Parag Roy Venu,BJP,70463,26827,Vidya Sagar Keshri,BJP,"85,929","25,238",Vidya Sagar Keshri,BJP,"102,212","19,702",Vidya Sagar Keshri,BJP,NDA,,False,False
+49,Araria,araria,Araria,,9,Araria,Zakir Hussain Khan,LJP,49532,18061,Avidur Rahman,INC,"92,667","40,044",Avidur Rahman,INC,"103,054","47,936",Avidur Rahman,INC,MGB,,False,False
+50,Jokihat,jokihat,Araria,,9,Araria,Sarfaraz Alam,JD(U),44027,25330,Sarfaraz Alam,JD(U),"92,890","53,980",Shahnawaz Alam,AIMIM,"59,596","7,383",Mohammed Shahnawaz Alam,RJD,MGB,Switched from AIMIM to RJD[11],True,True
+51,Sikti,sikti,Araria,,9,Araria,Anandi Prasad Yadav,BJP,42076,9874,Vijay Kumar Mandal,BJP,"76,995","8,106",Vijay Kumar Mandal,BJP,"84,128","13,610",Vijay Kumar Mandal,BJP,NDA,,False,False
+52,Bahadurganj,bahadurganj,Kishanganj,,10,Kishanganj,Md. Tauseef Alam,INC,30551,3799,Md. Tauseef Alam,INC,"53,533","13,942",Mohammad Anzar Nayeemi,AIMIM,"85,855","45,215",Mohammad Anzar Nayeemi,RJD,MGB,Switched from AIMIM to RJD[11],True,False
+53,Thakurganj,thakurganj,Kishanganj,,10,Kishanganj,Naushad Alam,LJP,36372,6963,Naushad Alam,JD(U),"74,239","8,087",Saud Alam,RJD,"79,909","23,887",Saud Alam,RJD,MGB,,False,False
+54,Kishanganj,kishanganj,Kishanganj,,10,Kishanganj,Mohammad Jawed,INC,38867,264,Mohammad Jawed,INC,"66,522","8,609",Ijaharul Hussain,INC,"61,078","1,381",Ijaharul Hussain,INC,MGB,,False,False
+55,Kochadhaman,kochadhaman,Kishanganj,,10,Kishanganj,Akhtarul Iman,RJD,37376,9025,Mujahid Alam,JD(U),"55,929","18,843",Muhammad Izhar Asfi,AIMIM,"79,893","36,143",Muhammad Izhar Asfi,RJD,MGB,Switched from AIMIM to RJD[11],True,False
+56,Amour,amour,Purnia,,10,Kishanganj,Saba Zafar,BJP,57774,18828,Abdul Zalil Mastan,INC,"100,135","51,997",Akhtarul Iman,AIMIM,"94,459","52,515",Akhtarul Iman,AIMIM,None,,False,False
+57,Baisi,baisi,Purnia,,10,Kishanganj,Santosh Kushwaha,BJP,39939,9250,Abdus Subhan,RJD,"67,022","38,740",Syed Ruknuddin Ahmad,AIMIM,"68,416","16,373",Syed Ruknuddin Ahmad,RJD,MGB,Switched from AIMIM to RJD[11],True,False
+58,Kasba,kasba,Purnia,,12,Purnia,Md. Afaque Alam,INC,63025,4455,Md Afaque Alam,INC,"81,633","1,794",Md Afaque Alam,INC,"77,410","17,278",Md Afaque Alam,INC,MGB,,False,False
+59,Banmankhi,banmankhi-sc,Purnia,SC,12,Purnia,Krishna Kumar Rishi,BJP,67950,44890,Krishna Kumar Rishi,BJP,"59,053",708,Krishna Kumar Rishi,BJP,"93,594","27,743",Krishna Kumar Rishi,BJP,NDA,,False,False
+60,Rupauli,rupauli,Purnia,,12,Purnia,Bima Bharti,JD(U),64887,37716,Bima Bharti,JD(U),"50,945","9,672",Bima Bharti,JD(U),"64,324","19,330",Bima Bharti,JD(U),NDA,"Switched from JD(U) to RJD.
+Shankar Singh		IND		None	Elected on 13 July 2024 in By-election 2024",False,False
+61,Dhamdaha,dhamdaha,Purnia,,12,Purnia,Leshi Singh,JD(U),64323,44697,Leshi Singh,JD(U),"75,400","29,817",Leshi Singh,JD(U),"97,057","33,594",Leshi Singh,JD(U),NDA,,False,False
+62,Purnia,purnia,Purnia,,12,Purnia,Raj Kishore Kesri,BJP,54605,15599,Vijay Kumar Khemka,BJP,"92,020","32,815",Vijay Kumar Khemka,BJP,"97,757","32,154",Vijay Kumar Khemka,BJP,NDA,,False,False
+63,Katihar,katihar,Katihar,,11,Katihar,Tarkishore Prasad,BJP,58718,20607,Tarkishore Prasad,BJP,"66,048","14,894",Tarkishore Prasad,BJP,"82,669","10,519",Tarkishore Prasad,BJP,NDA,,False,False
+64,Kadwa,kadwa,Katihar,,11,Katihar,Bhola Ray,BJP,38225,18367,Shakeel Ahmad Khan,INC,"56,141","5,799",Shakeel Ahmad Khan,INC,"71,267","32,402",Shakeel Ahmad Khan,INC,MGB,,False,False
+65,Balrampur,balrampur,Katihar,,11,Katihar,Dulal Chandra Goswami,IND,48136,2704,Mahbub Alam,CPI(ML)L,"62,513","20,419",Mahbub Alam,CPI(ML)L,"104,489","53,597",Mahbub Alam,CPI(ML)L,MGB,,False,False
+66,Pranpur,pranpur,Katihar,,11,Katihar,Binod Kumar Singh,BJP,43660,716,Binod Kumar Singh,BJP,"47,924","8,101",Nisha Singh,BJP,"79,974","2,972",Nisha Singh,BJP,NDA,,False,False
+67,Manihari,manihari-st,Katihar,ST,11,Katihar,Manohar Prasad Singh,JD(U),44938,4165,Manohar Prasad Singh,INC,"61,704","13,680",Manohar Prasad Singh,INC,"83,032","21,209",Manohar Prasad Singh,INC,MGB,,False,False
+68,Barari,barari,Katihar,,11,Katihar,Bibhash Chandra Choudhary,BJP,58104,27168,Neeraj Kumar,RJD,"71,175","14,336",Bijay Singh,JD(U),"81,752","10,438",Bijay Singh,JD(U),NDA,,False,False
+69,Korha,korha-sc,Katihar,SC,12,Purnia,Mahesh Paswan,BJP,71020,52444,Punam Paswan,INC,"78,409","5,426",Kavita Devi,BJP,"104,625","28,943",Kavita Devi,BJP,NDA,,False,False
+70,Alamnagar,alamnagar,Madhepura,,13,Madhepura,Narendra Narayan Yadav,JD(U),64967,42345,Narendra Narayan Yadav,JD(U),"87,962","43,876",Narendra Narayan Yadav,JD(U),"102,517","28,680",Narendra Narayan Yadav,JD(U),NDA,,False,False
+71,Bihariganj,bihariganj,Madhepura,,13,Madhepura,Renu Kumari Singh,JD(U),79062,49997,Niranjan Kumar Mehta,JD(U),"78,361","29,253",Niranjan Kumar Mehta,JD(U),"81,531","18,711",Niranjan Kumar Mehta,JD(U),NDA,,False,False
+72,Singheshwar,singheshwar-sc,Madhepura,SC,8,Supaul,Ramesh Rishidev,JD(U),72282,15196,Ramesh Rishidev,JD(U),"83,073","50,200",Chandrahas Chaupal,RJD,"86,181","5,573",Chandrahas Chaupal,RJD,MGB,,False,False
+73,Madhepura,madhepura,Madhepura,,13,Madhepura,Chandra Shekhar,RJD,72481,11944,Chandra Shekhar,RJD,"90,974","37,642",Chandrashekhar Yadav,RJD,"79,839","15,072",Chandra Shekhar Yadav,RJD,MGB,,False,True
+74,Sonbarsha,sonbarsha-sc,Saharsa,SC,13,Madhepura,Ratnesh Sada,JD(U),56633,31445,Ratnesh Sada,JD(U),"88,789","53,763",Ratnesh Sada,JD(U),"67,678","13,466",Ratnesh Sada,JD(U),NDA,,False,False
+75,Saharsa,saharsa,Saharsa,,13,Madhepura,Alok Ranjan Jha,BJP,55687,7979,Arun Kumar,RJD,"102,850","39,206",Alok Ranjan Jha,BJP,"103,538","19,679",Alok Ranjan Jha,BJP,NDA,,False,False
+76,Simri Bakhtiarpur,simri-bakhtiarpur,Saharsa,,25,Khagaria,Aurn Kumar,JD(U),57980,18842,Dinesh Chandra Yadav,JD(U),"78,514","37,806",Yusuf Salahuddin,RJD,"75,684","1,759",Yusuf Salahuddin,RJD,MGB,,False,False
+77,Mahishi,mahishi,Saharsa,,13,Madhepura,Abdul Ghafoor,RJD,39158,1717,Abdul Ghafoor,RJD,"56,436","26,135",Gunjeshwar Sah,JD(U),"66,316","1,630",Gunjeshwar Sah,JD(U),NDA,,False,False
+78,Kusheshwar Asthan,kusheshwar-asthan-sc,Darbhanga,SC,23,Samastipur,Shashi Bhushan Hazari,BJP,28576,5512,Shashi Bhushan Hazari,JD(U),"50,062","19,850",Shashi Bhushan Hazari,JD(U),"53,980","7,222",Shashi Bhushan Hazari,JD(U),NDA,"Died in 1 July 2021
+Aman Bhushan Hajari	Elected on 2 November 2021 in by-election",False,False
+79,Gaura Bauram,gaura-bauram,Darbhanga,,14,Darbhanga,Izhar Ahmad,JD(U),33258,10602,Madan Sahni,JD(U),"51,403","14,062",Swarna Singh,VIP,"59,538","7,280",Swarna Singh,BJP,NDA,Switched from VIP to BJP[12],True,False
+80,Benipur,benipur,Darbhanga,,14,Darbhanga,Gopal Jee Thakur,BJP,43222,13957,Sunil Choudhary,JD(U),"69,511","26,443",Binay Kumar Choudhary,JD(U),"61,416","6,590",Binay Kumar Choudhary,JD(U),NDA,,False,False
+81,Alinagar,alinagar,Darbhanga,,14,Darbhanga,Abdul Bari Siddiqui,RJD,37923,4989,Abdul Bari Siddiqui,RJD,"67,461","13,460",Mishri Lal Yadav,VIP,"61,082","3,101",Mishrilal Yadav,BJP,NDA,Switched from VIP to BJP[12],True,True
+82,Darbhanga Rural,darbhanga-rural,Darbhanga,,14,Darbhanga,Lalit Kumar Yadav,RJD,29776,3676,Lalit Kumar Yadav,RJD,"70,557","34,491",Lalit Kumar Yadav,RJD,"64,929","2,141",Lalit Kumar Yadav,RJD,MGB,,False,False
+83,Darbhanga,darbhanga,Darbhanga,,14,Darbhanga,Sanjay Saraogi,BJP,64136,27554,Sanjay Saraogi,BJP,"77,776","7,460",Sanjay Saraogi,BJP,"84,144","10,639",Sanjay Saraogi,BJP,NDA,,False,False
+84,Hayaghat,hayaghat,Darbhanga,,23,Samastipur,Amarnath Gami,BJP,32023,6025,Amarnath Gami,JD(U),"65,677","33,231",Ram Chandra Prasad,BJP,"67,030","10,252",Ram Chandra Prasad,BJP,NDA,,False,False
+85,Bahadurpur,bahadurpur,Darbhanga,,14,Darbhanga,Madan Sahni,JD(U),27320,643,Bhola Yadav,RJD,"71,547","16,989",Madan Sahni,JD(U),"68,538","2,629",Madan Sahni,JD(U),NDA,,False,False
+86,Keoti,keoti,Darbhanga,,6,Madhubani,Ashok Kumar Yadav,BJP,45791,29,Faraz Fatmi,RJD,"68,601","7,830",Murari Mohan Jha,BJP,"76,372","5,126",Murari Mohan Jha,BJP,NDA,,False,False
+87,Jale,jale,Darbhanga,,6,Madhubani,Vijay Kumar Mishra,BJP,42590,16942,Jibesh Kumar,BJP,"62,059","4,620",Jibesh Kumar,BJP,"87,376","21,796",Jibesh Kumar,BJP,NDA,,False,False
+88,Gaighat,gaighat,Muzaffarpur,,15,Muzaffarpur,Veena Devi,BJP,56386,15987,Maheshwar Prasad Yadav,RJD,"67,313","3,501",Niranjan Roy,RJD,"59,778","7,566",Niranjan Roy,RJD,MGB,,False,False
+89,Aurai,aurai,Muzaffarpur,,15,Muzaffarpur,Ram Surat Rai,BJP,38422,11741,Surendra Kumar,RJD,"66,958","10,825",Ram Surat Kumar,BJP,"90,479","47,866",Ram Surat Rai,BJP,NDA,,False,True
+90,Minapur,minapur,Muzaffarpur,,15,Muzaffarpur,Dinesh Prasad,JD(U),42286,5402,Munna Yadav,RJD,"80,790","23,940",Rajeev Kumar,RJD,"60,018","15,512",Munna Yadav,RJD,MGB,,False,True
+91,Bochahan,bochahan-sc,Muzaffarpur,SC,15,Muzaffarpur,Ramai Ram,JD(U),61885,24127,Baby Kumari,IND,"67,720","24,130",Musafir Paswan,VIP,"77,837","11,268",Musafir Paswan,VIP,NDA,"Died in November 2021
+Amar Kumar Paswan		RJD		MGB	Won in 2022 by-poll necessitated after the death of Musafir Paswan.",False,False
+92,Sakra,sakra-sc,Muzaffarpur,SC,15,Muzaffarpur,Suresh Chanchal,JD(U),55486,13045,Lal Babu Ram,RJD,"75,010","13,012",Ashok Kumar Choudhary,JD(U),"67,265","1,537",Ashok Kumar Choudhary,JD(U),NDA,,False,False
+93,Kurhani,kurhani,Muzaffarpur,,15,Muzaffarpur,Manoj Kumar Singh,JD(U),36757,1570,Kedar Prasad Gupta,BJP,"73,227","11,570",Anil Kumar Sahani,RJD,"78,549",712,Anil Kumar Sahni,RJD,MGB,"Disqualified on 14 October 2022 after criminal conviction[13]
+Kedar Prasad Gupta		BJP		NDA	Won by-poll in 2022.[14]",False,True
+94,Muzaffarpur,muzaffarpur,Muzaffarpur,,15,Muzaffarpur,Suresh Sharma,BJP,72301,46439,Suresh Kumar Sharma,BJP,"95,594","29,739",Bijendra Chaudhary,INC,"81,871","6,326",Bijendra Chaudhary,INC,MGB,,False,False
+95,Kanti,kanti,Muzaffarpur,,16,Vaishali,Ajit Kumar,JD(U),39648,8415,Ashok Kumar Choudhary,IND,"58,111","9,275",Mohammad Israil Mansuri,RJD,"64,458","10,314",Mohammad Israil Mansuri,RJD,MGB,,False,False
+96,Baruraj,baruraj,Muzaffarpur,,16,Vaishali,Brij Kishor Singh,RJD,42783,14317,Nand Kumar Rai,RJD,"68,011","4,909",Arun Kumar Singh,BJP,"87,407","43,654",Arun Kumar Singh (politician),BJP,NDA,,False,True
+97,Paroo,paroo,Muzaffarpur,,16,Vaishali,Ashok Kumar Singh,BJP,53609,19027,Ashok Kumar Singh,BJP,"80,445","13,539",Ashok Kumar Singh,BJP,"77,392","14,698",Ashok Kumar Singh,BJP,NDA,,False,False
+98,Sahebganj,sahebganj,Muzaffarpur,,16,Vaishali,Raju Kumar Singh,JD(U),46606,4916,Ram Vichar Ray,RJD,"70,583","10,660",Raju Kumar Singh,VIP,"81,203","15,333",Raju Kumar Singh,BJP,NDA,Switched from VIP to BJP[12],True,False
+99,Baikunthpur,baikunthpur,Gopalganj,,17,Gopalganj,Manjeet Kumar Singh,JD(U),70105,36524,Mithlesh Tiwari,BJP,"56,162","14,115",Prem Shankar Prasad,RJD,"67,807","11,113",Prem Shankar Yadav,RJD,MGB,,False,True
+100,Barauli,barauli,Gopalganj,,17,Gopalganj,Rampravesh Rai,BJP,45234,10414,Md. Nematullah,RJD,"61,690",504,Rampravesh Rai,BJP,"81,956","14,155",Rampravesh Rai,BJP,NDA,,False,False
+101,Gopalganj,gopalganj,Gopalganj,,17,Gopalganj,Subhash Singh,BJP,58010,15893,Subhash Singh,BJP,"78,491","5,074",Subhash Singh,BJP,"77,791","36,752",Subhash Singh,BJP,NDA,"Death of Subhash Singh[15]
+Kusum Devi	Won in 2022 bypoll",False,False
+102,Kuchaikote,kuchaikote,Gopalganj,,17,Gopalganj,Amrendra Kumar Pandey,JD(U),51815,19518,Amrendra Kumar Pandey,JD(U),"72,224","3,562",Amrendra Kumar Pandey,JD(U),"74,359","20,630",Amrendra Kumar Pandey,JD(U),NDA,,False,False
+103,Bhore,bhore-sc,Gopalganj,SC,17,Gopalganj,Indradev Manjhi,BJP,61401,43570,Anil Kumar,INC,"74,365","14,871",Sunil Kumar,JD(U),"74,067",462,Sunil Kumar,JD(U),NDA,,False,False
+104,Hathua,hathua,Gopalganj,,17,Gopalganj,Ramsewak Singh,JD(U),50708,22847,Ramsewak Singh,JD(U),"57,917","22,984",Rajesh Kumar Singh,RJD,"86,731","30,527",Rajesh Kumar Singh,RJD,MGB,,False,False
+105,Siwan,siwan,Siwan,,18,Siwan,Vyas Deo Prasad,BJP,51637,12541,Vyas Deo Prasad,BJP,"55,156","3,534",Awadh Bihari Choudhary,RJD,"76,785","1,973",Awadh Bihari Yadav,RJD,MGB,,False,True
+106,Ziradei,ziradei,Siwan,,18,Siwan,Asha Devi,BJP,29442,8920,Ramesh Singh Kushwaha,JD(U),"40,760","6,091",Amarjeet Kushwaha,CPI(ML)L,"69,442","25,510",Amarjeet Kushwaha,CPI(ML)L,MGB,,False,False
+107,Darauli,darauli-sc,Siwan,SC,18,Siwan,Ramayan Manjhi,BJP,40993,7006,Satyadeo Ram,CPI(ML)L,"49,576","9,584",Satyadeo Ram,CPI(ML)L,"81,067","12,119",Satyadeo Ram,CPI(ML)L,MGB,,False,False
+108,Raghunathpur,raghunathpur,Siwan,,18,Siwan,Vikram Kunwar,BJP,33474,15112,Hari Shankar Yadav,RJD,"61,042","10,622",Hari Shankar Yadav,RJD,"67,757","17,965",Hari Shankar Yadav,RJD,MGB,,False,False
+109,Daraunda,daraunda,Siwan,,18,Siwan,Jagmato Devi,JD(U),49115,31135,Kavita Singh,JD(U),"66,255","13,222",Karanjeet Singh,BJP,"71,934","11,320",Karanjeet Singh,BJP,NDA,,False,False
+110,Barharia,barharia,Siwan,,18,Siwan,Shyam Bahadur Singh,JD(U),53707,25121,Shyam Bahadur Singh,JD(U),"65,168","14,583",Bachcha Pandey,RJD,"71,793","3,559",Bachcha Pandey,RJD,MGB,,False,False
+111,Goriakothi,goriakothi,Siwan,,19,Maharajganj,Bhumendra Narayan Singh,BJP,42533,14021,Satyadeo Prasad Singh,RJD,"70,965","7,651",Devesh Kant Singh,BJP,"87,368","11,891",Devesh Kant Singh,BJP,NDA,,False,False
+112,Maharajganj,maharajganj,Siwan,,19,Maharajganj,Damodar Singh,JD(U),40232,20000,Hem Narayan Sah,JD(U),"68,459","20,292",Vijay Shanker Dubey,INC,"48,825","1,976",Vijay Shanker Dubey,INC,MGB,,False,False
+113,Ekma,ekma,Saran,,19,Maharajganj,Manoranjan Singh,JD(U),55474,29201,Manoranjan Singh,JD(U),"49,508","8,126",Srikant Yadav,RJD,"53,875","13,927",Srikant Yadav,RJD,MGB,,False,False
+114,Manjhi,manjhi,Saran,,19,Maharajganj,Gautam Singh,JD(U),28687,7904,Vijay Shanker Dubey,INC,"29,558","8,866",Satyendra Yadav,CPI(M),"59,324","25,386",Satyendra Yadav,CPI(M),MGB,,False,False
+115,Baniapur,baniapur,Saran,,19,Maharajganj,Kedar Nath Singh,RJD,45259,3575,Kedar Nath Singh,RJD,"69,851","15,951",Kedar Nath Singh,RJD,"65,194","27,789",Kedar Nath Singh,RJD,MGB,,False,False
+116,Taraiya,taraiya,Saran,,19,Maharajganj,Janak Singh,BJP,26600,6970,Mudrika Prasad Rai,RJD,"69,012","20,440",Janak Singh,BJP,"53,430","11,307",Janak Singh,BJP,NDA,,False,False
+117,Marhaura,marhaura,Saran,,20,Saran,Jitendra Kumar Ray,RJD,26374,5624,Jitendra Kumar Ray,RJD,"66,714","16,718",Jitendra Kumar Ray,RJD,"59,812","11,385",Jitendra Kumar Ray,RJD,MGB,,False,False
+118,Chapra,chapra,Saran,,20,Saran,Janardan Singh Sigriwal,BJP,61045,35871,C. N. Gupta,BJP,"71,646","11,379",C. N. Gupta,BJP,"75,710","6,771",C. N. Gupta,BJP,NDA,,False,False
+119,Garkha,garkha-sc,Saran,SC,20,Saran,Gyanchand Manjhi,BJP,41033,1787,Muneshwar Chaudhary,RJD,"89,249","39,883",Surendra Ram,RJD,"83,412","9,937",Surendra Ram,RJD,MGB,,False,False
+120,Amnour,amnour,Saran,,20,Saran,Krishna Kumar Mantoo,JD(U),29508,10517,Shatrudhan Tiwari,BJP,"39,134","5,251",Krishan Kumar Mantoo,BJP,"63,316","3,681",Krishan Kumar Mantoo,BJP,NDA,,False,False
+121,Parsa,parsa,Saran,,20,Saran,Chhotelal Rai,JD(U),44828,4689,Chandrika Rai,RJD,"77,211","42,335",Chhote Lal Ray,RJD,"68,316","17,293",Chhote Lal Ray,RJD,MGB,,False,False
+122,Sonpur,sonpur,Saran,,20,Saran,Vinay Kumar Singh,BJP,64676,20685,Ramanuj Prasad Yadav,RJD,"86,082","36,396",Ramanuj Prasad Yadav,RJD,"73,247","6,686",Ramanuj Prasad Yadav,RJD,MGB,,False,False
+123,Hajipur,hajipur,Vaishali,,21,Hajipur,Nityanand Rai,BJP,55315,16609,Awadhesh Singh,BJP,"86,773","12,195",Awadhesh Singh,BJP,"85,552","2,990",Awadhesh Singh,BJP,NDA,,False,False
+124,Lalganj,lalganj,Vaishali,,21,Hajipur,Annu Shukla,JD(U),58210,24145,Raj Kumar Sah,LJP,"80,842","20,293",Sanjay Kumar Singh,BJP,"70,750","26,299",Sanjay Kumar Singh,BJP,NDA,,False,False
+125,Vaishali,vaishali,Vaishali,,16,Vaishali,Brishin Patel,JD(U),60950,12828,Raj Kishore Singh,JD(U),"79,286","31,061",Siddharth Patel,JD(U),"69,780","7,413",Siddharth Patel,JD(U),NDA,,False,False
+126,Mahua,mahua,Vaishali,,21,Hajipur,Ravindra Ray,JD(U),46309,21925,Tej Pratap Yadav,RJD,"66,927","28,155",Mukesh Kumar Raushan,RJD,"62,580","13,687",Mukesh Raushan Yadav,RJD,MGB,,False,True
+127,Raja Pakar,raja-pakar-sc,Vaishali,SC,21,Hajipur,Sanjay Kumar,JD(U),43212,10215,Shivchandra Ram,RJD,"61,251","15,155",Pratima Kumari Das,INC,"54,299","1,796",Pratima Kumari,INC,MGB,,False,True
+128,Raghopur,raghopur,Vaishali,,21,Hajipur,Satish Kumar,JD(U),64222,13006,Tejashwi Yadav,RJD,"91,236","22,733",Tejashwi Yadav,RJD,"97,404","38,174",Tejashwi Yadav,RJD,MGB,,False,False
+129,Mahnar,mahnar,Vaishali,,21,Hajipur,Achyutanand Singh,BJP,29754,2489,Umesh Singh Kushwaha,JD(U),"69,825","26,455",Bina Singh,RJD,"61,721","7,947",Bina Singh,RJD,MGB,,False,False
+130,Patepur,patepur-sc,Vaishali,SC,22,Ujiarpur,Mahendra Baitha,BJP,53762,16667,Prema Chaudhary,RJD,"67,548","12,461",Lakhendra Kumar Raushan,BJP,"86,509","25,839",Lakhendra Kumar Raushan,BJP,NDA,,False,False
+131,Kalyanpur,kalyanpur-sc,Samastipur,SC,23,Samastipur,Ramsewak Hazari,JD(U),62124,30197,Maheshwar Hazari,JD(U),"84,904","37,686",Maheshwar Hazari,JD(U),"72,279","10,251",Maheshwar Hazari,JD(U),NDA,,False,False
+132,Warisnagar,warisnagar,Samastipur,,23,Samastipur,Ashok Kumar,JD(U),46245,19500,Ashok Kumar,JD(U),"92,687","58,573",Ashok Kumar,JD(U),"68,356","13,801",Ashok Kumar,JD(U),NDA,,False,False
+133,Samastipur,samastipur,Samastipur,,23,Samastipur,Akhtarul Islam Sahin,RJD,42852,1827,Akhtarul Islam Sahin,RJD,"82,508","31,080",Akhtarul Islam Sahin,RJD,"68,507","4,714",Akhtarul Islam Sahin,RJD,MGB,,False,False
+134,Ujiarpur,ujiarpur,Samastipur,,22,Ujiarpur,Durga Prasad Singh,RJD,42791,13031,Alok Kumar Mehta,RJD,"85,466","47,460",Alok Kumar Mehta,RJD,"90,601","23,268",Alok Kumar Mehta,RJD,MGB,,False,False
+135,Morwa,morwa,Samastipur,,22,Ujiarpur,Baidhnath Sahani,JD(U),40271,6850,Vidya Sagar Singh Nishad,JD(U),"59,206","18,816",Ranvijay Sahu,RJD,"59,554","10,671",Ranvijay Sahu,RJD,MGB,,False,False
+136,Sarairanjan,sarairanjan,Samastipur,,22,Ujiarpur,Vijay Kumar Chaudhary,JD(U),53946,17557,Vijay Kumar Chaudhary,JD(U),"81,055","34,044",Vijay Kumar Chaudhary,JD(U),"72,666","3,624",Vijay Kumar Chaudhary,JD(U),NDA,,False,False
+137,Mohiuddinnagar,mohiuddinnagar,Samastipur,,22,Ujiarpur,Rana Gangeshwar Singh,BJP,51756,14351,Ejya Yadav,RJD,"47,137","23,431",Rajesh Kumar Singh,BJP,"70,385","15,114",Rajesh Kumar Singh,BJP,NDA,,False,False
+138,Bibhutipur,bibhutipur,Samastipur,,22,Ujiarpur,Ram Balak Singh,JD(U),46469,12301,Ram Balak Singh,JD(U),"57,882","17,235",Ajay Kumar,CPI(M),"73,822","40,496",Ajay Kumar,CPI(M),MGB,,False,False
+139,Rosera,rosera-sc,Samastipur,SC,23,Samastipur,Manju Hazari,BJP,57930,12119,Ashok Kumar,INC,"85,506","34,361",Birendra Kumar,BJP,"87,163","35,744",Birendra Kumar,BJP,NDA,,False,False
+140,Hasanpur,hasanpur,Samastipur,,25,Khagaria,Raj Kumar Ray,JD(U),36767,3291,Raj Kumar Ray,JD(U),"63,094","29,600",Tej Pratap Yadav,RJD,"80,991","21,139",Tej Pratap Yadav,RJD,MGB,,False,False
+141,Cheria-Bariarpur,cheria-bariarpur,Begusarai,,24,Begusarai,Manju Verma,JD(U),32807,1061,Manju Verma,JD(U),"69,795","29,736",Raj Banshi Mahto,RJD,"68,635","40,897",Raj Banshi Mahto,RJD,MGB,,False,False
+142,Bachhwara,bachhwara,Begusarai,,24,Begusarai,Abdhesh Kumar Rai,CPI,33770,12087,Ramdeo Rai,INC,"73,983","36,931",Surendra Mehata,BJP,"54,738",484,Surendra Mehata,BJP,NDA,,False,False
+143,Teghra,teghra,Begusarai,,24,Begusarai,Lalan Kumar,BJP,38694,5846,Birendra Kumar,RJD,"68,975","15,611",Ram Ratan Singh,CPI,"85,229","47,979",Ram Ratan Singh,CPI,MGB,,False,False
+144,Matihani,matihani,Begusarai,,24,Begusarai,Narendra Kumar Singh,JD(U),60530,23828,Narendra Kumar Singh,JD(U),"89,297","22,688",Rajkumar Singh,LJP,"61,364",333,Raj Kumar Singh,JD(U),NDA,Switched from LJP to JD(U)[16],True,True
+145,Sahebpur Kamal,sahebpur-kamal,Begusarai,,24,Begusarai,Parveen Amanullah,JD(U),46391,11111,Shreenarayan Yadav,RJD,"78,225","45,474",Satanand Sambuddha,RJD,"64,888","14,225",Sadanand Yadav,RJD,MGB,,False,True
+146,Begusarai,begusarai,Begusarai,,24,Begusarai,Surendra Mehata,BJP,50602,19618,Amita Bhushan,INC,"83,521","16,531",Kundan Kumar,BJP,"74,217","4,554",Kundan Kumar,BJP,NDA,,False,False
+147,Bakhri,bakhri-sc,Begusarai,SC,24,Begusarai,Ramanand Ram,BJP,43871,18412,Upendra Paswan,RJD,"72,632","40,256",Suryakant Paswan,CPI,"72,177",777,Suryakant Paswan,CPI,MGB,,False,False
+148,Alauli,alauli-sc,Khagaria,SC,25,Khagaria,Ram Chandra Sada,JD(U),53775,17523,Chandan Kumar,RJD,"70,519","24,470",Ramvrikish Sada,RJD,"47,183","2,773",Ramvrikish Sada,RJD,MGB,,False,False
+149,Khagaria,khagaria,Khagaria,,25,Khagaria,Poonam Devi Yadav,JD(U),48841,26853,Poonam Devi Yadav,JD(U),"64,767","25,565",Chhatrapati Yadav,INC,"46,980","3,000",Chhatrapati Yadav,INC,MGB,,False,False
+150,Beldaur,beldaur,Khagaria,,25,Khagaria,Panna Lal Singh Patel,JD(U),45990,15738,Panna Lal Singh Patel,JD(U),"63,216","13,525",Panna Lal Singh Patel,JD(U),"56,541","5,108",Panna Lal Singh Patel,JD(U),NDA,,False,False
+151,Parbatta,parbatta,Khagaria,,25,Khagaria,Samrat Chaudhary,RJD,60428,808,Ramanand Prasad Singh,JD(U),"76,248","28,924",Sanjeev Kumar,JD(U),"77,226",951,Sanjeev Kumar,JD(U),NDA,,False,False
+152,Bihpur,bihpur,Bhagalpur,,26,Bhagalpur,Kumar Shailendra,BJP,48027,465,Varsha Rani,RJD,"68,963","12,716",Kumar Shailendra,BJP,"72,938","6,129",Kumar Shailendra,BJP,NDA,,False,False
+153,Gopalpur,gopalpur,Bhagalpur,,26,Bhagalpur,Narendra Kumar Niraj,JD(U),53876,25060,Narendra Kumar Niraj,JD(U),"57,403","5,169",Narendra Kumar Niraj,JD(U),"75,533","24,461",Narendra Kumar Niraj,JD(U),NDA,,False,False
+154,Pirpainti,pirpainti-sc,Bhagalpur,SC,26,Bhagalpur,Aman Kumar,BJP,48493,5752,Ram Vilash Paswan,RJD,"80,058","5,144",Lalan Kumar,BJP,"96,229","27,019",Lalan Kumar,BJP,NDA,,False,False
+155,Kahalgaon,kahalgaon,Bhagalpur,,26,Bhagalpur,Sadanand Singh,INC,44936,8935,Sadanand Singh,INC,"64,981","21,229",Pawan Kumar Yadav,BJP,"115,538","42,893",Pawan Kumar Yadav,BJP,NDA,,False,False
+156,Bhagalpur,bhagalpur,Bhagalpur,,26,Bhagalpur,Ashwini Kumar Choubey,BJP,49164,11060,Ajeet Sharma,INC,"70,514","10,658",Ajeet Sharma,INC,"65,502","1,113",Ajeet Sharma,INC,MGB,,False,False
+157,Sultanganj,sultanganj,Bhagalpur,,27,Banka,Subodh Roy,JD(U),34652,4845,Subodh Roy,JD(U),"63,345","14,033",Lalit Narayan Mandal,JD(U),"72,823","11,565",Lalit Narayan Mandal,JD(U),NDA,,False,False
+158,Nathnagar,nathnagar,Bhagalpur,,26,Bhagalpur,Ajay Kumar Mandal,JD(U),42094,4727,Ajay Kumar Mandal,JD(U),"66,485","7,825",Ali Ashraf Siddiqui,RJD,"78,832","7,756",Ali Ashraf Siddiqui,RJD,MGB,,False,False
+159,Amarpur,amarpur,Banka,,27,Banka,Janardan Manjhi,JD(U),47300,18007,Janardan Manjhi,JD(U),"73,707","11,773",Jayant Raj Kushwaha,JD(U),"54,308","3,114",Jayant Raj Kushwaha,JD(U),NDA,,False,False
+160,Dhoraiya,dhoraiya-sc,Banka,SC,27,Banka,Manish Kumar,JD(U),40261,8342,Manish Kumar,JD(U),"68,858","24,154",Bhudeo Choudhary,RJD,"78,646","2,687",Bhudeo Choudhary,RJD,MGB,,False,False
+161,Banka,banka,Banka,,27,Banka,Javed Iqbal Ansari,RJD,29047,2410,Ramnarayan Mandal,BJP,"52,379","3,730",Ramnarayan Mandal,BJP,"69,762","16,828",Ramnarayan Mandal,BJP,NDA,,False,False
+162,Katoria,katoria-st,Banka,ST,27,Banka,Sonelal Hembram,BJP,32332,8763,Sweety Sima Hembram,RJD,"54,760","10,337",Nikki Hembrom,BJP,"74,785","6,421",Nikki Hembrom,BJP,NDA,,False,False
+163,Belhar,belhar,Banka,,27,Banka,Giridhari Yadav,JD(U),33776,7616,Giridhari Yadav,JD(U),"70,348","16,191",Manoj Yadav,JD(U),"73,589","2,473",Manoj Yadav,JD(U),NDA,,False,False
+164,Tarapur,tarapur,Munger,,40,Jamui,Neeta Choudhary,JD(U),44582,13878,Mewalal Chaudhary,JD(U),"66,411","11,947",Mewalal Chaudhary,JD(U),"64,468","7,225",Mewa Lal Choudhary,JD(U),NDA,"Died on 19 April 2021 due to COVID-19
+Rajeev Kumar Singh	Elected on 2 November 2021 in by-election",False,True
+165,Munger,munger,Munger,,28,Munger,Anant Kumar Satyarthy,JD(U),55086,17613,Vijay Kumar 'Vijay',RJD,"77,216","4,365",Pranav Kumar Yadav,BJP,"75,573","1,244",Pranav Kumar Yadav,BJP,NDA,,False,False
+166,Jamalpur,jamalpur,Munger,,28,Munger,Shailesh Kumar,JD(U),48337,21142,Shailesh Kumar,JD(U),"67,273","15,476",Ajay Kumar Singh,INC,"57,196","4,432",Ajay Kumar Singh,INC,MGB,,False,False
+167,Suryagarha,suryagarha,Lakhisarai,,28,Munger,Prem Ranjan Patel,BJP,49511,2928,Prahlad Yadav,RJD,"82,490","30,030",Prahlad Yadav,RJD,"62,306","9,589",Prahlad Yadav,JD(U),NDA,Switched from RJD to JDU,True,False
+168,Lakhisarai,lakhisarai,Lakhisarai,,28,Munger,Vijay Kumar Sinha,BJP,78457,59620,Vijay Kumar Sinha,BJP,"75,901","6,556",Vijay Kumar Sinha,BJP,"74,212","10,483",Vijay Kumar Sinha,BJP,NDA,Deputy Leader of BJP,False,False
+169,Sheikhpura,sheikhpura,Sheikhpura,,40,Jamui,Randhir Kumar Soni,JD(U),31507,7342,Randhir Kumar Soni,JD(U),"41,755","13,101",Vijay Kumar,RJD,"56,365","6,116",Vijay Kumar Yadav,RJD,MGB,,False,True
+170,Barbigha,barbigha,Sheikhpura,,39,Nawada,Gajanand Shahi,JD(U),24136,3047,Sudarshan Kumar,INC,"46,406","15,717",Sudarshan Kumar,JD(U),"39,878",113,Sudarshan Kumar,JD(U),NDA,,False,False
+171,Asthawan,asthawan,Nalanda,,29,Nalanda,Jitendra Kumar,JD(U),54176,19570,Jitendra Kumar,JD(U),"58,908","10,444",Jitendra Kumar,JD(U),"51,525","11,600",Jitendra Kumar,JD(U),NDA,,False,False
+172,Biharsharif,biharsharif,Nalanda,,29,Nalanda,Sunil Kumar,JD(U),77880,23712,Sunil Kumar,BJP,"76,201","2,340",Sunil Kumar,BJP,"81,888","15,102",Sunil Kumar,BJP,NDA,,False,False
+173,Rajgir,rajgir-sc,Nalanda,SC,29,Nalanda,Satyadev Narayan Arya,BJP,50648,26951,Ravi Jyoti Kumar,JD(U),"62,009","5,390",Kaushal Kishore,JD(U),"67,191","16,048",Kaushal Kishore,JD(U),NDA,,False,False
+174,Islampur,islampur,Nalanda,,29,Nalanda,Rajib Ranjan,JD(U),56332,23808,Chandrasen Prasad,JD(U),"66,587","22,602",Rakesh Kumar Roushan,RJD,"68,088","3,698",Rakesh Raushan Yadav,RJD,MGB,,False,True
+175,Hilsa,hilsa,Nalanda,,29,Nalanda,Usha Sinha,JD(U),54974,13202,Shakti Singh Yadav,RJD,"72,347","26,076",Krishna Murari Sharan,JD(U),"61,848",12,Krishna Murari Sharan,JD(U),NDA,,False,False
+176,Nalanda,nalanda,Nalanda,,29,Nalanda,Shrawan Kumar,JD(U),58067,21037,Shrawan Kumar,JD(U),"72,596","2,996",Shrawan Kumar,JD(U),"66,066","16,077",Shrawan Kumar,JD(U),NDA,,False,False
+177,Harnaut,harnaut,Nalanda,,29,Nalanda,Hari Narayan Singh,JD(U),56827,15042,Hari Narayan Singh,JD(U),"71,933","14,295",Hari Narayan Singh,JD(U),"65,404","27,241",Hari Narayan Singh,JD(U),NDA,,False,False
+178,Mokama,mokama,Patna,,28,Munger,Anant Kumar Singh,JD(U),51564,8954,Anant Kumar Singh,IND,"54,005","18,348",Anant Kumar Singh,RJD,"78,721","35,757",Anant Kumar Singh,RJD,MGB,"Disqualified in July 2022 due to criminal conviction[17]
+Nilam Devi		JD(U)		NDA	*Won in 2022 bypoll
+Switched from RJD to JDU",False,False
+179,Barh,barh,Patna,,28,Munger,Gyanendra Kumar Singh,JD(U),53129,19395,Gyanendra Kumar Singh,BJP,"63,989","8,359",Gyanendra Kumar Singh,BJP,"49,327","10,240",Gyanendra Kumar Singh,BJP,NDA,,False,False
+180,Bakhtiarpur,bakhtiarpur,Patna,,30,Patna Sahib,Aniruddh Kumar Yadav,RJD,52782,14745,Ranvijay Singh Yadav,BJP,"61,496","7,902",Aniruddh Kumar Yadav,RJD,"89,483","20,672",Aniruddh Kumar Yadav,RJD,MGB,,False,False
+181,Digha,digha,Patna,,30,Patna Sahib,Punam Devi,JD(U),81247,60462,Sanjeev Chaurasiya,BJP,"92,671","24,779",Sanjeev Chaurasiya,BJP,"97,044","46,073",Sanjeev Chaurasiya,BJP,NDA,,False,False
+182,Bankipur,bankipur,Patna,,30,Patna Sahib,Nitin Nabin,BJP,78771,60840,Nitin Nabin,BJP,"86,759","39,767",Nitin Nabin,BJP,"83,068","39,036",Nitin Nabin,BJP,NDA,,False,False
+183,Kumhrar,kumhrar,Patna,,30,Patna Sahib,Arun Kumar Sinha,BJP,83425,67808,Arun Kumar Sinha,BJP,"87,792","37,275",Arun Kumar Sinha,BJP,"81,400","26,463",Arun Kumar Sinha,BJP,NDA,,False,False
+184,Patna Sahib,patna-sahib,Patna,,30,Patna Sahib,Nand Kishore Yadav,BJP,91419,65337,Nand Kishore Yadav,BJP,"88,108","2,792",Nand Kishore Yadav,BJP,"97,692","18,300",Nand Kishore Yadav,BJP,NDA,,False,False
+185,Fatuha,fatuha,Patna,,30,Patna Sahib,Rama Nand Yadav,RJD,50218,9656,Rama Nand Yadav,RJD,"77,210","30,402",Rama Nand Yadav,RJD,"85,769","19,370",Rama Nand Yadav,RJD,MGB,,False,False
+186,Danapur,danapur,Patna,,31,Pataliputra,Asha Devi,BJP,59425,17919,Asha Devi,BJP,"72,192","5,209",Ritlal Yadav,RJD,"89,895","15,924",Ritlal Yadav,RJD,MGB,,False,False
+187,Maner,maner,Patna,,31,Pataliputra,Bhai Virendra,RJD,57818,9601,Bhai Virendra,RJD,"89,773","22,828",Bhai Virendra,RJD,"94,223","32,917",Bhai Virendra Yadav,RJD,MGB,,False,True
+188,Phulwari,phulwari-sc,Patna,SC,31,Pataliputra,Shyam Rajak,JD(U),67390,21180,Shyam Rajak,JD(U),"94,094","45,713",Gopal Ravidas,CPI(ML)L,"91,124","13,857",Gopal Ravidas,CPI(ML)L,MGB,,False,False
+189,Masaurhi,masaurhi-sc,Patna,SC,31,Pataliputra,Arun Manjhi,JD(U),56977,5032,Rekha Devi,RJD,"89,657","39,186",Rekha Devi,RJD,"98,696","32,227",Rekha Devi,RJD,MGB,,False,False
+190,Paliganj,paliganj,Patna,,31,Pataliputra,Usha Vidyarthi,BJP,43692,10242,Jai Vardhan Yadav,RJD,"65,932","24,453",Sandeep Saurav,CPI(ML)L,"67,917","30,915",Sandeep Yadav,CPI(ML)L,MGB,,False,True
+191,Bikram,bikram,Patna,,31,Pataliputra,Anil Kumar,BJP,38965,2352,Siddharth,INC,"94,088","44,311",Siddharth Saurav Singh,INC,"86,177","35,460",Siddharth Saurav,BJP,NDA,Switched from INC to BJP,True,True
+192,Sandesh,sandesh,Bhojpur,,32,Arrah,Sanjay Singh Tiger,BJP,29988,6822,Arun Yadav,RJD,"74,306","25,427",Kiran Devi Yadav,RJD,"79,599","50,607",Kiran Devi Yadav,RJD,MGB,,False,False
+193,Barhara,barhara,Bhojpur,,32,Arrah,Raghvendra Pratap Singh,RJD,46102,1083,Saroj Yadav,RJD,"65,001","13,308",Raghvendra Pratap Singh,BJP,"76,182","4,973",Raghvendra Pratap Singh,BJP,NDA,,False,False
+194,Arrah,arrah,Bhojpur,,32,Arrah,Amrendra Pratap Singh,BJP,56504,18940,Mohammad Nawaz Alam,RJD,"70,004",666,Amrendra Pratap Singh,BJP,"71,781","3,002",Amrendra Pratap Singh,BJP,NDA,,False,False
+195,Agiaon,agiaon-sc,Bhojpur,SC,32,Arrah,Shivesh Kumar,BJP,29257,5249,Prabhunath Prasad,JD(U),"52,276","14,704",Manoj Manzil,CPI(ML)L,"86,327","48,550",Manoj Manzil,CPI(ML)L,MGB,"Disqualified on 16 February 2024 due to criminal conviction [18]
+Shiv Prakash Ranjan		CPI(ML)L		MGB",False,False
+196,Tarari,tarari,Bhojpur,,32,Arrah,Narendra Kumar Pandey,JD(U),48413,14320,Sudama Prasad,CPI(ML)L,"44,050",272,Sudama Prasad,CPI(ML)L,"73,945","11,015",Sudama Prasad,CPI(ML)L,MGB,Vishal Prashant		BJP		NDA	Won in 2024 bypoll,False,False
+197,Jagdishpur,jagdishpur,Bhojpur,,32,Arrah,Dinesh Kumar Singh,RJD,55560,10186,Ram Vishun Singh,RJD,"49,020","10,195",Ram Vishnun Singh,RJD,"66,632","22,107",Ram Vishnun Yadav,RJD,MGB,,False,True
+198,Shahpur,shahpur,Bhojpur,,32,Arrah,Munni Devi,BJP,44795,8211,Rahul Tiwari,RJD,"69,315","14,570",Rahul Tiwari,RJD,"64,393","22,883",Rahul Tiwari,RJD,MGB,,False,False
+199,Brahampur,brahampur,Buxar,,33,Buxar,Dilmarni Devi,BJP,46196,20342,Shambhu Nath Yadav,RJD,"94,079","30,776",Shambhu Nath Singh Yadav,RJD,"90,176","51,141",Shambhu Nath Yadav,RJD,MGB,,False,True
+200,Buxar,buxar,Buxar,,33,Buxar,Sukhada Pandey,BJP,48062,20183,Sanjay Kumar Tiwari,INC,"66,527","10,181",Sanjay Kumar Tiwari,INC,"59,417","3,892",Sanjay Kumar Tiwari,INC,MGB,,False,False
+201,Dumraon,dumraon,Buxar,,33,Buxar,Daud Ali,JD(U),42538,19846,Dadan Yadav,JD(U),"81,081","30,339",Ajit Kushwaha,CPI(ML)L,"71,320","24,415",Ajit Kumar Singh,CPI(ML)L,MGB,,False,True
+202,Rajpur,rajpur-sc,Buxar,SC,33,Buxar,Santosh Kumar Nirala,JD(U),54802,15239,Santosh Kumar Nirala,JD(U),"84,184","32,788",Vishwanath Ram,INC,"67,871","21,204",Vishwanath Ram,INC,MGB,,False,False
+203,Ramgarh,ramgarh,Kaimur,,33,Buxar,Ambika Singh Yadav,RJD,30787,2978,Ashok Kumar Singh,BJP,"57,501","8,011",Sudhakar Singh,RJD,"58,083",189,Sudhakar Singh,RJD,MGB,Ashok Kumar Singh		BJP		NDA	Won in 2024 bypoll,False,False
+204,Mohania,mohania-sc,Kaimur,SC,34,Sasaram,Chhedi Paswan,JD(U),38918,2525,Niranjan Ram,BJP,"60,911","7,581",Sangita Kumari,RJD,"61,235","12,054",Sangita Kumari,BJP,NDA,Switched from RJD to BJP,True,False
+205,Bhabua,bhabua,Kaimur,,34,Sasaram,Pramod Kumar Singh,LJP,31246,447,Anand Bhushan Pandey,BJP,"50,768","7,744",Bharat Bind,RJD,"57,561","10,045",Bharat Bind,BJP,NDA,Switched from RJD to BJP,True,False
+206,Chainpur,chainpur,Kaimur,,34,Sasaram,Brij Kishor Bind,BJP,46510,13580,Brij Kishor Bind,BJP,"58,913",671,Mohd Zama Khan,BSP,"95,245","24,294",Mohd Zama Khan,JD(U),NDA,Switched from BSP to JD(U)[19],True,False
+207,Chenari,chenari-sc,Rohtas,SC,34,Sasaram,Shyam Bihari Ram,JD(U),44586,2901,Lalan Paswan,RLSP,"68,148","9,781",Murari Prasad Gautam,INC,"71,701","18,003",Murari Prasad Gautam,BJP,NDA,Switched from INC to BJP,True,False
+208,Sasaram,sasaram,Rohtas,,34,Sasaram,Jawahar Prasad,BJP,50856,5411,Ashok Kumar,RJD,"82,766","19,612",Rajesh Kumar Gupta,RJD,"83,303","26,423",Rajesh Kumar Gupta,RJD,MGB,,False,False
+209,Kargahar,kargahar,Rohtas,,34,Sasaram,Ram Dhani Singh,JD(U),54190,13197,Bashisht Singh,JD(U),"57,018","12,907",Santosh Kumar Mishra,INC,"47,321","4,083",Santhosh Kumar Mishra,INC,MGB,,False,True
+210,Dinara,dinara,Rohtas,,33,Buxar,Jai Kumar Singh,JD(U),47176,16610,Jai Kumar Singh,JD(U),"64,699","2,691",Vijay Mandal,RJD,"59,541","8,228",Vijay Yadav,RJD,MGB,,False,True
+211,Nokha,nokha,Rohtas,,35,Karakat,Rameshwar Chaurasiya,BJP,39020,11723,Anita Devi,RJD,"72,780","22,998",Anita Devi,RJD,"65,690","17,672",Anita Devi,RJD,MGB,,False,False
+212,Dehri,dehri,Rohtas,,35,Karakat,Jyoti Rashmi,IND,43634,9815,Mohammad Iliyas Hussain,RJD,"49,402","3,898",Fateh Bahadur Kushwaha,RJD,"64,567",464,Fateh Bahadur Singh,RJD,MGB,,False,True
+213,Karakat,karakat,Rohtas,,35,Karakat,Rajeshwar Raj,JD(U),49751,11415,Sanjay Kumar Singh,RJD,"59,720","12,119",Arun Kushwaha,CPI(ML)L,"82,700","18,189",Arun Singh,CPI(ML)L,MGB,,False,True
+214,Arwal,arwal,Arwal,,36,Jahanabad,Chitranjan Kumar,BJP,23984,4202,Ravindra Singh,RJD,"55,295","17,810",Maha Nand Singh,CPI(ML)L,"68,286","19,950",Maha Nand Singh,CPI(ML)L,MGB,,False,False
+215,Kurtha,kurtha,Arwal,,36,Jahanabad,Satyadeo Singh,JD(U),37633,9493,Satyadeo Singh,JD(U),"43,676","14,119",Bagi Kumar Verma,RJD,"54,227","27,810",Bagi Kumar Verma,RJD,MGB,,False,False
+216,Jehanabad,jehanabad,Jehanabad,,36,Jahanabad,Abhiram Sharma,JD(U),35508,8567,Mudrika Singh Yadav,RJD,"76,458","30,321",Suday Yadav,RJD,"75,030","33,902",Suday Yadav,RJD,MGB,,False,False
+217,Ghosi,ghosi,Jehanabad,,36,Jahanabad,Rahul Kumar,JD(U),40364,14276,Krishna Nandan Prasad Verma,JD(U),"67,248","21,625",Ram Bali Singh Yadav,CPI(ML)L,"74,712","17,333",Ram Bali Singh Yadav,CPI(ML)L,MGB,,False,False
+218,Makhdumpur,makhdumpur-sc,Jehanabad,SC,36,Jahanabad,Jitan Ram Manjhi,JD(U),38463,5085,Subedar Das,RJD,"66,631","26,777",Satish Kumar,RJD,"71,571","22,565",Satish Kumar,RJD,MGB,,False,False
+219,Goh,goh,Aurangabad,,35,Karakat,Ranvijay Kumar,JD(U),47378,694,Manoj Kumar,BJP,"53,615","7,672",Bheem Kumar Yadav,RJD,"81,410","35,618",Bhim Kumar Singh,RJD,MGB,,False,True
+220,Obra,obra,Aurangabad,,35,Karakat,Somprakash Singh,IND,36816,802,Birendra Kumar Sinha,RJD,"56,042","11,396",Rishi Kumar,RJD,"63,662","22,668",Rishi Yadav,RJD,MGB,,False,True
+221,Nabinagar,nabinagar,Aurangabad,,35,Karakat,Virendra Kumar Singh,JD(U),36860,11834,Virendra Kumar Singh,JD(U),"42,035","5,261",Vijay Kumar Singh,RJD,"64,943","20,121",Vijay Kumar Singh,RJD,MGB,,False,False
+222,Kutumba,kutumba-sc,Aurangabad,SC,37,Aurangabad,Lalan Ram,JD(U),42559,13910,Rajesh Kumar,INC,"51,303","10,098",Rajesh Kumar,INC,"50,822","16,653",Rajesh Kumar,INC,MGB,,False,False
+223,Aurangabad,aurangabad,Aurangabad,,37,Aurangabad,Ramadhar Singh,BJP,41176,6242,Anand Shankar Singh,INC,"63,637","18,398",Anand Shankar Singh,INC,"70,018","2,243",Anand Shankar Singh,INC,MGB,,False,False
+224,Rafiganj,rafiganj,Aurangabad,,37,Aurangabad,Ashok Kumar Singh,JD(U),58501,23685,Ashok Kumar Singh,JD(U),"62,897","9,525",Mohammad Nehaluddin,RJD,"63,325","9,429",MD Nehaluddin,RJD,MGB,,False,True
+225,Gurua,gurua,Gaya,,37,Aurangabad,Surendra Prasad Sinha,BJP,46767,11436,Rajiv Nandan,BJP,"56,480","6,515",Vinay Yadav,RJD,"70,761","6,599",Vinay Yadav,RJD,MGB,,False,False
+226,Sherghati,sherghati,Gaya,,38,Gaya,Vinod Prasad Yadav,JD(U),25447,6503,Vinod Prasad Yadav,JD(U),"44,579","4,834",Manju Agrawal,RJD,"61,804","16,690",Manju Agrawal,RJD,MGB,,False,False
+227,Imamganj,imamganj-sc,Gaya,SC,37,Aurangabad,Uday Narayan Choudhary,JD(U),44126,1211,Jitan Ram Manjhi,HAM(S),"79,389","29,408",Jitan Ram Manjhi,HAM(S),"78,762","16,034",Jitan Ram Manjhi,HAM(S),NDA,Deepa Manjhi		HAM(S)		NDA	Won in 2024 bypoll,False,False
+228,Barachatti,barachatti-sc,Gaya,SC,38,Gaya,Jyoti Devi,JD(U),57550,23746,Samta Devi,RJD,"70,909","19,126",Jyoti Devi,HAM(S),"72,491","6,318",Jyoti Devi,HAM(S),NDA,,False,False
+229,Bodh Gaya,bodh-gaya-sc,Gaya,SC,38,Gaya,Shyamdeo Paswan,BJP,54160,11213,Kumar Sarvjeet,RJD,"82,656","30,473",Kumar Sarvjeet,RJD,"80,926","4,708",Kumar Sarvjeet,RJD,MGB,,False,False
+230,Gaya Town,gaya-town,Gaya,,38,Gaya,Prem Kumar,BJP,55618,28417,Prem Kumar,BJP,"66,891","22,789",Prem Kumar,BJP,"66,932","11,898",Prem Kumar,BJP,NDA,,False,False
+231,Tikari,tikari,Gaya,,37,Aurangabad,Anil Kumar,JD(U),67706,18541,Abhay Kumar Sinha,JD(U),"86,975","31,813",Anil Kumar,HAM(S),"70,359","2,630",Anil Kumar,HAM(S),NDA,,False,False
+232,Belaganj,belaganj,Gaya,,38,Gaya,Surendra Prasad Yadav,RJD,53079,4638,Surendra Prasad Yadav,RJD,"71,067","30,341",Surendra Prasad Yadav,RJD,"79,708","23,963",Surendra Prasad Yadav,RJD,MGB,Manorama Devi		JD(U)		NDA	Won in 2024 bypoll,False,False
+233,Atri,atri,Gaya,,36,Jahanabad,Krishna Nandan Yadav,JD(U),55633,20610,Kunti Devi,RJD,"60,687","13,817",Ajay Yadav,RJD,"62,658","7,931",Ajay Kumar Yadav,RJD,MGB,,False,True
+234,Wazirganj,wazirganj,Gaya,,38,Gaya,Birendra Singh,BJP,38893,17766,Awadhesh Kumar Singh,INC,"80,107","12,759",Birendra Singh,BJP,"70,713","22,430",Birendra Singh,BJP,NDA,,False,False
+235,Rajauli,rajauli-sc,Nawada,SC,39,Nawada,Kanhaiya Kumar,BJP,51020,14090,Prakash Veer,RJD,"70,549","4,615",Prakash Veer,RJD,"69,984","12,593",Prakash Veer,RJD,MGB,,False,False
+236,Hisua,hisua,Nawada,,39,Nawada,Anil Singh,BJP,43110,3978,Anil Singh,BJP,"82,493","12,239",Nitu Kumari,INC,"94,930","17,091",Nitu Kumari,INC,MGB,,False,False
+237,Nawada,nawada,Nawada,,39,Nawada,Purnima Yadav,JD(U),46568,6337,Rajballabh Prasad,RJD,"88,235","16,726",Vibha Devi Yadav,RJD,"72,345","26,220",Vibha Devi Yadav,RJD,MGB,,False,False
+238,Gobindpur,gobindpur,Nawada,,39,Nawada,Kaushal Yadav,JD(U),45589,20887,Purnima Yadav,INC,"43,016","4,399",Mohammed Kamran,RJD,"79,557","33,074",Md Kamran,RJD,MGB,,False,True
+239,Warsaliganj,warsaliganj,Nawada,,39,Nawada,Pradip Kumar,JD(U),42381,5428,Aruna Devi,BJP,"85,912","19,527",Aruna Devi,BJP,"62,451","9,030",Aruna Devi,BJP,NDA,,False,False
+240,Sikandra,sikandra-sc,Jamui,SC,40,Jamui,Rameshwar Paswan,JD(U),39829,12361,Sudhir Kumar,INC,"59,092","7,990",Prafull Kumar Manjhi,HAM(S),"47,061","5,505",Prafull Kumar Manjhi,HAM(S),NDA,,False,False
+241,Jamui,jamui,Jamui,,40,Jamui,Ajoy Pratap,JD(U),60130,24467,Vijay Prakash Yadav,RJD,"66,577","8,249",Shreyasi Singh,BJP,"79,603","41,049",Shreyasi Singh,BJP,NDA,,False,False
+242,Jhajha,jhajha,Jamui,,40,Jamui,Damodar Rawat,JD(U),48080,10204,Rabindra Yadav,BJP,"65,537","22,086",Damodar Rawat,JD(U),"76,972","1,679",Damodar Rawat,JD(U),NDA,,False,False
+243,Chakai,chakai,Jamui,,40,Jamui,Sumit Kumar Singh,JMM,21809,188,Savitri Devi,RJD,"47,064","12,113",Sumit Kumar Singh,IND,"45,548",581,Sumit Kumar Singh,IND,NDA,,False,False
