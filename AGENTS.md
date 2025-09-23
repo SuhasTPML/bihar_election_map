@@ -97,6 +97,60 @@ colorForFeature(feature, scaleSpec, metric): string
 ## TODO (next iterations)
 
 - [ ] Refine quantile/quantize legend labels (exact bounds).
-- [ ] Optional label decluttering for all‑AC labels at higher zooms.
+- [ ] Optional label decluttering for all-AC labels at higher zooms.
 - [ ] Optional TopoJSON pipeline and boundary simplification.
 - [ ] Optional parent/child embed scripts (postMessage height handshake).
+
+## Review & Improvements (index_svg.html)
+
+### What Works
+- Smooth zoom/pan with fit-to-feature and URL k/x/y restore.
+- Hover outline + tooltip; categorical/numeric color modes and legend update.
+- Metric/classification controls; Indian number formatting.
+- Selection zoom and CSV-backed details panel.
+
+### Bugs / Breakages
+- `clearSelection` is referenced by the Close button but not defined.
+- AC dropdown is populated but not wired to selection (missing `change` handler).
+- Zoom `end` handler calls `updateCloseBtn()` twice.
+- Misencoded separator shows as `�` in info, tooltip, and details; use `·` or `&middot;`.
+
+### UX Improvements
+- Add search (with `datalist`) for quick AC lookup; dropdown alone is heavy.
+- Persist `classification` in URL (e.g., `classify=quantile`) for fully shareable links.
+- Add visible “Reset/Home” control and small keyboard hints (+/−/0).
+- On selection, keep a pinned label near centroid and mirror tooltip data in details panel.
+- Touch: treat tap as select and suppress hover tooltip on touch pointers.
+
+### Legend / Classification
+- Add an explicit “No data” swatch/color in legend and map (e.g., `#eee`).
+- For `quantile/quantize`, derive bin labels from scale thresholds with clear bounds (≤ a, a–b, > b) instead of guessing 0–domain[i].
+- Render the sequential legend as a visible gradient bar with min–max labels; size `.swatch` boxes in CSS.
+- Cache and reuse the computed numeric scale; avoid recompute per feature.
+
+### Accessibility
+- Give `<svg>` an `aria-label` describing the current metric.
+- Make each AC keyboard-focusable/selectable (Enter) and apply focus outline.
+- Keep ARIA live announcement; ensure control order is logical for tabbing.
+
+### Performance / Data
+- Cache `currentScaleSpec` on metric/classification change and reuse in `colorForFeature` and legend highlight.
+- Consider TopoJSON + simplification for production to reduce payload size.
+- Delay recolor that depends on CSV until after CSV loads to avoid redundant updates.
+
+### Embed / Share
+- Add `postMessage` hook to send height changes to parent on selection/legend change.
+- Copy link should include `metric`, `classify`, `ac`, and `k/x/y`; show a brief toast.
+
+### Quick Fixes (Code Pointers)
+- Implement `clearSelection()`:
+  - Clear `selectedId`, remove `.selected`, clear label/details/info, reset zoom (`zoom.transform` to identity), update URL, hide Close.
+- Wire AC dropdown:
+  - `selEl.addEventListener('change', e => e.target.value ? selectByKey(e.target.value) : clearSelection());`
+- Cache scale:
+  - `let currentScaleSpec = null;` Set in `updateLegendAndRecolor()` via `computeValueMap()` and reuse in `colorForFeature`/legend highlight.
+- Legend CSS sizing:
+  - `.legend .swatch { display:inline-block; width:12px; height:12px; border:1px solid #ccc; margin-right:4px; }`
+  - `.legend .gradient { width:160px; height:10px; background: linear-gradient(to right, #f2f0f7, #54278f); border:1px solid #ccc; }`
+- URL param:
+  - Read/write `classify` in `applyViewFromURL()`/`pushURLState()`.
