@@ -1,0 +1,8 @@
+      if(f){
+        fitToFeature(f);
+        const p = f.properties; const acname = p.AC_NAME || p.ac_name || p.Ac_Name || ''; const dist = p.DIST_NAME || p.dist_name || '';
+        setInfo(`<b>${key} ${acname}</b>${dist? ' · District: '+dist:''}`);
+        document.getElementById('announcer').textContent = `${key} ${acname}`;
+        try { const c = path.centroid(f); labelLayer.raise(); labelLayer.selectAll('text.sel').data([f]).join('text').attr('class','label sel').attr('x', c[0]).attr('y', c[1]).attr('text-anchor','middle').text(key + ' ' + acname); } catch(e){}
+        const row = dataMap.get(key) || {}; const det = [`<b>${key} ${acname}</b>${dist? " · District: "+dist:""}`, row.current_mla_name ? `MLA: ${row.current_mla_name} (${row.current_mla_party||""}) · ${row.current_mla_alliance||""}` : "", (row.y2020_margin? `2020 margin: ${fmtInt(num(row.y2020_margin))}` : ""), (row.y2015_margin? `2015 margin: ${fmtInt(num(row.y2015_margin))}` : ""), (row.y2010_margin? `2010 margin: ${fmtInt(num(row.y2010_margin))}` : "")].filter(Boolean).join("<br>"); document.getElementById("details").innerHTML = det; pushURLState(); updateCloseBtn();
+      }
