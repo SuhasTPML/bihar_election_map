@@ -9,6 +9,7 @@
     #controls { padding: 10px 12px; display:flex; gap:10px; align-items:center; flex-wrap: wrap; border-bottom: 1px solid #eee; }
     #mapwrap { height: calc(100vh - 86px); }
     #status { color: #b00; margin-left: 8px; }
+    body { overflow-y: scroll; }
     svg { width: 100%; height: 100%; background: #f9fafb; display:block; }
     .ac { stroke: #1f77b4; stroke-width: 0.5; }
     .ac:hover { stroke-width: 0.8; cursor: pointer; }
@@ -16,9 +17,10 @@
     #info { font-size: 0.95rem; }
     .label { font: 12px/1.1 sans-serif; fill: #111; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
     .legend { display:flex; align-items:center; gap:8px; }
-    .legend .swatch { width:14px; height:14px; border:1px solid #999; }
-    .legend .gradient { width: 220px; height: 12px; border:1px solid #999; background: linear-gradient(90deg,#f2f0f7,#dadaeb,#bcbddc,#9e9ac8,#756bb1,#54278f); }
-    .tooltip { position: fixed; pointer-events: none; background: rgba(255,255,255,0.95); border: 1px solid #ccc; border-radius: 4px; padding: 6px 8px; font-size: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); display:none; }
+    
+    .hover-outline { fill: none; stroke: #0f4c81; stroke-width: 3.5; pointer-events: none; }
+    .legend .legitem.active { outline: 2px solid #333; border-radius: 2px; padding: 0 2px; }
+    .tooltip { position: fixed; pointer-events: none; background: rgba(255,255,255,0.95); border: 1px solid #ccc; border-radius: 4px; padding: 6px 8px; font-size: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); display:none; max-width: 280px; }
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
   </style>
 </head>
@@ -67,6 +69,7 @@
     const svg = d3.select('#svg');
     const g = d3.select('#zoomlayer');
     const labelLayer = g.append('g').attr('id','labelLayer');
+    const hoverLayer = g.append('path').attr('class','hover-outline').style('display','none');
     const statusEl = document.getElementById('status');
     const infoEl = document.getElementById('info');
     const selEl = document.getElementById('acSelect');
@@ -123,6 +126,32 @@
       return computeScale(vals);
     }
 
+    function debounce(fn, wait=25){ let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), wait); }; }
+
+    function binIndex(spec, v){
+      if(spec.type==='threshold'){
+        const dom = spec.scale.domain(); for(let i=0;i<dom.length;i++){ if(v<=dom[i]) return i; } return spec.scale.range().length-1;
+      } else if(spec.type==='quantize' || spec.type==='quantile'){
+        const color = spec.scale(v); return spec.scale.range().indexOf(color);
+      }
+      return -1;
+    }
+
+    function clearLegendActive(){ document.querySelectorAll('#legend .legitem.active').forEach(n=> n.classList.remove('active')); }
+
+    function highlightLegendForFeature(f){
+      const m = getCurrentMetric(); const el = document.getElementById('legend'); if(!el) return; clearLegendActive();
+      const k = featureKey(f.properties); const row = dataMap.get(k); if(!row) return;
+      if(m.type==='category'){
+        const a = (m.get(row)||'').toUpperCase(); const n = el.querySelector(`.legitem[data-lab="${a}"]`); if(n) n.classList.add('active');
+      } else {
+        const v = m.get(row); if(v==null || !isFinite(v)) return; const spec = computeValueMap(); const bi = binIndex(spec, v); if(bi>=0){ const n = el.querySelector(`.legitem[data-bin="${bi}"]`); if(n) n.classList.add('active'); }
+      }
+    }
+
+    const handleHover = debounce((ev, d)=>{ showTooltip(ev,d); try{ hoverLayer.attr('d', path(d)).style('display','block'); }catch(e){} highlightLegendForFeature(d); }, 10);
+    function clearHover(){ hideTooltip(); hoverLayer.style('display','none'); clearLegendActive(); }
+
     function colorForFeature(f){
       const k = featureKey(f.properties); const row = dataMap.get(k);
       if(!row) return '#cfe3f6';
@@ -140,7 +169,7 @@
       const el = document.getElementById('legend'); el.innerHTML='';
       const m = getCurrentMetric();
       if(m.type==='category'){
-        for(const [lab,col] of allianceColors){ const box=document.createElement('span'); box.className='swatch'; box.style.background=col; const t=document.createElement('span'); t.textContent=lab; t.style.marginRight='10px'; el.appendChild(box); el.appendChild(t);} return; }
+        { for(const [lab,col] of allianceColors){ const wrap=document.createElement("span"); wrap.className="legitem"; wrap.dataset.lab=lab; const box=document.createElement("span"); box.className="swatch"; box.style.background=col; const t=document.createElement("span"); t.textContent=lab; t.style.marginRight="10px"; wrap.appendChild(box); wrap.appendChild(t); el.appendChild(wrap);} return; } return; }
       const spec = computeValueMap();
       if(spec.type==='sequential'){
         const bar = document.createElement('div'); bar.className='gradient'; el.appendChild(bar);
@@ -150,12 +179,7 @@
         return;
       }
       const domain = spec.scale.domain(); const rng = spec.scale.range();
-      for(let i=0;i<rng.length;i++){
-        const box=document.createElement('span'); box.className='swatch'; box.style.background=rng[i];
-        const from = i===0? 0 : domain[i-1]; const to = domain[i];
-        const t=document.createElement('span'); t.textContent = (to? (fmtInt(from)+'–'+fmtInt(to)) : (fmtInt(from)+'+')); t.style.marginRight='8px';
-        el.appendChild(box); el.appendChild(t);
-      }
+      { for(let i=0;i<rng.length;i++){  const wrap=document.createElement("span"); wrap.className="legitem"; wrap.dataset.bin=String(i); const box=document.createElement("span"); box.className="swatch"; box.style.background=rng[i]; const from = i===0? 0 : domain[i-1]; const to = domain[i]; const t=document.createElement("span"); t.textContent = (to? (fmtInt(from)+"–"+fmtInt(to)) : (fmtInt(from)+"+")); t.style.marginRight="8px"; wrap.appendChild(box); wrap.appendChild(t); el.appendChild(wrap); } }
     }
 
     function populateSelect(features){
@@ -173,8 +197,8 @@
         .attr('data-key', d => featureKey(d.properties))
         .attr('d', d => path(d))
         .attr('fill', d => colorForFeature(d))
-        .on('mousemove', (ev,d)=> showTooltip(ev,d))
-        .on('mouseleave', hideTooltip)
+        .on('pointermove', handleHover)
+        .on('pointerleave', clearHover)
         .on('click', (ev, d) => selectByKey(featureKey(d.properties)));
     }
 
