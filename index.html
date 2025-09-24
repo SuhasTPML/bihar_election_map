@@ -72,7 +72,7 @@
       </div>
     </div>
   </div>
-  <div id="details" style="padding:8px 12px; border-top:1px solid #eee; font: 14px/1.4 system-ui, Arial, sans-serif;"></div>
+  <div id="details" style="display:none; padding:8px 12px; border-top:1px solid #eee; font: 14px/1.4 system-ui, Arial, sans-serif;"></div>
 
   <div id="tooltip" class="tooltip"></div>
 
@@ -397,10 +397,17 @@
       g.selectAll('path').classed('selected', false).classed('dimmed', false);
       labelLayer.selectAll('text.sel').remove();
       setInfo('');
-      document.getElementById('details').innerHTML = '';
+      const detailsEl = document.getElementById('details');
+      if(detailsEl){
+        detailsEl.innerHTML = '';
+        detailsEl.style.display = 'none';
+      }
       selEl.value = '';
       if(searchEl) searchEl.value = '';
-      const sheet = document.getElementById('sheet'); if(sheet){ sheet.style.transform = 'translateY(100%)'; }
+      const sheet = document.getElementById('sheet');
+      if(sheet){
+        sheet.style.transform = 'translateY(100%)';
+      }
       svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
       pushURLState();
       updateCloseBtn();
@@ -415,20 +422,49 @@
       const f = biharData.features.find(ft => featureKey(ft.properties) === key);
       if(f){
         fitToFeature(f);
-        const p = f.properties; const acname = p.AC_NAME || p.ac_name || p.Ac_Name || ''; const dist = p.DIST_NAME || p.dist_name || '';
-        setInfo(`<b>${key} ${acname}</b>${dist? ' · District: '+dist:''}`);
-        setInfo(infoEl.innerHTML.replace(' ? ', ' &middot; '));
+        const p = f.properties;
+        const acname = p.AC_NAME || p.ac_name || p.Ac_Name || '';
+        const dist = p.DIST_NAME || p.dist_name || '';
+        setInfo(`<b>${key} ${acname}</b>${dist ? ' &middot; District: ' + dist : ''}`);
         document.getElementById('announcer').textContent = `${key} ${acname}`;
-        try { const c = path.centroid(f); labelLayer.raise(); labelLayer.selectAll('text.sel').data([f]).join('text').attr('class','label sel').attr('x', c[0]).attr('y', c[1]).attr('text-anchor','middle').text(key + ' ' + acname); } catch(e){}
-        const row = dataMap.get(key) || {}; const det = [`<b>${key} ${acname}</b>${dist? " · District: "+dist:""}`, row.current_mla_name ? `MLA: ${row.current_mla_name} (${row.current_mla_party||""}) · ${row.current_mla_alliance||""}` : "", (row.y2020_margin? `2020 margin: ${fmtInt(num(row.y2020_margin))}` : ""), (row.y2015_margin? `2015 margin: ${fmtInt(num(row.y2015_margin))}` : ""), (row.y2010_margin? `2010 margin: ${fmtInt(num(row.y2010_margin))}` : "")].filter(Boolean).join("<br>");         document.getElementById("details").innerHTML = det;
-        const sheet = document.getElementById('sheet'); const sheetContent = document.getElementById('sheetContent');
+        try {
+          const c = path.centroid(f);
+          labelLayer.raise();
+          labelLayer.selectAll('text.sel')
+            .data([f])
+            .join('text')
+            .attr('class','label sel')
+            .attr('x', c[0])
+            .attr('y', c[1])
+            .attr('text-anchor','middle')
+            .text(`${key} ${acname}`);
+        } catch(e){}
+        const row = dataMap.get(key) || {};
+        const sheet = document.getElementById('sheet');
+        const sheetContent = document.getElementById('sheetContent');
+        const reserved = row.reserved ? ` &middot; ${row.reserved}` : '';
+        const sheetLines = [
+          `<b>${key} ${acname}</b>${dist ? ' &middot; ' + dist : ''}${reserved}`,
+          row.current_mla_name ? `${row.current_mla_name}${row.current_mla_party ? ` (${row.current_mla_party})` : ''}${row.current_mla_alliance ? ' &middot; ' + row.current_mla_alliance : ''}` : '',
+          row.y2020_margin ? `2020 margin: ${fmtInt(num(row.y2020_margin))}` : '',
+          row.y2015_margin ? `2015 margin: ${fmtInt(num(row.y2015_margin))}` : '',
+          row.y2010_margin ? `2010 margin: ${fmtInt(num(row.y2010_margin))}` : ''
+        ].filter(Boolean);
+        const detailsEl = document.getElementById('details');
+        if(detailsEl){
+          detailsEl.innerHTML = '';
+          detailsEl.style.display = 'none';
+        }
         if(sheet && sheetContent){
-          const reserved = row.reserved ? ` &middot; ${row.reserved}` : '';
-          sheetContent.innerHTML = [`<b>${key} ${acname}</b>${dist? ' &middot; '+dist:''}${reserved}`, row.current_mla_name ? `${row.current_mla_name} (${row.current_mla_party||''}) &middot; ${row.current_mla_alliance||''}` : '', (row.y2020_margin? `2020 margin: ${fmtInt(num(row.y2020_margin))}` : '')].filter(Boolean).join('<br>');
-          const more = document.getElementById('moreDetails'); if(more){ more.href = row.slug ? (`/bihar/constituency/${row.slug}`) : '#'; }
+          sheetContent.innerHTML = sheetLines.join('<br>');
+          const more = document.getElementById('moreDetails');
+          if(more){
+            more.href = row.slug ? (`/bihar/constituency/${row.slug}`) : '#';
+          }
           sheet.style.transform = 'translateY(0)';
         }
-        pushURLState(); updateCloseBtn();
+        pushURLState();
+        updateCloseBtn();
       }
     }
 
