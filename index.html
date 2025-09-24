@@ -1,430 +1,260 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bihar Assembly Constituencies - SVG Choropleth</title>
+  <title>Bihar Assembly Constituencies — SVG Viewer</title>
   <style>
     html, body { height: 100%; margin: 0; font-family: system-ui, Arial, sans-serif; }
-    #controls { padding: 10px 12px; display:flex; gap:10px; align-items:center; flex-wrap: wrap; border-bottom: 1px solid #eee; }
-    #mapwrap { height: calc(100vh - 86px); }
+    #controls { padding: 10px 12px; display:flex; gap:10px; align-items:center; flex-wrap: wrap; }
+    #mapwrap { height: calc(100vh - 70px); }
     #status { color: #b00; margin-left: 8px; }
-    body { overflow-y: scroll; }
     svg { width: 100%; height: 100%; background: #f9fafb; display:block; }
-    .ac { stroke: #1f77b4; stroke-width: 0.5; }
-    .ac:hover { stroke-width: 0.8; cursor: pointer; }
-    .selected { stroke: #d62728; stroke-width: 1.2; }
-    .dimmed { opacity: 0.25; }
+    .ac { fill: #cfe3f6; stroke: #1f77b4; stroke-width: 0.5; }
+    .ac:hover { fill: #a9d0ff; cursor: pointer; }
+    .selected { fill: #f7c6c6; stroke: #d62728; stroke-width: 1.2; }
     #info { font-size: 0.95rem; }
-    .label { font: 12px/1.1 sans-serif; fill: #111; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
-    .legend { display:flex; align-items:center; gap:8px; }
-    .legend .swatch { display:inline-block; width:12px; height:12px; border:1px solid #cbd5f5; border-radius:2px; margin-right:4px; }
-    .legend .gradient { display:inline-block; width:160px; height:10px; border:1px solid #cbd5f5; border-radius:999px; background: linear-gradient(to right, #f1f5f9, #4338ca); }
     
-    .hover-outline { fill: none; stroke: #0f4c81; stroke-width: 3.5; pointer-events: none; }
-    .legend .legitem.active { outline: 2px solid #333; border-radius: 2px; padding: 0 2px; }
-    .tooltip { position: fixed; pointer-events: none; background: rgba(255,255,255,0.95); border: 1px solid #ccc; border-radius: 4px; padding: 6px 8px; font-size: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); display:none; max-width: 280px; }
-    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+    .label { font: 12px/1.1 sans-serif; fill: #111; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
   </style>
 </head>
 <body>
   <div id="controls">
-    <strong>Bihar Assembly (SVG)</strong>
-    <label for="searchAC">Search:</label>
-    <input id="searchAC" type="search" placeholder="Search AC or district" list="acList" style="min-width:260px;" />
-    <datalist id="acList"></datalist>
-    <label for="acSelect" style="display:none">AC:</label>
-    <select id="acSelect" style="display:none"><option value="">- Select -</option></select>
-    
-    
-    <button id="zoomOut" type="button" title="Zoom out">-</button>
-    <button id="zoomIn" type="button" title="Zoom in">+</button>
-    
-    <label for="metricSelect">Color by:</label>
-    <select id="metricSelect">
-      <option value="alliance" selected>Alliance (current)</option>
-      <option value="margin20">Margin (2020)</option>
-      <option value="margin15">Margin (2015)</option>
-      <option value="margin10">Margin (2010)</option>
-    </select>
-    <label for="classifySelect">Classify:</label>
-    <select id="classifySelect">
-      <option value="threshold" selected>Threshold</option>
-      <option value="quantile">Quantile</option>
-      <option value="quantize">Quantize</option>
-      <option value="sequential">Sequential</option>
-    </select>
-    <span id="legend" class="legend"></span>
-    <span id="status"></span>
+    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+      <strong style="margin-right: 15px;">Bihar Assembly (SVG)</strong>
+      <span id="status" style="color: #b00;"></span>
+    </div>
+    <div style="position: relative; width: 100%; margin-bottom: 10px;">
+      <input id="acSearch" type="search" placeholder="Search constituency by number, name, or district..."
+             style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;" />
+      <div id="dropdown" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ccc; border-top: none; border-radius: 0 0 4px 4px; max-height: 300px; overflow-y: auto; display: none; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.15);"></div>
+    </div>
     <div id="info"></div>
-    <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
   </div>
-  <div id="mapwrap" class="loading" style="position:relative">
+  <div id="mapwrap" class="loading">
     <svg id="svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid meet">
       <g id="zoomlayer"></g>
       <g id="uiLayer"></g>
     </svg>
-    <div id="sheet" aria-live="polite" style="position:absolute; left:0; right:0; bottom:0; transform: translateY(100%); transition: transform 250ms ease; background:#fff; border-top:1px solid #e5e7eb; box-shadow: 0 -4px 10px rgba(0,0,0,0.08); font: 14px/1.4 system-ui, Arial, sans-serif; padding:10px 12px;">
-      <div id="sheetContent"></div>
-      <div style="margin-top:8px; display:flex; gap:10px;">
-        <a id="moreDetails" href="#" target="_blank" rel="noopener" style="background:#0f4c81; color:#fff; padding:6px 10px; border-radius:4px; text-decoration:none;">More details</a>
-        <button id="sheetClear" type="button" style="background:#fff; border:1px solid #ccc; border-radius:4px; padding:6px 10px; cursor:pointer;">Clear</button>
-      </div>
-    </div>
   </div>
-  <div id="details" style="display:none; padding:8px 12px; border-top:1px solid #eee; font: 14px/1.4 system-ui, Arial, sans-serif;"></div>
-
-  <div id="tooltip" class="tooltip"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script>
     const width = 1200, height = 900;
     const svg = d3.select('#svg');
     const g = d3.select('#zoomlayer');
     const ui = d3.select('#uiLayer');
     const labelLayer = g.append('g').attr('id','labelLayer');
-    const hoverLayer = g.append('path').attr('class','hover-outline').style('display','none');
     const statusEl = document.getElementById('status');
     const infoEl = document.getElementById('info');
-    const selEl = document.getElementById('acSelect');
-    const searchEl = document.getElementById('searchAC');
-    const dataListEl = document.getElementById('acList');
+    const searchEl = document.getElementById('acSearch');
+    const dropdownEl = document.getElementById('dropdown');
     const wrapEl = document.getElementById('mapwrap');
-    const tooltip = document.getElementById('tooltip');
+    let searchData = [];
     let labelToKey = new Map();
-
-    const NO_DATA_CODE = 'NA';
-    const NO_DATA_LABEL = 'No data';
-    const NO_DATA_FILL = '#d4d4d8';
-    let partiesData = new Map();
-
-    const defaultAllianceColors = { NDA: '#1f77b4', MGB: '#d62728', UPA: '#9467bd', OTH: '#8c564b', IND: '#7f7f7f', NA: NO_DATA_FILL };
-    const allianceColors = new Map();
 
     let biharData = null;
     let projection, path;
     let selectedId = null;
-    let dataMap = new Map();
-    let currentMetric = 'alliance';
-    let classification = 'threshold';
-    let breaks = [2000,5000,10000,20000,40000];
-    const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', (ev) => { g.attr('transform', ev.transform); }).on('end', ()=>{ pushURLState(); updateCloseBtn(); });
-    svg.call(zoom); svg.node().tabIndex = 0;
 
-    // Indian locale formatting
-    const inLocale = d3.formatLocale({ decimal: ".", thousands: ",", grouping: [3,2], currency: ["\u20B9", ""], percent: "%" });
-    const fmtInt = (v)=> v==null || isNaN(v) ? 'NA' : inLocale.format(",")(v);
+    const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', (ev) => {
+      g.attr('transform', ev.transform);
+      updateCrossButton();
+    });
+    svg.call(zoom);
 
-    const metrics = {
-      alliance: {
-        id: 'alliance',
-        type: 'category',
-        get: (r) => {
-          const val = (r.current_mla_alliance || '').trim();
-          return val ? val.toUpperCase() : NO_DATA_CODE;
-        },
-        palette: allianceColors
-      },
-      margin20: { id: 'margin20', type: 'numeric', get: (r) => num(r.y2020_margin) },
-      margin15: { id: 'margin15', type: 'numeric', get: (r) => num(r.y2015_margin) },
-      margin10: { id: 'margin10', type: 'numeric', get: (r) => num(r.y2010_margin) }
-    };
+    function setInfo(html){ infoEl.innerHTML = html || ''; }
 
-    function num(x){ if(x==null) return null; const s = String(x).replace(/,/g, '').trim(); const v = +s; return isFinite(v) ? v : null; }
-    function clampToHex(value){ const v = Math.max(0, Math.min(255, Math.round(value))); const hex = v.toString(16); return hex.length === 1 ? '0' + hex : hex; }
-    function pastelizeColor(hex, mix = 0.45){
-      if(!hex || typeof hex !== 'string'){ return '#e5e7eb'; }
-      const normalized = hex.replace('#','').trim();
-      if(!normalized){ return '#e5e7eb'; }
-      const raw = normalized.length === 3 ? normalized.split('').map(ch => ch + ch).join('') : normalized.slice(0, 6);
-      if(raw.length !== 6 || /[^0-9a-f]/i.test(raw)){ return '#e5e7eb'; }
-      const r = parseInt(raw.slice(0, 2), 16);
-      const g = parseInt(raw.slice(2, 4), 16);
-      const b = parseInt(raw.slice(4, 6), 16);
-      const blend = (component) => component + (255 - component) * mix;
-      return '#' + clampToHex(blend(r)) + clampToHex(blend(g)) + clampToHex(blend(b));
-    }
-    function applyAlliancePalette(overrides){
-      allianceColors.clear();
-      const merged = new Map();
-      Object.entries(defaultAllianceColors).forEach(([key, color]) => {
-        merged.set(key.toUpperCase(), color);
-      });
-      if(overrides){
-        Object.entries(overrides).forEach(([key, color]) => {
-          if(color){
-            merged.set(key.toUpperCase(), color);
-          }
-        });
-      }
-      merged.forEach((color, key) => {
-        if(key === NO_DATA_CODE){
-          allianceColors.set(key, NO_DATA_FILL);
-        } else {
-          allianceColors.set(key, pastelizeColor(color, 0.45));
-        }
-      });
-      if(!allianceColors.has(NO_DATA_CODE)){
-        allianceColors.set(NO_DATA_CODE, NO_DATA_FILL);
-      }
-    }
-    applyAlliancePalette();
-    function featureKey(p){ const n = p.AC_NO ?? p.ac_no ?? p.Ac_No; try { return String(parseInt(+n)).padStart(3,'0'); } catch { return String(n||''); } }
-    function keyPad(n){ try { return String(parseInt(+n)).padStart(3,'0'); } catch { return String(n||''); } }
-    function getCurrentMetric(){ return metrics[document.getElementById('metricSelect').value] || metrics.alliance; }
+    function createSvgControls(){
+      // Cross button (top-right)
+      const crossButton = ui.append('g')
+        .attr('class', 'cross-button')
+        .attr('transform', `translate(${width - 30}, 30)`)
+        .style('cursor', 'pointer')
+        .style('display', 'none');
 
-    function computeScale(values){
-      const m = getCurrentMetric();
-      if(m.type==='category') return null;
-      const clean = values.filter(v=> v!=null && isFinite(v));
-      const colors = ['#f2f0f7','#dadaeb','#bcbddc','#9e9ac8','#756bb1','#54278f'];
-      if(classification==='quantile'){
-        return { type:'quantile', scale: d3.scaleQuantile().domain(clean).range(colors) };
-      } else if(classification==='quantize'){
-        const min = d3.min(clean)||0, max = d3.max(clean)||1; return { type:'quantize', scale: d3.scaleQuantize().domain([min,max]).range(colors) };
-      } else if(classification==='sequential'){
-        const min = d3.min(clean)||0, max = d3.max(clean)||1; return { type:'sequential', scale: d3.scaleSequential().domain([min,max]).interpolator(d3.interpolatePuRd) };
-      } else {
-        return { type:'threshold', scale: d3.scaleThreshold().domain(breaks).range(colors) };
-      }
+      crossButton.append('circle')
+        .attr('r', 15)
+        .attr('fill', 'white')
+        .attr('stroke', '#666')
+        .attr('stroke-width', 1);
+
+      crossButton.append('path')
+        .attr('d', 'M-6,-6 L6,6 M6,-6 L-6,6')
+        .attr('stroke', '#333')
+        .attr('stroke-width', 2);
+
+      crossButton.on('click', clearAndReset);
+
+      // Zoom In button (top-right, below cross)
+      const zoomInButton = ui.append('g')
+        .attr('class', 'zoom-in-button')
+        .attr('transform', `translate(${width - 30}, 70)`)
+        .style('cursor', 'pointer');
+
+      zoomInButton.append('circle')
+        .attr('r', 15)
+        .attr('fill', 'white')
+        .attr('stroke', '#666')
+        .attr('stroke-width', 1);
+
+      zoomInButton.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '0.35em')
+        .attr('font-size', '14px')
+        .attr('font-weight', 'bold')
+        .text('+');
+
+      zoomInButton.on('click', () => svg.transition().duration(300).call(zoom.scaleBy, 1.3));
+
+      // Zoom Out button (top-right, below zoom in)
+      const zoomOutButton = ui.append('g')
+        .attr('class', 'zoom-out-button')
+        .attr('transform', `translate(${width - 30}, 110)`)
+        .style('cursor', 'pointer');
+
+      zoomOutButton.append('circle')
+        .attr('r', 15)
+        .attr('fill', 'white')
+        .attr('stroke', '#666')
+        .attr('stroke-width', 1);
+
+      zoomOutButton.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '0.35em')
+        .attr('font-size', '16px')
+        .attr('font-weight', 'bold')
+        .text('−');
+
+      zoomOutButton.on('click', () => svg.transition().duration(300).call(zoom.scaleBy, 1/1.3));
     }
 
-    function computeValueMap(){
-      const m = getCurrentMetric(); if(m.type==='category') return null; const vals = [];
-      for(const [k,row] of dataMap){ const v = m.get(row); if(v!=null && isFinite(v)) vals.push(v); }
-      return computeScale(vals);
+    function updateCrossButton(){
+      const transform = d3.zoomTransform(svg.node());
+      const isZoomed = transform.k > 1.01;
+      const isSelected = selectedId !== null;
+
+      ui.select('.cross-button')
+        .style('display', (isZoomed || isSelected) ? 'block' : 'none');
     }
 
-    function getNumericValues(){
-      const m = getCurrentMetric(); if(m.type==='category') return [];
-      const vals = [];
-      for(const [k,row] of dataMap){ const v = m.get(row); if(v!=null && isFinite(v)) vals.push(v); }
-      return vals;
+    function featureKey(p){
+      const n = p.AC_NO ?? p.ac_no ?? p.Ac_No;
+      try { return String(parseInt(+n)).padStart(3,'0'); } catch { return String(n||''); }
     }
 
-    function debounce(fn, wait=25){ let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), wait); }; }
-
-    function binIndex(spec, v){
-      if(!spec) return -1;
-      if(spec.type==='threshold'){
-        const dom = spec.scale.domain();
-        for(let i=0;i<dom.length;i++){ if(v<=dom[i]) return i; }
-        return spec.scale.range().length-1;
-      }
-      if(spec.type==='quantize' || spec.type==='quantile'){
-        const color = spec.scale(v);
-        return spec.scale.range().indexOf(color);
-      }
-      return -1;
-    }
-
-    function populateSelect(features){
-      const items = features.map(f => ({
+    function populateSearch(features){
+      searchData = features.map(f => ({
         key: featureKey(f.properties),
         name: f.properties.AC_NAME || f.properties.ac_name || f.properties.Ac_Name || 'AC',
         dist: f.properties.DIST_NAME || f.properties.dist_name || ''
       })).sort((a,b) => a.key.localeCompare(b.key));
-      for(const it of items){
-        const label = `${it.key} - ${it.name}${it.dist? ' ('+it.dist+')':''}`;
-        const opt = document.createElement('option'); opt.value = it.key; opt.textContent = label; selEl.appendChild(opt);
-        if(dataListEl){ const dop = document.createElement('option'); dop.value = label; dataListEl.appendChild(dop); }
-        labelToKey.set(label, it.key);
+
+      // Create searchable labels
+      searchData.forEach(item => {
+        const label = `${item.key} - ${item.name}${item.dist? ' ('+item.dist+')':''}`;
+        labelToKey.set(label, item.key);
+        item.label = label;
+        item.searchText = `${item.key} ${item.name} ${item.dist}`.toLowerCase();
+      });
+    }
+
+    function showDropdown(matches) {
+      if (matches.length === 0) {
+        dropdownEl.style.display = 'none';
+        return;
       }
+
+      dropdownEl.innerHTML = '';
+
+      // Show more results for full list, fewer for search results
+      const isFullList = matches.length === searchData.length;
+      const limit = isFullList ? 50 : 15;
+
+      matches.slice(0, limit).forEach((item, index) => {
+        const div = document.createElement('div');
+        div.textContent = item.label;
+        div.style.cssText = 'padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 14px;';
+        div.addEventListener('mouseenter', () => {
+          div.style.backgroundColor = '#f0f0f0';
+        });
+        div.addEventListener('mouseleave', () => {
+          div.style.backgroundColor = '';
+        });
+        div.addEventListener('click', () => {
+          searchEl.value = item.label;
+          selectByKey(item.key);
+          dropdownEl.style.display = 'none';
+        });
+        dropdownEl.appendChild(div);
+      });
+
+      // Add "showing X of Y" indicator if there are more results
+      if (matches.length > limit) {
+        const moreDiv = document.createElement('div');
+        moreDiv.textContent = `Showing ${limit} of ${matches.length} constituencies...`;
+        moreDiv.style.cssText = 'padding: 8px 12px; color: #666; font-style: italic; background: #f9f9f9; font-size: 12px;';
+        dropdownEl.appendChild(moreDiv);
+      }
+
+      dropdownEl.style.display = 'block';
+    }
+
+    function hideDropdown() {
+      setTimeout(() => dropdownEl.style.display = 'none', 150);
     }
 
     function draw(features){
-      g.selectAll('path').data(features).join('path')
+      g.selectAll('path').data(features)
+        .join('path')
         .attr('class', 'ac')
         .attr('data-key', d => featureKey(d.properties))
         .attr('d', d => path(d))
-        .attr('fill', d => colorForFeature(d))
-        .on('click', (ev, d) => { selectByKey(featureKey(d.properties)); sanitizeSeparators(); });
-    }
-    
-    function sanitizeSeparators(){
-      if(infoEl) infoEl.innerHTML = infoEl.innerHTML.replace(' ? ', ' &middot; ');
-      const detEl = document.getElementById('details');
-      if(detEl) detEl.innerHTML = detEl.innerHTML.replace(' ? ', ' &middot; ');
+        .on('click', (ev, d) => selectByKey(featureKey(d.properties)));
     }
 
     function fitToFeature(f){
-      const b = path.bounds(f); const dx = b[1][0]-b[0][0]; const dy = b[1][1]-b[0][1];
-      const cx=(b[0][0]+b[1][0])/2, cy=(b[0][1]+b[1][1])/2; const scale=Math.max(1, 0.9/Math.max(dx/width, dy/height));
+      const b = path.bounds(f);
+      const dx = b[1][0] - b[0][0];
+      const dy = b[1][1] - b[0][1];
+      const cx = (b[0][0] + b[1][0]) / 2;
+      const cy = (b[0][1] + b[1][1]) / 2;
+      const scale = Math.max(1, 0.9 / Math.max(dx / width, dy / height));
       const transform = d3.zoomIdentity.translate(width/2, height/2).scale(scale).translate(-cx, -cy);
       svg.transition().duration(750).call(zoom.transform, transform);
     }
 
-
-    function setInfo(html){ infoEl.innerHTML = html || ''; }
-
-    // Hover helpers (re-add with touch suppression)
-    function clearLegendActive(){ document.querySelectorAll('#legend .legitem.active').forEach(n=> n.classList.remove('active')); }
-    function highlightLegendForFeature(f){
-      const metric = getCurrentMetric();
-      const el = document.getElementById('legend');
-      if(!el) return;
-      clearLegendActive();
-      const key = featureKey(f.properties);
-      const row = dataMap.get(key);
-      if(metric.type === 'category'){
-        const rawValue = row ? metric.get(row) : null;
-        const code = typeof rawValue === 'string' ? rawValue.trim().toUpperCase() : rawValue;
-        const paletteKey = code || NO_DATA_CODE;
-        const target = el.querySelector(`.legitem[data-lab="${paletteKey}"]`) || el.querySelector(`.legitem[data-lab="${NO_DATA_CODE}"]`);
-        if(target) target.classList.add('active');
-        return;
-      }
-      if(!row) return;
-      const value = metric.get(row);
-      if(value == null || !isFinite(value)) return;
-      const spec = computeValueMap();
-      if(!spec || !spec.scale) return;
-      const color = spec.scale(value);
-      const idx = spec.scale.range().indexOf(color);
-      if(idx>=0){
-        const target = el.querySelector(`.legitem[data-bin="${idx}"]`);
-        if(target) target.classList.add('active');
-      }
-    }
-    const handleHover = debounce((ev, d)=>{ if(ev && ev.pointerType==='touch') return; showTooltip(ev,d); try{ hoverLayer.attr('d', path(d)).style('display','block'); }catch(e){} highlightLegendForFeature(d); }, 10);
-    function clearHover(){ hideTooltip(); hoverLayer.style('display','none'); clearLegendActive(); }
-
-    function colorForFeature(f){
-      const k = featureKey(f.properties);
-      const row = dataMap.get(k);
-      const metric = getCurrentMetric();
-      if(metric.type === 'category'){
-        const palette = metric.palette || allianceColors;
-        if(!row){
-          return palette.get(NO_DATA_CODE) || NO_DATA_FILL;
-        }
-        const rawValue = metric.get(row);
-        const code = typeof rawValue === 'string' ? rawValue.trim().toUpperCase() : rawValue;
-        const paletteKey = code || NO_DATA_CODE;
-        return palette.get(paletteKey) || palette.get(NO_DATA_CODE) || NO_DATA_FILL;
-      }
-      if(!row) return NO_DATA_FILL;
-      const value = metric.get(row);
-      if(value == null || !isFinite(value)) return NO_DATA_FILL;
-      const spec = computeValueMap();
-      if(!spec || !spec.scale){ return; }
-      if(!spec || !spec.scale) return NO_DATA_FILL;
-      return spec.scale(value);
-    }
-
-    function updateLegend(){
-      const el = document.getElementById('legend'); el.innerHTML='';
-      const m = getCurrentMetric();
-      if(m.type==='category'){
-        const entries = m.palette ? Array.from(m.palette.entries()) : [];
-        const noDataEntries = [];
-        for(const [lab, col] of entries){
-          if(lab === NO_DATA_CODE){
-            noDataEntries.push([lab, col]);
-            continue;
-          }
-          const wrap = document.createElement('span');
-          wrap.className = 'legitem';
-          wrap.dataset.lab = lab;
-          const box = document.createElement('span');
-          box.className = 'swatch';
-          box.style.background = col;
-          const t = document.createElement('span');
-          t.textContent = lab;
-          t.style.marginRight = '10px';
-          wrap.appendChild(box);
-          wrap.appendChild(t);
-          el.appendChild(wrap);
-        }
-        const ensureNoData = noDataEntries.length ? noDataEntries : [[NO_DATA_CODE, m.palette.get(NO_DATA_CODE) || NO_DATA_FILL]];
-        ensureNoData.forEach(([lab, col]) => {
-          const wrap = document.createElement('span');
-          wrap.className = 'legitem';
-          wrap.dataset.lab = lab;
-          const box = document.createElement('span');
-          box.className = 'swatch';
-          box.style.background = col || NO_DATA_FILL;
-          const t = document.createElement('span');
-          t.textContent = NO_DATA_LABEL;
-          t.style.marginRight = '10px';
-          wrap.appendChild(box);
-          wrap.appendChild(t);
-          el.appendChild(wrap);
-        });
-        return;
-      }
-      const spec = computeValueMap();
-      if(!spec || !spec.scale){ return; }
-      if(spec.type==='sequential'){
-        const bar = document.createElement('div'); bar.className='gradient'; el.appendChild(bar);
-        const values = Array.from(dataMap.values(), r => getCurrentMetric().get(r)).filter(v=>v!=null);
-        const min = d3.min(values)||0, max = d3.max(values)||1;
-        const lab = document.createElement('div'); lab.style.fontSize='12px'; lab.style.marginTop='4px'; lab.textContent = fmtInt(min) + ' - ' + fmtInt(max); el.appendChild(lab);
-        return;
-      }
-      const rng = spec.scale.range();
-      if(spec.type==='quantize'){
-        for(let i=0;i<rng.length;i++){
-          const color = rng[i]; const ext = spec.scale.invertExtent(color); const a = ext[0], b = ext[1];
-          let label; if(i===0){ label = '<= ' + fmtInt(b); } else if(i===rng.length-1){ label = '>= ' + fmtInt(a); } else { label = fmtInt(a) + '-' + fmtInt(b); }
-          const wrap=document.createElement('span'); wrap.className='legitem'; wrap.dataset.bin=String(i); const box=document.createElement('span'); box.className='swatch'; box.style.background=color; const t=document.createElement('span'); t.textContent = label; t.style.marginRight='8px'; wrap.appendChild(box); wrap.appendChild(t); el.appendChild(wrap);
-        }
-        return;
-      }
-      if(spec.type==='quantile'){
-        const thresholds = spec.scale.quantiles(); const vals = getNumericValues(); const min = d3.min(vals)||0, max = d3.max(vals)||0; const bounds = [min, ...thresholds, max];
-        for(let i=0;i<rng.length;i++){
-          let label; if(i===0){ label = '<= ' + fmtInt(bounds[1]); } else if(i===rng.length-1){ label = '>= ' + fmtInt(bounds[bounds.length-2]); } else { label = fmtInt(bounds[i]) + '-' + fmtInt(bounds[i+1]); }
-          const wrap=document.createElement('span'); wrap.className='legitem'; wrap.dataset.bin=String(i); const box=document.createElement('span'); box.className='swatch'; box.style.background=rng[i]; const t=document.createElement('span'); t.textContent = label; t.style.marginRight='8px'; wrap.appendChild(box); wrap.appendChild(t); el.appendChild(wrap);
-        }
-        return;
-      }
-      if(spec.type==='threshold'){
-        const domain = spec.scale.domain();
-        for(let i=0;i<rng.length;i++){
-          let label; if(i===0){ label = '<= ' + fmtInt(domain[0]); } else if(i===rng.length-1){ label = '>= ' + fmtInt(domain[domain.length-1]); } else { label = fmtInt(domain[i-1]) + '-' + fmtInt(domain[i]); }
-          const wrap=document.createElement('span'); wrap.className='legitem'; wrap.dataset.bin=String(i); const box=document.createElement('span'); box.className='swatch'; box.style.background=rng[i]; const t=document.createElement('span'); t.textContent = label; t.style.marginRight='8px'; wrap.appendChild(box); wrap.appendChild(t); el.appendChild(wrap);
-        }
-        return;
-      }
-    }
-
-    function clearSelection(){
+    function clearAndReset(){
       selectedId = null;
-      g.selectAll('path').classed('selected', false).classed('dimmed', false);
-      labelLayer.selectAll('text.sel').remove();
+      g.selectAll('path').classed('selected', false);
+      searchEl.value = '';
       setInfo('');
-      const detailsEl = document.getElementById('details');
-      if(detailsEl){
-        detailsEl.innerHTML = '';
-        detailsEl.style.display = 'none';
-      }
-      selEl.value = '';
-      if(searchEl) searchEl.value = '';
-      const sheet = document.getElementById('sheet');
-      if(sheet){
-        sheet.style.transform = 'translateY(100%)';
-      }
+      labelLayer.selectAll('*').remove();
+      // Reset zoom
       svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
-      pushURLState();
-      updateCloseBtn();
+      updateCrossButton();
     }
 
     function selectByKey(key){
       selectedId = key;
-      g.selectAll('path')
-        .classed('selected', d => featureKey(d.properties) === key)
-        .classed('dimmed', d => featureKey(d.properties) !== key);
+      g.selectAll('path').classed('selected', d => featureKey(d.properties) === key);
       g.selectAll('path').filter(d => featureKey(d.properties) === key).raise();
       const f = biharData.features.find(ft => featureKey(ft.properties) === key);
       if(f){
         fitToFeature(f);
         const p = f.properties;
+        const acno = key;
         const acname = p.AC_NAME || p.ac_name || p.Ac_Name || '';
         const dist = p.DIST_NAME || p.dist_name || '';
-        setInfo(`<b>${key} ${acname}</b>${dist ? ' &middot; District: ' + dist : ''}`);
-        document.getElementById('announcer').textContent = `${key} ${acname}`;
+        const pcno = p.PC_NO || p.pc_no || '';
+        const pcname = p.PC_NAME || p.pc_name || '';
+
+        // Update search bar with selected constituency
+        const searchLabel = `${acno} - ${acname}${dist? ' ('+dist+')':''}`;
+        searchEl.value = searchLabel;
+
+        setInfo(`<b>${acno} ${acname}</b>${dist? ' · District: '+dist:''}${pcname? ' · PC: '+pcno+' '+pcname:''}`);
+        // Add center label for selection
         try {
           const c = path.centroid(f);
           labelLayer.raise();
@@ -435,213 +265,77 @@
             .attr('x', c[0])
             .attr('y', c[1])
             .attr('text-anchor','middle')
-            .text(`${key} ${acname}`);
-        } catch(e){}
-        const row = dataMap.get(key) || {};
-        const sheet = document.getElementById('sheet');
-        const sheetContent = document.getElementById('sheetContent');
-        const reserved = row.reserved ? ` &middot; ${row.reserved}` : '';
-        const sheetLines = [
-          `<b>${key} ${acname}</b>${dist ? ' &middot; ' + dist : ''}${reserved}`,
-          row.current_mla_name ? `${row.current_mla_name}${row.current_mla_party ? ` (${row.current_mla_party})` : ''}${row.current_mla_alliance ? ' &middot; ' + row.current_mla_alliance : ''}` : '',
-          row.y2020_margin ? `2020 margin: ${fmtInt(num(row.y2020_margin))}` : '',
-          row.y2015_margin ? `2015 margin: ${fmtInt(num(row.y2015_margin))}` : '',
-          row.y2010_margin ? `2010 margin: ${fmtInt(num(row.y2010_margin))}` : ''
-        ].filter(Boolean);
-        const detailsEl = document.getElementById('details');
-        if(detailsEl){
-          detailsEl.innerHTML = '';
-          detailsEl.style.display = 'none';
-        }
-        if(sheet && sheetContent){
-          sheetContent.innerHTML = sheetLines.join('<br>');
-          const more = document.getElementById('moreDetails');
-          if(more){
-            more.href = row.slug ? (`/bihar/constituency/${row.slug}`) : '#';
-          }
-          sheet.style.transform = 'translateY(0)';
-        }
-        pushURLState();
-        updateCloseBtn();
+            .text(acno + ' ' + acname);
+        } catch(e) { console.error('label error', e); }
       }
+      updateCrossButton();
     }
 
-    function showTooltip(ev, d){
-      const p = d.properties || {}; const k = featureKey(p); const row = dataMap.get(k) || {}; const name = p.AC_NAME || p.ac_name || p.Ac_Name || ''; const dist = p.DIST_NAME || p.dist_name || '';
-      const metric = getCurrentMetric(); let line = '';
-      if(metric.type === 'category'){
-        const value = metric.get(row);
-        const display = value === NO_DATA_CODE ? NO_DATA_LABEL : value;
-        const label = metric.id === 'alliance' ? 'Alliance' : metric.id;
-        line = `${label}: ${display}`;
-      } else if(metric.id==='margin20'){
-        line = '2020 margin: ' + fmtInt(metric.get(row));
-      } else if(metric.id==='margin15'){
-        line = '2015 margin: ' + fmtInt(metric.get(row));
-      } else if(metric.id==='margin10'){
-        line = '2010 margin: ' + fmtInt(metric.get(row));
+    // Search input event handlers
+    searchEl.addEventListener('input', (e) => {
+      const query = e.target.value.trim().toLowerCase();
+
+      if (!query) {
+        hideDropdown();
+        return;
       }
-      tooltip.innerHTML = `<b>${k} ${name}</b>${dist? ' &middot; '+dist:''}<br>${line}`; tooltip.style.display='block'; tooltip.style.left=(ev.clientX+12)+'px'; tooltip.style.top=(ev.clientY+12)+'px';
-    }
-    function hideTooltip(){ tooltip.style.display='none'; }
 
-    function recolor(){ g.selectAll('path.ac').attr('fill', d => colorForFeature(d)); }
-    function updateLegendAndRecolor(){ updateLegend(); recolor(); }
-    function applyViewFromURL(){
-      const q = new URLSearchParams(location.search);
-      const metricParam = q.get('metric');
-      if(metricParam && metrics[metricParam]){
-        document.getElementById('metricSelect').value = metricParam;
-        currentMetric = metricParam;
+      // Filter search data
+      const matches = searchData.filter(item =>
+        item.searchText.includes(query)
+      );
+
+      showDropdown(matches);
+    });
+
+    searchEl.addEventListener('change', () => {
+      const value = searchEl.value.trim();
+      const key = labelToKey.get(value);
+      if(key){
+        selectByKey(key);
+        dropdownEl.style.display = 'none';
+      } else if(!value) {
+        clearAndReset();
+        dropdownEl.style.display = 'none';
       }
-      const classifyParam = q.get('classify');
-      if(classifyParam){
-        const classifyEl = document.getElementById('classifySelect');
-        if(classifyEl && Array.from(classifyEl.options).some(opt => opt.value === classifyParam)){
-          classification = classifyParam;
-          classifyEl.value = classifyParam;
-        }
+    });
+
+    searchEl.addEventListener('blur', hideDropdown);
+    searchEl.addEventListener('focus', () => {
+      // Show all constituencies if no search query, or filtered results if there is a query
+      const query = searchEl.value.trim().toLowerCase();
+      if (query) {
+        const matches = searchData.filter(item => item.searchText.includes(query));
+        showDropdown(matches);
+      } else {
+        // Show all constituencies when clicked with no search text
+        showDropdown(searchData);
       }
-      const ac = q.get('ac');
-      if(ac) { selectedId = ac; }
-      const k = parseFloat(q.get('k'));
-      const x = parseFloat(q.get('x'));
-      const y = parseFloat(q.get('y'));
-      if(!isNaN(k) && !isNaN(x) && !isNaN(y)){
-        const t = d3.zoomIdentity.translate(x, y).scale(k);
-        svg.call(zoom.transform, t);
+    });
+
+    searchEl.addEventListener('click', () => {
+      // Also show full dropdown on click (in case focus doesn't trigger)
+      if (!searchEl.value.trim()) {
+        showDropdown(searchData);
       }
-    }
+    });
 
-    function pushURLState(){
-      const t = d3.zoomTransform(svg.node());
-      const params = new URLSearchParams(location.search);
-      params.set('metric', document.getElementById('metricSelect').value);
-      params.set('classify', classification);
-      if(selectedId) params.set('ac', selectedId); else params.delete('ac');
-      params.set('k', (+t.k).toFixed(3)); params.set('x', (+t.x).toFixed(0)); params.set('y', (+t.y).toFixed(0));
-      history.replaceState(null,'', location.pathname + '?' + params.toString());
-    }
 
-    // Events
-    selEl.addEventListener('change', (e)=>{ const v = e.target.value; if(v) { selectByKey(v); sanitizeSeparators(); } else { clearSelection(); } });
-    const sheetClearBtn = document.getElementById('sheetClear'); if(sheetClearBtn){ sheetClearBtn.addEventListener('click', clearSelection); }
 
-    // Search (datalist-backed)
-    // labelToKey defined near top
-    if(searchEl){
-      searchEl.addEventListener('change', ()=>{ const v = searchEl.value; const key = labelToKey.get(v); if(key){ selectByKey(key); sanitizeSeparators(); } });
-      searchEl.addEventListener('input', ()=>{
-        const q = (searchEl.value||'').trim().toLowerCase();
-        g.selectAll('path').classed('dimmed', d => {
-          if(selectedId) return featureKey(d.properties) !== selectedId;
-          if(!q) return false;
-          const p = d.properties || {};
-          const key = featureKey(p);
-          const name = (p.AC_NAME||p.ac_name||p.Ac_Name||'').toLowerCase();
-          const dist = (p.DIST_NAME||p.dist_name||'').toLowerCase();
-          return !(key.includes(q) || name.includes(q) || dist.includes(q));
-        });
-      });
-    }
-    document.getElementById('metricSelect').addEventListener('change', ()=> { currentMetric = document.getElementById('metricSelect').value; updateLegendAndRecolor(); pushURLState(); updateCloseBtn(); });
-    document.getElementById('classifySelect').addEventListener('change', (e)=> { classification = e.target.value; updateLegendAndRecolor(); pushURLState(); updateCloseBtn(); });
-    document.getElementById('zoomIn').addEventListener('click', ()=> svg.transition().duration(300).call(zoom.scaleBy, 1.3));
-    document.getElementById('zoomOut').addEventListener('click', ()=> svg.transition().duration(300).call(zoom.scaleBy, 1/1.3));
-    svg.on('keydown', (e)=>{ if(e.key==='+'){ svg.transition().duration(300).call(zoom.scaleBy,1.3);} else if(e.key==='-'){ svg.transition().duration(300).call(zoom.scaleBy,1/1.3);} else if(e.key==='0'){ svg.transition().duration(400).call(zoom.transform,d3.zoomIdentity);} });
 
-    let closeIcon;
-    function buildCloseIcon(){
-      const posX = width - 28, posY = 28; // top-right in viewBox
-      closeIcon = ui.append('g')
-        .attr('id','closeIcon')
-        .attr('transform', `translate(${posX}, ${posY})`)
-        .style('display','none')
-        .style('cursor','pointer')
-        .attr('role','button')
-        .attr('tabindex', 0)
-        .attr('aria-label','Reset view');
-      closeIcon.append('circle').attr('r', 12).attr('fill', '#ffffff').attr('stroke', '#666');
-      closeIcon.append('line').attr('x1', -5).attr('y1', -5).attr('x2', 5).attr('y2', 5).attr('stroke', '#333').attr('stroke-width', 2).attr('stroke-linecap', 'round');
-      closeIcon.append('line').attr('x1', 5).attr('y1', -5).attr('x2', -5).attr('y2', 5).attr('stroke', '#333').attr('stroke-width', 2).attr('stroke-linecap', 'round');
-      closeIcon.on('click', clearSelection);
-      closeIcon.on('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ clearSelection(); } });
-
-      // Zoom FABs stacked under reset icon
-      const zoomIn = ui.append('g').attr('transform', `translate(${width - 28}, ${28+36})`).style('cursor','pointer');
-      zoomIn.append('circle').attr('r', 12).attr('fill', '#ffffff').attr('stroke', '#666');
-      zoomIn.append('text').attr('text-anchor','middle').attr('dy','0.35em').attr('font-size','14px').text('+');
-      zoomIn.on('click', ()=> svg.transition().duration(250).call(zoom.scaleBy, 1.3));
-
-      const zoomOut = ui.append('g').attr('transform', `translate(${width - 28}, ${28+36+36})`).style('cursor','pointer');
-      zoomOut.append('circle').attr('r', 12).attr('fill', '#ffffff').attr('stroke', '#666');
-      zoomOut.append('text').attr('text-anchor','middle').attr('dy','0.35em').attr('font-size','16px').text('-');
-      zoomOut.on('click', ()=> svg.transition().duration(250).call(zoom.scaleBy, 1/1.3));
-    }
-    function updateCloseBtn(){ const k = d3.zoomTransform(svg.node()).k; const show = (k>1.01 || selectedId); if(closeIcon) closeIcon.style('display', show ? 'block' : 'none'); }
-
-    async function loadBoundaries(){
-      return await fetch('bihar_ac_all.geojson').then(r => r.json());
-    }
-
-    async function loadParties(){
-      partiesData.clear();
-      try{
-        const response = await fetch('parties.json');
-        if(!response.ok){ throw new Error('Parties metadata unavailable'); }
-        const data = await response.json();
-        const overrides = {};
-        data.forEach(entry => {
-          if(entry && entry.code){
-            partiesData.set(String(entry.code).toUpperCase(), entry);
-          }
-          const allianceKey = entry && entry.alliance ? String(entry.alliance).trim().toUpperCase() : '';
-          if(allianceKey && entry && entry.color && !overrides[allianceKey]){
-            overrides[allianceKey] = entry.color;
-          }
-        });
-        applyAlliancePalette(overrides);
-      } catch(err){
-        console.warn('Failed to load parties.json', err);
-        applyAlliancePalette();
-      }
-    }
-
-    async function loadElectionData(){
-      try{
-        const rows = await d3.csv('bihar_election_results_consolidated.csv');
-        dataMap = new Map(rows.map(r => [ keyPad(r.no), r ]));
-      } catch(err){
-        console.warn('CSV load failed', err);
-        dataMap = new Map();
-      }
-    }
     async function init(){
       try{
-        statusEl.textContent = 'Loading Bihar boundaries...';
-        const data = await loadBoundaries();
+        statusEl.textContent = 'Loading Bihar GeoJSON...';
+        const data = await fetch('bihar_ac_all.geojson').then(r => r.json());
         biharData = data;
         projection = d3.geoMercator().fitSize([width, height], biharData);
         path = d3.geoPath(projection);
         draw(biharData.features);
-        populateSelect(biharData.features);
+        populateSearch(biharData.features);
+        createSvgControls();
         wrapEl.classList.remove('loading');
         statusEl.textContent = '';
-        buildCloseIcon();
-        updateCloseBtn();
-
-        statusEl.textContent = 'Loading election data...';
-        await Promise.all([loadParties(), loadElectionData()]);
-        statusEl.textContent = '';
-
-        applyViewFromURL();
-        updateLegendAndRecolor();
-        if(selectedId){
-          selectByKey(selectedId);
-        } else {
-          pushURLState();
-        }
-      } catch(e){
+      }catch(e){
         console.error(e);
         statusEl.textContent = 'Failed to load Bihar GeoJSON';
       }
@@ -651,4 +345,8 @@
   </script>
 </body>
 </html>
+
+
+
+
 
