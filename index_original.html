@@ -1,0 +1,221 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bihar Assembly Constituencies (GeoJSON)</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    #map { height: 86vh; }
+    #controls { padding: 8px 12px; font-family: system-ui, Arial, sans-serif; }
+    #status { color: #b00; margin-left: 8px; }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <strong>Bihar Assembly Constituencies</strong>
+    <div>Source: Bihar AC GeoJSON (local only) - <code>bihar_ac_all.geojson</code></div>
+    <div style="margin-top:6px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+      <label for="acSelect">Constituency:</label>
+      <select id="acSelect"><option value="">- Select -</option></select>
+      <button id="clearSel" type="button">Clear</button>
+      <button id="exportSvg" type="button">Export SVG</button>
+      <a id="downloadLink" href="#" download style="display:none;">Download selected</a>
+      <span id="status"></span>
+    </div>
+    <div id="info" style="margin-top:6px; font-size: 0.95rem;"></div>
+  </div>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script>
+    const map = L.map('map').setView([25.6, 85.1], 7);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 12,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const statusEl = document.getElementById('status');
+
+    let biharLayer = null;
+    let highlightLayer = null;
+    let biharMask = null;
+    let biharGeo = null;
+
+    function render(geojson){
+      const layer = L.geoJSON(geojson, {
+        style: { color: '#1f77b4', weight: 1, fillOpacity: 0.1 },
+        onEachFeature: function (feature, layer) {
+          var p = (feature && feature.properties) ? feature.properties : {};
+          var name = p.AC_NAME || p.ac_name || p.Ac_Name || 'AC';
+          var num = p.AC_NO || p.ac_no || p.Ac_No || '';
+          var label = (num ? (num + ' ') : '') + name;
+          layer.bindPopup(label);
+        }
+      }).addTo(map);
+      map.fitBounds(layer.getBounds());
+      return layer;
+    }
+
+    function getStateName(p){
+      return ((p && (p.ST_NAME || p.st_name || p.State_Name || p.state_name)) || '').toString().trim().toUpperCase();
+    }
+
+    function createMaskFromFeatureCollection(fc){
+      const outer = [
+        [-90, -180],
+        [-90,  180],
+        [ 90,  180],
+        [ 90, -180]
+      ];
+      const holes = [];
+      (fc.features || []).forEach(function(f){
+        const g = f && f.geometry; if(!g) return;
+        if(g.type === 'Polygon'){
+          const ring = (g.coordinates && g.coordinates[0]) || [];
+          holes.push(ring.map(function(x){ return [x[1], x[0]]; }));
+        } else if(g.type === 'MultiPolygon'){
+          (g.coordinates || []).forEach(function(poly){
+            const ring = (poly && poly[0]) || [];
+            holes.push(ring.map(function(x){ return [x[1], x[0]]; }));
+          });
+        }
+      });
+      return L.polygon([outer].concat(holes), { stroke:false, fillColor:'#ffffff', fillOpacity: 1, interactive:false });
+    }
+
+    function setInfo(html){ document.getElementById('info').innerHTML = html || ''; }
+
+    async function load(){
+      try {
+        statusEl.textContent = 'Loading bihar_ac_all.geojson ...';
+        const resp = await fetch('bihar_ac_all.geojson');
+        if(!resp.ok){ throw new Error('HTTP ' + resp.status); }
+        const data = await resp.json();
+        const feats = (data.features || []).filter(function(f){
+          return getStateName(f && f.properties) === 'BIHAR';
+        });
+        const bihar = { type: 'FeatureCollection', features: feats };
+        biharGeo = bihar;
+        statusEl.textContent = '';
+        if ((bihar.features || []).length > 0) {
+          biharLayer = render(bihar);
+          try {
+            biharMask = createMaskFromFeatureCollection(bihar);
+            biharMask.addTo(map);
+          } catch(e) { console.error('Mask error', e); }
+        } else {
+          statusEl.textContent = 'No Bihar features found in bihar_ac_all.geojson.';
+        }
+      } catch(err){
+        console.error(err);
+        statusEl.textContent = 'Failed to load bihar_ac_all.geojson: ' + err;
+        alert('Failed to load bihar_ac_all.geojson: ' + err);
+      }
+    }
+
+    async function loadIndex(){
+      try {
+        const resp = await fetch('bihar_ac_geojson/bihar_ac_index.json');
+        if(!resp.ok) return;
+        const items = await resp.json();
+        items.sort((a,b) => (a.ac_no||0) - (b.ac_no||0));
+        const sel = document.getElementById('acSelect');
+        for(const it of items){
+          const opt = document.createElement('option');
+          const num = (it.ac_no!=null) ? String(it.ac_no).padStart(3,'0') : '';
+          opt.value = it.file;
+          opt.textContent = `${num} - ${it.ac_name || ''}${it.district? ' ('+it.district+')':''}`;
+          opt.dataset.acno = it.ac_no || '';
+          opt.dataset.acname = it.ac_name || '';
+          opt.dataset.district = it.district || '';
+          opt.dataset.pcno = it.pc_no || '';
+          opt.dataset.pcname = it.pc_name || '';
+          sel.appendChild(opt);
+        }
+        sel.addEventListener('change', onSelectChange);
+        document.getElementById('clearSel').addEventListener('click', clearSelection);
+        document.getElementById('exportSvg').addEventListener('click', exportSvg);
+      } catch(e){ console.error('Index load error', e); }
+    }
+
+    async function onSelectChange(){
+      const sel = document.getElementById('acSelect');
+      const file = sel.value;
+      if(!file){ clearSelection(); return; }
+      if(highlightLayer){ map.removeLayer(highlightLayer); highlightLayer = null; }
+      const url = `bihar_ac_geojson/${file}`;
+      document.getElementById('status').textContent = 'Loading selection...';
+      try{
+        const resp = await fetch(url);
+        const gj = await resp.json();
+        highlightLayer = L.geoJSON(gj, {
+          style: { color: '#d62728', weight: 2, fillOpacity: 0.25 }
+        }).addTo(map);
+        map.fitBounds(highlightLayer.getBounds());
+        document.getElementById('status').textContent = '';
+        const link = document.getElementById('downloadLink');
+        link.style.display = '';
+        link.href = url;
+        const opt = sel.options[sel.selectedIndex];
+        const acno = opt.dataset.acno || '';
+        const acname = opt.dataset.acname || '';
+        const dist = opt.dataset.district || '';
+        const pcno = opt.dataset.pcno || '';
+        const pcname = opt.dataset.pcname || '';
+        setInfo(`<b>${acno} ${acname}</b>${dist? ' · District: '+dist:''}${pcname? ' · PC: '+pcno+' '+pcname:''}`);
+      } catch(e){
+        console.error('Selection load error', e);
+        document.getElementById('status').textContent = 'Failed to load selection';
+      }
+    }
+
+    function clearSelection(){
+      const sel = document.getElementById('acSelect');
+      sel.value = '';
+      if(highlightLayer){ map.removeLayer(highlightLayer); highlightLayer = null; }
+      document.getElementById('downloadLink').style.display = 'none';
+      setInfo('');
+    }
+
+    function exportSvg(){
+      try{
+        const data = biharGeo;
+        if(!data || !(data.features||[]).length){ alert('Bihar data not loaded yet'); return; }
+        const width = 1200, height = 1200;
+        const projection = d3.geoMercator().fitSize([width, height], data);
+        const path = d3.geoPath(projection);
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(svgNS, 'svg');
+        svg.setAttribute('xmlns', svgNS);
+        svg.setAttribute('width', width);
+        svg.setAttribute('height', height);
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+        const g = document.createElementNS(svgNS, 'g');
+        svg.appendChild(g);
+        for(const f of data.features){
+          const p = document.createElementNS(svgNS, 'path');
+          p.setAttribute('d', path(f));
+          p.setAttribute('fill', 'none');
+          p.setAttribute('stroke', '#1f77b4');
+          p.setAttribute('stroke-width', '0.8');
+          g.appendChild(p);
+        }
+        const serializer = new XMLSerializer();
+        const xml = serializer.serializeToString(svg);
+        const blob = new Blob([xml], {type: 'image/svg+xml;charset=utf-8'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'bihar_ac.svg';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } catch(e){ console.error('SVG export failed', e); alert('SVG export failed: '+e); }
+    }
+
+    load();
+    loadIndex();
+  </script>
+</body>
+</html>

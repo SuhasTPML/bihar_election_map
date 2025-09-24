@@ -1,9 +1,9 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bihar Assembly Constituencies - SVG Choropleth</title>
+  <title>Bihar Assembly Constituencies — SVG Choropleth</title>
   <style>
     html, body { height: 100%; margin: 0; font-family: system-ui, Arial, sans-serif; }
     #controls { padding: 10px 12px; display:flex; gap:10px; align-items:center; flex-wrap: wrap; border-bottom: 1px solid #eee; }
@@ -12,16 +12,14 @@
     body { overflow-y: scroll; }
     svg { width: 100%; height: 100%; background: #f9fafb; display:block; }
     .ac { stroke: #1f77b4; stroke-width: 0.5; }
-    .ac:hover { stroke-width: 2.0; cursor: pointer; }
+    .ac:hover { stroke-width: 0.8; cursor: pointer; }
     .selected { stroke: #d62728; stroke-width: 1.2; }
     .dimmed { opacity: 0.25; }
     #info { font-size: 0.95rem; }
     .label { font: 12px/1.1 sans-serif; fill: #111; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
     .legend { display:flex; align-items:center; gap:8px; }
-    .legend .swatch { display:inline-block; width:12px; height:12px; border:1px solid #cbd5f5; border-radius:2px; margin-right:4px; }
-    .legend .gradient { display:inline-block; width:160px; height:10px; border:1px solid #cbd5f5; border-radius:999px; background: linear-gradient(to right, #f1f5f9, #4338ca); }
     
-    .hover-outline { fill: none; stroke: #0f4c81; stroke-width: 5.0; pointer-events: none; }
+    .hover-outline { fill: none; stroke: #0f4c81; stroke-width: 3.5; pointer-events: none; }
     .legend .legitem.active { outline: 2px solid #333; border-radius: 2px; padding: 0 2px; }
     .tooltip { position: fixed; pointer-events: none; background: rgba(255,255,255,0.95); border: 1px solid #ccc; border-radius: 4px; padding: 6px 8px; font-size: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); display:none; max-width: 280px; }
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
@@ -72,7 +70,7 @@
       </div>
     </div>
   </div>
-  <div id="details" style="display:none; padding:8px 12px; border-top:1px solid #eee; font: 14px/1.4 system-ui, Arial, sans-serif;"></div>
+  <div id="details" style="padding:8px 12px; border-top:1px solid #eee; font: 14px/1.4 system-ui, Arial, sans-serif;"></div>
 
   <div id="tooltip" class="tooltip"></div>
 
@@ -94,14 +92,6 @@
     const tooltip = document.getElementById('tooltip');
     let labelToKey = new Map();
 
-    const NO_DATA_CODE = 'NA';
-    const NO_DATA_LABEL = 'No data';
-    const NO_DATA_FILL = '#d4d4d8';
-    let partiesData = new Map();
-
-    const defaultAllianceColors = { NDA: '#1f77b4', MGB: '#d62728', UPA: '#9467bd', OTH: '#8c564b', IND: '#7f7f7f', NA: NO_DATA_FILL };
-    const allianceColors = new Map();
-
     let biharData = null;
     let projection, path;
     let selectedId = null;
@@ -109,67 +99,23 @@
     let currentMetric = 'alliance';
     let classification = 'threshold';
     let breaks = [2000,5000,10000,20000,40000];
+
+    const allianceColors = new Map(Object.entries({ NDA: '#1f77b4', MGB: '#d62728', UPA: '#9467bd', OTH: '#8c564b', IND: '#7f7f7f' }));
     const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', (ev) => { g.attr('transform', ev.transform); }).on('end', ()=>{ pushURLState(); updateCloseBtn(); });
     svg.call(zoom); svg.node().tabIndex = 0;
 
     // Indian locale formatting
-    const inLocale = d3.formatLocale({ decimal: ".", thousands: ",", grouping: [3,2], currency: ["\u20B9", ""], percent: "%" });
+    const inLocale = d3.formatLocale({ decimal: ".", thousands: ",", grouping: [3,2], currency: ["₹", ""], percent: "%" });
     const fmtInt = (v)=> v==null || isNaN(v) ? 'NA' : inLocale.format(",")(v);
 
     const metrics = {
-      alliance: {
-        id: 'alliance',
-        type: 'category',
-        get: (r) => {
-          const val = (r.current_mla_alliance || '').trim();
-          return val ? val.toUpperCase() : NO_DATA_CODE;
-        },
-        palette: allianceColors
-      },
-      margin20: { id: 'margin20', type: 'numeric', get: (r) => num(r.y2020_margin) },
-      margin15: { id: 'margin15', type: 'numeric', get: (r) => num(r.y2015_margin) },
-      margin10: { id: 'margin10', type: 'numeric', get: (r) => num(r.y2010_margin) }
+      alliance: { id:'alliance', type:'category', get:(r)=> (r.current_mla_alliance||'').toUpperCase(), palette: allianceColors },
+      margin20: { id:'margin20', type:'numeric', get:(r)=> num(r.y2020_margin) },
+      margin15: { id:'margin15', type:'numeric', get:(r)=> num(r.y2015_margin) },
+      margin10: { id:'margin10', type:'numeric', get:(r)=> num(r.y2010_margin) }
     };
 
-    function num(x){ if(x==null) return null; const s = String(x).replace(/,/g, '').trim(); const v = +s; return isFinite(v) ? v : null; }
-    function clampToHex(value){ const v = Math.max(0, Math.min(255, Math.round(value))); const hex = v.toString(16); return hex.length === 1 ? '0' + hex : hex; }
-    function pastelizeColor(hex, mix = 0.45){
-      if(!hex || typeof hex !== 'string'){ return '#e5e7eb'; }
-      const normalized = hex.replace('#','').trim();
-      if(!normalized){ return '#e5e7eb'; }
-      const raw = normalized.length === 3 ? normalized.split('').map(ch => ch + ch).join('') : normalized.slice(0, 6);
-      if(raw.length !== 6 || /[^0-9a-f]/i.test(raw)){ return '#e5e7eb'; }
-      const r = parseInt(raw.slice(0, 2), 16);
-      const g = parseInt(raw.slice(2, 4), 16);
-      const b = parseInt(raw.slice(4, 6), 16);
-      const blend = (component) => component + (255 - component) * mix;
-      return '#' + clampToHex(blend(r)) + clampToHex(blend(g)) + clampToHex(blend(b));
-    }
-    function applyAlliancePalette(overrides){
-      allianceColors.clear();
-      const merged = new Map();
-      Object.entries(defaultAllianceColors).forEach(([key, color]) => {
-        merged.set(key.toUpperCase(), color);
-      });
-      if(overrides){
-        Object.entries(overrides).forEach(([key, color]) => {
-          if(color){
-            merged.set(key.toUpperCase(), color);
-          }
-        });
-      }
-      merged.forEach((color, key) => {
-        if(key === NO_DATA_CODE){
-          allianceColors.set(key, NO_DATA_FILL);
-        } else {
-          allianceColors.set(key, pastelizeColor(color, 0.45));
-        }
-      });
-      if(!allianceColors.has(NO_DATA_CODE)){
-        allianceColors.set(NO_DATA_CODE, NO_DATA_FILL);
-      }
-    }
-    applyAlliancePalette();
+    function num(x){ if(x==null) return null; const s=String(x).replace(/,/g,'').trim(); const v=+s; return isFinite(v)?v:null; }
     function featureKey(p){ const n = p.AC_NO ?? p.ac_no ?? p.Ac_No; try { return String(parseInt(+n)).padStart(3,'0'); } catch { return String(n||''); } }
     function keyPad(n){ try { return String(parseInt(+n)).padStart(3,'0'); } catch { return String(n||''); } }
     function getCurrentMetric(){ return metrics[document.getElementById('metricSelect').value] || metrics.alliance; }
@@ -237,18 +183,7 @@
       g.selectAll('path').data(features).join('path')
         .attr('class', 'ac')
         .attr('data-key', d => featureKey(d.properties))
-        .attr('d', d => {
-          const pathData = path(d);
-          const key = featureKey(d.properties);
-          if(!pathData || pathData === 'null' || pathData === '') {
-            console.warn('Invalid path data for constituency:', key, d.properties);
-            return '';
-          }
-          if(key === '002') {
-            console.log('Drawing constituency 002 path:', pathData.substring(0, 100) + '...');
-          }
-          return pathData;
-        })
+        .attr('d', d => path(d))
         .attr('fill', d => colorForFeature(d))
         .on('pointermove', handleHover)
         .on('pointerleave', clearHover)
@@ -274,101 +209,39 @@
     // Hover helpers (re-add with touch suppression)
     function clearLegendActive(){ document.querySelectorAll('#legend .legitem.active').forEach(n=> n.classList.remove('active')); }
     function highlightLegendForFeature(f){
-      const metric = getCurrentMetric();
-      const el = document.getElementById('legend');
-      if(!el) return;
-      clearLegendActive();
-      const key = featureKey(f.properties);
-      const row = dataMap.get(key);
-      if(metric.type === 'category'){
-        const rawValue = row ? metric.get(row) : null;
-        const code = typeof rawValue === 'string' ? rawValue.trim().toUpperCase() : rawValue;
-        const paletteKey = code || NO_DATA_CODE;
-        const target = el.querySelector(`.legitem[data-lab="${paletteKey}"]`) || el.querySelector(`.legitem[data-lab="${NO_DATA_CODE}"]`);
-        if(target) target.classList.add('active');
-        return;
-      }
-      if(!row) return;
-      const value = metric.get(row);
-      if(value == null || !isFinite(value)) return;
-      const spec = computeValueMap();
-      if(!spec || !spec.scale) return;
-      const color = spec.scale(value);
-      const idx = spec.scale.range().indexOf(color);
-      if(idx>=0){
-        const target = el.querySelector(`.legitem[data-bin="${idx}"]`);
-        if(target) target.classList.add('active');
+      const m = getCurrentMetric(); const el = document.getElementById('legend'); if(!el) return; clearLegendActive();
+      const k = featureKey(f.properties); const row = dataMap.get(k); if(!row) return;
+      if(m.type==='category'){
+        const a = (m.get(row)||'').toUpperCase(); const n = el.querySelector(`.legitem[data-lab="${a}"]`); if(n) n.classList.add('active');
+      } else {
+        const v = m.get(row); if(v==null || !isFinite(v)) return; const spec = computeValueMap();
+        const color = spec.scale(v); const idx = spec.scale.range().indexOf(color);
+        if(idx>=0){ const n = el.querySelector(`.legitem[data-bin="${idx}"]`); if(n) n.classList.add('active'); }
       }
     }
-    const handleHover = debounce((ev, d)=>{ if(ev && ev.pointerType==='touch') return; const key = featureKey(d.properties); const name = d.properties.AC_NAME || d.properties.ac_name || d.properties.Ac_Name || ''; console.log('Hover triggered:', key, name); showTooltip(ev,d); try{ const pathData = path(d); if(pathData && pathData !== 'null') { hoverLayer.attr('d', pathData).style('display','block').raise(); } else { console.warn('Invalid path data for feature:', key, d.properties); } }catch(e){ console.error('Hover error for feature:', key, e, d); } highlightLegendForFeature(d); }, 10);
+    const handleHover = debounce((ev, d)=>{ if(ev && ev.pointerType==='touch') return; showTooltip(ev,d); try{ hoverLayer.attr('d', path(d)).style('display','block'); }catch(e){} highlightLegendForFeature(d); }, 10);
     function clearHover(){ hideTooltip(); hoverLayer.style('display','none'); clearLegendActive(); }
 
     function colorForFeature(f){
-      const k = featureKey(f.properties);
-      const row = dataMap.get(k);
-      const metric = getCurrentMetric();
-      if(metric.type === 'category'){
-        const palette = metric.palette || allianceColors;
-        if(!row){
-          return palette.get(NO_DATA_CODE) || NO_DATA_FILL;
-        }
-        const rawValue = metric.get(row);
-        const code = typeof rawValue === 'string' ? rawValue.trim().toUpperCase() : rawValue;
-        const paletteKey = code || NO_DATA_CODE;
-        return palette.get(paletteKey) || palette.get(NO_DATA_CODE) || NO_DATA_FILL;
+      const k = featureKey(f.properties); const row = dataMap.get(k);
+      if(!row) return '#cfe3f6';
+      const m = getCurrentMetric();
+      if(m.type==='category'){
+        const a = (m.get(row)||'').toUpperCase(); return (metrics.alliance.palette.get(a) || '#cccccc');
+      } else {
+        const v = m.get(row); if(v==null || !isFinite(v)) return '#eeeeee';
+        const spec = computeValueMap();
+        return spec.scale(v);
       }
-      if(!row) return NO_DATA_FILL;
-      const value = metric.get(row);
-      if(value == null || !isFinite(value)) return NO_DATA_FILL;
-      const spec = computeValueMap();
-      if(!spec || !spec.scale){ return; }
-      if(!spec || !spec.scale) return NO_DATA_FILL;
-      return spec.scale(value);
     }
 
     function updateLegend(){
       const el = document.getElementById('legend'); el.innerHTML='';
       const m = getCurrentMetric();
       if(m.type==='category'){
-        const entries = m.palette ? Array.from(m.palette.entries()) : [];
-        const noDataEntries = [];
-        for(const [lab, col] of entries){
-          if(lab === NO_DATA_CODE){
-            noDataEntries.push([lab, col]);
-            continue;
-          }
-          const wrap = document.createElement('span');
-          wrap.className = 'legitem';
-          wrap.dataset.lab = lab;
-          const box = document.createElement('span');
-          box.className = 'swatch';
-          box.style.background = col;
-          const t = document.createElement('span');
-          t.textContent = lab;
-          t.style.marginRight = '10px';
-          wrap.appendChild(box);
-          wrap.appendChild(t);
-          el.appendChild(wrap);
-        }
-        const ensureNoData = noDataEntries.length ? noDataEntries : [[NO_DATA_CODE, m.palette.get(NO_DATA_CODE) || NO_DATA_FILL]];
-        ensureNoData.forEach(([lab, col]) => {
-          const wrap = document.createElement('span');
-          wrap.className = 'legitem';
-          wrap.dataset.lab = lab;
-          const box = document.createElement('span');
-          box.className = 'swatch';
-          box.style.background = col || NO_DATA_FILL;
-          const t = document.createElement('span');
-          t.textContent = NO_DATA_LABEL;
-          t.style.marginRight = '10px';
-          wrap.appendChild(box);
-          wrap.appendChild(t);
-          el.appendChild(wrap);
-        });
-        return;
+        for(const [lab,col] of m.palette){ const wrap=document.createElement('span'); wrap.className='legitem'; wrap.dataset.lab=lab; const box=document.createElement('span'); box.className='swatch'; box.style.background=col; const t=document.createElement('span'); t.textContent=lab; t.style.marginRight='10px'; wrap.appendChild(box); wrap.appendChild(t); el.appendChild(wrap);} return;
       }
       const spec = computeValueMap();
-      if(!spec || !spec.scale){ return; }
       if(spec.type==='sequential'){
         const bar = document.createElement('div'); bar.className='gradient'; el.appendChild(bar);
         const values = Array.from(dataMap.values(), r => getCurrentMetric().get(r)).filter(v=>v!=null);
@@ -408,17 +281,10 @@
       g.selectAll('path').classed('selected', false).classed('dimmed', false);
       labelLayer.selectAll('text.sel').remove();
       setInfo('');
-      const detailsEl = document.getElementById('details');
-      if(detailsEl){
-        detailsEl.innerHTML = '';
-        detailsEl.style.display = 'none';
-      }
+      document.getElementById('details').innerHTML = '';
       selEl.value = '';
       if(searchEl) searchEl.value = '';
-      const sheet = document.getElementById('sheet');
-      if(sheet){
-        sheet.style.transform = 'translateY(100%)';
-      }
+      const sheet = document.getElementById('sheet'); if(sheet){ sheet.style.transform = 'translateY(100%)'; }
       svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
       pushURLState();
       updateCloseBtn();
@@ -433,67 +299,30 @@
       const f = biharData.features.find(ft => featureKey(ft.properties) === key);
       if(f){
         fitToFeature(f);
-        const p = f.properties;
-        const acname = p.AC_NAME || p.ac_name || p.Ac_Name || '';
-        const dist = p.DIST_NAME || p.dist_name || '';
-        setInfo(`<b>${key} ${acname}</b>${dist ? ' &middot; District: ' + dist : ''}`);
+        const p = f.properties; const acname = p.AC_NAME || p.ac_name || p.Ac_Name || ''; const dist = p.DIST_NAME || p.dist_name || '';
+        setInfo(`<b>${key} ${acname}</b>${dist? ' · District: '+dist:''}`);
+        setInfo(infoEl.innerHTML.replace(' � ', ' &middot; '));
         document.getElementById('announcer').textContent = `${key} ${acname}`;
-        try {
-          const c = path.centroid(f);
-          labelLayer.raise();
-          labelLayer.selectAll('text.sel')
-            .data([f])
-            .join('text')
-            .attr('class','label sel')
-            .attr('x', c[0])
-            .attr('y', c[1])
-            .attr('text-anchor','middle')
-            .text(`${key} ${acname}`);
-        } catch(e){}
-        const row = dataMap.get(key) || {};
-        const sheet = document.getElementById('sheet');
-        const sheetContent = document.getElementById('sheetContent');
-        const reserved = row.reserved ? ` &middot; ${row.reserved}` : '';
-        const sheetLines = [
-          `<b>${key} ${acname}</b>${dist ? ' &middot; ' + dist : ''}${reserved}`,
-          row.current_mla_name ? `${row.current_mla_name}${row.current_mla_party ? ` (${row.current_mla_party})` : ''}${row.current_mla_alliance ? ' &middot; ' + row.current_mla_alliance : ''}` : '',
-          row.y2020_margin ? `2020 margin: ${fmtInt(num(row.y2020_margin))}` : '',
-          row.y2015_margin ? `2015 margin: ${fmtInt(num(row.y2015_margin))}` : '',
-          row.y2010_margin ? `2010 margin: ${fmtInt(num(row.y2010_margin))}` : ''
-        ].filter(Boolean);
-        const detailsEl = document.getElementById('details');
-        if(detailsEl){
-          detailsEl.innerHTML = '';
-          detailsEl.style.display = 'none';
-        }
+        try { const c = path.centroid(f); labelLayer.raise(); labelLayer.selectAll('text.sel').data([f]).join('text').attr('class','label sel').attr('x', c[0]).attr('y', c[1]).attr('text-anchor','middle').text(key + ' ' + acname); } catch(e){}
+        const row = dataMap.get(key) || {}; const det = [`<b>${key} ${acname}</b>${dist? " · District: "+dist:""}`, row.current_mla_name ? `MLA: ${row.current_mla_name} (${row.current_mla_party||""}) · ${row.current_mla_alliance||""}` : "", (row.y2020_margin? `2020 margin: ${fmtInt(num(row.y2020_margin))}` : ""), (row.y2015_margin? `2015 margin: ${fmtInt(num(row.y2015_margin))}` : ""), (row.y2010_margin? `2010 margin: ${fmtInt(num(row.y2010_margin))}` : "")].filter(Boolean).join("<br>");         document.getElementById("details").innerHTML = det;
+        const sheet = document.getElementById('sheet'); const sheetContent = document.getElementById('sheetContent');
         if(sheet && sheetContent){
-          sheetContent.innerHTML = sheetLines.join('<br>');
-          const more = document.getElementById('moreDetails');
-          if(more){
-            more.href = row.slug ? (`/bihar/constituency/${row.slug}`) : '#';
-          }
+          const reserved = row.reserved ? ` &middot; ${row.reserved}` : '';
+          sheetContent.innerHTML = [`<b>${key} ${acname}</b>${dist? ' &middot; '+dist:''}${reserved}`, row.current_mla_name ? `${row.current_mla_name} (${row.current_mla_party||''}) &middot; ${row.current_mla_alliance||''}` : '', (row.y2020_margin? `2020 margin: ${fmtInt(num(row.y2020_margin))}` : '')].filter(Boolean).join('<br>');
+          const more = document.getElementById('moreDetails'); if(more){ more.href = row.slug ? (`/bihar/constituency/${row.slug}`) : '#'; }
           sheet.style.transform = 'translateY(0)';
         }
-        pushURLState();
-        updateCloseBtn();
+        pushURLState(); updateCloseBtn();
       }
     }
 
     function showTooltip(ev, d){
       const p = d.properties || {}; const k = featureKey(p); const row = dataMap.get(k) || {}; const name = p.AC_NAME || p.ac_name || p.Ac_Name || ''; const dist = p.DIST_NAME || p.dist_name || '';
-      const metric = getCurrentMetric(); let line = '';
-      if(metric.type === 'category'){
-        const value = metric.get(row);
-        const display = value === NO_DATA_CODE ? NO_DATA_LABEL : value;
-        const label = metric.id === 'alliance' ? 'Alliance' : metric.id;
-        line = `${label}: ${display}`;
-      } else if(metric.id==='margin20'){
-        line = '2020 margin: ' + fmtInt(metric.get(row));
-      } else if(metric.id==='margin15'){
-        line = '2015 margin: ' + fmtInt(metric.get(row));
-      } else if(metric.id==='margin10'){
-        line = '2010 margin: ' + fmtInt(metric.get(row));
-      }
+      const m = getCurrentMetric(); let line='';
+      if(m.type==='category'){ line = 'Alliance: ' + (row.current_mla_alliance || ''); }
+      else if(m.id==='margin20'){ line = '2020 margin: ' + fmtInt(m.get(row)); }
+      else if(m.id==='margin15'){ line = '2015 margin: ' + fmtInt(m.get(row)); }
+      else if(m.id==='margin10'){ line = '2010 margin: ' + fmtInt(m.get(row)); }
       tooltip.innerHTML = `<b>${k} ${name}</b>${dist? ' &middot; '+dist:''}<br>${line}`; tooltip.style.display='block'; tooltip.style.left=(ev.clientX+12)+'px'; tooltip.style.top=(ev.clientY+12)+'px';
     }
     function hideTooltip(){ tooltip.style.display='none'; }
@@ -502,27 +331,11 @@
     function updateLegendAndRecolor(){ updateLegend(); recolor(); }
     function applyViewFromURL(){
       const q = new URLSearchParams(location.search);
-      const metricParam = q.get('metric');
-      if(metricParam && metrics[metricParam]){
-        document.getElementById('metricSelect').value = metricParam;
-        currentMetric = metricParam;
-      }
-      const classifyParam = q.get('classify');
-      if(classifyParam){
-        const classifyEl = document.getElementById('classifySelect');
-        if(classifyEl && Array.from(classifyEl.options).some(opt => opt.value === classifyParam)){
-          classification = classifyParam;
-          classifyEl.value = classifyParam;
-        }
-      }
-      const ac = q.get('ac');
-      if(ac) { selectedId = ac; }
-      const k = parseFloat(q.get('k'));
-      const x = parseFloat(q.get('x'));
-      const y = parseFloat(q.get('y'));
+      const m = q.get('metric'); if(m && metrics[m]) { document.getElementById('metricSelect').value = m; currentMetric = m; }
+      const ac = q.get('ac'); if(ac) { selectedId = ac; }
+      const k = parseFloat(q.get('k')), x = parseFloat(q.get('x')), y = parseFloat(q.get('y'));
       if(!isNaN(k) && !isNaN(x) && !isNaN(y)){
-        const t = d3.zoomIdentity.translate(x, y).scale(k);
-        svg.call(zoom.transform, t);
+        const t = d3.zoomIdentity.translate(x,y).scale(k); svg.call(zoom.transform, t);
       }
     }
 
@@ -530,7 +343,6 @@
       const t = d3.zoomTransform(svg.node());
       const params = new URLSearchParams(location.search);
       params.set('metric', document.getElementById('metricSelect').value);
-      params.set('classify', classification);
       if(selectedId) params.set('ac', selectedId); else params.delete('ac');
       params.set('k', (+t.k).toFixed(3)); params.set('x', (+t.x).toFixed(0)); params.set('y', (+t.y).toFixed(0));
       history.replaceState(null,'', location.pathname + '?' + params.toString());
@@ -588,91 +400,58 @@
 
       const zoomOut = ui.append('g').attr('transform', `translate(${width - 28}, ${28+36+36})`).style('cursor','pointer');
       zoomOut.append('circle').attr('r', 12).attr('fill', '#ffffff').attr('stroke', '#666');
-      zoomOut.append('text').attr('text-anchor','middle').attr('dy','0.35em').attr('font-size','16px').text('-');
+      zoomOut.append('text').attr('text-anchor','middle').attr('dy','0.35em').attr('font-size','16px').text('−');
       zoomOut.on('click', ()=> svg.transition().duration(250).call(zoom.scaleBy, 1/1.3));
     }
     function updateCloseBtn(){ const k = d3.zoomTransform(svg.node()).k; const show = (k>1.01 || selectedId); if(closeIcon) closeIcon.style('display', show ? 'block' : 'none'); }
 
     async function loadBoundaries(){
+      try {
+        const rTopo = await fetch('bihar_ac_all.topojson');
+        if(rTopo.ok){
+          const topo = await rTopo.json();
+          const objName = topo.objects && Object.keys(topo.objects)[0];
+          if(objName){
+            const fc = topojson.feature(topo, topo.objects[objName]);
+            return fc;
+          }
+        }
+      } catch (e) { /* fall back to GeoJSON */ }
       return await fetch('bihar_ac_all.geojson').then(r => r.json());
     }
 
-    async function loadParties(){
-      partiesData.clear();
-      try{
-        const response = await fetch('parties.json');
-        if(!response.ok){ throw new Error('Parties metadata unavailable'); }
-        const data = await response.json();
-        const overrides = {};
-        data.forEach(entry => {
-          if(entry && entry.code){
-            partiesData.set(String(entry.code).toUpperCase(), entry);
-          }
-          const allianceKey = entry && entry.alliance ? String(entry.alliance).trim().toUpperCase() : '';
-          if(allianceKey && entry && entry.color && !overrides[allianceKey]){
-            overrides[allianceKey] = entry.color;
-          }
-        });
-        applyAlliancePalette(overrides);
-      } catch(err){
-        console.warn('Failed to load parties.json', err);
-        applyAlliancePalette();
-      }
-    }
-
-    async function loadElectionData(){
-      try{
-        const rows = await d3.csv('bihar_election_results_consolidated.csv');
-        dataMap = new Map(rows.map(r => [ keyPad(r.no), r ]));
-      } catch(err){
-        console.warn('CSV load failed', err);
-        dataMap = new Map();
-      }
-    }
     async function init(){
       try{
         statusEl.textContent = 'Loading Bihar boundaries...';
         const data = await loadBoundaries();
-        biharData = data;
-        projection = d3.geoMercator().fitSize([width, height], biharData);
-        path = d3.geoPath(projection);
-        console.log('Total features loaded:', biharData.features.length);
-        const featureKeys = biharData.features.map(f => featureKey(f.properties));
-        const duplicateKeys = featureKeys.filter((key, index) => featureKeys.indexOf(key) !== index);
-        if(duplicateKeys.length > 0) {
-          console.warn('Duplicate constituency keys found:', duplicateKeys);
-        }
-        const feature002 = biharData.features.find(f => featureKey(f.properties) === '002');
-        if(feature002) {
-          console.log('Constituency 002 properties:', feature002.properties);
-          console.log('Constituency 002 geometry type:', feature002.geometry.type);
-        }
-        draw(biharData.features);
-        populateSelect(biharData.features);
-        wrapEl.classList.remove('loading');
-        statusEl.textContent = '';
-        buildCloseIcon();
-        updateCloseBtn();
-
-        statusEl.textContent = 'Loading election data...';
-        await Promise.all([loadParties(), loadElectionData()]);
-        statusEl.textContent = '';
-
-        applyViewFromURL();
-        updateLegendAndRecolor();
-        if(selectedId){
-          selectByKey(selectedId);
-        } else {
-          pushURLState();
-        }
-      } catch(e){
-        console.error(e);
-        statusEl.textContent = 'Failed to load Bihar GeoJSON';
-      }
+        biharData = data; projection = d3.geoMercator().fitSize([width, height], biharData); path = d3.geoPath(projection);
+        draw(biharData.features); populateSelect(biharData.features); wrapEl.classList.remove('loading'); statusEl.textContent='';
+        buildCloseIcon(); updateCloseBtn();
+        try{ const rows = await d3.csv('bihar_election_results_consolidated.csv'); dataMap = new Map(rows.map(r => [ keyPad(r.no), r ])); updateLegendAndRecolor(); } catch(e){ console.warn('CSV load failed', e); }
+        applyViewFromURL(); if(selectedId){ selectByKey(selectedId); }
+      }catch(e){ console.error(e); statusEl.textContent = 'Failed to load Bihar GeoJSON'; }
     }
 
     init();
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
