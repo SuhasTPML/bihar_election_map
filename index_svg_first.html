@@ -20,14 +20,15 @@
 </head>
 <body>
   <div id="controls">
-    <strong>Bihar Assembly (SVG)</strong>
-    <label for="acSelect">Constituency:</label>
-    <select id="acSelect"><option value="">- Select -</option></select>
-    <button id="zoomOut" type="button" title="Zoom out">−</button>
-    <button id="zoomIn" type="button" title="Zoom in">+</button>
-    <button id="exportSel" type="button" disabled>Export Selected SVG</button>
-    <button id="exportAll" type="button">Export All SVG</button>
-    <span id="status"></span>
+    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+      <strong style="margin-right: 15px;">Bihar Assembly (SVG)</strong>
+      <span id="status" style="color: #b00;"></span>
+    </div>
+    <div style="position: relative; width: 100%; margin-bottom: 10px;">
+      <input id="acSearch" type="search" placeholder="Search constituency by number, name, or district..."
+             style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;" />
+      <div id="dropdown" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ccc; border-top: none; border-radius: 0 0 4px 4px; max-height: 300px; overflow-y: auto; display: none; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.15);"></div>
+    </div>
     <div id="info"></div>
   </div>
   <div id="mapwrap" class="loading">
@@ -46,8 +47,11 @@
     const labelLayer = g.append('g').attr('id','labelLayer');
     const statusEl = document.getElementById('status');
     const infoEl = document.getElementById('info');
-    const selEl = document.getElementById('acSelect');
+    const searchEl = document.getElementById('acSearch');
+    const dropdownEl = document.getElementById('dropdown');
     const wrapEl = document.getElementById('mapwrap');
+    let searchData = [];
+    let labelToKey = new Map();
 
     let biharData = null;
     let projection, path;
@@ -61,7 +65,8 @@
 
     function setInfo(html){ infoEl.innerHTML = html || ''; }
 
-    function createCrossButton(){
+    function createSvgControls(){
+      // Cross button (top-right)
       const crossButton = ui.append('g')
         .attr('class', 'cross-button')
         .attr('transform', `translate(${width - 30}, 30)`)
@@ -80,6 +85,48 @@
         .attr('stroke-width', 2);
 
       crossButton.on('click', clearAndReset);
+
+      // Zoom In button (top-right, below cross)
+      const zoomInButton = ui.append('g')
+        .attr('class', 'zoom-in-button')
+        .attr('transform', `translate(${width - 30}, 70)`)
+        .style('cursor', 'pointer');
+
+      zoomInButton.append('circle')
+        .attr('r', 15)
+        .attr('fill', 'white')
+        .attr('stroke', '#666')
+        .attr('stroke-width', 1);
+
+      zoomInButton.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '0.35em')
+        .attr('font-size', '14px')
+        .attr('font-weight', 'bold')
+        .text('+');
+
+      zoomInButton.on('click', () => svg.transition().duration(300).call(zoom.scaleBy, 1.3));
+
+      // Zoom Out button (top-right, below zoom in)
+      const zoomOutButton = ui.append('g')
+        .attr('class', 'zoom-out-button')
+        .attr('transform', `translate(${width - 30}, 110)`)
+        .style('cursor', 'pointer');
+
+      zoomOutButton.append('circle')
+        .attr('r', 15)
+        .attr('fill', 'white')
+        .attr('stroke', '#666')
+        .attr('stroke-width', 1);
+
+      zoomOutButton.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '0.35em')
+        .attr('font-size', '16px')
+        .attr('font-weight', 'bold')
+        .text('−');
+
+      zoomOutButton.on('click', () => svg.transition().duration(300).call(zoom.scaleBy, 1/1.3));
     }
 
     function updateCrossButton(){
@@ -96,24 +143,65 @@
       try { return String(parseInt(+n)).padStart(3,'0'); } catch { return String(n||''); }
     }
 
-    function populateSelect(features){
-      const items = features.map(f => ({
+    function populateSearch(features){
+      searchData = features.map(f => ({
         key: featureKey(f.properties),
         name: f.properties.AC_NAME || f.properties.ac_name || f.properties.Ac_Name || 'AC',
-        dist: f.properties.DIST_NAME || f.properties.dist_name || '',
-        pcno: f.properties.PC_NO || f.properties.pc_no || '',
-        pcname: f.properties.PC_NAME || f.properties.pc_name || ''
+        dist: f.properties.DIST_NAME || f.properties.dist_name || ''
       })).sort((a,b) => a.key.localeCompare(b.key));
-      for(const it of items){
-        const opt = document.createElement('option');
-        opt.value = it.key;
-        opt.textContent = `${it.key} - ${it.name}${it.dist? ' ('+it.dist+')':''}`;
-        opt.dataset.acname = it.name;
-        opt.dataset.district = it.dist;
-        opt.dataset.pcno = it.pcno;
-        opt.dataset.pcname = it.pcname;
-        selEl.appendChild(opt);
+
+      // Create searchable labels
+      searchData.forEach(item => {
+        const label = `${item.key} - ${item.name}${item.dist? ' ('+item.dist+')':''}`;
+        labelToKey.set(label, item.key);
+        item.label = label;
+        item.searchText = `${item.key} ${item.name} ${item.dist}`.toLowerCase();
+      });
+    }
+
+    function showDropdown(matches) {
+      if (matches.length === 0) {
+        dropdownEl.style.display = 'none';
+        return;
       }
+
+      dropdownEl.innerHTML = '';
+
+      // Show more results for full list, fewer for search results
+      const isFullList = matches.length === searchData.length;
+      const limit = isFullList ? 50 : 15;
+
+      matches.slice(0, limit).forEach((item, index) => {
+        const div = document.createElement('div');
+        div.textContent = item.label;
+        div.style.cssText = 'padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 14px;';
+        div.addEventListener('mouseenter', () => {
+          div.style.backgroundColor = '#f0f0f0';
+        });
+        div.addEventListener('mouseleave', () => {
+          div.style.backgroundColor = '';
+        });
+        div.addEventListener('click', () => {
+          searchEl.value = item.label;
+          selectByKey(item.key);
+          dropdownEl.style.display = 'none';
+        });
+        dropdownEl.appendChild(div);
+      });
+
+      // Add "showing X of Y" indicator if there are more results
+      if (matches.length > limit) {
+        const moreDiv = document.createElement('div');
+        moreDiv.textContent = `Showing ${limit} of ${matches.length} constituencies...`;
+        moreDiv.style.cssText = 'padding: 8px 12px; color: #666; font-style: italic; background: #f9f9f9; font-size: 12px;';
+        dropdownEl.appendChild(moreDiv);
+      }
+
+      dropdownEl.style.display = 'block';
+    }
+
+    function hideDropdown() {
+      setTimeout(() => dropdownEl.style.display = 'none', 150);
     }
 
     function draw(features){
@@ -139,8 +227,7 @@
     function clearAndReset(){
       selectedId = null;
       g.selectAll('path').classed('selected', false);
-      selEl.value = '';
-      document.getElementById('exportSel').disabled = true;
+      searchEl.value = '';
       setInfo('');
       labelLayer.selectAll('*').remove();
       // Reset zoom
@@ -161,8 +248,12 @@
         const dist = p.DIST_NAME || p.dist_name || '';
         const pcno = p.PC_NO || p.pc_no || '';
         const pcname = p.PC_NAME || p.pc_name || '';
+
+        // Update search bar with selected constituency
+        const searchLabel = `${acno} - ${acname}${dist? ' ('+dist+')':''}`;
+        searchEl.value = searchLabel;
+
         setInfo(`<b>${acno} ${acname}</b>${dist? ' · District: '+dist:''}${pcname? ' · PC: '+pcno+' '+pcname:''}`);
-        document.getElementById('exportSel').disabled = false;
         // Add center label for selection
         try {
           const c = path.centroid(f);
@@ -180,67 +271,57 @@
       updateCrossButton();
     }
 
-    selEl.addEventListener('change', () => {
-      if(selEl.value){ selectByKey(selEl.value); } else { clearAndReset(); }
+    // Search input event handlers
+    searchEl.addEventListener('input', (e) => {
+      const query = e.target.value.trim().toLowerCase();
+
+      if (!query) {
+        hideDropdown();
+        return;
+      }
+
+      // Filter search data
+      const matches = searchData.filter(item =>
+        item.searchText.includes(query)
+      );
+
+      showDropdown(matches);
     });
 
-    function exportAllSvg(){
-      if(!biharData) return;
-      const w = 1200, h = 1200;
-      const proj = d3.geoMercator().fitSize([w,h], biharData);
-      const pth = d3.geoPath(proj);
-      const ns = 'http://www.w3.org/2000/svg';
-      const svgEl = document.createElementNS(ns, 'svg');
-      svgEl.setAttribute('xmlns', ns); svgEl.setAttribute('width', w); svgEl.setAttribute('height', h);
-      svgEl.setAttribute('viewBox', `0 0 ${w} ${h}`);
-      const gEl = document.createElementNS(ns, 'g'); svgEl.appendChild(gEl);
-      for(const f of biharData.features){
-        const pathEl = document.createElementNS(ns, 'path');
-        pathEl.setAttribute('d', pth(f));
-        pathEl.setAttribute('fill', 'none');
-        pathEl.setAttribute('stroke', '#1f77b4');
-        pathEl.setAttribute('stroke-width', '0.8');
-        gEl.appendChild(pathEl);
+    searchEl.addEventListener('change', () => {
+      const value = searchEl.value.trim();
+      const key = labelToKey.get(value);
+      if(key){
+        selectByKey(key);
+        dropdownEl.style.display = 'none';
+      } else if(!value) {
+        clearAndReset();
+        dropdownEl.style.display = 'none';
       }
-      const xml = new XMLSerializer().serializeToString(svgEl);
-      const blob = new Blob([xml], {type:'image/svg+xml;charset=utf-8'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'bihar_ac.svg';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      setTimeout(()=>URL.revokeObjectURL(url), 1000);
-    }
+    });
 
-    function exportSelectedSvg(){
-      if(!selectedId || !biharData) return;
-      const f = biharData.features.find(ft => featureKey(ft.properties) === selectedId);
-      if(!f) return;
-      const w = 800, h = 800;
-      const proj = d3.geoMercator().fitSize([w,h], f);
-      const pth = d3.geoPath(proj);
-      const ns = 'http://www.w3.org/2000/svg';
-      const svgEl = document.createElementNS(ns, 'svg');
-      svgEl.setAttribute('xmlns', ns); svgEl.setAttribute('width', w); svgEl.setAttribute('height', h);
-      svgEl.setAttribute('viewBox', `0 0 ${w} ${h}`);
-      const gEl = document.createElementNS(ns, 'g'); svgEl.appendChild(gEl);
-      const pathEl = document.createElementNS(ns, 'path');
-      pathEl.setAttribute('d', pth(f));
-      pathEl.setAttribute('fill', '#f7c6c6');
-      pathEl.setAttribute('stroke', '#d62728');
-      pathEl.setAttribute('stroke-width', '1');
-      gEl.appendChild(pathEl);
-      const p = f.properties;
-      const acno = featureKey(p);
-      const acname = p.AC_NAME || p.ac_name || p.Ac_Name || 'ac';
-      const xml = new XMLSerializer().serializeToString(svgEl);
-      const blob = new Blob([xml], {type:'image/svg+xml;charset=utf-8'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = `bihar_ac_${acno}_${acname.replace(/[^A-Za-z0-9]+/g,'_').toLowerCase()}.svg`;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      setTimeout(()=>URL.revokeObjectURL(url), 1000);
-    }
+    searchEl.addEventListener('blur', hideDropdown);
+    searchEl.addEventListener('focus', () => {
+      // Show all constituencies if no search query, or filtered results if there is a query
+      const query = searchEl.value.trim().toLowerCase();
+      if (query) {
+        const matches = searchData.filter(item => item.searchText.includes(query));
+        showDropdown(matches);
+      } else {
+        // Show all constituencies when clicked with no search text
+        showDropdown(searchData);
+      }
+    });
 
-    document.getElementById('exportAll').addEventListener('click', exportAllSvg);
-    document.getElementById('exportSel').addEventListener('click', exportSelectedSvg);
+    searchEl.addEventListener('click', () => {
+      // Also show full dropdown on click (in case focus doesn't trigger)
+      if (!searchEl.value.trim()) {
+        showDropdown(searchData);
+      }
+    });
+
+
+
 
     async function init(){
       try{
@@ -250,8 +331,8 @@
         projection = d3.geoMercator().fitSize([width, height], biharData);
         path = d3.geoPath(projection);
         draw(biharData.features);
-        populateSelect(biharData.features);
-        createCrossButton();
+        populateSearch(biharData.features);
+        createSvgControls();
         wrapEl.classList.remove('loading');
         statusEl.textContent = '';
       }catch(e){
@@ -260,11 +341,6 @@
       }
     }
 
-    document.getElementById('zoomIn').addEventListener('click', zoomIn);
-    document.getElementById('zoomOut').addEventListener('click', zoomOut);
-
-    function zoomIn(){ svg.transition().duration(300).call(zoom.scaleBy, 1.3); }
-    function zoomOut(){ svg.transition().duration(300).call(zoom.scaleBy, 1/1.3); }
     init();
   </script>
 </body>

@@ -12,7 +12,7 @@
     body { overflow-y: scroll; }
     svg { width: 100%; height: 100%; background: #f9fafb; display:block; }
     .ac { stroke: #1f77b4; stroke-width: 0.5; }
-    .ac:hover { stroke-width: 2.0; cursor: pointer; }
+    .ac:hover { stroke-width: 0.8; cursor: pointer; }
     .selected { stroke: #d62728; stroke-width: 1.2; }
     .dimmed { opacity: 0.25; }
     #info { font-size: 0.95rem; }
@@ -21,7 +21,7 @@
     .legend .swatch { display:inline-block; width:12px; height:12px; border:1px solid #cbd5f5; border-radius:2px; margin-right:4px; }
     .legend .gradient { display:inline-block; width:160px; height:10px; border:1px solid #cbd5f5; border-radius:999px; background: linear-gradient(to right, #f1f5f9, #4338ca); }
     
-    .hover-outline { fill: none; stroke: #0f4c81; stroke-width: 5.0; pointer-events: none; }
+    .hover-outline { fill: none; stroke: #0f4c81; stroke-width: 3.5; pointer-events: none; }
     .legend .legitem.active { outline: 2px solid #333; border-radius: 2px; padding: 0 2px; }
     .tooltip { position: fixed; pointer-events: none; background: rgba(255,255,255,0.95); border: 1px solid #ccc; border-radius: 4px; padding: 6px 8px; font-size: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); display:none; max-width: 280px; }
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
@@ -237,21 +237,8 @@
       g.selectAll('path').data(features).join('path')
         .attr('class', 'ac')
         .attr('data-key', d => featureKey(d.properties))
-        .attr('d', d => {
-          const pathData = path(d);
-          const key = featureKey(d.properties);
-          if(!pathData || pathData === 'null' || pathData === '') {
-            console.warn('Invalid path data for constituency:', key, d.properties);
-            return '';
-          }
-          if(key === '002') {
-            console.log('Drawing constituency 002 path:', pathData.substring(0, 100) + '...');
-          }
-          return pathData;
-        })
+        .attr('d', d => path(d))
         .attr('fill', d => colorForFeature(d))
-        .on('pointermove', handleHover)
-        .on('pointerleave', clearHover)
         .on('click', (ev, d) => { selectByKey(featureKey(d.properties)); sanitizeSeparators(); });
     }
     
@@ -300,7 +287,7 @@
         if(target) target.classList.add('active');
       }
     }
-    const handleHover = debounce((ev, d)=>{ if(ev && ev.pointerType==='touch') return; const key = featureKey(d.properties); const name = d.properties.AC_NAME || d.properties.ac_name || d.properties.Ac_Name || ''; console.log('Hover triggered:', key, name); showTooltip(ev,d); try{ const pathData = path(d); if(pathData && pathData !== 'null') { hoverLayer.attr('d', pathData).style('display','block').raise(); } else { console.warn('Invalid path data for feature:', key, d.properties); } }catch(e){ console.error('Hover error for feature:', key, e, d); } highlightLegendForFeature(d); }, 10);
+    const handleHover = debounce((ev, d)=>{ if(ev && ev.pointerType==='touch') return; showTooltip(ev,d); try{ hoverLayer.attr('d', path(d)).style('display','block'); }catch(e){} highlightLegendForFeature(d); }, 10);
     function clearHover(){ hideTooltip(); hoverLayer.style('display','none'); clearLegendActive(); }
 
     function colorForFeature(f){
@@ -636,17 +623,6 @@
         biharData = data;
         projection = d3.geoMercator().fitSize([width, height], biharData);
         path = d3.geoPath(projection);
-        console.log('Total features loaded:', biharData.features.length);
-        const featureKeys = biharData.features.map(f => featureKey(f.properties));
-        const duplicateKeys = featureKeys.filter((key, index) => featureKeys.indexOf(key) !== index);
-        if(duplicateKeys.length > 0) {
-          console.warn('Duplicate constituency keys found:', duplicateKeys);
-        }
-        const feature002 = biharData.features.find(f => featureKey(f.properties) === '002');
-        if(feature002) {
-          console.log('Constituency 002 properties:', feature002.properties);
-          console.log('Constituency 002 geometry type:', feature002.geometry.type);
-        }
         draw(biharData.features);
         populateSelect(biharData.features);
         wrapEl.classList.remove('loading');
