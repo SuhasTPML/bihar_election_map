@@ -25,16 +25,20 @@ This document captures the design and implementation plan for the SVG/D3 choropl
 - Primary viewer: `index_svg.html` (SVG + D3 v7).
 - Data sources:
   - Boundaries: `bihar_ac_all.geojson` (FeatureCollection of AC polygons).
-  - Attributes: `bihar_election_results_consolidated.csv` (joined by zero‑padded `AC_NO` ↔ `no`).
-- Local helpers created earlier: `bihar_ac_geojson/` (per‑AC files for other flows).
+    - Attributes:  (joined by zero-padded  ↔ ).
+  - Party metadata:  (code → alliance, name, color).
+- Local helpers created earlier:  (per-AC files for other flows).
 
 ## Shared State and Configuration
 
-- `state`: `{ metricId, classification, breaks, zoomTransform, selectedKey }`.
-- `metrics` (examples):
-  - `alliance`: categorical, palette `{ NDA, MGB, UPA, OTH, IND }`.
-  - `margin20 | margin15 | margin10`: numeric; derive from CSV columns.
-- `scales` factory (based on `classification`): `threshold | quantile | quantize | sequential`.
+- : .
+-  roadmap:
+  - : categorical (current/2020 combined), pastel palette for .
+  - : categorical; palette generated from  pastelized colors with graceful fallback.
+  - : categorical (, , , ) with soft swatches.
+  - Historical: , , ,  derived from CSV + party map.
+  - Margins:  numeric columns for threshold/quantile modes.
+-  factory (based on ): .
 - Number formatting: Indian locale (1,23,456) for legend/tooltip.
 
 ## Modules (SVG/D3)
@@ -110,10 +114,8 @@ colorForFeature(feature, scaleSpec, metric): string
 - Selection zoom and CSV-backed details panel.
 
 ### Bugs / Breakages
-- `clearSelection` is referenced by the Close button but not defined.
-- AC dropdown is populated but not wired to selection (missing `change` handler).
-- Zoom `end` handler calls `updateCloseBtn()` twice.
-- Misencoded separator shows as `�` in info, tooltip, and details; use `·` or `&middot;`.
+- Classification mode is not persisted to the URL ( parameter missing).
+- Misencoded separator still surfaces as  in info/details; replace upstream rather than via string patch.
 
 ### UX Improvements
 - Add search (with `datalist`) for quick AC lookup; dropdown alone is heavy.
@@ -123,9 +125,10 @@ colorForFeature(feature, scaleSpec, metric): string
 - Touch: treat tap as select and suppress hover tooltip on touch pointers.
 
 ### Legend / Classification
-- Add an explicit “No data” swatch/color in legend and map (e.g., `#eee`).
-- For `quantile/quantize`, derive bin labels from scale thresholds with clear bounds (≤ a, a–b, > b) instead of guessing 0–domain[i].
-- Render the sequential legend as a visible gradient bar with min–max labels; size `.swatch` boxes in CSS.
+- Add an explicit "No data" swatch/color in legend and map (e.g., ).
+- Switch categorical palettes to pastel variants (party/alliance/reserved) so the map stays readable.
+- For , derive bin labels from scale thresholds with clear bounds (≤ a, a–b, ≥ b).
+- Render the sequential legend as a visible gradient bar with min-max labels; size  boxes in CSS.
 - Cache and reuse the computed numeric scale; avoid recompute per feature.
 
 ### Accessibility
@@ -134,9 +137,9 @@ colorForFeature(feature, scaleSpec, metric): string
 - Keep ARIA live announcement; ensure control order is logical for tabbing.
 
 ### Performance / Data
-- Cache `currentScaleSpec` on metric/classification change and reuse in `colorForFeature` and legend highlight.
+- Cache  on metric/classification change and reuse in  and legend highlight.
 - Consider TopoJSON + simplification for production to reduce payload size.
-- Delay recolor that depends on CSV until after CSV loads to avoid redundant updates.
+- Delay recolor until CSV +  both resolve to avoid redundant updates.
 
 ### Embed / Share
 - Add `postMessage` hook to send height changes to parent on selection/legend change.

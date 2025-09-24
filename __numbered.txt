@@ -1,0 +1,457 @@
+     1: <!doctype html>
+     2: <html>
+     3: <head>
+     4:   <meta charset="utf-8" />
+     5:   <meta name="viewport" content="width=device-width, initial-scale=1" />
+     6:   <title>Bihar Assembly Constituencies — SVG Choropleth</title>
+     7:   <style>
+     8:     html, body { height: 100%; margin: 0; font-family: system-ui, Arial, sans-serif; }
+     9:     #controls { padding: 10px 12px; display:flex; gap:10px; align-items:center; flex-wrap: wrap; border-bottom: 1px solid #eee; }
+    10:     #mapwrap { height: calc(100vh - 86px); }
+    11:     #status { color: #b00; margin-left: 8px; }
+    12:     body { overflow-y: scroll; }
+    13:     svg { width: 100%; height: 100%; background: #f9fafb; display:block; }
+    14:     .ac { stroke: #1f77b4; stroke-width: 0.5; }
+    15:     .ac:hover { stroke-width: 0.8; cursor: pointer; }
+    16:     .selected { stroke: #d62728; stroke-width: 1.2; }
+    17:     .dimmed { opacity: 0.25; }
+    18:     #info { font-size: 0.95rem; }
+    19:     .label { font: 12px/1.1 sans-serif; fill: #111; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
+    20:     .legend { display:flex; align-items:center; gap:8px; }
+    21:     
+    22:     .hover-outline { fill: none; stroke: #0f4c81; stroke-width: 3.5; pointer-events: none; }
+    23:     .legend .legitem.active { outline: 2px solid #333; border-radius: 2px; padding: 0 2px; }
+    24:     .tooltip { position: fixed; pointer-events: none; background: rgba(255,255,255,0.95); border: 1px solid #ccc; border-radius: 4px; padding: 6px 8px; font-size: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); display:none; max-width: 280px; }
+    25:     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+    26:   </style>
+    27: </head>
+    28: <body>
+    29:   <div id="controls">
+    30:     <strong>Bihar Assembly (SVG)</strong>
+    31:     <label for="searchAC">Search:</label>
+    32:     <input id="searchAC" type="search" placeholder="Search AC or district" list="acList" style="min-width:260px;" />
+    33:     <datalist id="acList"></datalist>
+    34:     <label for="acSelect" style="display:none">AC:</label>
+    35:     <select id="acSelect" style="display:none"><option value="">- Select -</option></select>
+    36:     
+    37:     
+    38:     <button id="zoomOut" type="button" title="Zoom out">-</button>
+    39:     <button id="zoomIn" type="button" title="Zoom in">+</button>
+    40:     
+    41:     <label for="metricSelect">Color by:</label>
+    42:     <select id="metricSelect">
+    43:       <option value="alliance" selected>Alliance (current)</option>
+    44:       <option value="margin20">Margin (2020)</option>
+    45:       <option value="margin15">Margin (2015)</option>
+    46:       <option value="margin10">Margin (2010)</option>
+    47:     </select>
+    48:     <label for="classifySelect">Classify:</label>
+    49:     <select id="classifySelect">
+    50:       <option value="threshold" selected>Threshold</option>
+    51:       <option value="quantile">Quantile</option>
+    52:       <option value="quantize">Quantize</option>
+    53:       <option value="sequential">Sequential</option>
+    54:     </select>
+    55:     <span id="legend" class="legend"></span>
+    56:     <span id="status"></span>
+    57:     <div id="info"></div>
+    58:     <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
+    59:   </div>
+    60:   <div id="mapwrap" class="loading" style="position:relative">
+    61:     <svg id="svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid meet">
+    62:       <g id="zoomlayer"></g>
+    63:       <g id="uiLayer"></g>
+    64:     </svg>
+    65:     <div id="sheet" aria-live="polite" style="position:absolute; left:0; right:0; bottom:0; transform: translateY(100%); transition: transform 250ms ease; background:#fff; border-top:1px solid #e5e7eb; box-shadow: 0 -4px 10px rgba(0,0,0,0.08); font: 14px/1.4 system-ui, Arial, sans-serif; padding:10px 12px;">
+    66:       <div id="sheetContent"></div>
+    67:       <div style="margin-top:8px; display:flex; gap:10px;">
+    68:         <a id="moreDetails" href="#" target="_blank" rel="noopener" style="background:#0f4c81; color:#fff; padding:6px 10px; border-radius:4px; text-decoration:none;">More details</a>
+    69:         <button id="sheetClear" type="button" style="background:#fff; border:1px solid #ccc; border-radius:4px; padding:6px 10px; cursor:pointer;">Clear</button>
+    70:       </div>
+    71:     </div>
+    72:   </div>
+    73:   <div id="details" style="padding:8px 12px; border-top:1px solid #eee; font: 14px/1.4 system-ui, Arial, sans-serif;"></div>
+    74: 
+    75:   <div id="tooltip" class="tooltip"></div>
+    76: 
+    77:   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+    78:   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+    79:   <script>
+    80:     const width = 1200, height = 900;
+    81:     const svg = d3.select('#svg');
+    82:     const g = d3.select('#zoomlayer');
+    83:     const ui = d3.select('#uiLayer');
+    84:     const labelLayer = g.append('g').attr('id','labelLayer');
+    85:     const hoverLayer = g.append('path').attr('class','hover-outline').style('display','none');
+    86:     const statusEl = document.getElementById('status');
+    87:     const infoEl = document.getElementById('info');
+    88:     const selEl = document.getElementById('acSelect');
+    89:     const searchEl = document.getElementById('searchAC');
+    90:     const dataListEl = document.getElementById('acList');
+    91:     const wrapEl = document.getElementById('mapwrap');
+    92:     const tooltip = document.getElementById('tooltip');
+    93:     let labelToKey = new Map();
+    94: 
+    95:     let biharData = null;
+    96:     let projection, path;
+    97:     let selectedId = null;
+    98:     let dataMap = new Map();
+    99:     let currentMetric = 'alliance';
+   100:     let classification = 'threshold';
+   101:     let breaks = [2000,5000,10000,20000,40000];
+   102: 
+   103:     const allianceColors = new Map(Object.entries({ NDA: '#1f77b4', MGB: '#d62728', UPA: '#9467bd', OTH: '#8c564b', IND: '#7f7f7f' }));
+   104:     const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', (ev) => { g.attr('transform', ev.transform); }).on('end', ()=>{ pushURLState(); updateCloseBtn(); });
+   105:     svg.call(zoom); svg.node().tabIndex = 0;
+   106: 
+   107:     // Indian locale formatting
+   108:     const inLocale = d3.formatLocale({ decimal: ".", thousands: ",", grouping: [3,2], currency: ["?", ""], percent: "%" });
+   109:     const fmtInt = (v)=> v==null || isNaN(v) ? 'NA' : inLocale.format(",")(v);
+   110: 
+   111:     const metrics = {
+   112:       alliance: { id:'alliance', type:'category', get:(r)=> (r.current_mla_alliance||'').toUpperCase(), palette: allianceColors },
+   113:       margin20: { id:'margin20', type:'numeric', get:(r)=> num(r.y2020_margin) },
+   114:       margin15: { id:'margin15', type:'numeric', get:(r)=> num(r.y2015_margin) },
+   115:       margin10: { id:'margin10', type:'numeric', get:(r)=> num(r.y2010_margin) }
+   116:     };
+   117: 
+   118:     function num(x){ if(x==null) return null; const s=String(x).replace(/,/g,'').trim(); const v=+s; return isFinite(v)?v:null; }
+   119:     function featureKey(p){ const n = p.AC_NO ?? p.ac_no ?? p.Ac_No; try { return String(parseInt(+n)).padStart(3,'0'); } catch { return String(n||''); } }
+   120:     function keyPad(n){ try { return String(parseInt(+n)).padStart(3,'0'); } catch { return String(n||''); } }
+   121:     function getCurrentMetric(){ return metrics[document.getElementById('metricSelect').value] || metrics.alliance; }
+   122: 
+   123:     function computeScale(values){
+   124:       const m = getCurrentMetric();
+   125:       if(m.type==='category') return null;
+   126:       const clean = values.filter(v=> v!=null && isFinite(v));
+   127:       const colors = ['#f2f0f7','#dadaeb','#bcbddc','#9e9ac8','#756bb1','#54278f'];
+   128:       if(classification==='quantile'){
+   129:         return { type:'quantile', scale: d3.scaleQuantile().domain(clean).range(colors) };
+   130:       } else if(classification==='quantize'){
+   131:         const min = d3.min(clean)||0, max = d3.max(clean)||1; return { type:'quantize', scale: d3.scaleQuantize().domain([min,max]).range(colors) };
+   132:       } else if(classification==='sequential'){
+   133:         const min = d3.min(clean)||0, max = d3.max(clean)||1; return { type:'sequential', scale: d3.scaleSequential().domain([min,max]).interpolator(d3.interpolatePuRd) };
+   134:       } else {
+   135:         return { type:'threshold', scale: d3.scaleThreshold().domain(breaks).range(colors) };
+   136:       }
+   137:     }
+   138: 
+   139:     function computeValueMap(){
+   140:       const m = getCurrentMetric(); if(m.type==='category') return null; const vals = [];
+   141:       for(const [k,row] of dataMap){ const v = m.get(row); if(v!=null && isFinite(v)) vals.push(v); }
+   142:       return computeScale(vals);
+   143:     }
+   144: 
+   145:     function getNumericValues(){
+   146:       const m = getCurrentMetric(); if(m.type==='category') return [];
+   147:       const vals = [];
+   148:       for(const [k,row] of dataMap){ const v = m.get(row); if(v!=null && isFinite(v)) vals.push(v); }
+   149:       return vals;
+   150:     }
+   151: 
+   152:     function debounce(fn, wait=25){ let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), wait); }; }
+   153: 
+   154:     function binIndex(spec, v){
+   155:       if(!spec) return -1;
+   156:       if(spec.type==='threshold'){
+   157:         const dom = spec.scale.domain();
+   158:         for(let i=0;i<dom.length;i++){ if(v<=dom[i]) return i; }
+   159:         return spec.scale.range().length-1;
+   160:       }
+   161:       if(spec.type==='quantize' || spec.type==='quantile'){
+   162:         const color = spec.scale(v);
+   163:         return spec.scale.range().indexOf(color);
+   164:       }
+   165:       return -1;
+   166:     }
+   167: 
+   168:     function populateSelect(features){
+   169:       const items = features.map(f => ({
+   170:         key: featureKey(f.properties),
+   171:         name: f.properties.AC_NAME || f.properties.ac_name || f.properties.Ac_Name || 'AC',
+   172:         dist: f.properties.DIST_NAME || f.properties.dist_name || ''
+   173:       })).sort((a,b) => a.key.localeCompare(b.key));
+   174:       for(const it of items){
+   175:         const label = `${it.key} - ${it.name}${it.dist? ' ('+it.dist+')':''}`;
+   176:         const opt = document.createElement('option'); opt.value = it.key; opt.textContent = label; selEl.appendChild(opt);
+   177:         if(dataListEl){ const dop = document.createElement('option'); dop.value = label; dataListEl.appendChild(dop); }
+   178:         labelToKey.set(label, it.key);
+   179:       }
+   180:     }
+   181: 
+   182:     function draw(features){
+   183:       g.selectAll('path').data(features).join('path')
+   184:         .attr('class', 'ac')
+   185:         .attr('data-key', d => featureKey(d.properties))
+   186:         .attr('d', d => path(d))
+   187:         .attr('fill', d => colorForFeature(d))
+   188:         .on('pointermove', handleHover)
+   189:         .on('pointerleave', clearHover)
+   190:         .on('click', (ev, d) => { selectByKey(featureKey(d.properties)); sanitizeSeparators(); });
+   191:     }
+   192:     
+   193:     function sanitizeSeparators(){
+   194:       if(infoEl) infoEl.innerHTML = infoEl.innerHTML.replace(' ? ', ' &middot; ');
+   195:       const detEl = document.getElementById('details');
+   196:       if(detEl) detEl.innerHTML = detEl.innerHTML.replace(' ? ', ' &middot; ');
+   197:     }
+   198: 
+   199:     function fitToFeature(f){
+   200:       const b = path.bounds(f); const dx = b[1][0]-b[0][0]; const dy = b[1][1]-b[0][1];
+   201:       const cx=(b[0][0]+b[1][0])/2, cy=(b[0][1]+b[1][1])/2; const scale=Math.max(1, 0.9/Math.max(dx/width, dy/height));
+   202:       const transform = d3.zoomIdentity.translate(width/2, height/2).scale(scale).translate(-cx, -cy);
+   203:       svg.transition().duration(750).call(zoom.transform, transform);
+   204:     }
+   205: 
+   206: 
+   207:     function setInfo(html){ infoEl.innerHTML = html || ''; }
+   208: 
+   209:     // Hover helpers (re-add with touch suppression)
+   210:     function clearLegendActive(){ document.querySelectorAll('#legend .legitem.active').forEach(n=> n.classList.remove('active')); }
+   211:     function highlightLegendForFeature(f){
+   212:       const m = getCurrentMetric(); const el = document.getElementById('legend'); if(!el) return; clearLegendActive();
+   213:       const k = featureKey(f.properties); const row = dataMap.get(k); if(!row) return;
+   214:       if(m.type==='category'){
+   215:         const a = (m.get(row)||'').toUpperCase(); const n = el.querySelector(`.legitem[data-lab="${a}"]`); if(n) n.classList.add('active');
+   216:       } else {
+   217:         const v = m.get(row); if(v==null || !isFinite(v)) return; const spec = computeValueMap();
+   218:         const color = spec.scale(v); const idx = spec.scale.range().indexOf(color);
+   219:         if(idx>=0){ const n = el.querySelector(`.legitem[data-bin="${idx}"]`); if(n) n.classList.add('active'); }
+   220:       }
+   221:     }
+   222:     const handleHover = debounce((ev, d)=>{ if(ev && ev.pointerType==='touch') return; showTooltip(ev,d); try{ hoverLayer.attr('d', path(d)).style('display','block'); }catch(e){} highlightLegendForFeature(d); }, 10);
+   223:     function clearHover(){ hideTooltip(); hoverLayer.style('display','none'); clearLegendActive(); }
+   224: 
+   225:     function colorForFeature(f){
+   226:       const k = featureKey(f.properties); const row = dataMap.get(k);
+   227:       if(!row) return '#cfe3f6';
+   228:       const m = getCurrentMetric();
+   229:       if(m.type==='category'){
+   230:         const a = (m.get(row)||'').toUpperCase(); return (metrics.alliance.palette.get(a) || '#cccccc');
+   231:       } else {
+   232:         const v = m.get(row); if(v==null || !isFinite(v)) return '#eeeeee';
+   233:         const spec = computeValueMap();
+   234:         return spec.scale(v);
+   235:       }
+   236:     }
+   237: 
+   238:     function updateLegend(){
+   239:       const el = document.getElementById('legend'); el.innerHTML='';
+   240:       const m = getCurrentMetric();
+   241:       if(m.type==='category'){
+   242:         for(const [lab,col] of m.palette){ const wrap=document.createElement('span'); wrap.className='legitem'; wrap.dataset.lab=lab; const box=document.createElement('span'); box.className='swatch'; box.style.background=col; const t=document.createElement('span'); t.textContent=lab; t.style.marginRight='10px'; wrap.appendChild(box); wrap.appendChild(t); el.appendChild(wrap);} return;
+   243:       }
+   244:       const spec = computeValueMap();
+   245:       if(spec.type==='sequential'){
+   246:         const bar = document.createElement('div'); bar.className='gradient'; el.appendChild(bar);
+   247:         const values = Array.from(dataMap.values(), r => getCurrentMetric().get(r)).filter(v=>v!=null);
+   248:         const min = d3.min(values)||0, max = d3.max(values)||1;
+   249:         const lab = document.createElement('div'); lab.style.fontSize='12px'; lab.style.marginTop='4px'; lab.textContent = fmtInt(min) + ' - ' + fmtInt(max); el.appendChild(lab);
+   250:         return;
+   251:       }
+   252:       const rng = spec.scale.range();
+   253:       if(spec.type==='quantize'){
+   254:         for(let i=0;i<rng.length;i++){
+   255:           const color = rng[i]; const ext = spec.scale.invertExtent(color); const a = ext[0], b = ext[1];
+   256:           let label; if(i===0){ label = '<= ' + fmtInt(b); } else if(i===rng.length-1){ label = '>= ' + fmtInt(a); } else { label = fmtInt(a) + '-' + fmtInt(b); }
+   257:           const wrap=document.createElement('span'); wrap.className='legitem'; wrap.dataset.bin=String(i); const box=document.createElement('span'); box.className='swatch'; box.style.background=color; const t=document.createElement('span'); t.textContent = label; t.style.marginRight='8px'; wrap.appendChild(box); wrap.appendChild(t); el.appendChild(wrap);
+   258:         }
+   259:         return;
+   260:       }
+   261:       if(spec.type==='quantile'){
+   262:         const thresholds = spec.scale.quantiles(); const vals = getNumericValues(); const min = d3.min(vals)||0, max = d3.max(vals)||0; const bounds = [min, ...thresholds, max];
+   263:         for(let i=0;i<rng.length;i++){
+   264:           let label; if(i===0){ label = '<= ' + fmtInt(bounds[1]); } else if(i===rng.length-1){ label = '>= ' + fmtInt(bounds[bounds.length-2]); } else { label = fmtInt(bounds[i]) + '-' + fmtInt(bounds[i+1]); }
+   265:           const wrap=document.createElement('span'); wrap.className='legitem'; wrap.dataset.bin=String(i); const box=document.createElement('span'); box.className='swatch'; box.style.background=rng[i]; const t=document.createElement('span'); t.textContent = label; t.style.marginRight='8px'; wrap.appendChild(box); wrap.appendChild(t); el.appendChild(wrap);
+   266:         }
+   267:         return;
+   268:       }
+   269:       if(spec.type==='threshold'){
+   270:         const domain = spec.scale.domain();
+   271:         for(let i=0;i<rng.length;i++){
+   272:           let label; if(i===0){ label = '<= ' + fmtInt(domain[0]); } else if(i===rng.length-1){ label = '>= ' + fmtInt(domain[domain.length-1]); } else { label = fmtInt(domain[i-1]) + '-' + fmtInt(domain[i]); }
+   273:           const wrap=document.createElement('span'); wrap.className='legitem'; wrap.dataset.bin=String(i); const box=document.createElement('span'); box.className='swatch'; box.style.background=rng[i]; const t=document.createElement('span'); t.textContent = label; t.style.marginRight='8px'; wrap.appendChild(box); wrap.appendChild(t); el.appendChild(wrap);
+   274:         }
+   275:         return;
+   276:       }
+   277:     }
+   278: 
+   279:     function clearSelection(){
+   280:       selectedId = null;
+   281:       g.selectAll('path').classed('selected', false).classed('dimmed', false);
+   282:       labelLayer.selectAll('text.sel').remove();
+   283:       setInfo('');
+   284:       document.getElementById('details').innerHTML = '';
+   285:       selEl.value = '';
+   286:       if(searchEl) searchEl.value = '';
+   287:       const sheet = document.getElementById('sheet'); if(sheet){ sheet.style.transform = 'translateY(100%)'; }
+   288:       svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
+   289:       pushURLState();
+   290:       updateCloseBtn();
+   291:     }
+   292: 
+   293:     function selectByKey(key){
+   294:       selectedId = key;
+   295:       g.selectAll('path')
+   296:         .classed('selected', d => featureKey(d.properties) === key)
+   297:         .classed('dimmed', d => featureKey(d.properties) !== key);
+   298:       g.selectAll('path').filter(d => featureKey(d.properties) === key).raise();
+   299:       const f = biharData.features.find(ft => featureKey(ft.properties) === key);
+   300:       if(f){
+   301:         fitToFeature(f);
+   302:         const p = f.properties; const acname = p.AC_NAME || p.ac_name || p.Ac_Name || ''; const dist = p.DIST_NAME || p.dist_name || '';
+   303:         setInfo(`<b>${key} ${acname}</b>${dist? ' · District: '+dist:''}`);
+   304:         setInfo(infoEl.innerHTML.replace(' ? ', ' &middot; '));
+   305:         document.getElementById('announcer').textContent = `${key} ${acname}`;
+   306:         try { const c = path.centroid(f); labelLayer.raise(); labelLayer.selectAll('text.sel').data([f]).join('text').attr('class','label sel').attr('x', c[0]).attr('y', c[1]).attr('text-anchor','middle').text(key + ' ' + acname); } catch(e){}
+   307:         const row = dataMap.get(key) || {}; const det = [`<b>${key} ${acname}</b>${dist? " · District: "+dist:""}`, row.current_mla_name ? `MLA: ${row.current_mla_name} (${row.current_mla_party||""}) · ${row.current_mla_alliance||""}` : "", (row.y2020_margin? `2020 margin: ${fmtInt(num(row.y2020_margin))}` : ""), (row.y2015_margin? `2015 margin: ${fmtInt(num(row.y2015_margin))}` : ""), (row.y2010_margin? `2010 margin: ${fmtInt(num(row.y2010_margin))}` : "")].filter(Boolean).join("<br>");         document.getElementById("details").innerHTML = det;
+   308:         const sheet = document.getElementById('sheet'); const sheetContent = document.getElementById('sheetContent');
+   309:         if(sheet && sheetContent){
+   310:           const reserved = row.reserved ? ` &middot; ${row.reserved}` : '';
+   311:           sheetContent.innerHTML = [`<b>${key} ${acname}</b>${dist? ' &middot; '+dist:''}${reserved}`, row.current_mla_name ? `${row.current_mla_name} (${row.current_mla_party||''}) &middot; ${row.current_mla_alliance||''}` : '', (row.y2020_margin? `2020 margin: ${fmtInt(num(row.y2020_margin))}` : '')].filter(Boolean).join('<br>');
+   312:           const more = document.getElementById('moreDetails'); if(more){ more.href = row.slug ? (`/bihar/constituency/${row.slug}`) : '#'; }
+   313:           sheet.style.transform = 'translateY(0)';
+   314:         }
+   315:         pushURLState(); updateCloseBtn();
+   316:       }
+   317:     }
+   318: 
+   319:     function showTooltip(ev, d){
+   320:       const p = d.properties || {}; const k = featureKey(p); const row = dataMap.get(k) || {}; const name = p.AC_NAME || p.ac_name || p.Ac_Name || ''; const dist = p.DIST_NAME || p.dist_name || '';
+   321:       const m = getCurrentMetric(); let line='';
+   322:       if(m.type==='category'){ line = 'Alliance: ' + (row.current_mla_alliance || ''); }
+   323:       else if(m.id==='margin20'){ line = '2020 margin: ' + fmtInt(m.get(row)); }
+   324:       else if(m.id==='margin15'){ line = '2015 margin: ' + fmtInt(m.get(row)); }
+   325:       else if(m.id==='margin10'){ line = '2010 margin: ' + fmtInt(m.get(row)); }
+   326:       tooltip.innerHTML = `<b>${k} ${name}</b>${dist? ' &middot; '+dist:''}<br>${line}`; tooltip.style.display='block'; tooltip.style.left=(ev.clientX+12)+'px'; tooltip.style.top=(ev.clientY+12)+'px';
+   327:     }
+   328:     function hideTooltip(){ tooltip.style.display='none'; }
+   329: 
+   330:     function recolor(){ g.selectAll('path.ac').attr('fill', d => colorForFeature(d)); }
+   331:     function updateLegendAndRecolor(){ updateLegend(); recolor(); }
+   332:     function applyViewFromURL(){
+   333:       const q = new URLSearchParams(location.search);
+   334:       const m = q.get('metric'); if(m && metrics[m]) { document.getElementById('metricSelect').value = m; currentMetric = m; }
+   335:       const ac = q.get('ac'); if(ac) { selectedId = ac; }
+   336:       const k = parseFloat(q.get('k')), x = parseFloat(q.get('x')), y = parseFloat(q.get('y'));
+   337:       if(!isNaN(k) && !isNaN(x) && !isNaN(y)){
+   338:         const t = d3.zoomIdentity.translate(x,y).scale(k); svg.call(zoom.transform, t);
+   339:       }
+   340:     }
+   341: 
+   342:     function pushURLState(){
+   343:       const t = d3.zoomTransform(svg.node());
+   344:       const params = new URLSearchParams(location.search);
+   345:       params.set('metric', document.getElementById('metricSelect').value);
+   346:       if(selectedId) params.set('ac', selectedId); else params.delete('ac');
+   347:       params.set('k', (+t.k).toFixed(3)); params.set('x', (+t.x).toFixed(0)); params.set('y', (+t.y).toFixed(0));
+   348:       history.replaceState(null,'', location.pathname + '?' + params.toString());
+   349:     }
+   350: 
+   351:     // Events
+   352:     selEl.addEventListener('change', (e)=>{ const v = e.target.value; if(v) { selectByKey(v); sanitizeSeparators(); } else { clearSelection(); } });
+   353:     const sheetClearBtn = document.getElementById('sheetClear'); if(sheetClearBtn){ sheetClearBtn.addEventListener('click', clearSelection); }
+   354: 
+   355:     // Search (datalist-backed)
+   356:     // labelToKey defined near top
+   357:     if(searchEl){
+   358:       searchEl.addEventListener('change', ()=>{ const v = searchEl.value; const key = labelToKey.get(v); if(key){ selectByKey(key); sanitizeSeparators(); } });
+   359:       searchEl.addEventListener('input', ()=>{
+   360:         const q = (searchEl.value||'').trim().toLowerCase();
+   361:         g.selectAll('path').classed('dimmed', d => {
+   362:           if(selectedId) return featureKey(d.properties) !== selectedId;
+   363:           if(!q) return false;
+   364:           const p = d.properties || {};
+   365:           const key = featureKey(p);
+   366:           const name = (p.AC_NAME||p.ac_name||p.Ac_Name||'').toLowerCase();
+   367:           const dist = (p.DIST_NAME||p.dist_name||'').toLowerCase();
+   368:           return !(key.includes(q) || name.includes(q) || dist.includes(q));
+   369:         });
+   370:       });
+   371:     }
+   372:     document.getElementById('metricSelect').addEventListener('change', ()=> { currentMetric = document.getElementById('metricSelect').value; updateLegendAndRecolor(); pushURLState(); updateCloseBtn(); });
+   373:     document.getElementById('classifySelect').addEventListener('change', (e)=> { classification = e.target.value; updateLegendAndRecolor(); pushURLState(); updateCloseBtn(); });
+   374:     document.getElementById('zoomIn').addEventListener('click', ()=> svg.transition().duration(300).call(zoom.scaleBy, 1.3));
+   375:     document.getElementById('zoomOut').addEventListener('click', ()=> svg.transition().duration(300).call(zoom.scaleBy, 1/1.3));
+   376:     svg.on('keydown', (e)=>{ if(e.key==='+'){ svg.transition().duration(300).call(zoom.scaleBy,1.3);} else if(e.key==='-'){ svg.transition().duration(300).call(zoom.scaleBy,1/1.3);} else if(e.key==='0'){ svg.transition().duration(400).call(zoom.transform,d3.zoomIdentity);} });
+   377: 
+   378:     let closeIcon;
+   379:     function buildCloseIcon(){
+   380:       const posX = width - 28, posY = 28; // top-right in viewBox
+   381:       closeIcon = ui.append('g')
+   382:         .attr('id','closeIcon')
+   383:         .attr('transform', `translate(${posX}, ${posY})`)
+   384:         .style('display','none')
+   385:         .style('cursor','pointer')
+   386:         .attr('role','button')
+   387:         .attr('tabindex', 0)
+   388:         .attr('aria-label','Reset view');
+   389:       closeIcon.append('circle').attr('r', 12).attr('fill', '#ffffff').attr('stroke', '#666');
+   390:       closeIcon.append('line').attr('x1', -5).attr('y1', -5).attr('x2', 5).attr('y2', 5).attr('stroke', '#333').attr('stroke-width', 2).attr('stroke-linecap', 'round');
+   391:       closeIcon.append('line').attr('x1', 5).attr('y1', -5).attr('x2', -5).attr('y2', 5).attr('stroke', '#333').attr('stroke-width', 2).attr('stroke-linecap', 'round');
+   392:       closeIcon.on('click', clearSelection);
+   393:       closeIcon.on('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ clearSelection(); } });
+   394: 
+   395:       // Zoom FABs stacked under reset icon
+   396:       const zoomIn = ui.append('g').attr('transform', `translate(${width - 28}, ${28+36})`).style('cursor','pointer');
+   397:       zoomIn.append('circle').attr('r', 12).attr('fill', '#ffffff').attr('stroke', '#666');
+   398:       zoomIn.append('text').attr('text-anchor','middle').attr('dy','0.35em').attr('font-size','14px').text('+');
+   399:       zoomIn.on('click', ()=> svg.transition().duration(250).call(zoom.scaleBy, 1.3));
+   400: 
+   401:       const zoomOut = ui.append('g').attr('transform', `translate(${width - 28}, ${28+36+36})`).style('cursor','pointer');
+   402:       zoomOut.append('circle').attr('r', 12).attr('fill', '#ffffff').attr('stroke', '#666');
+   403:       zoomOut.append('text').attr('text-anchor','middle').attr('dy','0.35em').attr('font-size','16px').text('-');
+   404:       zoomOut.on('click', ()=> svg.transition().duration(250).call(zoom.scaleBy, 1/1.3));
+   405:     }
+   406:     function updateCloseBtn(){ const k = d3.zoomTransform(svg.node()).k; const show = (k>1.01 || selectedId); if(closeIcon) closeIcon.style('display', show ? 'block' : 'none'); }
+   407: 
+   408:     async function loadBoundaries(){
+   409:       try {
+   410:         const rTopo = await fetch('bihar_ac_all.topojson');
+   411:         if(rTopo.ok){
+   412:           const topo = await rTopo.json();
+   413:           const objName = topo.objects && Object.keys(topo.objects)[0];
+   414:           if(objName){
+   415:             const fc = topojson.feature(topo, topo.objects[objName]);
+   416:             return fc;
+   417:           }
+   418:         }
+   419:       } catch (e) { /* fall back to GeoJSON */ }
+   420:       return await fetch('bihar_ac_all.geojson').then(r => r.json());
+   421:     }
+   422: 
+   423:     async function init(){
+   424:       try{
+   425:         statusEl.textContent = 'Loading Bihar boundaries...';
+   426:         const data = await loadBoundaries();
+   427:         biharData = data; projection = d3.geoMercator().fitSize([width, height], biharData); path = d3.geoPath(projection);
+   428:         draw(biharData.features); populateSelect(biharData.features); wrapEl.classList.remove('loading'); statusEl.textContent='';
+   429:         buildCloseIcon(); updateCloseBtn();
+   430:         try{ const rows = await d3.csv('bihar_election_results_consolidated.csv'); dataMap = new Map(rows.map(r => [ keyPad(r.no), r ])); updateLegendAndRecolor(); } catch(e){ console.warn('CSV load failed', e); }
+   431:         applyViewFromURL(); if(selectedId){ selectByKey(selectedId); }
+   432:       }catch(e){ console.error(e); statusEl.textContent = 'Failed to load Bihar GeoJSON'; }
+   433:     }
+   434: 
+   435:     init();
+   436:   </script>
+   437: </body>
+   438: </html>
+   439: 
+   440: 
+   441: 
+   442: 
+   443: 
+   444: 
+   445: 
+   446: 
+   447: 
+   448: 
+   449: 
+   450: 
+   451: 
+   452: 
+   453: 
+   454: 
+   455: 
+   456: 
+   457: 
