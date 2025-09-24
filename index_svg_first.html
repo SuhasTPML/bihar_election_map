@@ -23,10 +23,8 @@
     <strong>Bihar Assembly (SVG)</strong>
     <label for="acSelect">Constituency:</label>
     <select id="acSelect"><option value="">- Select -</option></select>
-    <button id="clearSel" type="button">Clear</button>
-      <button id="zoomOut" type="button" title="Zoom out">−</button>
-      <button id="zoomIn" type="button" title="Zoom in">+</button>
-      <button id="resetView" type="button" title="Reset view">Reset</button>
+    <button id="zoomOut" type="button" title="Zoom out">−</button>
+    <button id="zoomIn" type="button" title="Zoom in">+</button>
     <button id="exportSel" type="button" disabled>Export Selected SVG</button>
     <button id="exportAll" type="button">Export All SVG</button>
     <span id="status"></span>
@@ -35,6 +33,7 @@
   <div id="mapwrap" class="loading">
     <svg id="svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid meet">
       <g id="zoomlayer"></g>
+      <g id="uiLayer"></g>
     </svg>
   </div>
 
@@ -43,6 +42,7 @@
     const width = 1200, height = 900;
     const svg = d3.select('#svg');
     const g = d3.select('#zoomlayer');
+    const ui = d3.select('#uiLayer');
     const labelLayer = g.append('g').attr('id','labelLayer');
     const statusEl = document.getElementById('status');
     const infoEl = document.getElementById('info');
@@ -55,10 +55,41 @@
 
     const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', (ev) => {
       g.attr('transform', ev.transform);
+      updateCrossButton();
     });
     svg.call(zoom);
 
     function setInfo(html){ infoEl.innerHTML = html || ''; }
+
+    function createCrossButton(){
+      const crossButton = ui.append('g')
+        .attr('class', 'cross-button')
+        .attr('transform', `translate(${width - 30}, 30)`)
+        .style('cursor', 'pointer')
+        .style('display', 'none');
+
+      crossButton.append('circle')
+        .attr('r', 15)
+        .attr('fill', 'white')
+        .attr('stroke', '#666')
+        .attr('stroke-width', 1);
+
+      crossButton.append('path')
+        .attr('d', 'M-6,-6 L6,6 M6,-6 L-6,6')
+        .attr('stroke', '#333')
+        .attr('stroke-width', 2);
+
+      crossButton.on('click', clearAndReset);
+    }
+
+    function updateCrossButton(){
+      const transform = d3.zoomTransform(svg.node());
+      const isZoomed = transform.k > 1.01;
+      const isSelected = selectedId !== null;
+
+      ui.select('.cross-button')
+        .style('display', (isZoomed || isSelected) ? 'block' : 'none');
+    }
 
     function featureKey(p){
       const n = p.AC_NO ?? p.ac_no ?? p.Ac_No;
@@ -105,13 +136,16 @@
       svg.transition().duration(750).call(zoom.transform, transform);
     }
 
-    function clearSelection(){
+    function clearAndReset(){
       selectedId = null;
       g.selectAll('path').classed('selected', false);
       selEl.value = '';
       document.getElementById('exportSel').disabled = true;
       setInfo('');
       labelLayer.selectAll('*').remove();
+      // Reset zoom
+      svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
+      updateCrossButton();
     }
 
     function selectByKey(key){
@@ -143,12 +177,12 @@
             .text(acno + ' ' + acname);
         } catch(e) { console.error('label error', e); }
       }
+      updateCrossButton();
     }
 
     selEl.addEventListener('change', () => {
-      if(selEl.value){ selectByKey(selEl.value); } else { clearSelection(); }
+      if(selEl.value){ selectByKey(selEl.value); } else { clearAndReset(); }
     });
-    document.getElementById('clearSel').addEventListener('click', clearSelection);
 
     function exportAllSvg(){
       if(!biharData) return;
@@ -217,6 +251,7 @@
         path = d3.geoPath(projection);
         draw(biharData.features);
         populateSelect(biharData.features);
+        createCrossButton();
         wrapEl.classList.remove('loading');
         statusEl.textContent = '';
       }catch(e){
@@ -227,11 +262,9 @@
 
     document.getElementById('zoomIn').addEventListener('click', zoomIn);
     document.getElementById('zoomOut').addEventListener('click', zoomOut);
-    document.getElementById('resetView').addEventListener('click', resetView);
-    
+
     function zoomIn(){ svg.transition().duration(300).call(zoom.scaleBy, 1.3); }
     function zoomOut(){ svg.transition().duration(300).call(zoom.scaleBy, 1/1.3); }
-    function resetView(){ svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity); }
     init();
   </script>
 </body>
