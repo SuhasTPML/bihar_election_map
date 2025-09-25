@@ -284,16 +284,18 @@
               color = reservedColors[status] || reservedColors['GEN'];
               break;
             case 'alliance-2015':
-              color = getHistoricalAllianceColor(row.y2015_winner_party, '2015');
+              color = getHistoricalOriginalColor(row.y2015_winner_party, '2015');
               break;
             case 'party-2015':
-              color = partyColors.get(row.y2015_winner_party) || getHistoricalAllianceColor(row.y2015_winner_party, '2015');
+              const partyInfo2015 = partyData.get(row.y2015_winner_party);
+              color = partyInfo2015?.color || getHistoricalOriginalColor(row.y2015_winner_party, '2015');
               break;
             case 'alliance-2010':
-              color = getHistoricalAllianceColor(row.y2010_winner_party, '2010');
+              color = getHistoricalOriginalColor(row.y2010_winner_party, '2010');
               break;
             case 'party-2010':
-              color = partyColors.get(row.y2010_winner_party) || getHistoricalAllianceColor(row.y2010_winner_party, '2010');
+              const partyInfo2010 = partyData.get(row.y2010_winner_party);
+              color = partyInfo2010?.color || getHistoricalOriginalColor(row.y2010_winner_party, '2010');
               break;
             default:
               color = '#f3f4f6';
