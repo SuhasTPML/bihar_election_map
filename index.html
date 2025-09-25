@@ -670,29 +670,9 @@
 
     // Color mode change handler
     colorModeEl.addEventListener('change', () => {
-      console.log('Color mode changed to:', colorModeEl.value);
-      console.log('Election data size:', electionData.size);
-      console.log('Party data size:', partyData.size);
-
       currentColorMode = colorModeEl.value;
-
-      if (electionData.size === 0) {
-        console.warn('No election data available for color mode change');
-        statusEl.textContent = 'Color data not available';
-        return;
-      }
-
-      console.log('Applying colors for mode:', currentColorMode);
-      g.selectAll('path').attr('fill', d => {
-        const key = featureKey(d.properties);
-        const color = getColorForMode(key, currentColorMode);
-        if (key === '001') { // Debug first constituency
-          console.log('Color for AC001:', color, 'Mode:', currentColorMode);
-        }
-        return color;
-      });
+      g.selectAll('path').attr('fill', d => getColorForMode(featureKey(d.properties), currentColorMode));
       updateLegend();
-      console.log('Color mode change completed');
     });
 
     function updateLegend() {
@@ -751,24 +731,9 @@
 
     async function loadElectionData() {
       try {
-        console.log('Loading election data...');
-
-        // Debug: Check if files exist by trying to fetch them with no-cors mode first
-        try {
-          const testFetch = await fetch('parties.csv', { method: 'HEAD' });
-          console.log('parties.csv HEAD request status:', testFetch.status);
-        } catch (e) {
-          console.warn('HEAD request failed, proceeding with normal fetch:', e.message);
-        }
-
-        // Load parties.csv with better error handling
-        console.log('Fetching parties.csv...');
+        // Load parties.csv
         const partiesResponse = await fetch('parties.csv');
-        if (!partiesResponse.ok) {
-          throw new Error(`Failed to load parties.csv: ${partiesResponse.status} ${partiesResponse.statusText}`);
-        }
         const partiesText = await partiesResponse.text();
-        console.log('Parties CSV loaded, length:', partiesText.length);
         const partiesLines = partiesText.split('\n');
         const partiesHeaders = parseCSVLine(partiesLines[0]);
 
@@ -796,13 +761,8 @@
         }
 
         // Load election results CSV with proper parsing
-        console.log('Fetching bihar_election_results_consolidated.csv...');
         const csvResponse = await fetch('bihar_election_results_consolidated.csv');
-        if (!csvResponse.ok) {
-          throw new Error(`Failed to load CSV: ${csvResponse.status} ${csvResponse.statusText}`);
-        }
         const csvText = await csvResponse.text();
-        console.log('Election CSV loaded, length:', csvText.length);
         const lines = csvText.split('\n');
         const headers = parseCSVLine(lines[0]);
 
@@ -823,45 +783,24 @@
         console.log(`Loaded ${electionData.size} constituency records`);
 
         // Pre-compute color cache for performance
-        console.log('Election data parsed. Rows:', electionData.size);
         preComputeColors();
 
-        console.log('Data loading completed successfully');
         return true;
       } catch (e) {
         console.error('Failed to load election data:', e);
-        console.error('Error details:', {
-          name: e.name,
-          message: e.message,
-          stack: e.stack
-        });
-        statusEl.textContent = `Data loading failed: ${e.message}`;
         return false;
       }
     }
 
     async function init(){
       try{
-        console.log('Initializing Bihar map...');
-        console.log('Current URL:', window.location.href);
-        console.log('Origin:', window.location.origin);
-
         statusEl.textContent = 'Loading Bihar data...';
 
         // Load election data first
         const dataLoaded = await loadElectionData();
-        if (!dataLoaded) {
-          console.warn('Election data failed to load, continuing with basic functionality');
-        }
 
-        // Load GeoJSON with better error handling
-        console.log('Loading GeoJSON...');
-        const geoResponse = await fetch('bihar_ac_all.geojson');
-        if (!geoResponse.ok) {
-          throw new Error(`Failed to load GeoJSON: ${geoResponse.status} ${geoResponse.statusText}`);
-        }
-        const geoData = await geoResponse.json();
-        console.log('GeoJSON loaded, features:', geoData.features?.length);
+        // Load GeoJSON
+        const geoData = await fetch('bihar_ac_all.geojson').then(r => r.json());
         biharData = geoData;
         projection = d3.geoMercator().fitSize([width, height], biharData);
         path = d3.geoPath(projection);
@@ -872,29 +811,15 @@
 
         if (dataLoaded) {
           // Update colors now that data is loaded
-          console.log('Applying colors with mode:', currentColorMode);
           g.selectAll('path').attr('fill', d => getColorForMode(featureKey(d.properties), currentColorMode));
           updateLegend();
-          console.log('Colors applied successfully');
-        } else {
-          // Fallback: use basic gray coloring if data fails
-          console.warn('Using fallback coloring due to data loading failure');
-          g.selectAll('path').attr('fill', '#f3f4f6');
-          colorModeEl.disabled = true;
-          colorModeEl.title = 'Color modes unavailable - data loading failed';
         }
 
         wrapEl.classList.remove('loading');
-        statusEl.textContent = dataLoaded ? '' : 'Map loaded (colors unavailable)';
-        console.log('Initialization completed');
+        statusEl.textContent = '';
       }catch(e){
-        console.error('Fatal error during initialization:', e);
-        console.error('Error details:', {
-          name: e.name,
-          message: e.message,
-          stack: e.stack
-        });
-        statusEl.textContent = `Failed to load Bihar data: ${e.message}`;
+        console.error(e);
+        statusEl.textContent = 'Failed to load Bihar data';
       }
     }
 
