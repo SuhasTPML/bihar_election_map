@@ -10,7 +10,7 @@
     #mapwrap { height: calc(100vh - 70px); }
     #status { color: #b00; margin-left: 8px; }
     svg { width: 100%; height: 100%; background: #f9fafb; display:block; }
-    .ac { stroke: #1f77b4; stroke-width: 0.5; }
+    .ac { stroke-width: 0.5; }
     .ac:hover { fill: #a9d0ff; cursor: pointer; }
     .selected { stroke-width: 1.5; }
     .dimmed { opacity: 0.3; transition: opacity 0.3s ease; }
@@ -73,6 +73,7 @@
     let allianceColors = new Map();
     let partyToAlliance = new Map();
     let partyData = new Map(); // Store complete party information
+    let colorCache = new Map(); // Pre-computed color combinations
     let currentColorMode = 'alliance-2020';
 
     let biharData = null;
@@ -96,6 +97,14 @@
     }
 
     function getColorForMode(acNo, mode) {
+      // Try cache first for performance
+      const cacheKey = `${mode}_${acNo}`;
+      const cachedColor = colorCache.get(cacheKey);
+      if (cachedColor) {
+        return cachedColor;
+      }
+
+      // Fallback to original logic (for edge cases or missing cache)
       const row = electionData.get(acNo);
       if (!row) return '#f3f4f6'; // Light gray for missing data
 
@@ -177,6 +186,120 @@
       }
 
       return color; // Return original if can't parse
+    }
+
+    // Get original (non-pastelized) color for stroke
+    function getOriginalColorForMode(acNo, mode) {
+      const row = electionData.get(acNo);
+      if (!row) return '#1f77b4'; // Default stroke color
+
+      switch(mode) {
+        case 'alliance-2020':
+          const alliance2020 = row.current_mla_alliance;
+          if (alliance2020 === 'NDA') return '#0066cc';
+          if (alliance2020 === 'MGB') return '#cc3300';
+          if (alliance2020 === 'OTH') return '#8A2BE2';
+          return '#1f77b4';
+        case 'party-2020':
+          const party2020 = row.current_mla_party;
+          const partyInfo2020 = partyData.get(party2020);
+          return partyInfo2020?.color || '#1f77b4';
+        case 'reserved':
+          const status = row.reserved || 'GEN';
+          const reservedOrigColors = { 'GEN': '#999999', 'SC': '#0066ff', 'ST': '#00aa00', 'NA': '#666666' };
+          return reservedOrigColors[status] || reservedOrigColors['GEN'];
+        case 'alliance-2015':
+          return getHistoricalOriginalColor(row.y2015_winner_party, '2015');
+        case 'party-2015':
+          const party2015 = row.y2015_winner_party;
+          const partyInfo2015 = partyData.get(party2015);
+          return partyInfo2015?.color || getHistoricalOriginalColor(party2015, '2015');
+        case 'alliance-2010':
+          return getHistoricalOriginalColor(row.y2010_winner_party, '2010');
+        case 'party-2010':
+          const party2010 = row.y2010_winner_party;
+          const partyInfo2010 = partyData.get(party2010);
+          return partyInfo2010?.color || getHistoricalOriginalColor(party2010, '2010');
+        default:
+          return '#1f77b4';
+      }
+    }
+
+    function getHistoricalOriginalColor(party, year) {
+      if (!party) return '#1f77b4';
+
+      const party_info = partyData.get(party);
+      if (!party_info) return '#1f77b4';
+
+      let alliance;
+      if (year === '2015') {
+        alliance = party_info.alliance_2015;
+      } else if (year === '2010') {
+        alliance = party_info.alliance_2010;
+      } else {
+        alliance = party_info.alliance_2020;
+      }
+
+      // Map to original alliance colors
+      if (alliance === 'RJD+') return '#cc3300'; // RJD+ mapped to original red
+      if (alliance === 'UPA') return '#8A2BE2';  // UPA mapped to original purple
+      if (alliance === 'LF') return '#8A2BE2';   // Left Front mapped to original purple
+      if (alliance === 'SSM') return '#8A2BE2';  // Socialist Secular Morcha mapped to original purple
+      if (alliance === 'NA') return '#999999';   // Independent original gray
+
+      // Main alliances
+      if (alliance === 'NDA') return '#0066cc';
+      if (alliance === 'MGB') return '#cc3300';
+      if (alliance === 'OTH') return '#8A2BE2';
+
+      return '#1f77b4';
+    }
+
+    // Pre-compute all color combinations for performance
+    function preComputeColors() {
+      console.log('Pre-computing color cache...');
+      const colorModes = ['alliance-2020', 'party-2020', 'reserved', 'alliance-2015', 'party-2015', 'alliance-2010', 'party-2010'];
+      let cached = 0;
+
+      for (const [acNo, row] of electionData) {
+        for (const mode of colorModes) {
+          const cacheKey = `${mode}_${acNo}`;
+          let color;
+
+          switch(mode) {
+            case 'alliance-2020':
+              color = allianceColors.get(row.current_mla_alliance) || '#f3f4f6';
+              break;
+            case 'party-2020':
+              color = partyColors.get(row.current_mla_party) || allianceColors.get(row.current_mla_alliance) || '#f3f4f6';
+              break;
+            case 'reserved':
+              const status = row.reserved || 'GEN';
+              const reservedColors = { 'GEN': '#f9fafb', 'SC': '#dbeafe', 'ST': '#dcfce7', 'NA': '#f3f4f6' };
+              color = reservedColors[status] || reservedColors['GEN'];
+              break;
+            case 'alliance-2015':
+              color = getHistoricalAllianceColor(row.y2015_winner_party, '2015');
+              break;
+            case 'party-2015':
+              color = partyColors.get(row.y2015_winner_party) || getHistoricalAllianceColor(row.y2015_winner_party, '2015');
+              break;
+            case 'alliance-2010':
+              color = getHistoricalAllianceColor(row.y2010_winner_party, '2010');
+              break;
+            case 'party-2010':
+              color = partyColors.get(row.y2010_winner_party) || getHistoricalAllianceColor(row.y2010_winner_party, '2010');
+              break;
+            default:
+              color = '#f3f4f6';
+          }
+
+          colorCache.set(cacheKey, color);
+          cached++;
+        }
+      }
+
+      console.log(`Color cache created: ${cached} combinations cached`);
     }
 
     // Proper CSV parsing function to handle quoted values and commas
@@ -366,6 +489,7 @@
         .attr('data-key', d => featureKey(d.properties))
         .attr('d', d => path(d))
         .attr('fill', d => getColorForMode(featureKey(d.properties), currentColorMode))
+        .attr('stroke', '#1f77b4') // Set default stroke color
         .on('click', (ev, d) => selectByKey(featureKey(d.properties)));
     }
 
@@ -405,11 +529,11 @@
       // Dim all other constituencies (spotlight effect)
       g.selectAll('path').classed('dimmed', d => featureKey(d.properties) !== key);
 
-      // Apply dynamic stroke color based on current fill color
+      // Apply original (non-pastelized) color for stroke
       const selectedPath = g.selectAll('path').filter(d => featureKey(d.properties) === key);
       if (!selectedPath.empty()) {
-        const fillColor = selectedPath.attr('fill');
-        const strokeColor = darkenColor(fillColor, 0.7);
+        const strokeColor = getOriginalColorForMode(key, currentColorMode);
+        console.log(`Selected AC ${key}: using original strokeColor = "${strokeColor}"`); // Debug log
         selectedPath.attr('stroke', strokeColor);
       }
 
@@ -650,6 +774,10 @@
         }
 
         console.log(`Loaded ${electionData.size} constituency records`);
+
+        // Pre-compute color cache for performance
+        preComputeColors();
+
         return true;
       } catch (e) {
         console.error('Failed to load election data:', e);
