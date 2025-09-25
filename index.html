@@ -32,11 +32,9 @@
     <div style="margin-bottom: 10px;">
       <label for="colorMode" style="margin-right: 8px; font-weight: 500;">Color by:</label>
       <select id="colorMode" style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
-        <option value="alliance-2025" selected>2025 Alliance (Current)</option>
-        <option value="party-2025">2025 Party</option>
-        <option value="reserved">Reserved Status</option>
-        <option value="alliance-2020">2020 Alliance</option>
+        <option value="alliance-2020" selected>2020 Alliance (Current)</option>
         <option value="party-2020">2020 Party</option>
+        <option value="reserved">Reserved Status</option>
         <option value="alliance-2015">2015 Alliance</option>
         <option value="party-2015">2015 Party</option>
         <option value="alliance-2010">2010 Alliance</option>
@@ -73,7 +71,7 @@
     let partyColors = new Map();
     let allianceColors = new Map();
     let partyToAlliance = new Map();
-    let currentColorMode = 'alliance-2025';
+    let currentColorMode = 'alliance-2020';
 
     let biharData = null;
     let projection, path;
@@ -100,18 +98,14 @@
       if (!row) return '#f3f4f6'; // Light gray for missing data
 
       switch(mode) {
-        case 'alliance-2025':
+        case 'alliance-2020':
           return allianceColors.get(row.current_mla_alliance) || '#f3f4f6';
-        case 'party-2025':
+        case 'party-2020':
           return partyColors.get(row.current_mla_party) || allianceColors.get(row.current_mla_alliance) || '#f3f4f6';
         case 'reserved':
           const status = row.reserved || 'GEN';
           const reservedColors = { 'GEN': '#f9fafb', 'SC': '#dbeafe', 'ST': '#dcfce7', 'NA': '#f3f4f6' };
           return reservedColors[status] || reservedColors['GEN'];
-        case 'alliance-2020':
-          return getHistoricalAllianceColor(row.y2020_winner_party);
-        case 'party-2020':
-          return partyColors.get(row.y2020_winner_party) || getHistoricalAllianceColor(row.y2020_winner_party);
         case 'alliance-2015':
           return getHistoricalAllianceColor(row.y2015_winner_party);
         case 'party-2015':
@@ -383,7 +377,7 @@
         console.log('PC Name:', pcname);
 
         if (electionInfo) {
-          console.log('\n--- 2025 ELECTION DATA ---');
+          console.log('\n--- 2020 ELECTION DATA ---');
           console.log('Current MLA:', electionInfo.current_mla_name);
           console.log('Current Party:', electionInfo.current_mla_party);
           console.log('Current Alliance:', electionInfo.current_mla_alliance);
@@ -514,9 +508,9 @@
         // Show top parties only for party mode
         const partyCount = new Map();
         for (const [key, row] of electionData) {
-          const party = mode.includes('2025') ? row.current_mla_party :
-                       mode.includes('2020') ? row.y2020_winner_party :
-                       mode.includes('2015') ? row.y2015_winner_party : row.y2010_winner_party;
+          const party = mode === 'party-2020' ? row.current_mla_party :
+                       mode === 'party-2015' ? row.y2015_winner_party :
+                       mode === 'party-2010' ? row.y2010_winner_party : null;
           if (party) partyCount.set(party, (partyCount.get(party) || 0) + 1);
         }
 
