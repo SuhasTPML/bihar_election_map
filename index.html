@@ -12,7 +12,8 @@
     svg { width: 100%; height: 100%; background: #f9fafb; display:block; }
     .ac { stroke: #1f77b4; stroke-width: 0.5; }
     .ac:hover { fill: #a9d0ff; cursor: pointer; }
-    .selected { fill: #f7c6c6; stroke: #d62728; stroke-width: 1.2; }
+    .selected { stroke-width: 1.5; }
+    .dimmed { opacity: 0.3; transition: opacity 0.3s ease; }
     #info { font-size: 0.95rem; }
     
     .label { font: 12px/1.1 sans-serif; fill: #111; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
@@ -147,6 +148,35 @@
 
     function getPartyAlliance(party) {
       return partyToAlliance.get(party) || 'NA';
+    }
+
+    // Utility function to darken a color for stroke
+    function darkenColor(color, factor = 0.7) {
+      if (!color || typeof color !== 'string') return color;
+
+      // Handle rgb() format
+      if (color.startsWith('rgb')) {
+        const match = color.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+        if (match) {
+          const r = Math.round(parseInt(match[1]) * factor);
+          const g = Math.round(parseInt(match[2]) * factor);
+          const b = Math.round(parseInt(match[3]) * factor);
+          return `rgb(${r}, ${g}, ${b})`;
+        }
+      }
+
+      // Handle hex format
+      if (color.startsWith('#')) {
+        const hex = color.replace('#', '');
+        if (hex.length === 6) {
+          const r = Math.round(parseInt(hex.slice(0, 2), 16) * factor);
+          const g = Math.round(parseInt(hex.slice(2, 4), 16) * factor);
+          const b = Math.round(parseInt(hex.slice(4, 6), 16) * factor);
+          return `rgb(${r}, ${g}, ${b})`;
+        }
+      }
+
+      return color; // Return original if can't parse
     }
 
     // Proper CSV parsing function to handle quoted values and commas
@@ -353,6 +383,13 @@
     function clearAndReset(){
       selectedId = null;
       g.selectAll('path').classed('selected', false);
+
+      // Remove dimming effect (restore full opacity)
+      g.selectAll('path').classed('dimmed', false);
+
+      // Reset stroke colors to default
+      g.selectAll('path').attr('stroke', '#1f77b4');
+
       searchEl.value = '';
       setInfo('');
       labelLayer.selectAll('*').remove();
@@ -364,7 +401,19 @@
     function selectByKey(key){
       selectedId = key;
       g.selectAll('path').classed('selected', d => featureKey(d.properties) === key);
-      g.selectAll('path').filter(d => featureKey(d.properties) === key).raise();
+
+      // Dim all other constituencies (spotlight effect)
+      g.selectAll('path').classed('dimmed', d => featureKey(d.properties) !== key);
+
+      // Apply dynamic stroke color based on current fill color
+      const selectedPath = g.selectAll('path').filter(d => featureKey(d.properties) === key);
+      if (!selectedPath.empty()) {
+        const fillColor = selectedPath.attr('fill');
+        const strokeColor = darkenColor(fillColor, 0.7);
+        selectedPath.attr('stroke', strokeColor);
+      }
+
+      selectedPath.raise();
       const f = biharData.features.find(ft => featureKey(ft.properties) === key);
       if(f){
         fitToFeature(f);
