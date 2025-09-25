@@ -71,6 +71,7 @@
     let partyColors = new Map();
     let allianceColors = new Map();
     let partyToAlliance = new Map();
+    let partyData = new Map(); // Store complete party information
     let currentColorMode = 'alliance-2020';
 
     let biharData = null;
@@ -107,28 +108,41 @@
           const reservedColors = { 'GEN': '#f9fafb', 'SC': '#dbeafe', 'ST': '#dcfce7', 'NA': '#f3f4f6' };
           return reservedColors[status] || reservedColors['GEN'];
         case 'alliance-2015':
-          return getHistoricalAllianceColor(row.y2015_winner_party);
+          return getHistoricalAllianceColor(row.y2015_winner_party, '2015');
         case 'party-2015':
-          return partyColors.get(row.y2015_winner_party) || getHistoricalAllianceColor(row.y2015_winner_party);
+          return partyColors.get(row.y2015_winner_party) || getHistoricalAllianceColor(row.y2015_winner_party, '2015');
         case 'alliance-2010':
-          return getHistoricalAllianceColor(row.y2010_winner_party);
+          return getHistoricalAllianceColor(row.y2010_winner_party, '2010');
         case 'party-2010':
-          return partyColors.get(row.y2010_winner_party) || getHistoricalAllianceColor(row.y2010_winner_party);
+          return partyColors.get(row.y2010_winner_party) || getHistoricalAllianceColor(row.y2010_winner_party, '2010');
         default:
           return '#f3f4f6';
       }
     }
 
-    function getHistoricalAllianceColor(party) {
+    function getHistoricalAllianceColor(party, year) {
       if (!party) return '#f3f4f6';
-      // Map party to alliance based on parties.json data
-      const partyData = Array.from(partyColors.keys()).find(p => p === party);
-      if (partyData) {
-        // Get alliance from loaded party data
-        const alliance = getPartyAlliance(party);
-        return allianceColors.get(alliance) || '#f3f4f6';
+
+      const party_info = partyData.get(party);
+      if (!party_info) return '#f3f4f6';
+
+      let alliance;
+      if (year === '2015') {
+        alliance = party_info.alliance_2015;
+      } else if (year === '2010') {
+        alliance = party_info.alliance_2010;
+      } else {
+        alliance = party_info.alliance_2020;
       }
-      return '#f3f4f6';
+
+      // Map special alliance codes to our main color categories
+      if (alliance === 'RJD+') alliance = 'MGB'; // RJD+ mapped to MGB colors
+      if (alliance === 'UPA') alliance = 'OTH';  // UPA mapped to Others
+      if (alliance === 'LF') alliance = 'OTH';   // Left Front mapped to Others
+      if (alliance === 'SSM') alliance = 'OTH';  // Socialist Secular Morcha mapped to Others
+      if (alliance === 'NA') return '#e5e7eb';   // Independent - return directly
+
+      return allianceColors.get(alliance) || '#f3f4f6';
     }
 
     function getPartyAlliance(party) {
@@ -495,7 +509,7 @@
           { color: allianceColors.get('NDA'), label: 'NDA' },
           { color: allianceColors.get('MGB'), label: 'MGB' },
           { color: allianceColors.get('OTH'), label: 'Others' },
-          { color: allianceColors.get('NA'), label: 'No Data' }
+          { color: '#e5e7eb', label: 'Independent' }
         ];
       } else if (mode === 'reserved') {
         legendItems = [
@@ -537,9 +551,11 @@
 
     async function loadElectionData() {
       try {
-        // Load parties.json
-        const partiesResponse = await fetch('parties.json');
-        const parties = await partiesResponse.json();
+        // Load parties.csv
+        const partiesResponse = await fetch('parties.csv');
+        const partiesText = await partiesResponse.text();
+        const partiesLines = partiesText.split('\n');
+        const partiesHeaders = parseCSVLine(partiesLines[0]);
 
         // Set up alliance colors with more distinct colors
         allianceColors.set('NDA', pastelizeColor('#0066cc'));  // Blue
@@ -547,9 +563,21 @@
         allianceColors.set('OTH', pastelizeColor('#8A2BE2'));  // Purple
         allianceColors.set('NA', '#e5e7eb');  // Light gray
 
-        for (const party of parties) {
+        // Parse parties CSV
+        for (let i = 1; i < partiesLines.length; i++) {
+          const line = partiesLines[i].trim();
+          if (!line) continue;
+
+          const values = parseCSVLine(line);
+          const party = {};
+          partiesHeaders.forEach((header, index) => {
+            party[header] = values[index] || '';
+          });
+
+          // Store in maps
           partyColors.set(party.code, pastelizeColor(party.color));
-          partyToAlliance.set(party.code, party.alliance);
+          partyToAlliance.set(party.code, party.alliance_2020); // Current alliance for general use
+          partyData.set(party.code, party); // Full party data for historical lookups
         }
 
         // Load election results CSV with proper parsing
