@@ -37,6 +37,47 @@
       svg circle { stroke-width: 3; } /* Even thicker borders for visibility */
       svg text { font-size: 36px !important; } /* Larger icons on phones */
     }
+
+    #bottomSheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid #ccc;
+      padding: 15px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      font-size: 14px;
+      max-height: 140px;
+      overflow-y: auto;
+    }
+
+    /* Dynamic map padding when bottom sheet is active */
+    body.bottom-sheet-active #mapwrap {
+      padding-bottom: 160px;
+      transition: padding-bottom 0.3s ease;
+    }
+
+    /* Responsive bottom sheet height */
+    @media (max-width: 768px) {
+      #bottomSheet {
+        max-height: 120px;
+      }
+      body.bottom-sheet-active #mapwrap {
+        padding-bottom: 140px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #bottomSheet {
+        max-height: 30vh; /* 30% of viewport height */
+        padding: 12px;
+      }
+      body.bottom-sheet-active #mapwrap {
+        padding-bottom: 35vh;
+      }
+    }
   </style>
 </head>
 <body>
@@ -446,6 +487,46 @@
         .style('display', (isZoomed || isSelected) ? 'block' : 'none');
     }
 
+    function renderDetails({ featureProps, electionRow }) {
+      const acNo = featureKey(featureProps);
+      const acName = featureProps.AC_NAME || featureProps.ac_name || featureProps.Ac_Name || '';
+      const district = featureProps.DIST_NAME || featureProps.dist_name || '';
+
+      let content = `<div style="font-weight: bold; margin-bottom: 8px;">📍 ${acNo} · ${acName}`;
+      if (district) content += ` · ${district}`;
+      content += `</div>`;
+
+      if (electionRow) {
+        const mlaName = electionRow.current_mla_name || 'Not available';
+        const party = electionRow.current_mla_party || 'Unknown';
+        const alliance = electionRow.current_mla_alliance || 'Unknown';
+
+        // Get colors for party and alliance
+        const partyColor = partyColors.get(party) || '#f3f4f6';
+        const allianceColor = allianceColors.get(alliance) || '#f3f4f6';
+
+        content += `<div style="margin-bottom: 6px;">Current MLA: <strong>${mlaName}</strong></div>`;
+        content += `<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">`;
+        content += `<span>Party: <span style="display: inline-block; width: 12px; height: 12px; background: ${partyColor}; margin-right: 4px; border-radius: 2px;"></span>${party}</span>`;
+        content += `<span>Alliance: <span style="display: inline-block; width: 12px; height: 12px; background: ${allianceColor}; margin-right: 4px; border-radius: 2px;"></span>${alliance}</span>`;
+        content += `</div>`;
+        content += `<button id="moreDetailsBtn" style="padding: 6px 12px; background: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">More details →</button>`;
+      } else {
+        content += `<div style="color: #666; font-style: italic;">No election data available for this constituency.</div>`;
+      }
+
+      document.getElementById('bottomSheet').innerHTML = content;
+
+      // Add click handler for more details button
+      const moreBtn = document.getElementById('moreDetailsBtn');
+      if (moreBtn) {
+        moreBtn.addEventListener('click', () => {
+          console.log(`More details requested for ${acNo} - ${acName}`);
+          // TODO: Implement detailed view (modal, sidebar, or new page)
+        });
+      }
+    }
+
     function featureKey(p){
       const n = p.AC_NO ?? p.ac_no ?? p.Ac_No;
       try { return String(parseInt(+n)).padStart(3,'0'); } catch { return String(n||''); }
@@ -553,6 +634,10 @@
       // Reset zoom
       svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
       updateCrossButton();
+
+      // Hide bottom sheet when clearing selection
+      document.getElementById('bottomSheet').style.display = 'none';
+      document.body.classList.remove('bottom-sheet-active');
     }
 
     function selectByKey(key){
@@ -644,6 +729,11 @@
             .attr('text-anchor','middle')
             .text(acno + ' ' + acname);
         } catch(e) { console.error('label error', e); }
+
+        // Show bottom sheet with constituency details
+        renderDetails({ featureProps: f.properties, electionRow: electionInfo });
+        document.getElementById('bottomSheet').style.display = 'block';
+        document.body.classList.add('bottom-sheet-active');
       }
       updateCrossButton();
     }
@@ -854,6 +944,10 @@
 
     init();
   </script>
+
+  <div id="bottomSheet" style="display: none;">
+    Test Bottom Sheet - Selected constituency info will appear here
+  </div>
 </body>
 </html>
 
