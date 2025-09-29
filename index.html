@@ -1,57 +1,12 @@
 ﻿<!doctype html>
-<!--
-  Bihar Assembly Constituencies Interactive Map Widget
-
-  EMBEDDABLE WIDGET CONFIGURATION:
-  - Default max height: 600px (configurable via --widget-max-height CSS variable)
-  - GitHub Pages CDN data loading with local file fallbacks
-  - Self-contained with robust network error handling
-  - Responsive design with mobile optimization
-  - PostMessage API for iframe height communication
-
-  DATA SOURCES:
-  - Primary: GitHub Pages CDN (https://suhastpml.github.io/bihar_election_map/)
-  - Fallback: Local files (./parties.csv, ./bihar_election_results_consolidated.csv, ./bihar_ac_all.geojson)
-  - Automatic failover ensures reliability in any hosting environment
-
-  INTEGRATION EXAMPLE:
-  <iframe src="bihar-map.html"
-          width="100%"
-          height="600"
-          style="border: none; --widget-max-height: 800px;"></iframe>
-
-  IFRAME AUTO-RESIZE (Optional):
-  window.addEventListener('message', (e) => {
-    if (e.data.type === 'bihar-map-resize') {
-      document.getElementById('iframe').height = e.data.height;
-    }
-  });
--->
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bihar Assembly Constituencies — Interactive Map Widget</title>
+  <title>Bihar Assembly Constituencies — SVG Viewer</title>
   <style>
-    /* Embeddable Widget Root Styles */
-    :root {
-      --widget-max-height: 600px; /* Configurable by host */
-    }
-
-    html, body { margin: 0; font-family: system-ui, Arial, sans-serif; width: 100%; }
-
-    #embedRoot {
-      width: 100%;
-      max-height: var(--widget-max-height);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      position: relative;
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 6px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
+    html, body { height: 100%; margin: 0; font-family: system-ui, Arial, sans-serif; }
+    body { display: flex; flex-direction: column; }
     #controls { padding: 8px 12px; display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
 
     /* Compact Controls Layout Classes */
@@ -129,12 +84,7 @@
         justify-self: end;
       }
     }
-    #mapwrap {
-      flex: 1;
-      min-height: 0;
-      position: relative;
-      overflow: auto; /* Fallback scrolling for extreme zoom cases */
-    }
+    #mapwrap { flex: 1; min-height: 0; }
     #status { color: #b00; margin-left: 8px; }
     svg { width: 100%; height: 100%; background: #f9fafb; display:block; }
     .ac {
@@ -169,9 +119,9 @@
       svg text { font-size: 36px !important; } /* Larger icons on phones */
     }
 
-    /* Bottom Sheet Structured Layout - Embedded Mode */
+    /* Bottom Sheet Structured Layout */
     #bottomSheet {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
@@ -267,8 +217,8 @@
       background: #0052a3;
     }
 
-    /* Dynamic map padding when bottom sheet is active - Embedded Mode */
-    #embedRoot.bottom-sheet-active #mapwrap {
+    /* Dynamic map padding when bottom sheet is active */
+    body.bottom-sheet-active #mapwrap {
       padding-bottom: 160px;
       transition: padding-bottom 0.3s ease;
     }
@@ -278,7 +228,7 @@
       #bottomSheet {
         max-height: 120px;
       }
-      #embedRoot.bottom-sheet-active #mapwrap {
+      body.bottom-sheet-active #mapwrap {
         padding-bottom: 140px;
       }
 
@@ -308,7 +258,7 @@
         max-height: 30vh; /* 30% of viewport height */
         padding: 12px;
       }
-      #embedRoot.bottom-sheet-active #mapwrap {
+      body.bottom-sheet-active #mapwrap {
         padding-bottom: 35vh;
       }
 
@@ -444,8 +394,7 @@
   </style>
 </head>
 <body>
-  <div id="embedRoot">
-    <div id="controls">
+  <div id="controls">
     <div class="controls-header">
       <strong>Bihar Assembly (SVG)</strong>
       <span id="status"></span>
@@ -507,7 +456,24 @@
     let biharData = null;
     let projection, path;
     let selectedId = null;
-    let embedRoot = null;
+
+    // URL parameter utilities
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function setQueryParam(name, value) {
+      const url = new URL(window.location);
+      url.searchParams.set(name, value);
+      history.replaceState(null, '', url);
+    }
+
+    function removeQueryParam(name) {
+      const url = new URL(window.location);
+      url.searchParams.delete(name);
+      history.replaceState(null, '', url);
+    }
 
     // Color utilities
     function pastelizeColor(hex, mix = 0.25) {
@@ -766,17 +732,10 @@
       return result;
     }
 
-    // Smart zoom behavior - preserve D3 interactions, fallback to container scroll
-    const zoom = d3.zoom()
-      .scaleExtent([1, 20])
-      .on('zoom', (ev) => {
-        g.attr('transform', ev.transform);
-        updateCrossButton();
-
-        // Optional: Clamp zoom to prevent extreme overflow
-        // The container overflow: auto will handle edge cases naturally
-      });
-
+    const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', (ev) => {
+      g.attr('transform', ev.transform);
+      updateCrossButton();
+    });
     svg.call(zoom);
 
     function setInfo(html){ infoEl.innerHTML = html || ''; }
@@ -965,10 +924,13 @@
 
       // Hide bottom sheet when clearing selection
       document.getElementById('bottomSheet').style.display = 'none';
-      document.getElementById('embedRoot').classList.remove('bottom-sheet-active');
+      document.body.classList.remove('bottom-sheet-active');
+
+      // Remove URL parameter
+      removeQueryParam('ac');
     }
 
-    function selectByKey(key){
+    function selectByKey(key, suppressUrlUpdate = false){
       selectedId = key;
       g.selectAll('path').classed('selected', d => featureKey(d.properties) === key);
 
@@ -1047,9 +1009,14 @@
         // Show bottom sheet with constituency details
         renderDetails({ featureProps: f.properties, electionRow: electionInfo });
         document.getElementById('bottomSheet').style.display = 'block';
-        document.getElementById('embedRoot').classList.add('bottom-sheet-active');
+        document.body.classList.add('bottom-sheet-active');
       }
       updateCrossButton();
+
+      // Update URL parameter (unless suppressed for initial load)
+      if (!suppressUrlUpdate) {
+        setQueryParam('ac', key);
+      }
     }
 
     // Search input event handlers
@@ -1098,6 +1065,13 @@
       // Also show full dropdown on click (in case focus doesn't trigger)
       if (!searchEl.value.trim()) {
         showDropdown(searchData);
+      }
+    });
+
+    // Handle browser's built-in search clear button (×)
+    searchEl.addEventListener('search', () => {
+      if (!searchEl.value.trim()) {
+        clearAndReset();
       }
     });
 
@@ -1261,41 +1235,9 @@
       }
     }
 
-    // Handle widget resize with width-driven fitting for edge-to-edge map display
-    function updateProjection() {
-      if (!biharData) return;
-
-      const rootRect = embedRoot.getBoundingClientRect();
-      const availableWidth = rootRect.width;
-      const controlsHeight = document.getElementById('controls').offsetHeight;
-      const bottomSheetHeight = document.getElementById('bottomSheet').style.display === 'none' ? 0 : 160;
-      const availableHeight = Math.max(rootRect.height - controlsHeight - bottomSheetHeight, 200);
-
-      // Fit to width for edge-to-edge display (no horizontal margins)
-      projection = d3.geoMercator().fitWidth(availableWidth, biharData);
-      path = d3.geoPath(projection);
-
-      // Center vertically inside the available height
-      const bounds = path.bounds(biharData);
-      const mapHeight = bounds[1][1] - bounds[0][1];
-      const extraSpace = Math.max(availableHeight - mapHeight, 0);
-      const translate = projection.translate();
-      projection.translate([translate[0], translate[1] + extraSpace / 2]);
-      path = d3.geoPath(projection);
-
-      // Update SVG dimensions to match calculated space
-      svg
-        .attr('width', availableWidth)
-        .attr('height', availableHeight);
-
-      // Redraw paths with new projection
-      g.selectAll('path').attr('d', d => path(d));
-    }
-
     async function init(){
       try{
         statusEl.textContent = 'Loading Bihar data from GitHub Pages...';
-        embedRoot = document.getElementById('embedRoot');
 
         // Load election data first
         const dataLoaded = await loadElectionData();
@@ -1308,9 +1250,8 @@
         );
         const geoData = await geoResponse.json();
         biharData = geoData;
-
-        // Initialize projection based on embed container size
-        updateProjection();
+        projection = d3.geoMercator().fitSize([width, height], biharData);
+        path = d3.geoPath(projection);
 
         draw(biharData.features);
         populateSearch(biharData.features);
@@ -1322,40 +1263,26 @@
           updateLegend();
         }
 
-        // Set up ResizeObserver to handle container size changes
-        if (window.ResizeObserver) {
-          const resizeObserver = new ResizeObserver(entries => {
-            updateProjection();
-
-            // Optional: Communicate height to parent iframe
-            if (window.parent && window.parent !== window) {
-              const actualHeight = embedRoot.scrollHeight;
-              const maxHeight = getComputedStyle(embedRoot).getPropertyValue('--widget-max-height');
-              window.parent.postMessage({
-                type: 'bihar-map-resize',
-                height: Math.min(actualHeight, parseInt(maxHeight) || 600),
-                maxHeight: parseInt(maxHeight) || 600
-              }, '*');
-            }
-          });
-          resizeObserver.observe(embedRoot);
+        // Handle initial URL parameter selection
+        const initialAc = getQueryParam('ac');
+        if (initialAc && electionData.has(initialAc)) {
+          // Suppress URL update on initial load to prevent double history entry
+          selectByKey(initialAc, true);
         }
 
         wrapEl.classList.remove('loading');
         statusEl.textContent = '';
-        console.log('🎉 Bihar Assembly Map Widget fully initialized with remote data sources');
       }catch(e){
-        console.error('❌ Widget initialization failed:', e);
-        statusEl.textContent = 'Failed to load Bihar data - check network connection';
+        console.error(e);
+        statusEl.textContent = 'Failed to load Bihar data';
       }
     }
 
     init();
   </script>
 
-    <div id="bottomSheet" style="display: none;">
-      Test Bottom Sheet - Selected constituency info will appear here
-    </div>
+  <div id="bottomSheet" style="display: none;">
+    Test Bottom Sheet - Selected constituency info will appear here
   </div>
 </body>
 </html>
