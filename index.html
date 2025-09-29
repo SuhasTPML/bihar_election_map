@@ -78,6 +78,91 @@
         padding-bottom: 35vh;
       }
     }
+
+    /* Map controls styling */
+    #mapwrap {
+      position: relative;
+    }
+
+    #mapControls {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    #crossBtn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .map-control-btn {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #666;
+      border-radius: 50%;
+      background: white;
+      color: #333;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .map-control-btn:hover {
+      background: #f0f0f0;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .map-control-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    /* Responsive map controls */
+    @media (max-width: 768px) {
+      #mapControls {
+        top: 15px;
+        left: 15px;
+        gap: 8px;
+      }
+      #crossBtn {
+        top: 15px;
+        right: 15px;
+      }
+      .map-control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #mapControls {
+        top: 10px;
+        left: 10px;
+        gap: 6px;
+      }
+      #crossBtn {
+        top: 10px;
+        right: 10px;
+      }
+      .map-control-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        border-width: 1.5px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -109,8 +194,12 @@
   <div id="mapwrap" class="loading">
     <svg id="svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMin meet">
       <g id="zoomlayer"></g>
-      <g id="uiLayer"></g>
     </svg>
+    <button id="crossBtn" class="map-control-btn" style="display: none;" title="Clear selection and reset view">×</button>
+    <div id="mapControls">
+      <button id="zoomInBtn" class="map-control-btn" title="Zoom in">+</button>
+      <button id="zoomOutBtn" class="map-control-btn" title="Zoom out">−</button>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
@@ -118,7 +207,6 @@
     const width = 1200, height = 900;
     const svg = d3.select('#svg');
     const g = d3.select('#zoomlayer');
-    const ui = d3.select('#uiLayer');
     const labelLayer = g.append('g').attr('id','labelLayer');
     const statusEl = document.getElementById('status');
     const infoEl = document.getElementById('info');
@@ -406,76 +494,16 @@
 
     function setInfo(html){ infoEl.innerHTML = html || ''; }
 
-    function createSvgControls(){
-      // Dynamic positioning based on viewport
-      const isMobile = window.innerWidth <= 768;
-      const isPhone = window.innerWidth <= 480;
-      const leftOffset = isPhone ? 60 : isMobile ? 60 : 60;  // Left edge for zoom buttons
-      const rightOffset = isPhone ? 60 : isMobile ? 60 : 60; // Right edge for cross button
-      const topStart = isPhone ? 45 : 40;
-      const buttonSpacing = isPhone ? 90 : 100; // Increased spacing between zoom buttons
+    function createMapControls(){
+      // Get DOM elements for the new external controls
+      const crossBtn = document.getElementById('crossBtn');
+      const zoomInBtn = document.getElementById('zoomInBtn');
+      const zoomOutBtn = document.getElementById('zoomOutBtn');
 
-      // Cross button (top-right) - stays on right
-      const crossButton = ui.append('g')
-        .attr('class', 'cross-button')
-        .attr('transform', `translate(${width - rightOffset}, ${topStart})`)
-        .style('cursor', 'pointer')
-        .style('display', 'none');
-
-      crossButton.append('circle')
-        .attr('r', 30)
-        .attr('fill', 'white')
-        .attr('stroke', '#666')
-        .attr('stroke-width', 2);
-
-      crossButton.append('path')
-        .attr('d', 'M-12,-12 L12,12 M12,-12 L-12,12')
-        .attr('stroke', '#333')
-        .attr('stroke-width', 3);
-
-      crossButton.on('click', clearAndReset);
-
-      // Zoom In button (top-left) - moved to left side
-      const zoomInButton = ui.append('g')
-        .attr('class', 'zoom-in-button')
-        .attr('transform', `translate(${leftOffset}, ${topStart})`)
-        .style('cursor', 'pointer');
-
-      zoomInButton.append('circle')
-        .attr('r', 30)
-        .attr('fill', 'white')
-        .attr('stroke', '#666')
-        .attr('stroke-width', 2);
-
-      zoomInButton.append('text')
-        .attr('text-anchor', 'middle')
-        .attr('dy', '0.35em')
-        .attr('font-size', '28px')
-        .attr('font-weight', 'bold')
-        .text('+');
-
-      zoomInButton.on('click', () => svg.transition().duration(300).call(zoom.scaleBy, 1.3));
-
-      // Zoom Out button (left side, below zoom in)
-      const zoomOutButton = ui.append('g')
-        .attr('class', 'zoom-out-button')
-        .attr('transform', `translate(${leftOffset}, ${topStart + buttonSpacing})`)
-        .style('cursor', 'pointer');
-
-      zoomOutButton.append('circle')
-        .attr('r', 30)
-        .attr('fill', 'white')
-        .attr('stroke', '#666')
-        .attr('stroke-width', 2);
-
-      zoomOutButton.append('text')
-        .attr('text-anchor', 'middle')
-        .attr('dy', '0.35em')
-        .attr('font-size', '32px')
-        .attr('font-weight', 'bold')
-        .text('−');
-
-      zoomOutButton.on('click', () => svg.transition().duration(300).call(zoom.scaleBy, 1/1.3));
+      // Wire up event handlers
+      crossBtn.addEventListener('click', clearAndReset);
+      zoomInBtn.addEventListener('click', () => svg.transition().duration(300).call(zoom.scaleBy, 1.3));
+      zoomOutBtn.addEventListener('click', () => svg.transition().duration(300).call(zoom.scaleBy, 1/1.3));
     }
 
     function updateCrossButton(){
@@ -483,8 +511,8 @@
       const isZoomed = transform.k > 1.01;
       const isSelected = selectedId !== null;
 
-      ui.select('.cross-button')
-        .style('display', (isZoomed || isSelected) ? 'block' : 'none');
+      const crossBtn = document.getElementById('crossBtn');
+      crossBtn.style.display = (isZoomed || isSelected) ? 'block' : 'none';
     }
 
     function renderDetails({ featureProps, electionRow }) {
@@ -926,7 +954,7 @@
 
         draw(biharData.features);
         populateSearch(biharData.features);
-        createSvgControls();
+        createMapControls();
 
         if (dataLoaded) {
           // Update colors now that data is loaded
