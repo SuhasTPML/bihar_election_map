@@ -38,11 +38,11 @@
       --widget-max-height: 600px; /* Configurable by host */
     }
 
-    html, body { margin: 0; font-family: system-ui, Arial, sans-serif; }
+    html, body { margin: 0; font-family: system-ui, Arial, sans-serif; width: 100%; }
 
     #embedRoot {
+      width: 100%;
       max-height: var(--widget-max-height);
-      height: var(--widget-max-height);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -1261,19 +1261,32 @@
       }
     }
 
-    // Handle widget resize and maintain aspect ratio
+    // Handle widget resize with width-driven fitting for edge-to-edge map display
     function updateProjection() {
       if (!biharData) return;
 
-      const containerRect = embedRoot.getBoundingClientRect();
-      const availableWidth = containerRect.width;
+      const rootRect = embedRoot.getBoundingClientRect();
+      const availableWidth = rootRect.width;
       const controlsHeight = document.getElementById('controls').offsetHeight;
       const bottomSheetHeight = document.getElementById('bottomSheet').style.display === 'none' ? 0 : 160;
-      const availableHeight = containerRect.height - controlsHeight - bottomSheetHeight;
+      const availableHeight = Math.max(rootRect.height - controlsHeight - bottomSheetHeight, 200);
 
-      // Update SVG dimensions and projection
-      projection = d3.geoMercator().fitSize([availableWidth, availableHeight], biharData);
+      // Fit to width for edge-to-edge display (no horizontal margins)
+      projection = d3.geoMercator().fitWidth(availableWidth, biharData);
       path = d3.geoPath(projection);
+
+      // Center vertically inside the available height
+      const bounds = path.bounds(biharData);
+      const mapHeight = bounds[1][1] - bounds[0][1];
+      const extraSpace = Math.max(availableHeight - mapHeight, 0);
+      const translate = projection.translate();
+      projection.translate([translate[0], translate[1] + extraSpace / 2]);
+      path = d3.geoPath(projection);
+
+      // Update SVG dimensions to match calculated space
+      svg
+        .attr('width', availableWidth)
+        .attr('height', availableHeight);
 
       // Redraw paths with new projection
       g.selectAll('path').attr('d', d => path(d));
