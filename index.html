@@ -1,12 +1,51 @@
 ﻿<!doctype html>
+<!--
+  Bihar Assembly Constituencies Interactive Map Widget
+
+  EMBEDDABLE WIDGET CONFIGURATION:
+  - Default max height: 600px (configurable via --widget-max-height CSS variable)
+  - Self-contained with all dependencies
+  - Responsive design with mobile optimization
+  - PostMessage API for iframe height communication
+
+  INTEGRATION EXAMPLE:
+  <iframe src="bihar-map.html"
+          width="100%"
+          height="600"
+          style="border: none; --widget-max-height: 800px;"></iframe>
+
+  IFRAME AUTO-RESIZE (Optional):
+  window.addEventListener('message', (e) => {
+    if (e.data.type === 'bihar-map-resize') {
+      document.getElementById('iframe').height = e.data.height;
+    }
+  });
+-->
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bihar Assembly Constituencies — SVG Viewer</title>
+  <title>Bihar Assembly Constituencies — Interactive Map Widget</title>
   <style>
-    html, body { height: 100%; margin: 0; font-family: system-ui, Arial, sans-serif; }
-    body { display: flex; flex-direction: column; }
+    /* Embeddable Widget Root Styles */
+    :root {
+      --widget-max-height: 600px; /* Configurable by host */
+    }
+
+    html, body { margin: 0; font-family: system-ui, Arial, sans-serif; }
+
+    #embedRoot {
+      max-height: var(--widget-max-height);
+      height: var(--widget-max-height);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
     #controls { padding: 8px 12px; display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
 
     /* Compact Controls Layout Classes */
@@ -84,7 +123,12 @@
         justify-self: end;
       }
     }
-    #mapwrap { flex: 1; min-height: 0; }
+    #mapwrap {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      overflow: auto; /* Fallback scrolling for extreme zoom cases */
+    }
     #status { color: #b00; margin-left: 8px; }
     svg { width: 100%; height: 100%; background: #f9fafb; display:block; }
     .ac {
@@ -119,9 +163,9 @@
       svg text { font-size: 36px !important; } /* Larger icons on phones */
     }
 
-    /* Bottom Sheet Structured Layout */
+    /* Bottom Sheet Structured Layout - Embedded Mode */
     #bottomSheet {
-      position: fixed;
+      position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
@@ -217,8 +261,8 @@
       background: #0052a3;
     }
 
-    /* Dynamic map padding when bottom sheet is active */
-    body.bottom-sheet-active #mapwrap {
+    /* Dynamic map padding when bottom sheet is active - Embedded Mode */
+    #embedRoot.bottom-sheet-active #mapwrap {
       padding-bottom: 160px;
       transition: padding-bottom 0.3s ease;
     }
@@ -228,7 +272,7 @@
       #bottomSheet {
         max-height: 120px;
       }
-      body.bottom-sheet-active #mapwrap {
+      #embedRoot.bottom-sheet-active #mapwrap {
         padding-bottom: 140px;
       }
 
@@ -258,7 +302,7 @@
         max-height: 30vh; /* 30% of viewport height */
         padding: 12px;
       }
-      body.bottom-sheet-active #mapwrap {
+      #embedRoot.bottom-sheet-active #mapwrap {
         padding-bottom: 35vh;
       }
 
@@ -394,7 +438,8 @@
   </style>
 </head>
 <body>
-  <div id="controls">
+  <div id="embedRoot">
+    <div id="controls">
     <div class="controls-header">
       <strong>Bihar Assembly (SVG)</strong>
       <span id="status"></span>
@@ -456,6 +501,7 @@
     let biharData = null;
     let projection, path;
     let selectedId = null;
+    let embedRoot = null;
 
     // Color utilities
     function pastelizeColor(hex, mix = 0.25) {
@@ -714,10 +760,17 @@
       return result;
     }
 
-    const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', (ev) => {
-      g.attr('transform', ev.transform);
-      updateCrossButton();
-    });
+    // Smart zoom behavior - preserve D3 interactions, fallback to container scroll
+    const zoom = d3.zoom()
+      .scaleExtent([1, 20])
+      .on('zoom', (ev) => {
+        g.attr('transform', ev.transform);
+        updateCrossButton();
+
+        // Optional: Clamp zoom to prevent extreme overflow
+        // The container overflow: auto will handle edge cases naturally
+      });
+
     svg.call(zoom);
 
     function setInfo(html){ infoEl.innerHTML = html || ''; }
@@ -906,7 +959,7 @@
 
       // Hide bottom sheet when clearing selection
       document.getElementById('bottomSheet').style.display = 'none';
-      document.body.classList.remove('bottom-sheet-active');
+      document.getElementById('embedRoot').classList.remove('bottom-sheet-active');
     }
 
     function selectByKey(key){
@@ -988,7 +1041,7 @@
         // Show bottom sheet with constituency details
         renderDetails({ featureProps: f.properties, electionRow: electionInfo });
         document.getElementById('bottomSheet').style.display = 'block';
-        document.body.classList.add('bottom-sheet-active');
+        document.getElementById('embedRoot').classList.add('bottom-sheet-active');
       }
       updateCrossButton();
     }
@@ -1166,9 +1219,28 @@
       }
     }
 
+    // Handle widget resize and maintain aspect ratio
+    function updateProjection() {
+      if (!biharData) return;
+
+      const containerRect = embedRoot.getBoundingClientRect();
+      const availableWidth = containerRect.width;
+      const controlsHeight = document.getElementById('controls').offsetHeight;
+      const bottomSheetHeight = document.getElementById('bottomSheet').style.display === 'none' ? 0 : 160;
+      const availableHeight = containerRect.height - controlsHeight - bottomSheetHeight;
+
+      // Update SVG dimensions and projection
+      projection = d3.geoMercator().fitSize([availableWidth, availableHeight], biharData);
+      path = d3.geoPath(projection);
+
+      // Redraw paths with new projection
+      g.selectAll('path').attr('d', d => path(d));
+    }
+
     async function init(){
       try{
         statusEl.textContent = 'Loading Bihar data...';
+        embedRoot = document.getElementById('embedRoot');
 
         // Load election data first
         const dataLoaded = await loadElectionData();
@@ -1176,8 +1248,9 @@
         // Load GeoJSON
         const geoData = await fetch('bihar_ac_all.geojson').then(r => r.json());
         biharData = geoData;
-        projection = d3.geoMercator().fitSize([width, height], biharData);
-        path = d3.geoPath(projection);
+
+        // Initialize projection based on embed container size
+        updateProjection();
 
         draw(biharData.features);
         populateSearch(biharData.features);
@@ -1187,6 +1260,25 @@
           // Update colors now that data is loaded
           g.selectAll('path').attr('fill', d => getColorForMode(featureKey(d.properties), currentColorMode));
           updateLegend();
+        }
+
+        // Set up ResizeObserver to handle container size changes
+        if (window.ResizeObserver) {
+          const resizeObserver = new ResizeObserver(entries => {
+            updateProjection();
+
+            // Optional: Communicate height to parent iframe
+            if (window.parent && window.parent !== window) {
+              const actualHeight = embedRoot.scrollHeight;
+              const maxHeight = getComputedStyle(embedRoot).getPropertyValue('--widget-max-height');
+              window.parent.postMessage({
+                type: 'bihar-map-resize',
+                height: Math.min(actualHeight, parseInt(maxHeight) || 600),
+                maxHeight: parseInt(maxHeight) || 600
+              }, '*');
+            }
+          });
+          resizeObserver.observe(embedRoot);
         }
 
         wrapEl.classList.remove('loading');
@@ -1200,8 +1292,9 @@
     init();
   </script>
 
-  <div id="bottomSheet" style="display: none;">
-    Test Bottom Sheet - Selected constituency info will appear here
+    <div id="bottomSheet" style="display: none;">
+      Test Bottom Sheet - Selected constituency info will appear here
+    </div>
   </div>
 </body>
 </html>
