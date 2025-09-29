@@ -1042,6 +1042,13 @@
       }
     });
 
+    // Handle browser's built-in search clear button (×)
+    searchEl.addEventListener('search', () => {
+      if (!searchEl.value.trim()) {
+        clearAndReset();
+      }
+    });
+
     // Color mode change handler
     colorModeEl.addEventListener('change', () => {
       currentColorMode = colorModeEl.value;
