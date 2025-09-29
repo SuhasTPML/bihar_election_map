@@ -699,38 +699,6 @@
       console.log(`Color cache created: ${cached} combinations cached`);
     }
 
-    // Proper CSV parsing function to handle quoted values and commas
-    function parseCSVLine(line) {
-      const result = [];
-      let current = '';
-      let inQuotes = false;
-
-      for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        const nextChar = line[i + 1];
-
-        if (char === '"') {
-          if (inQuotes && nextChar === '"') {
-            // Escaped quote within quoted field
-            current += '"';
-            i++; // Skip the next quote
-          } else {
-            // Toggle quote state
-            inQuotes = !inQuotes;
-          }
-        } else if (char === ',' && !inQuotes) {
-          // Field separator outside of quotes
-          result.push(current.trim());
-          current = '';
-        } else {
-          current += char;
-        }
-      }
-
-      // Add the last field
-      result.push(current.trim());
-      return result;
-    }
 
     const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', (ev) => {
       g.attr('transform', ev.transform);
@@ -1165,15 +1133,13 @@
 
     async function loadElectionData() {
       try {
-        // Load parties.csv with GitHub Pages CDN + local fallback
+        // Load parties.json with GitHub Pages CDN + local fallback
         const partiesResponse = await loadWithFallback(
-          'https://suhastpml.github.io/bihar_election_map/parties.csv',
-          './parties.csv',
+          'https://suhastpml.github.io/bihar_election_map/parties.json',
+          './parties.json',
           'parties data'
         );
-        const partiesText = await partiesResponse.text();
-        const partiesLines = partiesText.split('\n');
-        const partiesHeaders = parseCSVLine(partiesLines[0]);
+        const partiesData = await partiesResponse.json();
 
         // Set up alliance colors with more distinct colors
         allianceColors.set('NDA', pastelizeColor('#0066cc'));  // Blue
@@ -1181,43 +1147,24 @@
         allianceColors.set('OTH', pastelizeColor('#8A2BE2'));  // Purple
         allianceColors.set('NA', '#e5e7eb');  // Light gray
 
-        // Parse parties CSV
-        for (let i = 1; i < partiesLines.length; i++) {
-          const line = partiesLines[i].trim();
-          if (!line) continue;
-
-          const values = parseCSVLine(line);
-          const party = {};
-          partiesHeaders.forEach((header, index) => {
-            party[header] = values[index] || '';
-          });
-
+        // Process parties JSON data
+        for (const party of partiesData) {
           // Store in maps
           partyColors.set(party.code, pastelizeColor(party.color));
           partyToAlliance.set(party.code, party.alliance_2020); // Current alliance for general use
           partyData.set(party.code, party); // Full party data for historical lookups
         }
 
-        // Load election results CSV with GitHub Pages CDN + local fallback
-        const csvResponse = await loadWithFallback(
-          'https://suhastpml.github.io/bihar_election_map/bihar_election_results_consolidated.csv',
-          './bihar_election_results_consolidated.csv',
+        // Load election results JSON with GitHub Pages CDN + local fallback
+        const resultsResponse = await loadWithFallback(
+          'https://suhastpml.github.io/bihar_election_map/bihar_election_results_consolidated.json',
+          './bihar_election_results_consolidated.json',
           'election results data'
         );
-        const csvText = await csvResponse.text();
-        const lines = csvText.split('\n');
-        const headers = parseCSVLine(lines[0]);
+        const resultsData = await resultsResponse.json();
 
-        for (let i = 1; i < lines.length; i++) {
-          const line = lines[i].trim();
-          if (!line) continue;
-
-          const values = parseCSVLine(line);
-          const row = {};
-          headers.forEach((header, index) => {
-            row[header] = values[index] || '';
-          });
-
+        // Process election results JSON data
+        for (const row of resultsData) {
           const acNo = String(parseInt(row.no || '0')).padStart(3, '0');
           electionData.set(acNo, row);
         }
