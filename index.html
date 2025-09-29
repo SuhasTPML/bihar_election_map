@@ -17,7 +17,7 @@
       stroke-linecap: round;
       shape-rendering: geometricPrecision;
     }
-    .ac:hover { fill: #a9d0ff; cursor: pointer; }
+    .ac:not(.no-hover):hover { fill: #a9d0ff; cursor: pointer; }
     .selected { stroke-width: 1.5; }
     .dimmed { opacity: 0.3; transition: opacity 0.3s ease; }
     #info { font-size: 0.95rem; }
@@ -541,6 +541,9 @@
       // Remove dimming effect (restore full opacity)
       g.selectAll('path').classed('dimmed', false);
 
+      // Restore hover behavior for all constituencies
+      g.selectAll('path').classed('no-hover', false);
+
       // Reset stroke colors to default
       g.selectAll('path').attr('stroke', '#1f77b4');
 
@@ -558,6 +561,9 @@
 
       // Dim all other constituencies (spotlight effect)
       g.selectAll('path').classed('dimmed', d => featureKey(d.properties) !== key);
+
+      // Suppress hover on selected constituency
+      g.selectAll('path').classed('no-hover', d => featureKey(d.properties) === key);
 
       // Apply original (non-pastelized) color for stroke
       const selectedPath = g.selectAll('path').filter(d => featureKey(d.properties) === key);
