@@ -4,9 +4,15 @@
 
   EMBEDDABLE WIDGET CONFIGURATION:
   - Default max height: 600px (configurable via --widget-max-height CSS variable)
-  - Self-contained with all dependencies
+  - GitHub Pages CDN data loading with local file fallbacks
+  - Self-contained with robust network error handling
   - Responsive design with mobile optimization
   - PostMessage API for iframe height communication
+
+  DATA SOURCES:
+  - Primary: GitHub Pages CDN (https://suhastpml.github.io/bihar_election_map/)
+  - Fallback: Local files (./parties.csv, ./bihar_election_results_consolidated.csv, ./bihar_ac_all.geojson)
+  - Automatic failover ensures reliability in any hosting environment
 
   INTEGRATION EXAMPLE:
   <iframe src="bihar-map.html"
@@ -1156,10 +1162,41 @@
 
 
 
+    // Robust data loading with GitHub Pages CDN + local fallback
+    async function loadWithFallback(githubUrl, localPath, description = 'data') {
+      try {
+        console.log(`🌐 Loading ${description} from GitHub Pages: ${githubUrl}`);
+        const response = await fetch(githubUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        console.log(`✅ Successfully loaded ${description} from GitHub Pages CDN`);
+        return response;
+      } catch (error) {
+        console.warn(`⚠️ GitHub Pages failed for ${description}:`, error.message);
+        console.log(`🔄 Falling back to local file: ${localPath}`);
+        try {
+          const fallbackResponse = await fetch(localPath);
+          if (!fallbackResponse.ok) {
+            throw new Error(`Local fallback failed: HTTP ${fallbackResponse.status}`);
+          }
+          console.log(`✅ Successfully loaded ${description} from local fallback`);
+          return fallbackResponse;
+        } catch (fallbackError) {
+          console.error(`❌ Both GitHub Pages and local fallback failed for ${description}:`, fallbackError.message);
+          throw new Error(`Failed to load ${description} from both GitHub Pages and local sources`);
+        }
+      }
+    }
+
     async function loadElectionData() {
       try {
-        // Load parties.csv
-        const partiesResponse = await fetch('parties.csv');
+        // Load parties.csv with GitHub Pages CDN + local fallback
+        const partiesResponse = await loadWithFallback(
+          'https://suhastpml.github.io/bihar_election_map/parties.csv',
+          './parties.csv',
+          'parties data'
+        );
         const partiesText = await partiesResponse.text();
         const partiesLines = partiesText.split('\n');
         const partiesHeaders = parseCSVLine(partiesLines[0]);
@@ -1187,8 +1224,12 @@
           partyData.set(party.code, party); // Full party data for historical lookups
         }
 
-        // Load election results CSV with proper parsing
-        const csvResponse = await fetch('bihar_election_results_consolidated.csv');
+        // Load election results CSV with GitHub Pages CDN + local fallback
+        const csvResponse = await loadWithFallback(
+          'https://suhastpml.github.io/bihar_election_map/bihar_election_results_consolidated.csv',
+          './bihar_election_results_consolidated.csv',
+          'election results data'
+        );
         const csvText = await csvResponse.text();
         const lines = csvText.split('\n');
         const headers = parseCSVLine(lines[0]);
@@ -1207,14 +1248,15 @@
           electionData.set(acNo, row);
         }
 
-        console.log(`Loaded ${electionData.size} constituency records`);
+        console.log(`📊 Successfully loaded ${electionData.size} constituency records from remote/local sources`);
 
         // Pre-compute color cache for performance
         preComputeColors();
 
         return true;
       } catch (e) {
-        console.error('Failed to load election data:', e);
+        console.error('❌ Critical error loading election data:', e);
+        statusEl.textContent = 'Failed to load election data - check network connection';
         return false;
       }
     }
@@ -1239,14 +1281,19 @@
 
     async function init(){
       try{
-        statusEl.textContent = 'Loading Bihar data...';
+        statusEl.textContent = 'Loading Bihar data from GitHub Pages...';
         embedRoot = document.getElementById('embedRoot');
 
         // Load election data first
         const dataLoaded = await loadElectionData();
 
-        // Load GeoJSON
-        const geoData = await fetch('bihar_ac_all.geojson').then(r => r.json());
+        // Load GeoJSON with GitHub Pages CDN + local fallback
+        const geoResponse = await loadWithFallback(
+          'https://suhastpml.github.io/bihar_election_map/bihar_ac_all.geojson',
+          './bihar_ac_all.geojson',
+          'constituency map data'
+        );
+        const geoData = await geoResponse.json();
         biharData = geoData;
 
         // Initialize projection based on embed container size
@@ -1283,9 +1330,10 @@
 
         wrapEl.classList.remove('loading');
         statusEl.textContent = '';
+        console.log('🎉 Bihar Assembly Map Widget fully initialized with remote data sources');
       }catch(e){
-        console.error(e);
-        statusEl.textContent = 'Failed to load Bihar data';
+        console.error('❌ Widget initialization failed:', e);
+        statusEl.textContent = 'Failed to load Bihar data - check network connection';
       }
     }
 
