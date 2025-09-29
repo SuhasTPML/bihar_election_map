@@ -457,6 +457,9 @@
     let projection, path;
     let selectedId = null;
 
+    // Debug flag for detailed console logging
+    const DEBUG = false;
+
     // URL parameter utilities
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
@@ -652,7 +655,7 @@
 
     // Pre-compute all color combinations for performance
     function preComputeColors() {
-      console.log('Pre-computing color cache...');
+      if (DEBUG) console.log('Pre-computing color cache...');
       const colorModes = ['alliance-2020', 'party-2020', 'reserved', 'alliance-2015', 'party-2015', 'alliance-2010', 'party-2010'];
       let cached = 0;
 
@@ -696,7 +699,7 @@
         }
       }
 
-      console.log(`Color cache created: ${cached} combinations cached`);
+      if (DEBUG) console.log(`Color cache created: ${cached} combinations cached`);
     }
 
 
@@ -912,7 +915,7 @@
       const selectedPath = g.selectAll('path').filter(d => featureKey(d.properties) === key);
       if (!selectedPath.empty()) {
         const strokeColor = getOriginalColorForMode(key, currentColorMode);
-        console.log(`Selected AC ${key}: using original strokeColor = "${strokeColor}"`); // Debug log
+        if (DEBUG) console.log(`Selected AC ${key}: using original strokeColor = "${strokeColor}"`);
         selectedPath.attr('stroke', strokeColor);
       }
 
@@ -931,46 +934,48 @@
         const searchLabel = `${acno} - ${acname}${dist? ' ('+dist+')':''}`;
         searchEl.value = searchLabel;
 
-        // Console log detailed constituency information
+        // Console log detailed constituency information (only when DEBUG enabled)
         const electionInfo = electionData.get(acno);
-        console.log('=== CONSTITUENCY SELECTED ===');
-        console.log('AC Number:', acno);
-        console.log('AC Name:', acname);
-        console.log('District:', dist);
-        console.log('PC Number:', pcno);
-        console.log('PC Name:', pcname);
+        if (DEBUG) {
+          console.log('=== CONSTITUENCY SELECTED ===');
+          console.log('AC Number:', acno);
+          console.log('AC Name:', acname);
+          console.log('District:', dist);
+          console.log('PC Number:', pcno);
+          console.log('PC Name:', pcname);
 
-        if (electionInfo) {
-          console.log('\n--- 2020 ELECTION DATA ---');
-          console.log('Current MLA:', electionInfo.current_mla_name);
-          console.log('Current Party:', electionInfo.current_mla_party);
-          console.log('Current Alliance:', electionInfo.current_mla_alliance);
-          console.log('Reserved Status:', electionInfo.reserved || 'GEN');
+          if (electionInfo) {
+            console.log('\n--- 2020 ELECTION DATA ---');
+            console.log('Current MLA:', electionInfo.current_mla_name);
+            console.log('Current Party:', electionInfo.current_mla_party);
+            console.log('Current Alliance:', electionInfo.current_mla_alliance);
+            console.log('Reserved Status:', electionInfo.reserved || 'GEN');
 
-          console.log('\n--- HISTORICAL WINNERS ---');
-          if (electionInfo.y2020_winner_name) {
-            console.log('2020 Winner:', electionInfo.y2020_winner_name, '(' + electionInfo.y2020_winner_party + ')');
-            console.log('2020 Votes:', electionInfo.y2020_winner_votes, 'Margin:', electionInfo.y2020_margin);
+            console.log('\n--- HISTORICAL WINNERS ---');
+            if (electionInfo.y2020_winner_name) {
+              console.log('2020 Winner:', electionInfo.y2020_winner_name, '(' + electionInfo.y2020_winner_party + ')');
+              console.log('2020 Votes:', electionInfo.y2020_winner_votes, 'Margin:', electionInfo.y2020_margin);
+            }
+            if (electionInfo.y2015_winner_name) {
+              console.log('2015 Winner:', electionInfo.y2015_winner_name, '(' + electionInfo.y2015_winner_party + ')');
+              console.log('2015 Votes:', electionInfo.y2015_winner_votes, 'Margin:', electionInfo.y2015_margin);
+            }
+            if (electionInfo.y2010_winner_name) {
+              console.log('2010 Winner:', electionInfo.y2010_winner_name, '(' + electionInfo.y2010_winner_party + ')');
+              console.log('2010 Votes:', electionInfo.y2010_winner_votes, 'Margin:', electionInfo.y2010_margin);
+            }
+
+            console.log('\n--- CHANGES FROM 2020 ---');
+            console.log('Different Party vs 2020:', electionInfo.diff_party_vs_2020 === 'True' ? 'Yes' : 'No');
+            console.log('Different Name vs 2020:', electionInfo.diff_name_vs_2020 === 'True' ? 'Yes' : 'No');
+
+            console.log('\n--- RAW DATA OBJECT ---');
+            console.log(electionInfo);
+          } else {
+            console.log('\n⚠️ No election data found for this constituency');
           }
-          if (electionInfo.y2015_winner_name) {
-            console.log('2015 Winner:', electionInfo.y2015_winner_name, '(' + electionInfo.y2015_winner_party + ')');
-            console.log('2015 Votes:', electionInfo.y2015_winner_votes, 'Margin:', electionInfo.y2015_margin);
-          }
-          if (electionInfo.y2010_winner_name) {
-            console.log('2010 Winner:', electionInfo.y2010_winner_name, '(' + electionInfo.y2010_winner_party + ')');
-            console.log('2010 Votes:', electionInfo.y2010_winner_votes, 'Margin:', electionInfo.y2010_margin);
-          }
-
-          console.log('\n--- CHANGES FROM 2020 ---');
-          console.log('Different Party vs 2020:', electionInfo.diff_party_vs_2020 === 'True' ? 'Yes' : 'No');
-          console.log('Different Name vs 2020:', electionInfo.diff_name_vs_2020 === 'True' ? 'Yes' : 'No');
-
-          console.log('\n--- RAW DATA OBJECT ---');
-          console.log(electionInfo);
-        } else {
-          console.log('\n⚠️ No election data found for this constituency');
+          console.log('==============================\n');
         }
-        console.log('==============================\n');
 
         // SVG labels removed for cleaner interface - info now shown only in bottom sheet
 
