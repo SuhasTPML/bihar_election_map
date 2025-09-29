@@ -27,11 +27,15 @@
     /* Mobile optimizations */
     @media (max-width: 768px) {
       #controls { flex-direction: column; gap: 15px; padding: 8px 12px; }
-      svg circle[r="15"] { r: 22; } /* Touch targets */
+      svg circle[r="30"] { r: 35; } /* Larger touch targets for tablet */
+      svg circle { stroke-width: 2.5; } /* Thicker button borders on mobile */
     }
 
     @media (max-width: 480px) {
       #acSearch { font-size: 16px; } /* Prevents zoom on iOS */
+      svg circle[r="30"] { r: 40; } /* Extra large touch targets for phones */
+      svg circle { stroke-width: 3; } /* Even thicker borders for visibility */
+      svg text { font-size: 36px !important; } /* Larger icons on phones */
     }
   </style>
 </head>
@@ -362,63 +366,71 @@
     function setInfo(html){ infoEl.innerHTML = html || ''; }
 
     function createSvgControls(){
-      // Cross button (top-right)
+      // Dynamic positioning based on viewport
+      const isMobile = window.innerWidth <= 768;
+      const isPhone = window.innerWidth <= 480;
+      const leftOffset = isPhone ? 60 : isMobile ? 60 : 60;  // Left edge for zoom buttons
+      const rightOffset = isPhone ? 60 : isMobile ? 60 : 60; // Right edge for cross button
+      const topStart = isPhone ? 30 : 40;
+      const buttonSpacing = isPhone ? 90 : 100; // Increased spacing between zoom buttons
+
+      // Cross button (top-right) - stays on right
       const crossButton = ui.append('g')
         .attr('class', 'cross-button')
-        .attr('transform', `translate(${width * 0.95}, 30)`)
+        .attr('transform', `translate(${width - rightOffset}, ${topStart})`)
         .style('cursor', 'pointer')
         .style('display', 'none');
 
       crossButton.append('circle')
-        .attr('r', 15)
+        .attr('r', 30)
         .attr('fill', 'white')
         .attr('stroke', '#666')
-        .attr('stroke-width', 1);
+        .attr('stroke-width', 2);
 
       crossButton.append('path')
-        .attr('d', 'M-6,-6 L6,6 M6,-6 L-6,6')
+        .attr('d', 'M-12,-12 L12,12 M12,-12 L-12,12')
         .attr('stroke', '#333')
-        .attr('stroke-width', 2);
+        .attr('stroke-width', 3);
 
       crossButton.on('click', clearAndReset);
 
-      // Zoom In button (top-right, below cross)
+      // Zoom In button (top-left) - moved to left side
       const zoomInButton = ui.append('g')
         .attr('class', 'zoom-in-button')
-        .attr('transform', `translate(${width * 0.95}, 70)`)
+        .attr('transform', `translate(${leftOffset}, ${topStart})`)
         .style('cursor', 'pointer');
 
       zoomInButton.append('circle')
-        .attr('r', 15)
+        .attr('r', 30)
         .attr('fill', 'white')
         .attr('stroke', '#666')
-        .attr('stroke-width', 1);
+        .attr('stroke-width', 2);
 
       zoomInButton.append('text')
         .attr('text-anchor', 'middle')
         .attr('dy', '0.35em')
-        .attr('font-size', '14px')
+        .attr('font-size', '28px')
         .attr('font-weight', 'bold')
         .text('+');
 
       zoomInButton.on('click', () => svg.transition().duration(300).call(zoom.scaleBy, 1.3));
 
-      // Zoom Out button (top-right, below zoom in)
+      // Zoom Out button (left side, below zoom in)
       const zoomOutButton = ui.append('g')
         .attr('class', 'zoom-out-button')
-        .attr('transform', `translate(${width * 0.95}, 110)`)
+        .attr('transform', `translate(${leftOffset}, ${topStart + buttonSpacing})`)
         .style('cursor', 'pointer');
 
       zoomOutButton.append('circle')
-        .attr('r', 15)
+        .attr('r', 30)
         .attr('fill', 'white')
         .attr('stroke', '#666')
-        .attr('stroke-width', 1);
+        .attr('stroke-width', 2);
 
       zoomOutButton.append('text')
         .attr('text-anchor', 'middle')
         .attr('dy', '0.35em')
-        .attr('font-size', '16px')
+        .attr('font-size', '32px')
         .attr('font-weight', 'bold')
         .text('−');
 
