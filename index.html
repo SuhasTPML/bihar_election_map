@@ -38,6 +38,7 @@
       svg text { font-size: 36px !important; } /* Larger icons on phones */
     }
 
+    /* Bottom Sheet Structured Layout */
     #bottomSheet {
       position: fixed;
       bottom: 0;
@@ -53,19 +54,121 @@
       overflow-y: auto;
     }
 
+    .sheet-header {
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .sheet-header .ac-number {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      margin-right: 8px;
+    }
+
+    .sheet-header .ac-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1f2937;
+      margin-right: 12px;
+    }
+
+    .sheet-header .district-name {
+      font-size: 13px;
+      font-weight: 400;
+      color: #9ca3af;
+      margin-left: auto;
+    }
+
+    .info-row {
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .info-row strong {
+      color: #1f2937;
+    }
+
+    .card-grid {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #374151;
+    }
+
+    .color-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .action-button {
+      padding: 8px 16px;
+      background: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+      align-self: flex-end;
+      margin-left: auto;
+    }
+
+    .action-button:hover {
+      background: #0052a3;
+    }
+
     /* Dynamic map padding when bottom sheet is active */
     body.bottom-sheet-active #mapwrap {
       padding-bottom: 160px;
       transition: padding-bottom 0.3s ease;
     }
 
-    /* Responsive bottom sheet height */
+    /* Responsive bottom sheet height and layout */
     @media (max-width: 768px) {
       #bottomSheet {
         max-height: 120px;
       }
       body.bottom-sheet-active #mapwrap {
         padding-bottom: 140px;
+      }
+
+      /* Stack cards vertically on mobile */
+      .card-grid {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .card {
+        justify-content: flex-start;
+        padding: 8px 12px;
+      }
+
+      .action-button {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 4px;
+        padding: 10px 16px;
+        font-size: 14px;
       }
     }
 
@@ -76,6 +179,50 @@
       }
       body.bottom-sheet-active #mapwrap {
         padding-bottom: 35vh;
+      }
+
+      /* Enhanced mobile layout for phones */
+      .sheet-header {
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .sheet-header .ac-number {
+        font-size: 13px;
+      }
+
+      .sheet-header .ac-name {
+        font-size: 16px;
+        margin-right: 8px;
+      }
+
+      .sheet-header .district-name {
+        font-size: 12px;
+        margin-left: 0;
+        flex-basis: 100%;
+        margin-top: 2px;
+      }
+
+      .info-row {
+        font-size: 13px;
+        margin-bottom: 8px;
+      }
+
+      .card {
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+
+      .color-swatch {
+        width: 16px;
+        height: 16px;
+      }
+
+      .action-button {
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 600;
       }
     }
 
@@ -188,7 +335,6 @@
         <option value="party-2010">2010 Party</option>
       </select>
     </div>
-    <div id="info"></div>
     <div id="legend" style="margin-top: 5px; font-size: 13px; display: none;"></div>
   </div>
   <div id="mapwrap" class="loading">
@@ -520,8 +666,13 @@
       const acName = featureProps.AC_NAME || featureProps.ac_name || featureProps.Ac_Name || '';
       const district = featureProps.DIST_NAME || featureProps.dist_name || '';
 
-      let content = `<div style="font-weight: bold; margin-bottom: 8px;">📍 ${acNo} · ${acName}`;
-      if (district) content += ` · ${district}`;
+      // Build structured content with hierarchical layout
+      let content = `<div class="sheet-header" style="display: flex; align-items: baseline;">`;
+      content += `<span class="ac-number">${acNo}</span>`;
+      content += `<span class="ac-name">${acName}</span>`;
+      if (district) {
+        content += `<span class="district-name">${district}</span>`;
+      }
       content += `</div>`;
 
       if (electionRow) {
@@ -533,14 +684,23 @@
         const partyColor = partyColors.get(party) || '#f3f4f6';
         const allianceColor = allianceColors.get(alliance) || '#f3f4f6';
 
-        content += `<div style="margin-bottom: 6px;">Current MLA: <strong>${mlaName}</strong></div>`;
-        content += `<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">`;
-        content += `<span>Party: <span style="display: inline-block; width: 12px; height: 12px; background: ${partyColor}; margin-right: 4px; border-radius: 2px;"></span>${party}</span>`;
-        content += `<span>Alliance: <span style="display: inline-block; width: 12px; height: 12px; background: ${allianceColor}; margin-right: 4px; border-radius: 2px;"></span>${alliance}</span>`;
+        // MLA information row
+        content += `<div class="info-row">Current MLA: <strong>${mlaName}</strong></div>`;
+
+        // Party and alliance cards with professional layout
+        content += `<div class="card-grid">`;
+        content += `<div class="card">`;
+        content += `<div class="color-swatch" style="background: ${partyColor};"></div>`;
+        content += `<span><strong>Party:</strong> ${party}</span>`;
         content += `</div>`;
-        content += `<button id="moreDetailsBtn" style="padding: 6px 12px; background: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">More details →</button>`;
+        content += `<div class="card">`;
+        content += `<div class="color-swatch" style="background: ${allianceColor};"></div>`;
+        content += `<span><strong>Alliance:</strong> ${alliance}</span>`;
+        content += `</div>`;
+        content += `<button id="moreDetailsBtn" class="action-button">More details →</button>`;
+        content += `</div>`;
       } else {
-        content += `<div style="color: #666; font-style: italic;">No election data available for this constituency.</div>`;
+        content += `<div class="info-row" style="color: #9ca3af; font-style: italic;">No election data available for this constituency.</div>`;
       }
 
       document.getElementById('bottomSheet').innerHTML = content;
@@ -657,7 +817,6 @@
       g.selectAll('path').attr('stroke', '#1f77b4');
 
       searchEl.value = '';
-      setInfo('');
       labelLayer.selectAll('*').remove();
       // Reset zoom
       svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
@@ -701,8 +860,6 @@
         const searchLabel = `${acno} - ${acname}${dist? ' ('+dist+')':''}`;
         searchEl.value = searchLabel;
 
-        setInfo(`<b>${acno} ${acname}</b>${dist? ' · District: '+dist:''}${pcname? ' · PC: '+pcno+' '+pcname:''}`);
-
         // Console log detailed constituency information
         const electionInfo = electionData.get(acno);
         console.log('=== CONSTITUENCY SELECTED ===');
@@ -744,19 +901,7 @@
         }
         console.log('==============================\n');
 
-        // Add center label for selection
-        try {
-          const c = path.centroid(f);
-          labelLayer.raise();
-          labelLayer.selectAll('text.sel')
-            .data([f])
-            .join('text')
-            .attr('class','label sel')
-            .attr('x', c[0])
-            .attr('y', c[1])
-            .attr('text-anchor','middle')
-            .text(acno + ' ' + acname);
-        } catch(e) { console.error('label error', e); }
+        // SVG labels removed for cleaner interface - info now shown only in bottom sheet
 
         // Show bottom sheet with constituency details
         renderDetails({ featureProps: f.properties, electionRow: electionInfo });
