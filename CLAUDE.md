@@ -322,47 +322,75 @@ Successfully maintained the working CSS-only hover system from `index_svg_first.
 - **Performance maintained:** Optimized for mobile and desktop
 - **Code quality:** Clean, maintainable implementation
 
-## Phase 9: Bottom Sheet UI Enhancement (IN PROGRESS)
+## ✅ Phase 9: URL Parameter Functionality (COMPLETED)
 
-### Current Issues Identified
-- Duplicate AC information displayed in controls area and bottom sheet
-- SVG labels appear when zoomed, cluttering the view
-- Emoji usage inconsistent with professional design
-- Bottom sheet layout lacks proper structure and hierarchy
-- Party/Alliance information presentation needs improvement
+### URL Parameter Implementation
+**Changes Made:**
+- **Added URL utility functions** for managing query parameters:
+  - `getQueryParam(name)` - Retrieves URL parameter value
+  - `setQueryParam(name, value)` - Updates URL parameter without page reload
+  - `removeQueryParam(name)` - Removes URL parameter from current URL
+- **Enhanced selectByKey() function** with `suppressUrlUpdate` parameter:
+  - Normal selections update URL with `?ac=XXX` parameter
+  - Initial page load suppresses URL update to prevent double history entries
+- **Updated clearAndReset() function** to remove URL parameters when clearing selection
+- **Added initial parameter handling** in init() function:
+  - Checks for `ac` parameter after data loading is complete
+  - Automatically selects and zooms to specified constituency
+  - Gracefully ignores invalid constituency numbers
 
-### Planned Improvements
+### URL Parameter Features
+**Direct Link Support:**
+- `index.html?ac=139` automatically opens constituency 139 with zoom and bottom sheet
+- Works in both standalone pages and iframe embeds
+- Invalid constituency numbers are silently ignored (graceful degradation)
 
-#### 1. **Interface Cleanup**
-- Remove duplicate AC info display below controls
-- Eliminate SVG labels when zooming into constituencies
-- Clean up `setInfo()` calls and label management code
-- Maintain information only in bottom sheet
+**Interactive URL Updates:**
+- Click constituency → URL updates to `?ac=XXX`
+- Search and select → URL updates to `?ac=XXX`
+- Cross button/clear → URL parameter removed
+- Search clear button → URL parameter removed (maintains existing functionality)
 
-#### 2. **Professional UI Design**
-- Remove emoji usage for cleaner, professional appearance
-- Implement card-based layout for party/alliance information
-- Add proper visual hierarchy with structured headers
-- Enhance typography and spacing for better readability
+**Browser Compatibility:**
+- Uses native `URLSearchParams` and `history.replaceState()` (modern browser support)
+- Safe iframe operation (only modifies widget's own URL, no cross-origin access)
+- No page reloads or navigation - seamless URL state management
 
-#### 3. **Structured Layout System**
-- Header section with AC number, name, and district
-- Clean MLA information display
-- Card-based party/alliance presentation with color swatches
-- Right-aligned action button with proper spacing
+### File Consolidation
+**Major Refactor:**
+- **Replaced main index.html** with enhanced pre-embed version including URL parameters
+- **Removed redundant index_pre_embed.html** after successful consolidation
+- **Maintained all existing functionality** while adding URL parameter support
+- **GitHub Pages deployment** with shareable constituency links now live
 
-#### 4. **Enhanced Responsive Design**
-- Desktop: Horizontal card layout for party/alliance
-- Mobile: Stacked vertical cards for better touch interaction
-- Improved button sizing and touch targets
-- Better content prioritization on small screens
+### Current Features (Phase 9 Complete)
+- ✅ **Shareable constituency links** with direct URL parameter support
+- ✅ **Seamless URL state management** without page reloads
+- ✅ **Iframe-compatible** URL parameters for embedded widgets
+- ✅ **Graceful error handling** for invalid constituency numbers
+- ✅ **Browser history integration** using replaceState for clean URL management
+- ✅ **Responsive mobile design** with optimized touch interactions
+- ✅ **External map controls** independent of SVG scaling
+- ✅ **Rich bottom sheet** with constituency details and color indicators
+- ✅ **Smart height management** preventing overlap on all devices
+- ✅ **GitHub Pages compatible** with full functionality deployed
 
-### Implementation Strategy
-- **Phase 9.1:** Remove duplicate displays and clean up interface
-- **Phase 9.2:** Add structured CSS classes and layout system
-- **Phase 9.3:** Refactor renderDetails() with professional design
-- **Phase 9.4:** Implement responsive card-based layout
-- **Phase 9.5:** Testing and refinement across devices
+### File Statistics (Phase 9)
+- **Current file size:** ~825 lines (consolidated with URL parameter functionality)
+- **Original file:** 243 lines
+- **Total phases completed:** 9 major enhancement phases
+- **Files consolidated:** Removed duplicate index_pre_embed.html
+- **Performance maintained:** Fast URL parameter handling with minimal overhead
 
-### Expected Outcome
-A professional, clean interface with structured constituency information presentation, eliminating duplicate displays and providing optimal user experience across all devices.
+### Technical Implementation
+**URL Parameter Flow:**
+1. **Page Load:** `getQueryParam('ac')` checks for constituency parameter
+2. **Data Ready:** After election data loads, initial selection applies if parameter exists
+3. **User Interaction:** `selectByKey()` updates URL parameter for shareability
+4. **Reset Action:** `clearAndReset()` removes URL parameter for clean state
+
+**Browser Integration:**
+- Uses `history.replaceState()` for seamless URL updates
+- No browser history pollution (replaces current entry instead of adding new ones)
+- Maintains clean, shareable URLs for constituency-specific views
+- Works reliably across all modern browsers and iframe contexts
