@@ -394,3 +394,105 @@ Successfully maintained the working CSS-only hover system from `index_svg_first.
 - No browser history pollution (replaces current entry instead of adding new ones)
 - Maintains clean, shareable URLs for constituency-specific views
 - Works reliably across all modern browsers and iframe contexts
+
+## ✅ Phase 10: Data Format Migration (COMPLETED)
+
+### CSV to JSON Migration
+**Changes Made:**
+- **Removed parseCSVLine() function** (30 lines of custom CSV parsing logic)
+- **Replaced parties.csv → parties.json** with direct JSON loading using `loadWithFallback()`
+- **Replaced bihar_election_results_consolidated.csv → JSON** with simplified array iteration
+- **Added JSON data files** to repository for GitHub Pages compatibility
+
+### Performance Improvements
+**Data Loading Optimizations:**
+- **Faster parsing** using native `JSON.parse()` instead of character-by-character CSV parsing
+- **Reduced memory usage** by eliminating string splitting, line processing, and header mapping
+- **Type preservation** - numbers and booleans maintain proper types instead of string conversion
+- **Cleaner error handling** with descriptive JSON parsing errors vs. custom CSV parsing failures
+
+### Code Simplification
+**Eliminated Complex Logic:**
+- **Removed CSV parsing utility** - no more character-by-character line processing
+- **Direct object property access** instead of array index lookups with header mapping
+- **Native JSON array iteration** instead of line splitting and field extraction
+- **Maintained 100% functionality** while reducing code complexity significantly
+
+### File Structure Updates
+**New Data Files:**
+- `parties.json` - Clean JSON structure with party information and alliance mappings
+- `bihar_election_results_consolidated.json` - Election results in structured JSON format
+- Both files deployed to GitHub Pages CDN with local fallbacks
+
+## ✅ Phase 11: Debug Logging Optimization (COMPLETED)
+
+### DEBUG Logging Guard Implementation
+**Changes Made:**
+- **Added DEBUG flag** (`const DEBUG = false`) to control verbose console logging
+- **Protected detailed constituency logs** - 30+ lines of election data output controlled
+- **Guarded color cache logs** - Pre-computation status messages controlled by DEBUG
+- **Protected stroke color debug log** - Selection debug information only when needed
+
+### Performance Benefits
+**Console Output Optimization:**
+- **Snappy interactions** by eliminating verbose console output by default
+- **Iframe optimized** - particularly beneficial for embedded widget usage
+- **Low-powered device friendly** - reduces processing overhead from console operations
+- **Clean production console** - no clutter during normal user interactions
+- **Easy debugging** - simply set `DEBUG = true` when troubleshooting needed
+
+### Debug Logs Protected
+**Logging Categories Controlled:**
+- **Detailed constituency selection** - Full election data breakdown (30+ console.log statements)
+- **Color cache computation** - Pre-computation status and performance messages
+- **Stroke color selection** - Debug information for color selection logic
+- **Feature caching process** - Cache creation and performance monitoring
+
+## ✅ Phase 12: Performance Optimization (COMPLETED)
+
+### Feature and Centroid Caching System
+**Major Performance Overhaul:**
+- **Added featureByAc Map** for O(1) feature lookup instead of O(n) array search
+- **Added centroidCache Map** for pre-computed centroids eliminating repeated calculations
+- **Created cacheFeatures() function** to pre-compute both maps during initialization
+- **Updated selectByKey()** to use instant cached lookups instead of expensive operations
+
+### Performance Improvements Achieved
+**Computational Optimizations:**
+- **Feature lookup: O(n) → O(1)** - Eliminated 243-item array.find() search on every selection
+- **Centroid calculation: Repeated → Single** - Pre-computed all 243 centroids during init
+- **CPU usage reduction** - No more expensive trigonometric calculations on each selection
+- **Memory trade-off** - Small memory increase for massive performance gain
+
+### Technical Implementation
+**Caching Infrastructure:**
+- **Initialization timing** - `cacheFeatures()` called after `draw()` when projection ready
+- **Cache scope** - 243 features + 243 centroids cached for instant access
+- **Lookup optimization** - `featureByAc.get(key)` instead of `biharData.features.find()`
+- **Debug integration** - Cache creation logging controlled by DEBUG flag
+
+### User Experience Benefits
+**Interaction Improvements:**
+- **Smoother constituency selection** - Instant response instead of computation delay
+- **Better iframe performance** - Reduced computational overhead for embedded usage
+- **Improved mobile experience** - Particularly beneficial on slower devices and tablets
+- **Faster zoom/transitions** - Less CPU work during map interactions and animations
+
+### Current Features (Phase 12 Complete)
+- ✅ **High-performance constituency selection** with O(1) feature lookup and cached centroids
+- ✅ **JSON data loading** with simplified parsing and better type preservation
+- ✅ **DEBUG-controlled logging** for clean production console and easy development debugging
+- ✅ **Shareable constituency links** with direct URL parameter support
+- ✅ **Seamless URL state management** without page reloads
+- ✅ **Iframe-compatible** URL parameters for embedded widgets
+- ✅ **Responsive mobile design** with optimized touch interactions
+- ✅ **External map controls** independent of SVG scaling
+- ✅ **Rich bottom sheet** with constituency details and color indicators
+- ✅ **GitHub Pages compatible** with full functionality deployed
+
+### File Statistics (Phase 12)
+- **Current file size:** ~825 lines (optimized with performance caching)
+- **Original file:** 243 lines
+- **Total phases completed:** 12 major enhancement phases
+- **Performance optimizations:** 3 major speed improvements (JSON loading, debug control, feature caching)
+- **Codebase quality:** Clean, maintainable, and highly optimized for production use
