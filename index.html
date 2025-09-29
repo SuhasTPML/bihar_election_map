@@ -6,8 +6,9 @@
   <title>Bihar Assembly Constituencies — SVG Viewer</title>
   <style>
     html, body { height: 100%; margin: 0; font-family: system-ui, Arial, sans-serif; }
-    #controls { padding: 10px 12px; display:flex; gap:10px; align-items:center; flex-wrap: wrap; }
-    #mapwrap { height: calc(100vh - 70px); }
+    body { display: flex; flex-direction: column; }
+    #controls { padding: 10px 12px; display:flex; gap:10px; align-items:center; flex-wrap: wrap; flex-shrink: 0; }
+    #mapwrap { flex: 1; min-height: 0; }
     #status { color: #b00; margin-left: 8px; }
     svg { width: 100%; height: 100%; background: #f9fafb; display:block; }
     .ac {
@@ -22,6 +23,16 @@
     #info { font-size: 0.95rem; }
     
     .label { font: 12px/1.1 sans-serif; fill: #111; }
+
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      #controls { flex-direction: column; gap: 15px; padding: 8px 12px; }
+      svg circle[r="15"] { r: 22; } /* Touch targets */
+    }
+
+    @media (max-width: 480px) {
+      #acSearch { font-size: 16px; } /* Prevents zoom on iOS */
+    }
   </style>
 </head>
 <body>
@@ -354,7 +365,7 @@
       // Cross button (top-right)
       const crossButton = ui.append('g')
         .attr('class', 'cross-button')
-        .attr('transform', `translate(${width - 30}, 30)`)
+        .attr('transform', `translate(${width * 0.95}, 30)`)
         .style('cursor', 'pointer')
         .style('display', 'none');
 
@@ -374,7 +385,7 @@
       // Zoom In button (top-right, below cross)
       const zoomInButton = ui.append('g')
         .attr('class', 'zoom-in-button')
-        .attr('transform', `translate(${width - 30}, 70)`)
+        .attr('transform', `translate(${width * 0.95}, 70)`)
         .style('cursor', 'pointer');
 
       zoomInButton.append('circle')
@@ -395,7 +406,7 @@
       // Zoom Out button (top-right, below zoom in)
       const zoomOutButton = ui.append('g')
         .attr('class', 'zoom-out-button')
-        .attr('transform', `translate(${width - 30}, 110)`)
+        .attr('transform', `translate(${width * 0.95}, 110)`)
         .style('cursor', 'pointer');
 
       zoomOutButton.append('circle')
