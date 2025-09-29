@@ -451,6 +451,8 @@
     let partyToAlliance = new Map();
     let partyData = new Map(); // Store complete party information
     let colorCache = new Map(); // Pre-computed color combinations
+    let featureByAc = new Map(); // Cached feature lookup by AC key
+    let centroidCache = new Map(); // Pre-computed centroids for each AC
     let currentColorMode = 'alliance-2020';
 
     let biharData = null;
@@ -791,6 +793,21 @@
       try { return String(parseInt(+n)).padStart(3,'0'); } catch { return String(n||''); }
     }
 
+    // Pre-compute feature lookups and centroids for O(1) access
+    function cacheFeatures(features) {
+      if (DEBUG) console.log('Caching features and centroids for performance...');
+      let cached = 0;
+
+      features.forEach(feature => {
+        const key = featureKey(feature.properties);
+        featureByAc.set(key, feature);
+        centroidCache.set(key, path.centroid(feature)); // compute once
+        cached++;
+      });
+
+      if (DEBUG) console.log(`Feature cache created: ${cached} features and centroids cached`);
+    }
+
     function populateSearch(features){
       searchData = features.map(f => ({
         key: featureKey(f.properties),
@@ -920,7 +937,7 @@
       }
 
       selectedPath.raise();
-      const f = biharData.features.find(ft => featureKey(ft.properties) === key);
+      const f = featureByAc.get(key);
       if(f){
         fitToFeature(f);
         const p = f.properties;
@@ -1206,6 +1223,7 @@
         path = d3.geoPath(projection);
 
         draw(biharData.features);
+        cacheFeatures(biharData.features); // Pre-compute feature lookups and centroids
         populateSearch(biharData.features);
         createMapControls();
 
