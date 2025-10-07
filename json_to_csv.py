@@ -1,34 +1,94 @@
 #!/usr/bin/env python3
-"""Convert JSON array files back to CSV.
+"""Convert JSON array files back to CSV with schema-aware handling.
 
 Usage: python json_to_csv.py parties.json bihar_election_results_consolidated.json
 Outputs use .csv extension in same directory.
+
+Schema notes:
+- parties.json (new format with `alliance`) -> parties.csv with columns:
+  code,name,color,alliance (historical columns omitted).
+- bihar_election_results_consolidated.json is written as-is using a
+  canonical column order if recognized; otherwise falls back to the keys
+  of the first record.
 """
 
 import csv
 import json
 import pathlib
 import sys
-from typing import Any, List
+from typing import Any, List, Dict, Iterable
 
 
-def json_to_records(json_path: pathlib.Path) -> List[dict[str, Any]]:
+def json_to_records(json_path: pathlib.Path) -> List[Dict[str, Any]]:
     data = json.loads(json_path.read_text(encoding="utf-8"))
     if not isinstance(data, list):
         raise ValueError(f"Expected list at top level in {json_path.name}")
     return data
 
 
-def write_csv(records: List[dict[str, Any]], csv_path: pathlib.Path) -> None:
+def _preferred_order_for(filename: str) -> List[str] | None:
+    name = filename.lower()
+    if name.startswith("bihar_election_results_consolidated"):
+        return [
+            "no","constituency_name","slug","district","reserved",
+            "lok_sabha_no","lok_sabha",
+            "y2010_winner_name","y2010_winner_party","y2010_winner_votes","y2010_margin",
+            "y2015_winner_name","y2015_winner_party","y2015_winner_votes","y2015_margin",
+            "y2020_winner_name","y2020_winner_party","y2020_winner_votes","y2020_margin",
+            "current_mla_name","current_mla_party","current_mla_alliance","current_remarks",
+            "diff_party_vs_2020","diff_name_vs_2020",
+        ]
+    if name.startswith("parties"):
+        return ["code","name","color","alliance"]
+    return None
+
+
+def _collect_fieldnames(records: Iterable[Dict[str, Any]]) -> List[str]:
+    seen: Dict[str, None] = {}
+    for row in records:
+        for k in row.keys():
+            if k not in seen:
+                seen[k] = None
+    return list(seen.keys())
+
+
+def write_csv(records: List[Dict[str, Any]], csv_path: pathlib.Path) -> None:
     if not records:
         csv_path.write_text("", encoding="utf-8")
         return
 
-    fieldnames = list(records[0].keys())
+    preferred = _preferred_order_for(csv_path.stem)
+
+    # Schema-aware projection for parties.json: enforce columns and order
+    if csv_path.stem.lower().startswith("parties"):
+        projected = [
+            {
+                "code": r.get("code", ""),
+                "name": r.get("name", ""),
+                "color": r.get("color", ""),
+                "alliance": r.get("alliance") or r.get("alliance_2020") or "",
+            }
+            for r in records
+        ]
+        fieldnames = preferred or ["code","name","color","alliance"]
+        records_to_write = projected
+    else:
+        fieldnames = preferred or list(records[0].keys())
+        records_to_write = records
+
+    # If preferred includes keys that may be missing, include them; and add any extra keys at end
+    if not preferred:
+        # Extend with any unseen keys across all rows to avoid data loss
+        union = _collect_fieldnames(records_to_write)
+        for k in union:
+            if k not in fieldnames:
+                fieldnames.append(k)
+
     with csv_path.open("w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(records)
+        for row in records_to_write:
+            writer.writerow({k: row.get(k, "") for k in fieldnames})
 
 
 def convert_file(json_path: pathlib.Path) -> None:
