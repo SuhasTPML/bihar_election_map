@@ -32,9 +32,18 @@ def _preferred_order_for(filename: str) -> List[str] | None:
         return [
             "no","constituency_name","slug","district","reserved",
             "lok_sabha_no","lok_sabha",
-            "y2010_winner_name","y2010_winner_party","y2010_winner_votes","y2010_margin",
-            "y2015_winner_name","y2015_winner_party","y2015_winner_votes","y2015_margin",
-            "y2020_winner_name","y2020_winner_party","y2020_winner_votes","y2020_margin",
+            # 2010
+            "y2010_winner_name","y2010_winner_party","y2010_winner_votes",
+            "y2010_runner_name","y2010_runner_party","y2010_runner_votes",
+            "y2010_margin",
+            # 2015
+            "y2015_winner_name","y2015_winner_party","y2015_winner_votes",
+            "y2015_runner_name","y2015_runner_party","y2015_runner_votes",
+            "y2015_margin",
+            # 2020
+            "y2020_winner_name","y2020_winner_party","y2020_winner_votes",
+            "y2020_runner_name","y2020_runner_party","y2020_runner_votes",
+            "y2020_margin",
             "current_mla_name","current_mla_party","current_mla_alliance","current_remarks",
             "diff_party_vs_2020","diff_name_vs_2020",
         ]
@@ -94,8 +103,16 @@ def write_csv(records: List[Dict[str, Any]], csv_path: pathlib.Path) -> None:
 def convert_file(json_path: pathlib.Path) -> None:
     records = json_to_records(json_path)
     csv_path = json_path.with_suffix(".csv")
-    write_csv(records, csv_path)
-    print(f"Converted {json_path.name} -> {csv_path.name} ({len(records)} records)")
+    try:
+        write_csv(records, csv_path)
+        print(f"Converted {json_path.name} -> {csv_path.name} ({len(records)} records)")
+    except PermissionError:
+        # Fallback: write to a side file if the target is locked (common on Windows if open in another app)
+        alt_path = csv_path.with_name(csv_path.stem + ".new.csv")
+        write_csv(records, alt_path)
+        print(
+            f"Warning: Could not write {csv_path.name} (in use). Wrote to {alt_path.name} instead."
+        )
 
 
 def main(args: List[str]) -> None:
