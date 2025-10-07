@@ -44,6 +44,10 @@ def _preferred_order_for(filename: str) -> List[str] | None:
             "y2020_winner_name","y2020_winner_party","y2020_winner_votes",
             "y2020_runner_name","y2020_runner_party","y2020_runner_votes",
             "y2020_margin",
+            # 2025 (placeholders until results available)
+            "y2025_winner_name","y2025_winner_party","y2025_winner_votes",
+            "y2025_runner_name","y2025_runner_party","y2025_runner_votes",
+            "y2025_margin",
             "current_mla_name","current_mla_party","current_mla_alliance","current_remarks",
             "diff_party_vs_2020","diff_name_vs_2020",
         ]
